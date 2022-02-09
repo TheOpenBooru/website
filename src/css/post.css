@@ -1,0 +1,32 @@
+
+.post-sidebar{
+    position: static;
+    width: fit-content;
+    max-width:12rem;
+    background-color: var(--COLOR-1);
+    padding-right: 1rem;
+    float: left;
+}
+
+.post-info{
+    padding: 0.5rem;
+}
+
+.post-image{
+    justify-self: center;
+    align-self: center;
+    margin: 2rem;
+    border: 1px solid #000;
+    max-height: 65vh;
+    max-width: 50vw;
+}
+@media screen and (max-width: 30rem) {
+    .post-sidebar {
+        display: none;
+    }
+    .post-image{
+        max-width: 94%;
+        max-height: 94%;
+        margin: 3%;
+    }
+}

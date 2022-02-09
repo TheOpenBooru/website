@@ -1,0 +1,33 @@
+:root{
+    --IMAGE-SIZE: 12rem;
+}
+
+.post-list{
+    padding: 1rem;
+    height: 94vh;
+    width: 100%;
+    overflow-y: scroll;
+
+    /* Grid */
+    display: grid;
+    justify-items: center;
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit,minmax(var(--IMAGE-SIZE),1fr));
+}
+
+.post-list>a>img{
+    max-width:var(--IMAGE-SIZE);
+    max-height:var(--IMAGE-SIZE);
+    border-radius: 1rem;
+    border: 5px solid;
+
+    background-color: var(--COLOR-2);
+    border-color: var(--COLOR-2);
+    transition: all 0.1s ease-out;
+}
+
+.post-list>a>img:hover{
+    transition: 0.2s all ease-out;
+    border-color: var(--COLOR-3);
+    border-radius: 3rem;
+}

@@ -1,0 +1,77 @@
+#navigation-bar {
+    background-color: var(--COLOR-1);
+    padding:2px;
+    /* Shape */
+    position: static;
+    top: 0;
+    left: 0;
+    width:100%;
+
+    /* Flex */
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+@media screen and (max-aspect-ratio: 1/1) {
+    #navigation-bar {
+        justify-content:center;
+    }
+}
+
+#navigation-bar > * {
+    /* Shape */
+    min-height: fit-content;
+    min-width: fit-content;
+    height: 1.6rem;
+    width: 5rem;
+    border-radius: 1.2rem;
+    
+    /* Center containinng items */
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: left;
+    align-items: center;
+    
+    user-select: none;
+    margin: 0.2rem;
+    padding: 0.4rem;
+    justify-content: center;
+    background-color: var(--COLOR-2);
+    text-decoration: none;
+    transition: 0.15s ease-out;
+}
+
+
+
+#navigation-bar > a:hover {
+    transition: 0.3s ease-out;
+    background-color:var(--COLOR-3);
+    border-radius: 0.5rem;
+}
+
+#navigation-bar > input {
+    align-self: center;
+    float:right;
+}
+
+#navigation-bar > input:focus {
+    outline:none;
+}
+
+
+#navigation-bar > a > *{
+    --MARGIN: 5px;
+    color: black;
+    margin-left: var(--MARGIN);
+    margin-right: var(--MARGIN);
+}
+
+#navigation-bar > a > span{
+    font-size: 1.2rem;
+}
+
+#navigation-bar > a > svg {
+    width: 1rem;
+    height: 1rem;
+}

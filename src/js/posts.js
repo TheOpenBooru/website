@@ -1,8 +1,16 @@
-import { React } from "react";
-var ENDPOINT = "localhost";
+var ENDPOINT = "http://slate:57255";
 
-function getPosts() {
-    return new Array(60);
+async function getPost(id) {
+    let r = await fetch(`${ENDPOINT}/posts/post?id=${id}`)
+    let json = await r.json()
+    return json;
 }
 
-export { getPosts };
+async function getPosts(query) {
+    query = query || ""
+    let r = await fetch(`${ENDPOINT}/posts/search?query=${query}`)
+    let json = await r.json();
+    return json;
+}
+
+export { getPosts,getPost };

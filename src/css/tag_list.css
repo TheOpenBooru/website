@@ -1,0 +1,24 @@
+.tag-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 5px;
+
+    width: 100%;
+}
+.tag-list > span{
+    
+}
+.tag-list > span::before{
+    content: "- ";
+}
+
+.namespace-generic{
+    color: black;
+}
+.namespace-character{
+    color: purple;
+}
+.namespace-meta{
+    color: rgb(40, 40, 40);
+}
