@@ -1,7 +1,7 @@
 var ENDPOINT = "http://slate:57255";
 
 async function getPost(id) {
-    let r = await fetch(`${ENDPOINT}/posts/post?id=${id}`)
+    let r = await fetch(`${ENDPOINT}/posts/post/${id}`)
     let json = await r.json()
     return json;
 }
