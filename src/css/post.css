@@ -2,7 +2,7 @@
 .post-sidebar{
     position: static;
     width: fit-content;
-    max-width:12rem;
+    max-width: 20rem;
     background-color: var(--COLOR-1);
     padding-right: 1rem;
     float: left;
