@@ -23,7 +23,7 @@ function PostInfo(props) {
             <div className="post-info" >
                 <Entry name="Author" />
                 <Entry name="Source" />
-                <Entry name="Created At" value={new Date(post.created_at).toDateString()} />
+                <Entry name="Created At" value={new Date(post.created_at * 1000).toDateString()} />
                 <Entry name="Language" value={post.language} />
                 <Entry name="Age Rating" value={post.age_rating} />
                 <Entry name="Views" value={post.views} />
