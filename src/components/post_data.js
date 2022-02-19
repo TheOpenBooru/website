@@ -15,16 +15,18 @@ function Entry(props) {
 
 function PostInfo(props) {
     let post = props.post
-    if (!post) {
+    if (post.created_at === undefined) {
         return (<div className="post-info" />);
     }
     else {
+        let languageNames = new Intl.DisplayNames([post.language], { type: 'language' });
+        let language = languageNames.of('en');
         return (
             <div className="post-info" >
                 <Entry name="Author" />
                 <Entry name="Source" />
                 <Entry name="Created At" value={new Date(post.created_at * 1000).toDateString()} />
-                <Entry name="Language" value={post.language} />
+                <Entry name="Language" value={language} />
                 <Entry name="Age Rating" value={post.age_rating} />
                 <Entry name="Views" value={post.views} />
                 <Entry name="Upvotes" value={post.upvotes} />
