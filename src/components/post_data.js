@@ -6,7 +6,7 @@ function Entry(props) {
         <span>
             {props.name}: {"\t"}
             <a href={props.href}>
-                {props.value ? props.value : "None"}
+                {props.value != null ? props.value : "None"}
             </a>
             <br/>
         </span>
@@ -19,8 +19,15 @@ function PostInfo(props) {
         return (<div className="post-info" />);
     }
     else {
-        let languageNames = new Intl.DisplayNames([post.language], { type: 'language' });
-        let language = languageNames.of('en');
+        console.log(post);
+        let language
+        try {
+            let languageNames = new Intl.DisplayNames([post.language], { type: 'language' });
+            language = languageNames.of('en');
+        }
+        catch (e) {
+            language = post.language;
+        }
         return (
             <div className="post-info" >
                 <Entry name="Author" />
