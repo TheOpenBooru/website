@@ -9,6 +9,7 @@ function Post(props) {
             <img
                 height={data.thumbnail.height} width={data.thumbnail.width} 
                 src={data.thumbnail.url}
+                alt=""
             />
         </a>
     );
@@ -24,7 +25,7 @@ function PostList(props) {
     return (
         <div className="post-list">
             {posts.map((post) => (
-                <Post data={post}/>
+                <Post data={post} key={post.id}/>
             ))}
         </div>
     );

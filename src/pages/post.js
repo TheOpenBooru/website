@@ -24,7 +24,7 @@ function Post(props) {
                 <PostInfo post={post}/>
                 <TagList tags={post.tags} />
             </div>
-            <img className="post-image" src={URL} />
+            <img className="post-image" src={URL} alt=""/>
         </div>
     );
 }
