@@ -4,7 +4,7 @@ import '../css/tag_list.css';
 function Tag(props) {
     let namespace = props.namespace || 'generic';
     return (
-        <a className={`namespace-${namespace}`} href={`/tag?name=${props.name}`}>
+        <a className={`namespace-${namespace}`} href={`/posts?query=${props.name}`}>
             {props.name}
         </a>
     );
