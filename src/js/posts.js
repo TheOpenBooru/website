@@ -13,4 +13,20 @@ async function getPosts(query) {
     return json;
 }
 
-export { getPosts,getPost };
+async function updatePost(post) {
+    let request = new XMLHttpRequest();
+    request.open("PATCH", `${ENDPOINT}/posts/post/${post.id}`, true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(post);
+}
+
+async function createPost(file) {
+    let form = new FormData();
+    form.append("image_file", file);
+    
+    let request = new XMLHttpRequest();
+    request.open("POST", "http://localhost:57255/posts/create");
+    request.send(form);
+}
+
+export { getPosts,getPost,createPost,updatePost };

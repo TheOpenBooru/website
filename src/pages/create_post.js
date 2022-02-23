@@ -1,6 +1,7 @@
 import react from "react";
 import React from "react";
 import NavBar from "../components/navigation_bar";
+import {createPost} from "../js/posts.js";
 
 
 function CreatePost(props) {
@@ -8,12 +9,7 @@ function CreatePost(props) {
     function handleSubmit(event) {
         let files = File_Input.current.files;
         for (const file of files) {
-            let form = new FormData();
-            form.append("image_file", file);
-            
-            let request = new XMLHttpRequest();
-            request.open("POST", "http://localhost:57255/posts/create");
-            request.send(form);
+            createPost(file);
         }
     }
 
