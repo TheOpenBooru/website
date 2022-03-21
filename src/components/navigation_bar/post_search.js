@@ -37,7 +37,9 @@ function PostSearch() {
     let searchBoxRef = React.useRef();
     function runSearch() {
         let search = searchBoxRef.current.innerText;
-        window.location.href = `/posts?query=${search}`;
+        if (search !== "") {
+            window.location.href = `/posts?query=${search}`;
+        }
     }
     function SearchBoxKeypress(e) {
         let search = e.target.value;
