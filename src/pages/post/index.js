@@ -8,16 +8,18 @@ function Post(props) {
     let [post,setPost] = useState({});
     let [URL, setURL] = useState("https://example/test.jpg");
     
-    useEffect(async () => {
-        let params = new URLSearchParams(document.location.search);
-        let postID = params.get("id");
-        if (postID === null) {
-            // Redirect to home page
-            document.location.href = '/';
-        }
-        let post = await get(postID)
-        setPost(post);
+    useEffect(() => {
+        (async () => {
+            let params = new URLSearchParams(document.location.search);
+            let postID = params.get("id");
+            if (postID === null) {
+                // Redirect to home page
+                document.location.href = '/';
+            }
+            let post = await get(postID)
+            setPost(post);
         setURL(post.full.url);
+        })()
     }, []);
 
     let ImgElemt
