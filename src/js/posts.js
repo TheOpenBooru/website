@@ -23,6 +23,7 @@ async function get(id) {
 
 async function search(query) {
     query = query || ""
+    query += " limit:1000"
     let r = await fetch(`${ENDPOINT}/posts/search?query=${query}`)
     let json = await r.json();
     return json;
