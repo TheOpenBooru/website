@@ -19,6 +19,7 @@
     }
 }
 
+
 .post-list>a>img{
     max-width:var(--IMAGE-SIZE);
     max-height:var(--IMAGE-SIZE);
@@ -28,6 +29,9 @@
     background-color: var(--COLOR-2);
     border-color: var(--COLOR-2);
     transition: all 0.1s ease-out;
+}
+.post-list>a>.media-video{
+    border-color: lightgreen;
 }
 
 .post-list>a>img:hover{

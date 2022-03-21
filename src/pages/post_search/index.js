@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
-import Core from "./core";
-import "../css/post_search.css";
-import { search } from "../js/posts"
+import Core from "../core";
+import "./post_search.css";
+import { search } from "../../js/posts"
 
 function Post(props) {
     let data = props.data;
@@ -12,6 +12,7 @@ function Post(props) {
                 src={data.thumbnail.url}
                 alt=""
                 loading="lazy"
+                className={`media-${data.type}`}
             />
         </a>
     );
