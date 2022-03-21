@@ -37,7 +37,9 @@ function PostSearch() {
     let searchBoxRef = React.useRef();
     function runSearch() {
         let search = searchBoxRef.current.value;
-        if (search !== "") {
+        if (search === "") {
+            window.location.href = `/posts`;
+        } else {
             window.location.href = `/posts?query=${search}`;
         }
     }
