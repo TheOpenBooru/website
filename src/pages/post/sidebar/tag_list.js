@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/tag_list.css';
+import './tag_list.css';
 
 function Tag(props) {
     let namespace = props.namespace || 'generic';

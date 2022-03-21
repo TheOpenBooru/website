@@ -6,10 +6,7 @@
     background-color: var(--COLOR-1);
     padding-right: 1rem;
     float: left;
-}
-
-.post-info{
-    padding: 0.5rem;
+    padding: .5rem;
 }
 
 .post-image{
@@ -17,9 +14,11 @@
     align-self: center;
     margin: 2rem;
     border: 1px solid #000;
-    max-height: 80vh;
-    max-width: 60vw;
+    
+    max-height: 60%;
+    max-width: 70%;
 }
+
 @media screen and (max-width: 30rem) {
     .post-sidebar {
         display: none;

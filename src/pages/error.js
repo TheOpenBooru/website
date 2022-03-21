@@ -1,11 +1,11 @@
 import React from "react";
-import NavBar from "../components/navigation_bar";
+import Core from "./core";
 
 function ErrorPage() {
     return (
-        <div>
-            <NavBar />
-        </div>
+        <Core>
+                404 - This page does not exist
+        </Core>
     );
 }
 
