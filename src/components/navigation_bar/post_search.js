@@ -36,7 +36,7 @@ function PredictedTags(props) {
 function PostSearch() {
     let searchBoxRef = React.useRef();
     function runSearch() {
-        let search = searchBoxRef.current.innerText;
+        let search = searchBoxRef.current.value;
         if (search !== "") {
             window.location.href = `/posts?query=${search}`;
         }
