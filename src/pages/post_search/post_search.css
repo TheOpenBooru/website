@@ -31,7 +31,7 @@
     transition: all 0.1s ease-out;
 }
 .post-list>a>.media-video{
-    border-color: lightgreen;
+    border-color: green;
 }
 
 .post-list>a>img:hover{
