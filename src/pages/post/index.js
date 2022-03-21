@@ -2,7 +2,7 @@ import React, {useState,useEffect} from "react";
 import SideBar from "./sidebar";
 import Core from "../core";
 import { get } from "../../js/posts";
-import "../../css/post.css";
+import "./post.css";
 
 function Post(props) {
     let [post,setPost] = useState({});
