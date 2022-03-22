@@ -14,5 +14,5 @@ ReactDOM.render(
             <Route path="/post" element={<Post />} />
         </Routes>
     </BrowserRouter>,
-    document.body,
+    document.getElementById('root'),
 );
