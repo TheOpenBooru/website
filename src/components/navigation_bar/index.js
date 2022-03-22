@@ -22,7 +22,7 @@ function NavBar() {
             <PageButton title="Posts" icon="/posts.svg" >
                 <PostSearch />
             </PageButton>
-            <CreatePostBox />
+            <CreatePostBox className="navbar-section bordered"/>
         </nav>
     );
 }

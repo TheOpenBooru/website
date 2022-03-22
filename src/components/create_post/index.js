@@ -12,7 +12,7 @@ function CreatePostBox(props) {
     }
 
     return (
-        <div className="navbar-section bordered">
+        <div className={props.className}>
             <label htmlFor="image_file">Create Post:</label>
             <input
                 className="post-create-input"
