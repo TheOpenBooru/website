@@ -16,6 +16,9 @@ function PageButton(props) {
 function NavBar() {
     return (
         <nav id="navigation-bar">
+            <div className="navbar-section bordered">
+                Version: Alpha 1
+            </div>
             <PageButton title="Posts" icon="/posts.svg" >
                 <PostSearch />
             </PageButton>
