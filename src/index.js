@@ -12,6 +12,7 @@ ReactDOM.render(
             <Route index element={<Posts />} />
             <Route path="/posts" element={<Posts />} />
             <Route path="/post" element={<Post />} />
+            <Route path="*" element={<ErrorPage />} />
         </Routes>
     </BrowserRouter>,
     document.getElementById('root'),

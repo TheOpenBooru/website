@@ -2,9 +2,12 @@ import React from "react";
 import Core from "./core";
 
 function ErrorPage() {
+    window.location.replace('/error')
     return (
-        <Core>
-                404 - This page does not exist
+        <Core title="404 Error" description="404 Error page">
+            <div className="bordered">
+                404 Error - This page does not exist
+            </div>
         </Core>
     );
 }
