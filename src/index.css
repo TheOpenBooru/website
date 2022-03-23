@@ -3,8 +3,8 @@
   --COLOR-1:#78cad2;
   --COLOR-2:#62a8ac;
   --COLOR-3:#295155;
-  --COLOR-4:#1a2f31;
-  --COLOR-5:#081415;
+  --COLOR-4:#2d6064;
+  --COLOR-5:#193d41;
 }
 
 body {
@@ -14,6 +14,12 @@ body {
   background-color: var(--COLOR-BACKGROUND);
 }
 
+
+.centered{
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}
 
 .bordered{
   border: 3px solid var(--COLOR-4) ;
@@ -25,4 +31,11 @@ body {
   transition: 0.3s ease-out;
   background-color:var(--COLOR-3);
   border-radius: 0.5rem;
+}
+
+.disable-link-text {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: black;
 }
