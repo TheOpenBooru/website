@@ -5,10 +5,8 @@ import "./post_create.css";
 function CreatePostBox(props) {
     let File_Input = React.createRef();
     function handleSubmit(event) {
-        let files = File_Input.current.files;
-        for (const file of files) {
-            create(file);
-        }
+        let file = File_Input.current.files[0];
+        create(file);
     }
 
     return (
@@ -16,8 +14,8 @@ function CreatePostBox(props) {
             <label htmlFor="image_file">Create Post:</label>
             <input
                 className="post-create-input"
-                name="image_file" type="file" multiple
-                accept="image/png, image/jpeg, image/webp"
+                name="image_file" type="file"
+                accept="image/*, video/*"
                 ref={File_Input} />
             <button onClick={handleSubmit}>Submit</button>
         </div>
