@@ -5,21 +5,24 @@ import "./nav_bar.css";
 
 function PageButton(props) {
     return (
-        <a className="navbar-section bordered" title={props.title} onClick={props.onClick} href={props.href}>
+        <div className="navbar-section bordered" id={props.id}>
             <img className="navbar-button-icon" src={props.icon} alt="" />
-            <span className="navbar-button-text" >{props.title}</span>
+            <span className="navbar-button-text" >{props.content}</span>
             {props.children}
-        </a>
+        </div>
     );
 }
 
 function NavBar() {
     return (
         <nav id="navigation-bar">
-            <div className="navbar-section bordered">
-                Version: Alpha 1
-            </div>
-            <PageButton title="Posts" icon="/posts.svg" >
+            <a className="navbar-section bordered bordered-hover"
+                href="https://github.com/TheOpenBooru"  id="version-number">
+                <img className="navbar-button-icon" src="/images/github_logo.png" alt="" />
+                <text className="disable-link-text">Alpha 1</text>
+            </a>
+
+            <PageButton id="navbar-search" content="Search" icon="/images/posts.svg" >
                 <PostSearch />
             </PageButton>
             <CreatePostBox className="navbar-section bordered"/>
