@@ -23,9 +23,7 @@
 .post-list>a>img{
     max-width:var(--IMAGE-SIZE);
     max-height:var(--IMAGE-SIZE);
-    width: auto;
-    height: auto;
-    border-radius: 1rem;
+    border-radius: .5rem;
     border: 0.3rem solid;
     
     background-color: var(--COLOR-2);
@@ -36,7 +34,7 @@
 .post-list>a>img:hover{
     transition: 0.2s all ease-out;
     border-color: var(--COLOR-3);
-    border-radius: 3rem;
+    border-radius: 4rem;
 }
 
 .post-list>a>.media-video{

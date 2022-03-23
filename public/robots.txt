@@ -1,2 +1,6 @@
 User-agent: *
-Disallow: /post
+Allow: /posts
+Allow: /post
+Disallow: /error
+Disallow: /images/
+Disallow: /js/

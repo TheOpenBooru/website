@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React from "react";
 
 export default function Video(props) {
     let videoREF = React.useRef();
@@ -13,10 +13,10 @@ export default function Video(props) {
         };
     }
 
-    useEffect(setVolume, []);
+    React.useEffect(setVolume, []);
     return (
         <video
-            className="post-image"
+            className={props.className}
             src={props.src}
             ref={videoREF}
             controls

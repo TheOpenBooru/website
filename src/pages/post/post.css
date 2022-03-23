@@ -1,4 +1,3 @@
-
 .post-sidebar{
     position: static;
     width: fit-content;
@@ -9,20 +8,9 @@
     padding: .5rem;
 }
 
-.post-image{
-    margin: 2rem;
-    border: 1px solid #000;
-    max-height: 80vh;
-    max-width: 80vw;
-}
 
 @media screen and (max-width: 30rem) {
     .post-sidebar {
         display: none;
-    }
-    .post-image{
-        max-width: 94%;
-        max-height: 94%;
-        margin: 3%;
     }
 }

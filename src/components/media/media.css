@@ -1,0 +1,14 @@
+.post-media{
+    margin: 2rem;
+    border: 1px solid #000;
+    max-height: 60vh;
+    max-width: 60vw;
+}
+
+@media screen and (max-width: 30rem) {
+    .post-media{
+        max-width: 94%;
+        max-height: 94%;
+        margin: 3%;
+    }
+}
