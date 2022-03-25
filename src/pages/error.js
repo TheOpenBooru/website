@@ -2,7 +2,7 @@ import React from "react";
 import Core from "./core";
 
 function ErrorPage() {
-    window.location.replace('/error')
+    if (window.location.pathname === "/error") window.location.replace("/error");
     return (
         <Core title="404 Error" description="404 Error page">
             <div className="bordered">
