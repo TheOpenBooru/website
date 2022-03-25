@@ -4,7 +4,7 @@ import NavBar from '../components/navigation_bar';
 
 function Core(props) {
     if (props.embed) {
-        var ogElements = (
+        var open_graph = (
             <Helmet>
                 <meta property="og:title" content={props.title} />
                 <meta property="og:site_name " content="Open Booru" />
@@ -17,9 +17,9 @@ function Core(props) {
     }
     return (
         <div>
-            {props.embed ? ogElements : null}
+            {props.embed ? open_graph : null}
             <Helmet>
-                <title>{`Open Booru - ${props.title}`}</title>
+                <title>{props.title}</title>
                 <meta name="description" content={props.description} />
             </Helmet>
             <NavBar/>
