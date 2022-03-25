@@ -5,24 +5,24 @@ import SideBar from "./sidebar";
 import Core from "../core";
 import Media from "../../components/media";
 import OpenGraphTags from "../../components/open_graph";
+import { useParams } from "react-router-dom";
 
 function Post(props) {
     let [post,setPost] = useState({});
     let [URL, setURL] = useState("https://example/test.jpg");
     
-    let params = new URLSearchParams(document.location.search);
-    let postID = params.get("id");
-    if (postID === null) window.location.replace('/error');
+    const { id } = useParams();
+    if (id === null) window.location.replace('/error');
     
     async function generatePost() {
-        let post = await get(postID)
+        let post = await get(id)
         setPost(post);
         setURL(post.full.url);
     }
     
     useEffect(generatePost, []);
-    let title = `Post ${postID}`;
-    let desc = `Open Booru Post: ${postID}`;
+    let title = `Post ${id}`;
+    let desc = `Open Booru Post: ${id}`;
     return (
         <Core title={title} description={desc}>
             <OpenGraphTags

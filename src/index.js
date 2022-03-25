@@ -11,7 +11,7 @@ ReactDOM.render(
         <Routes>
             <Route index element={<Posts />} />
             <Route path="/posts" element={<Posts />} />
-            <Route path="/post" element={<Post />} />
+            <Route path="/post/:id" element={<Post/>} />
             <Route path="*" element={<ErrorPage />} />
         </Routes>
     </BrowserRouter>,
