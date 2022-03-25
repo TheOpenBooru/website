@@ -4,6 +4,7 @@ import "./post.css";
 import SideBar from "./sidebar";
 import Core from "../core";
 import Media from "../../components/media";
+import OpenGraphTags from "../../components/open_graph";
 
 function Post(props) {
     let [post,setPost] = useState({});
@@ -20,13 +21,15 @@ function Post(props) {
     }
     
     useEffect(generatePost, []);
+    let title = `Post ${postID}`;
+    let desc = `Open Booru Post: ${postID}`;
     return (
-        <Core
-            title={`Post ${postID}`}
-            description={`Open Booru Post: ${postID}`}
-            embed
-            image={URL}
-            >
+        <Core title={title} description={desc}>
+            <OpenGraphTags
+                title={title}
+                description={desc}
+                image={URL}
+            />
             <div id="post-page">
                 <SideBar post={post} />
                 <Media type={post.type} src={URL} />

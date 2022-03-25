@@ -3,21 +3,8 @@ import {Helmet} from "react-helmet";
 import NavBar from '../components/navigation_bar';
 
 function Core(props) {
-    if (props.embed) {
-        var open_graph = (
-            <Helmet>
-                <meta property="og:title" content={props.title} />
-                <meta property="og:site_name " content="Open Booru" />
-                <meta property="og:description" content={props.description} />
-                <meta property="og:type" content="media.image" />
-                <meta property="og:url" content={ document.location.href} />
-                { props.image ? <meta property="og:image" content={props.image} /> : null }
-            </Helmet>
-        )
-    }
     return (
         <div>
-            {props.embed ? open_graph : null}
             <Helmet>
                 <title>{props.title}</title>
                 <meta name="description" content={props.description} />
