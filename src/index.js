@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Posts from "./pages/post_search";
+import Posts from "./pages/posts";
 import Post from "./pages/post";
 import ErrorPage from "./pages/error";
 import './index.css';
