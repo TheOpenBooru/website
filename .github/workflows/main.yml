@@ -1,0 +1,18 @@
+name: CI
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy React code to GitHub Pages
+        uses: amitsingh-007/deploy-to-github-pages@v1.2
