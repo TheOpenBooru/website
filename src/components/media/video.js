@@ -16,6 +16,7 @@ export default function Video(props) {
     React.useEffect(setVolume, []);
     return (
         <video
+            style={props.style}
             className={props.className}
             src={props.src}
             ref={videoREF}

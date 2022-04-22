@@ -1,0 +1,35 @@
+#post-sidebar{
+    /* Position */
+    position: relative;
+    height: 100%;
+    min-width: 15rem;
+    max-width: 15rem;
+
+    padding: .5rem;
+    padding-right: 1rem;
+
+    /* Look */
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: var(--COLOR-2);
+}
+
+.tag-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.tag-list > span::before{
+    content: "- ";
+}
+
+.namespace-generic{
+    color: black;
+}
+.namespace-character{
+    color: purple;
+}
+.namespace-meta{
+    color: rgb(40, 40, 40);
+}

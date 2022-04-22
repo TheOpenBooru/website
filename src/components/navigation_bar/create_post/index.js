@@ -1,8 +1,8 @@
 import React from "react";
-import { create } from "../../js/posts.js";
-import "./post_create.css";
+import { create } from "../../../js/posts.js";
+import "./index.css";
 
-function CreatePostBox(props) {
+export default function CreatePostBox(props) {
     let File_Input = React.createRef();
     function handleSubmit(event) {
         let file = File_Input.current.files[0];
@@ -21,5 +21,3 @@ function CreatePostBox(props) {
         </div>
     );
 }
-
-export default CreatePostBox;

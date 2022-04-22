@@ -1,3 +1,3 @@
 # Website
 
-A webgui to interact with the OpenBooru api
+I started work on OpenBooru

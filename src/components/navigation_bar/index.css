@@ -1,11 +1,18 @@
+:root{
+    --NAVBAR_HEIGHT: 3rem;
+}
+
 #navigation-bar {
-    background-color: var(--COLOR-1);
-    padding:2px;
-    /* Shape */
-    position: static;
+    /* Position */
+    position: sticky;
     top: 0;
     left: 0;
-    width:100%;
+    min-height: var(--NAVBAR_HEIGHT);
+    max-height: var(--NAVBAR_HEIGHT);
+    width: 100vw;
+    z-index: 1;
+    
+    background-color: var(--COLOR-1);
 
     /* Flex */
     display: flex;
@@ -19,7 +26,6 @@
     /* Shape */
     min-height: fit-content;
     min-width: fit-content;
-    height: 1.6rem;
     width: 5rem;
     border-radius: 1.2rem;
     
@@ -61,19 +67,12 @@
 }
 
 .navbar-button-icon {
-    height: 1.3em;
+    height: 1.5rem;
 }
 
 
 @media screen and (max-aspect-ratio: 1/1) {
     #navigation-bar {
-        justify-content:center;
-    }
-    .navbar-section{
         display:none;
-    }
-    #navbar-search {
-        display:flex;
-        width: 95vw;
     }
 }

@@ -7,7 +7,7 @@ function Core(props) {
         <div>
             <Helmet>
                 <title>{props.title}</title>
-                <meta name="description" content={props.description} />
+                <meta name="description" content={props.description}/>
             </Helmet>
             <NavBar/>
             {props.children}

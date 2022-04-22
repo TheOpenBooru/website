@@ -1,0 +1,41 @@
+:root{
+    --IMAGE-SIZE: 12rem;
+}
+
+.post-list{
+    padding: 2rem 10rem 2rem 10rem;
+    
+    /* Position */
+    max-width: 100%;
+    max-height: calc(92vh - var(--NAVBAR_HEIGHT));
+    overflow-y: auto;
+
+
+    /* Grid */
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit,minmax(var(--IMAGE-SIZE),1fr));
+}
+
+@media screen and (max-width: 60rem) {
+    .post-list{
+        margin: .2rem;
+    }
+}
+
+.post-list>a>img{
+    max-width:var(--IMAGE-SIZE);
+    max-height:var(--IMAGE-SIZE);
+
+    object-fit: cover;
+    border: var(--COLOR-2) 0.3rem solid;
+    background-color: var(--COLOR-2);
+}
+
+.post-list>a:hover > img{
+    transition: 0.3s all ease-out;
+    border-color: var(--COLOR-3);
+    border-radius: 2rem;
+}

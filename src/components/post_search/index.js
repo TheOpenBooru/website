@@ -1,42 +1,39 @@
-import React,{useState,useEffect} from "react";
-import { search } from "../../js/posts"
-import Post from "./post_item";
-import "./post_search.css";
+import React, { useEffect, useRef, useState } from "react";
+import ColumnPosts from "./columns";
+import GridPosts from "./grid";
+import FullscreenPost from "./fullscreen";
+import LayoutSelector from "./layout_selector";
 
+import Settings from "../../js/settings";
+import { search, PostQuery } from "../../js/posts";
 
-function PostColumn(posts) {
-    return (
-        <div className="post-column">
-            {posts.map((post) => (
-                <Post data={post} key={post.id}/>
-            ))}
-        </div>
-    )
-}
-
-function SplitArray(array, parts) {
-    let buckets = Array.apply(null, Array(parts)).map(() => new Array());
-    array.forEach((v, i) => {
-        buckets[i % parts].push(v)
-        console.log(buckets[i % parts])
-        console.log(buckets)
-    })
-    return buckets;
-}
-
-export default function PostSearch() {
+export default function PostsSearch() {
     let [posts, setPosts] = useState([]);
-    useEffect( () => (async () => {
-        let params = new URLSearchParams(document.location.search);
-        let query = params.get("query");
-        let posts = await search(query);
-        setPosts(posts);
-    })(), []);
-    
-    
+    let [offset, setOffset] = useState(0);
+
+    async function prepend_posts() {
+        let query = new PostQuery();
+        query.limit = 100;
+        query.index = offset;
+        let additional_posts = await search(query);
+        setOffset(offset + additional_posts.length);
+        setPosts(posts.concat(additional_posts));
+    }
+
+    useEffect(() => prepend_posts(), []); // eslint-disable-line
+
+    if (Settings.Search_Layout === "grid") {
+        var post_search = <GridPosts posts_callback={prepend_posts} posts={posts} />;
+    } else if (Settings.Search_Layout === "fullscreen") {
+        var post_search = <FullscreenPost posts_callback={prepend_posts} posts={posts} />;
+    } else {
+        var post_search = <ColumnPosts posts_callback={prepend_posts} posts={posts} />;
+    }
+
     return (
-        <div className="post-list">
-            {SplitArray(posts,4).map(PostColumn)}
+        <div>
+            <LayoutSelector />
+            {post_search}
         </div>
     );
 }

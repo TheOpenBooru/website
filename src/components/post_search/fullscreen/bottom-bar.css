@@ -1,0 +1,62 @@
+#post-bottombar-container{
+    --BOTTOM-BAR-HIEGHT: 22vh;
+    --BOTTOM-BAR-PEEK: 1rem;
+    --IMAGE-HEIGHT: 20vh;
+    --IMAGE-WIDTH: calc(var(--IMAGE-HEIGHT) * 0.8)
+}
+
+
+#post-bottombar-container{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+/* Bottom Bar Slideout Animation */
+#post-bottombar{
+    transition: 0.2s ease-in;
+    bottom: calc((var(--BOTTOM-BAR-HIEGHT) * -1) + var(--BOTTOM-BAR-PEEK));
+}
+
+#post-bottombar:hover{
+    transition: 0.2s ease-out;
+    bottom: 0;
+}
+
+#post-bottombar{
+    /* Position */
+    position: relative;
+    min-height: calc(var(--BOTTOM-BAR-HIEGHT) - .2rem);
+    max-height: calc(var(--BOTTOM-BAR-HIEGHT) - .2rem);
+    width: 100vw;
+    
+    /* Look */
+    background-color: var(--COLOR-2);
+    border-top: #000 .2rem solid;
+    
+    /* Set scrollbars */
+    overflow-x: hidden;
+    overflow-y: hidden;
+    
+    /* Align preivews */
+    display: flex;
+    flex-wrap: nowrap;
+    align-items:center;
+    justify-content: center;
+}
+
+.post-bottombar-preview{
+    /* Position */
+    min-height: var(--IMAGE-HEIGHT);
+    max-height: var(--IMAGE-HEIGHT);
+    min-width: var(--IMAGE-WIDTH);
+    max-width: var(--IMAGE-WIDTH);
+    object-fit: cover;
+    
+    /* Look */
+    border: #000 .2rem solid;
+    border-radius: 1rem 1rem 0 0;
+    margin: calc(var(--IMAGE-HEIGHT) * 0.05);
+    background-color: var(--COLOR-3);
+    transition: 1s ease-in-out all;
+}

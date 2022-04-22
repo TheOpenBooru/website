@@ -5,8 +5,8 @@ import PostSearch from "../components/post_search";
 
 function Posts() {
     return (
-        <Core title="Posts" description="Use this page to search for posts">
-            <PostSearch/>
+        <Core title="Open Booru: Posts" description="Open Source booru implementation">
+            <PostSearch />
         </Core>
     );
 }

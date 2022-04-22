@@ -26,9 +26,7 @@ function PredictedTags(props) {
     };
     return (
         <div>
-            {predicted.map(
-                    (tag, i) => <Tag tag={tag} key={i} />
-            )}
+            {predicted.map((tag, i) => <Tag key={tag} tag={tag} />)}
         </div>
     )
 }

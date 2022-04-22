@@ -9,6 +9,7 @@ export default function OpenGraphTags(props) {
             <meta property="og:description" content={props.description} />
             <meta property="og:url" content={document.location.href} />
             <meta property="og:image" content={props.image} />
+            <meta property="og:video" content={props.video} />
         </Helmet>
     )
 }

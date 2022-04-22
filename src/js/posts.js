@@ -1,4 +1,4 @@
-var ENDPOINT = "https://openbooru.org:8443";
+var ENDPOINT = "http://192.168.0.82:8443";
 
 async function status() {
     return fetch(`${ENDPOINT}/status`)
@@ -9,24 +9,35 @@ async function status() {
 async function create(file) {
     let form = new FormData();
     form.append("image_file", file);
-    
+
     let request = new XMLHttpRequest();
     request.open("POST", `${ENDPOINT}/posts/create`);
     request.send(form);
 }
 
 async function get(id) {
-    let r = await fetch(`${ENDPOINT}/posts/post/${id}`)
-    let json = await r.json()
+    let r = await fetch(`${ENDPOINT}/posts/post/${id}`);
+    let json = await r.json();
     return json;
 }
 
+class PostQuery {
+    limit = 64;
+    index = 0;
+    include_tags = [];
+    exlude_tags = [];
+}
+
 async function search(query) {
-    query = query || ""
-    query += " limit:1000"
-    let r = await fetch(`${ENDPOINT}/posts/search?query=${query}`)
-    let json = await r.json();
-    return json;
+    let params = new URLSearchParams();
+    params.set("limit", query.limit);
+    params.set("index", query.index);
+    let r = await fetch(`${ENDPOINT}/posts/search?${params.toString()}`);
+    if (r.ok) {
+        return await r.json();
+    } else {
+        return [];
+    }
 }
 
 async function update(post) {
@@ -36,4 +47,4 @@ async function update(post) {
     request.send(post);
 }
 
-export { status, create, get, search, update };
+export { status, create, get, search, update, PostQuery };

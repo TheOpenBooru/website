@@ -1,7 +1,7 @@
 :root{
   --COLOR-BACKGROUND: #a1d2ce;
-  --COLOR-1:#78cad2;
-  --COLOR-2:#62a8ac;
+  --COLOR-1:#6bb7be;
+  --COLOR-2:#428c90;
   --COLOR-3:#295155;
   --COLOR-4:#2d6064;
   --COLOR-5:#193d41;
@@ -11,6 +11,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  overflow-y: hidden;
   background-color: var(--COLOR-BACKGROUND);
 }
 
