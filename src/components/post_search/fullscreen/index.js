@@ -13,7 +13,7 @@ export default function FullscreenPost(props) {
 
     // Handlers
     function visitPost() {
-        window.location.href = Redirects.post(index + 1);
+        window.location.href = Redirects.post(post.id);
     }
 
     function nextPost() {
@@ -50,7 +50,7 @@ export default function FullscreenPost(props) {
 
     return (
         <div id="post-fullscreen-base">
-            <div>{<Sidebar post={post} />}</div>
+        <div>{<Sidebar post={post} />}</div>
             <div
                 id="viewer-button-left"
                 className="viewer-button"
