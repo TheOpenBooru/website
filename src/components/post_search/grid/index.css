@@ -1,13 +1,16 @@
 :root{
-    --IMAGE-SIZE: 12rem;
+    --IMAGE-SIZE: 10rem;
 }
 
+@media screen and (max-aspect-ratio: 1/1) {
+    .post-list{max-height:calc(100vh - 4rem) !important}
+}
 .post-list{
-    padding: 2rem 10rem 2rem 10rem;
+    padding: 2rem 10vw 2rem 10vw;
     
     /* Position */
     max-width: 100%;
-    max-height: calc(92vh - var(--NAVBAR_HEIGHT));
+    max-height: calc(100vh - 4rem - var(--NAVBAR_HEIGHT));
     overflow-y: auto;
 
 
@@ -15,7 +18,7 @@
     display: grid;
     align-items: center;
     justify-items: center;
-    gap: 1rem;
+    gap: 2rem;
     grid-template-columns: repeat(auto-fit,minmax(var(--IMAGE-SIZE),1fr));
 }
 
