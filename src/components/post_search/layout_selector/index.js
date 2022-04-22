@@ -30,6 +30,7 @@ export default function LayoutSelector(props) {
             Settings.Search_Layout === layout.name ? "layout_selector-button-active" : "";
         return (
             <div
+                key={layout.name}
                 className={"layout_selector-button " + activeStyle}
                 onClick={update_settings(layout.name)}
             >
