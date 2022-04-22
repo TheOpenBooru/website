@@ -50,7 +50,9 @@ export default function FullscreenPost(props) {
 
     return (
         <div id="post-fullscreen-base">
-        <div>{<Sidebar post={post} />}</div>
+        <div className="viewer-tag_sidebar">
+            <Sidebar post={post} />
+        </div>
             <div
                 id="viewer-button-left"
                 className="viewer-button"
