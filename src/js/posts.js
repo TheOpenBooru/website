@@ -32,7 +32,9 @@ async function search(query) {
     let params = new URLSearchParams();
     params.set("limit", query.limit);
     params.set("index", query.index);
-    let r = await fetch(`${ENDPOINT}/posts/search?${params.toString()}`);
+    let r = await fetch(`${ENDPOINT}/posts/search?${params.toString()}`, {
+        cache: "default",
+    });
     if (r.ok) {
         return await r.json();
     } else {
