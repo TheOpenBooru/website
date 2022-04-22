@@ -16,12 +16,12 @@
 }
 
 .layout_selector-button {
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.6rem;
+    height: 1.6rem;
     margin: .2rem;
 
     border: 0.2rem solid #000;
-    border-radius: .2rem;
+    border-radius: .4rem;
     background-color: var(--COLOR-2);
     
     display: flex;
@@ -35,18 +35,17 @@
 }
 
 .layout_selector-button-icon {
-    transition: 0.3s ease-in-out;
+    transition: 0.2s ease-in-out;
     animation-fill-mode: forwards;
-
-    width: 1rem;
-    height: 1rem;
+    
+    width: 80%;
+    height: 80%;
     filter: invert(100%);
 }
 
-.layout_selector-button:hover > .layout-button-icon{
+.layout_selector-button:hover > .layout_selector-button-icon{
     cursor: pointer;
-    width: 110%;
-    height: 110%;
+    width: 90%;
+    height: 90%;
     filter: invert(0%);
-    background-color: var(--COLOR-3);
 }
