@@ -10,7 +10,7 @@
 
     /* Look */
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: var(--COLOR-2);
 }
 
@@ -20,16 +20,14 @@
     flex-wrap: nowrap;
 }
 
-.tag-list > span::before{
-    content: "- ";
-}
-
 .namespace-generic{
     color: black;
 }
+
 .namespace-character{
     color: purple;
 }
+
 .namespace-meta{
     color: rgb(40, 40, 40);
 }
