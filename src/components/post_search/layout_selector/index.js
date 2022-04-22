@@ -4,9 +4,6 @@ import "./index.css";
 
 export default function LayoutSelector(props) {
     let update_settings = (layout) => () => {
-        // Scroll to the top to problems on the fullscreen layout
-        window.scrollTo(0, 0);
-
         Settings.Search_Layout = layout;
         window.location.reload();
     };
