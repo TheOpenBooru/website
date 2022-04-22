@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import BottomBar from "./bottom-bar";
 import Media from "../../media";
 import Sidebar from "../../sidebar";
@@ -7,10 +7,15 @@ import "./index.css";
 
 export default function FullscreenPost(props) {
     let [index, setIndex] = useState(0);
+    let baseRef = useRef(null);
     let { posts_callback, posts } = props;
+    
+    if (posts.length - index < 32) {
+        posts_callback();
+    }
     let post = posts[index];
     if (post == null) return null;
-
+    
     // Handlers
     function visitPost() {
         window.location.href = Redirects.post(post.id);
@@ -42,24 +47,27 @@ export default function FullscreenPost(props) {
         }
     };
 
-    if (posts.length - index < 32) {
-        posts_callback();
-    }
 
+    // Scroll to top to prevent cropped content
+    let onLoadHandler = () => baseRef.current.scrollTo(0, 0);
+    
     let url = post.preview ? post.preview.url : post.full.url;
-
     return (
-        <div id="post-fullscreen-base">
-        <div className="viewer-tag_sidebar">
-            <Sidebar post={post} />
-        </div>
+        <div id="post-fullscreen-base" ref={baseRef} onLoad={onLoadHandler}>
+            <div className="viewer-tag_sidebar">
+                <Sidebar post={post} />
+            </div>
             <div
                 id="viewer-button-left"
                 className="viewer-button"
                 title="Previous"
                 onClick={prevPost}
             >
-                <img className="viewer-button-icon" src="/images/left-arrow.svg" alt="previous" />
+                <img
+                    className="viewer-button-icon"
+                    src="/images/left-arrow.svg"
+                    alt="previous"
+                />
             </div>
             <div className="viewer-center">
                 <div className="viewer-image">
@@ -67,7 +75,12 @@ export default function FullscreenPost(props) {
                 </div>
             </div>
             <div />
-            <div id="viewer-button-right" className="viewer-button" title="Next" onClick={nextPost}>
+            <div
+                id="viewer-button-right"
+                className="viewer-button"
+                title="Next"
+                onClick={nextPost}
+            >
                 <img className="viewer-button-icon" src="/images/right-arrow.svg" alt="next" />
             </div>
             <BottomBar posts={posts} index={index} setIndex={setIndex} />
