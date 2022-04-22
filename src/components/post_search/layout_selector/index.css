@@ -21,12 +21,17 @@
     margin: .2rem;
 
     border: 0.2rem solid #000;
-    border-radius: 0.1rem;
+    border-radius: .2rem;
     background-color: var(--COLOR-2);
-
+    
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.layout_selector-button-active {
+    border-radius: .4rem;
+    background-color: var(--COLOR-3);
 }
 
 .layout_selector-button-icon {

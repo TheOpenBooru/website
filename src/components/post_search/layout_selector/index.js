@@ -10,30 +10,37 @@ export default function LayoutSelector(props) {
         Settings.Search_Layout = layout;
         window.location.reload();
     };
+    let layouts = [
+        {
+            name: "grid",
+            icon: "/images/grid.svg",
+        },
+        {
+            name: "column",
+            icon: "/images/columns.svg",
+        },
+        {
+            name: "fullscreen",
+            icon: "/images/fullscreen.svg",
+        },
+    ];
 
-    return (
-        <div className="layout_selector">
-            <div className="layout_selector-button" onClick={update_settings("grid")}>
+    let icons = layouts.map((layout) => {
+        let activeStyle =
+            Settings.Search_Layout === layout.name ? "layout_selector-button-active" : "";
+        return (
+            <div
+                className={"layout_selector-button " + activeStyle}
+                onClick={update_settings(layout.name)}
+            >
                 <img
-                    alt="Grid Layout"
+                    alt={`Layout: ${layout.name}`}
                     className="layout_selector-button-icon"
-                    src="/images/grid.svg"
+                    src={layout.icon}
                 />
             </div>
-            <div className="layout_selector-button" onClick={update_settings("columns")}>
-                <img
-                    alt="Column Layout"
-                    className="layout_selector-button-icon"
-                    src="/images/columns.svg"
-                />
-            </div>
-            <div className="layout_selector-button" onClick={update_settings("fullscreen")}>
-                <img
-                    alt="Fullscreen Layout"
-                    className="layout_selector-button-icon"
-                    src="/images/fullscreen.svg"
-                />
-            </div>
-        </div>
-    );
+        );
+    });
+
+    return <div className="layout_selector">{icons}</div>;
 }
