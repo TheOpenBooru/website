@@ -1,3 +1,8 @@
+@media screen and (max-aspect-ratio: 1/1) {
+    #post-fullscreen-base{height: 100vh !important}
+    .viewer-tag_sidebar{display:none !important}
+}
+
 #post-fullscreen-base{
     /* Position */
     position: relative;
@@ -16,16 +21,11 @@
     justify-content: space-between;
 }
 
-@media screen and (max-aspect-ratio: 1/1){
-    .viewer-tag_sidebar{
-        display: none;
-    }
-}
-
 .viewer-center {
     top:0;
     width: 100%;
     margin: 1rem;
+    
     margin-bottom: calc(1rem + var(--BOTTOM-BAR-PEEK));
     
     /* Flex */

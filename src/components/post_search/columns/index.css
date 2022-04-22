@@ -5,6 +5,10 @@
     --IMAGE-MARGIN: .5rem;
 }
 
+@media screen and (max-aspect-ratio: 1/1) {
+    .post-columns{max-height:100vh !important}
+}
+
 .post-columns{
     /* Scroll */
     overflow-y: auto;

@@ -6,6 +6,12 @@
 }
 
 
+@media screen and (max-aspect-ratio: 1/1) {
+    #post-bottombar-container{
+        display:none;
+    }
+}
+
 #post-bottombar-container{
     position: absolute;
     left: 0;
