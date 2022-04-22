@@ -14,14 +14,20 @@ export default function Video(props) {
     }
 
     React.useEffect(setVolume, []);
+    let style = {
+        maxHeight: "100%",
+        maxWidth: "100%",
+    };
     return (
         <video
-            style={props.style}
+            style={style}
             className={props.className}
             src={props.src}
             ref={videoREF}
-            controls
             onVolumeChange={updateVolume}
+            autoPlay
+            loop
+            controls
         />
     );
 }

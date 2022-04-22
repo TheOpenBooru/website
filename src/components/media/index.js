@@ -4,10 +4,10 @@ import Video from "./video.js";
 export default function Media(props) {
     let { type, src } = props;
     let style = {
-        "width": "100%",
-        "height": "100%",
-        "object-fit": "scale-down",
-    }
+        width: "100%",
+        height: "100%",
+        objectFit: "scale-down",
+    };
     switch (type) {
         case "image":
         case "gif":
@@ -16,9 +16,7 @@ export default function Media(props) {
                 <img style={style} src={src} alt=""/>
             );
         case "video":
-            return (
-                    <Video style={style} src={src} />
-            );
+            return <Video src={src} />;
 
         default:
             return null;
