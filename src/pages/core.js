@@ -3,13 +3,14 @@ import {Helmet} from "react-helmet";
 import NavBar from '../components/navigation_bar';
 
 function Core(props) {
+    let { title, description } = props;
     return (
         <div>
             <Helmet>
-                <title>{props.title}</title>
-                <meta name="description" content={props.description}/>
+                {title ? <title>{title}</title> : null}
+                {description ? <meta name="description" content={description} /> : null}
             </Helmet>
-            <NavBar/>
+            <NavBar />
             {props.children}
         </div>
     );
