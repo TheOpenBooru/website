@@ -15,9 +15,3 @@
     border-radius: .5rem;
     margin: 1rem;
 }
-
-@media screen and (max-width: 30rem) {
-    .post-sidebar {
-        display: none;
-    }
-}

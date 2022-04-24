@@ -31,9 +31,7 @@ export default (props) => {
                 description={`Open Booru Post ${id}: ${post.tags.join(" ")}`}
             >
                 <div id="post-page">
-                    <div id="post-sidebar">
-                        <SideBar post={post} />
-                    </div>
+                    <SideBar post={post} />
                     <div id="post-image-container">
                         <div id="post-image">
                             <Media type={post.media_type} src={URL} />
