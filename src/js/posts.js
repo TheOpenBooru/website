@@ -1,4 +1,4 @@
-var ENDPOINT = "http://192.168.0.82:8443";
+var ENDPOINT = "https://openbooru.org:8443";
 
 async function status() {
     return fetch(`${ENDPOINT}/status`)
