@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import BottomBar from "./bottom-bar";
 import Media from "../../media";
 import Sidebar from "../../sidebar";
 import Redirects from "../../../js/redirects";
@@ -71,7 +70,7 @@ export default function FullscreenPost(props) {
             </div>
             <div className="viewer-center">
                 <div className="viewer-image">
-                    <Media src={url} type={post.media_type} />
+                    <Media media={post.full} type={post.media_type} />
                 </div>
             </div>
             <div />
@@ -83,7 +82,6 @@ export default function FullscreenPost(props) {
             >
                 <img className="viewer-button-icon" src="/images/right-arrow.svg" alt="next" />
             </div>
-            <BottomBar posts={posts} index={index} setIndex={setIndex} />
         </div>
     );
 }
