@@ -14,7 +14,7 @@ class PostSearch {
     async extend(count = 100) {
         let posts = await search(this.query)
         this.posts = this.posts.concat(posts)
-        this.query.index += 100;
+        this.query.index += posts.length;
     }
 }
 
