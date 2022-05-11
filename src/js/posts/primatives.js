@@ -1,4 +1,4 @@
-var ENDPOINT = "https://openbooru.org:8443";
+const ENDPOINT = "http://slate:8443";
 
 async function status() {
     return fetch(`${ENDPOINT}/status`)
@@ -19,13 +19,6 @@ async function get(id) {
     let r = await fetch(`${ENDPOINT}/posts/post/${id}`);
     let json = await r.json();
     return json;
-}
-
-class PostQuery {
-    limit = 64;
-    index = 0;
-    include_tags = [];
-    exlude_tags = [];
 }
 
 async function search(query) {
@@ -49,4 +42,4 @@ async function update(post) {
     request.send(post);
 }
 
-export { status, create, get, search, update, PostQuery };
+export { status, create, get, search, update};
