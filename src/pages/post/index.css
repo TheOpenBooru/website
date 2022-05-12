@@ -6,12 +6,18 @@
 #post-image-container{
     display: flex;
     justify-content: center;
-    width:100%
+    align-items: center;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
 }
 
-#post-image>*{
-    max-height: 80vh;
-    max-width: 70vh;
+#post-image{
+    max-height: calc(100vh - var(--NAVBAR_HEIGHT) - 5rem);
+    height: 100%;
+    width: 100%;
+    margin: 2rem;
     border-radius: .5rem;
-    margin: 1rem;
 }
