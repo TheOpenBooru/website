@@ -1,29 +1,29 @@
 import React from "react";
+import Settings from "js/settings";
+import styled from "styled-components";
 
 export default function Video(props) {
-    let videoREF = React.useRef();
+    let { video } = props;
     function updateVolume(e) {
-        localStorage.setItem("player-volume", e.target.volume);
+        Settings.Volume = e.target.volume;
     }
 
-    function setVolume() {
-        let volume = localStorage.getItem("player-volume") || 1;
-        videoREF.current.oncanplay = () => {
-            videoREF.current.volume = volume;
-        };
+    function setVolume(e) {
+        e.target.volume = Settings.Volume;
     }
 
-    React.useEffect(setVolume, []);
-    let style = {
-        maxHeight: "100%",
-        maxWidth: "100%",
-    };
+    const Video = styled.video`
+        max-height: 100%;
+        max-width: 100%;
+    `
+
     return (
-        <video
-            style={style}
+        <Video
             className={props.className}
-            src={props.src}
-            ref={videoREF}
+            src={video.url}
+            height={video.height}
+            width={video.width}
+            onCanPlay={setVolume}
             onVolumeChange={updateVolume}
             autoPlay
             loop
