@@ -15,9 +15,13 @@ export default (props) => {
 
     useEffect(() =>
         (async () => {
-            let post = await get(id);
-            setPost(post);
-            setURL(post.full.url);
+            try {
+                let post = await get(id);
+                setPost(post);
+                setURL(post.full.url);
+            } catch (e) {
+                window.location.replace(redirects.home());
+            }
         })(),[id],
     );
 
