@@ -73,9 +73,6 @@
     #navigation-bar {
         justify-content: space-around;
     }
-    #version-number{
-        display: none;
-    }
     .navbar-section{
         width: 100%;
     }
