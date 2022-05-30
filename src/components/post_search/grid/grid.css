@@ -1,10 +1,9 @@
 :root{
-    --IMAGE-SIZE: 10rem;
+    --IMAGE-SIZE: 12rem;
 }
 
-@media screen and (max-aspect-ratio: 1/1) {
-    .post-list{max-height:calc(100vh - 4rem) !important}
-}
+/* @media screen and (max-aspect-ratio: 1/1) { */
+
 .post-list{
     padding: 2rem 10vw 2rem 10vw;
     
@@ -18,39 +17,35 @@
     display: grid;
     align-items: center;
     justify-items: center;
-    gap: 2rem;
+    gap:1rem;
     grid-template-columns: repeat(auto-fit,minmax(var(--IMAGE-SIZE),1fr));
 }
 
-@media screen and (max-width: 60rem) {
-    .post-list{
-        margin: .2rem;
-    }
-}
-
 .post-list>a{
-    --MIN-SIZE:calc(var(--IMAGE-SIZE) / 4);
+    --MIN-SIZE:calc(var(--IMAGE-SIZE) / 2);
     --MAX-SIZE:var(--IMAGE-SIZE);
 
     min-width: var(--MIN-SIZE);
     min-height: var(--MIN-SIZE);
-    max-width: var(--IMAGE-SIZE);
-    max-height: var(--IMAGE-SIZE);
+    max-width: var(--MAX-SIZE);
+    max-height: var(--MAX-SIZE);
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.post-list>a>img{
-    width:100%;
-    
+
+.post-list>a img{
+    height: var(--IMAGE-SIZE);
+    width: 100%;
     object-fit: cover;
-    outline: var(--COLOR-2) 0.3rem solid;
+    
     background-color: var(--COLOR-2);
+    outline: var(--COLOR-2) 0.3rem solid;
 }
 
-.post-list>a:hover > img{
+.post-list>a:hover  img{
     transition: 0.3s all ease-out;
     border-color: var(--COLOR-3);
-    border-radius: 2rem;
+    border-radius: calc(var(--IMAGE-SIZE) / 5);
 }
