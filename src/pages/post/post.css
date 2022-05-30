@@ -15,8 +15,7 @@
 }
 
 #post-image{
-    display: inline;
-    /* height: fit-content;
-     */
-    margin: 2rem;
+    max-height: calc(100vh - var(--NAVBAR_HEIGHT) - 1rem);
+    max-width:70vw;
+    margin: .5rem;
 }
