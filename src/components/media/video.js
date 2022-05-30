@@ -21,8 +21,6 @@ export default function Video(props) {
         <Video
             className={props.className}
             src={video.url}
-            height={video.height}
-            width={video.width}
             onCanPlay={setVolume}
             onVolumeChange={updateVolume}
             autoPlay

@@ -1,6 +1,6 @@
 import React from "react";
-import Redirects from "../../../js/redirects";
-import "./index.css";
+import Redirects from "js/redirects";
+import "./grid.css";
 
 
 function GridItem(props) {

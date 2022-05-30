@@ -15,9 +15,8 @@
 }
 
 #post-image{
-    max-height: calc(100vh - var(--NAVBAR_HEIGHT) - 5rem);
-    height: 100%;
-    width: 100%;
+    display: inline;
+    /* height: fit-content;
+     */
     margin: 2rem;
-    border-radius: .5rem;
 }

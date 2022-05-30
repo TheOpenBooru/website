@@ -1,3 +1,5 @@
 # Website
 
-I started work on OpenBooru
+The React website for OpenBooru
+
+Visit the [website](https://openbooru.org)

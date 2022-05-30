@@ -5,7 +5,7 @@ import Core from "../core";
 import Media from "../../components/media";
 import { get } from "../../js/posts";
 import redirects from "../../js/redirects";
-import "./index.css";
+import "./post.css";
 
 export default (props) => {
     let [post, setPost] = useState(undefined);
@@ -25,6 +25,7 @@ export default (props) => {
     if (post === undefined) {
         return null;
     } else {
+        console.log(post);
         return (
             <Core
                 title={`Open Booru: Post ${id}`}
@@ -34,7 +35,7 @@ export default (props) => {
                     <SideBar post={post} />
                     <div id="post-image-container">
                         <div id="post-image">
-                            <Media type={post.media_type} src={URL} />
+                            <Media type={post.media_type} media={post.full} />
                         </div>
                     </div>
                 </div>

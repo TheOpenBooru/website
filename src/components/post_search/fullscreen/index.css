@@ -53,6 +53,8 @@
     position: relative;
     top: 0;
     min-height: 100%;
+    min-width: 5rem;
+    max-width: 5rem;
     width: 10rem;
 
     /* Look */

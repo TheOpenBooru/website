@@ -1,9 +1,19 @@
-const home = () => `/posts`
-const post = (id) => `/post/${id}`;
-const post_search = (query = null) => {
-    let url = '/posts';
-    url += query ? `?query=${query}` : '';
-    return url;
+import Settings from "./settings";
+
+class Redirects{
+    static home() {
+        return "/posts";
+    }
+    static post(id) {
+        return `/post/${id}`;
+    }
+
+    static post_search(query = null) {
+        let layout = Settings.Search_Layout
+        let url = `/posts/${layout}`;
+        url += query ? `?query=${query}` : '';
+        return url;
+    }
 }
 
-export default {home,post,post_search}
+export default Redirects;

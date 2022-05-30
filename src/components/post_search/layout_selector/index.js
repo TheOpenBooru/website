@@ -1,41 +1,44 @@
 import React from "react";
-import Settings from "../../../js/settings.js";
+import Settings from "js/settings.js";
+import Redirects from "js/redirects.js";
 import "./index.css";
 
+const layouts = [
+    {
+        name: "grid",
+        display: "Grid",
+        icon: "/images/grid.svg",
+    },
+    {
+        name: "column",
+        display: "Column",
+        icon: "/images/columns.svg",
+    },
+    {
+        name: "fullscreen",
+        display: "Fullscreen",
+        icon: "/images/fullscreen.svg",
+    },
+];
+
 export default function LayoutSelector(props) {
+    let { current } = props;
+    
     let update_settings = (layout) => () => {
         Settings.Search_Layout = layout;
-        window.location.reload();
+        window.location.href = Redirects.post_search();
     };
-    let layouts = [
-        {
-            name: "grid",
-            icon: "/images/grid.svg",
-        },
-        {
-            name: "column",
-            icon: "/images/columns.svg",
-        },
-        {
-            name: "fullscreen",
-            icon: "/images/fullscreen.svg",
-        },
-    ];
 
-    let icons = layouts.map((layout) => {
-        let activeStyle =
-            Settings.Search_Layout === layout.name ? "layout_selector-button-active" : "";
+    let icons = layouts.map((v) => {
+        let alt = `${v.display} Layout`;
+        let callback = update_settings(v.name);
+        let container_classes = "layout_selector-button";
+        if (current === v.name) {
+            container_classes += " layout_selector-button-active";
+        }
         return (
-            <div
-                key={layout.name}
-                className={"layout_selector-button " + activeStyle}
-                onClick={update_settings(layout.name)}
-            >
-                <img
-                    alt={`Layout: ${layout.name}`}
-                    className="layout_selector-button-icon"
-                    src={layout.icon}
-                />
+            <div id={"layout-"+v.name} key={v.name} title={alt} className={container_classes} onClick={callback}>
+                <img alt={v.display} src={v.icon} className="layout_selector-button-icon" />
             </div>
         );
     });

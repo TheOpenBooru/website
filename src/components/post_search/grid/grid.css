@@ -28,12 +28,24 @@
     }
 }
 
-.post-list>a>img{
-    max-width:var(--IMAGE-SIZE);
-    max-height:var(--IMAGE-SIZE);
+.post-list>a{
+    --MIN-SIZE:calc(var(--IMAGE-SIZE) / 4);
+    --MAX-SIZE:var(--IMAGE-SIZE);
 
+    min-width: var(--MIN-SIZE);
+    min-height: var(--MIN-SIZE);
+    max-width: var(--IMAGE-SIZE);
+    max-height: var(--IMAGE-SIZE);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post-list>a>img{
+    width:100%;
+    
     object-fit: cover;
-    border: var(--COLOR-2) 0.3rem solid;
+    outline: var(--COLOR-2) 0.3rem solid;
     background-color: var(--COLOR-2);
 }
 

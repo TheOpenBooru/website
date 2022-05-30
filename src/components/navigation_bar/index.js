@@ -1,6 +1,6 @@
 import React from "react";
-import Redirects from "../../js/redirects"
-import "./index.css";
+import Redirects from "js/redirects"
+import "./navbar.css";
 
 function PageButton(props) {
     let default_classes = "navbar-section bordered "
@@ -16,14 +16,19 @@ function PageButton(props) {
 function NavBar() {
     return (
         <nav id="navigation-bar">
-            <PageButton className="bordered-hover"
-                text="Alpha 2" icon="/images/github.svg"
-                href="https://github.com/TheOpenBooru" id="version-number">
-            </PageButton>
-            <PageButton className="bordered-hover"
-                text="Posts" icon="/images/posts.svg"
-                href={Redirects.home()}>
-            </PageButton>
+            <PageButton
+                id="version-number"
+                className="bordered-hover"
+                text="Alpha: Lithium"
+                icon="/images/github.svg"
+                href="https://github.com/TheOpenBooru"
+            ></PageButton>
+            <PageButton
+                className="bordered-hover"
+                text="Posts"
+                icon="/images/posts.svg"
+                href={Redirects.post_search()}
+            ></PageButton>
         </nav>
     );
 }
