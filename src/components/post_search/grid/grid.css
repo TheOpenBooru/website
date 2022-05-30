@@ -2,7 +2,11 @@
     --IMAGE-SIZE: 12rem;
 }
 
-/* @media screen and (max-aspect-ratio: 1/1) { */
+@media screen and (max-aspect-ratio: 1/1) {
+    :root {
+        --IMAGE-SIZE: 30vw !important;
+    }
+}
 
 .post-list{
     padding: 2rem 10vw 2rem 10vw;
