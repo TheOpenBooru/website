@@ -27,7 +27,7 @@ export default function GridPosts(props) {
         const { scrollTop, offsetHeight, scrollHeight } = e.target;
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
-        if (distanceFromBottom < 2) {
+        if (distanceFromBottom === 0) {
             posts_callback();
         }
     };

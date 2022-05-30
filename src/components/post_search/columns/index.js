@@ -53,7 +53,9 @@ export default function ColumnPosts(props) {
 
     let scrollHandler = (e) => {
         const { scrollTop, offsetHeight, scrollHeight } = e.target;
-        if (scrollTop + offsetHeight >= scrollHeight) {
+        let distanceFromTop = scrollTop + offsetHeight;
+        let distanceFromBottom = scrollHeight - distanceFromTop;
+        if (distanceFromBottom === 0) {
             posts_callback();
         }
     };

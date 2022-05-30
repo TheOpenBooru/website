@@ -6,7 +6,7 @@ import LayoutSelector from "./layout_selector";
 import Settings from "js/settings";
 
 export default function PostsSearch(props) {
-    let { search,layout } = props;
+    let { search, layout } = props;
     let [ posts, setPosts ] = useState([]);
     
     useEffect(() => {
@@ -15,10 +15,12 @@ export default function PostsSearch(props) {
             setPosts(search.posts);
         })()
     }, []);
-
+    
     function prepend_posts() {
-        search.extend(100);
-        setPosts(search.posts);
+        (async () => {
+            await search.extend(100);
+            setPosts(search.posts);
+        })();
     }
 
     let Layout_Lookup = {
