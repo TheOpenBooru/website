@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Media from "components/media";
 import Sidebar from "components/sidebar";
 import Redirects from "js/redirects";
-import "./index.css";
+import "./fullscreen.css";
 import { useParams } from "react-router-dom";
 
 export default function FullscreenPost(props) {

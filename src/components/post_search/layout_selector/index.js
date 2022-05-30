@@ -1,7 +1,7 @@
 import React from "react";
 import Settings from "js/settings.js";
 import Redirects from "js/redirects.js";
-import "./index.css";
+import "./layout.css";
 
 const layouts = [
     {

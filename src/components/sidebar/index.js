@@ -1,7 +1,7 @@
 import React from "react";
 import TagList from "./tag_list";
 import PostInfo from "./post_data";
-import "./index.css";
+import "./sidebar.css";
 
 function SideBar(props) {
     let post = props.post;
