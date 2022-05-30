@@ -18,8 +18,12 @@ async function create(file) {
 
 async function get(id) {
     let r = await fetch(`${Settings.API_URL}/posts/post/${id}`);
-    let json = await r.json();
-    return json;
+    if (r.status === 404) {
+        throw new Error("Post Not Found");
+    } else {
+        let json = await r.json();
+        return json;
+    }
 }
 
 async function search(query) {
