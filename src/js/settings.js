@@ -5,12 +5,6 @@ class Settings {
     static set Search_Layout(value) {
         localStorage.setItem("view_mode", value);
     }
-    static get Volume() {
-        return get_setting("volume", "1");
-    }
-    static set Volume(value) {
-        localStorage.setItem("volume", value);
-    }
     static get API_URL() {
         return get_setting("api_url", "https://api.openbooru.org");
     }
