@@ -7,6 +7,7 @@ function SideBar(props) {
     let post = props.post;
     return (
         <div id="post-sidebar">
+            <PostInfo post={post} />
             <TagList tags={post.tags} />
         </div>
     );

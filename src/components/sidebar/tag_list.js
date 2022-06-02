@@ -1,8 +1,9 @@
 import React from "react";
+import "./tag_list.css"
 
 function Tag(props) {
     let namespace = props.namespace || "generic";
-    return <a className={`namespace-${namespace}`}>{props.name}</a>;
+    return <span className={`namespace-${namespace}`}>{props.name}</span>;
 }
 
 function TagList(props) {

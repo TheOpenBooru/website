@@ -1,0 +1,20 @@
+.tag-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    
+    padding: .5rem;
+    border-top: 1px solid black;
+}
+
+.namespace-generic{
+    color: black;
+}
+
+.namespace-character{
+    color: purple;
+}
+
+.namespace-meta{
+    color: rgb(40, 40, 40);
+}

@@ -5,34 +5,18 @@
     min-width: 15rem;
     max-width: 15rem;
     
-    padding: .5rem;
-    padding-right: 1rem;
-    
     /* Look */
     overflow-x: hidden;
     overflow-y: auto;
     background-color: var(--COLOR-2);
+    border-right: 1px solid black;
 }
+
 
 @media screen and (max-aspect-ratio: 1/1) {
     #post-sidebar{display:none !important}
 }
 
-
-.tag-list{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-}
-
-.namespace-generic{
-    color: black;
-}
-
-.namespace-character{
-    color: purple;
-}
-
-.namespace-meta{
-    color: rgb(40, 40, 40);
+#post_data{
+    margin: .5rem;
 }
