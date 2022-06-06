@@ -12,8 +12,8 @@ function Core(props) {
             <Helmet>
                 {title ? <title>{title}</title> : null}
                 {description ? <meta name="description" content={description} /> : null}
-                <OpenGraph {...props} />
             </Helmet>
+            <OpenGraph {...props} />
             <NavigationBar />
             {props.children}
         </div>
