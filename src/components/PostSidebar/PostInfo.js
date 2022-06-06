@@ -21,7 +21,7 @@ export default function PostInfo(props) {
     return (
         <div id="postSidebar-postData">
             <Entry name="ID" value={post.id} />
-            <Entry name="Created At" value={created_at} />
+            <Entry name="Created On" value={created_at} />
             <Entry name="Source" value={post.source} href={post.source} />
             <Entry name="Views" value={post.views} />
         </div>
