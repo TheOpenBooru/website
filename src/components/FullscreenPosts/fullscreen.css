@@ -87,6 +87,10 @@
 
 .fullscreenPosts-button-icon{
     width: 90%;
+    max-height: 10rem;
+    min-width: 2rem;
+    min-height: 2rem;
+    object-fit: contain;
 }
 
 .fullscreenPosts-button:active > .fullscreenPosts-button-icon{
