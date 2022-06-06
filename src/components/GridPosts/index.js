@@ -1,4 +1,5 @@
 import React from "react";
+import { onLoadCallback } from "components/Media/image";
 import Redirects from "js/redirects";
 import "./grid.css";
 
@@ -26,15 +27,16 @@ function GridItem(props) {
     let { post } = props;
     let className = `gridPosts-item media-${post.media_type}`;
     let redirect = Redirects.post(post.id);
-    let image = post.thumbnail;
+    let { preview, thumbnail } = post;
     return (
         <a key={post.id} className={className} href={redirect}>
             <img
                 className="gridPosts-image"
-                src={image.url}
-                width={image.width}
-                height={image.height}
+                src={thumbnail.url}
+                width={thumbnail.width}
+                height={thumbnail.height}
                 alt=""
+                onLoad={onLoadCallback(preview, thumbnail, true)}
             />
         </a>
     );

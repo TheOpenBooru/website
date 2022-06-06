@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import Media from "components/Media";
+import Video from "components/Media/video";
+import Image from "components/Media/image";
 import Sidebar from "components/PostSidebar";
 import titleCase from "ap-style-title-case";
 import Redirects from "js/redirects";
 import Settings from "js/settings";
 import "./fullscreen.css";
 
-
 export default function FullscreenPosts(props) {
     let { posts, morePostsCallback } = props;
-    let [ index, setIndex] = useState(0);
-    let [ searchHash, setSearchHash ] = useState(0);
+    let [index, setIndex] = useState(0);
+    let [searchHash, setSearchHash] = useState(0);
     let post = posts[index];
-    
+
     if (post == null) {
         morePostsCallback();
         return null;
@@ -21,7 +21,7 @@ export default function FullscreenPosts(props) {
     if (posts.length - index < 32) {
         morePostsCallback();
     }
-    
+
     let firstPost = posts[0];
     if (firstPost && searchHash !== firstPost.id) {
         setSearchHash(firstPost.id);
@@ -72,34 +72,44 @@ export default function FullscreenPosts(props) {
             <div className="fullscreenPosts-sidebar">
                 <Sidebar post={post} />
             </div>
+
             <SideButton direction="left" img={prevImg} callback={prevPost} />
             <PostCount index={index} max={posts.length} />
             <div className="fullscreenPosts-center">
-                <a
-                    id="fullscreenPosts-image"
-                    title={`Post: ${post.id}`}
-                    href={post.media_type !== "video" ? Redirects.post(post.id) : null}
-                >
-                    <Media full={post.full} preview={post.preview} type={post.media_type} />
-                </a>
+                <CenterImage post={post} />
+
             </div>
             <SideButton direction="right" img={nextImg} callback={nextPost} />
         </div>
     );
 }
 
+function CenterImage(props) {
+    let { post } = props;
+    
+    if (post.type === "video") {
+        return <Video video={post.full}/>
+    } else {
+        return <Image full={post.full} preview={post.preview} lazy={true} />
+    }
+}
+
 function SideButton(props) { 
     let { callback, img, direction } = props;
-    return (
-        <div
-            id={`fullscreenPosts-${direction}Button`}
-            className="fullscreenPosts-button"
-            title={titleCase(direction)}
-            onClick={callback}
-        >
-            <img className="fullscreenPosts-button-icon" src={img} alt="" />
-        </div>
-    );
+    if (img) {
+        return (
+            <div
+                id={`fullscreenPosts-${direction}Button`}
+                className="fullscreenPosts-button"
+                title={titleCase(direction)}
+                onClick={callback}
+                >
+                <img className="fullscreenPosts-button-icon" src={img} alt="" />
+            </div>
+        );
+    } else {
+        return <div id={`fullscreenPosts-${direction}Button`} className="fullscreenPosts-button" />
+    }
 }
 function PostCount(props) {
     let { index, max } = props;

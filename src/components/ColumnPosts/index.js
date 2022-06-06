@@ -1,5 +1,6 @@
 import React from "react";
 import Redirects from "js/redirects";
+import { onLoadCallback } from "components/Media/image";
 import "./columns.css";
 
 export default function ColumnPosts(props) {
@@ -35,17 +36,6 @@ function ColumnItem(props) {
     let className = `columnsPosts-post media-${post.media_type}`;
     let redirect = Redirects.post(post.id);
     
-    function onLoadCallback(e){
-        if (e.target.src === preview.url) return;
-        let { width: elementWidth, height: elementHeight } = e.target.getBoundingClientRect();
-        if (thumbnail.width < elementWidth || thumbnail.height < elementHeight) {
-            e.target.loading = "lazy";
-            e.target.src = preview.url
-            e.target.width = preview.width;
-            e.target.height = preview.height;
-            e.target.removeEventListener("load", onLoadCallback);
-        }
-    }
     return (
         <a className={className} href={redirect} title={`Post: ${post.id}`}>
             <img
@@ -54,7 +44,7 @@ function ColumnItem(props) {
                 width={thumbnail.width}
                 height={thumbnail.height}
                 alt=""
-                onLoad={onLoadCallback}
+                onLoad={onLoadCallback(preview,thumbnail,true)}
             />
         </a>
     );
