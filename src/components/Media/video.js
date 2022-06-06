@@ -3,10 +3,10 @@ import React from "react";
 export default function Video(props) {
     let { video } = props;
     function updateVolume(e) {
-        sessionStorage.setItem("volume", e.target.value);
+        localStorage.setItem("volume", e.target.value);
     }
     function setVolume(e) {
-        e.target.volume = sessionStorage.getItem("volume");
+        e.target.volume = localStorage.getItem("volume") || .99;
     }
 
 
@@ -17,7 +17,7 @@ export default function Video(props) {
     };
 
     return (
-        <vide
+        <video
             className={props.className}
             style={VideoStyle}
             src={video.url}
