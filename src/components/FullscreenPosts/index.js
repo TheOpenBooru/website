@@ -75,7 +75,11 @@ export default function FullscreenPosts(props) {
             <SideButton direction="left" img={prevImg} callback={prevPost} />
             <PostCount index={index} max={posts.length} />
             <div className="fullscreenPosts-center">
-                <a id="fullscreenPosts-image" href={Redirects.post(post.id)} title={`Post: ${post.id}`}>
+                <a
+                    id="fullscreenPosts-image"
+                    title={`Post: ${post.id}`}
+                    href={post.media_type !== "video" ? Redirects.post(post.id) : null}
+                >
                     <Media full={post.full} preview={post.preview} type={post.media_type} />
                 </a>
             </div>
