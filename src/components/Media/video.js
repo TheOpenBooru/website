@@ -13,7 +13,7 @@ export default function Video(props) {
     const VideoStyle = {
         width: "100%",
         height: "100%",
-        objectFit: "scale-down",
+        objectFit: "contain",
     };
 
     return (
@@ -21,6 +21,8 @@ export default function Video(props) {
             className={props.className}
             style={VideoStyle}
             src={video.url}
+            height={video.height}
+            width={video.width}
             autoPlay
             loop
             controls
