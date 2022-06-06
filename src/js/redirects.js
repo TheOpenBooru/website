@@ -7,6 +7,10 @@ export default class Redirects {
         };
     }
 
+    static goto(url) {
+        window.location.href = url;
+    }
+
     static home() {
         return "/posts";
     }
