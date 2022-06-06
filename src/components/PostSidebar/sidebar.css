@@ -14,6 +14,7 @@
 
 #postSidebar-postData{
     padding: .5rem;
+    white-space: nowrap;
 }
 
 @media screen and (max-aspect-ratio: 1/1) {

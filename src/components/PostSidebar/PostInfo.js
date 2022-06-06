@@ -1,11 +1,14 @@
 import React from "react";
 
 function Entry(props) {
+    let { name, href, value } = props;
     return (
         <span>
-            {props.name}:{"\t"}
-            {props.value != null ? props.value : "None"}
-            {props.edittable ? <button>Edit</button> : null}
+            {name}:{"\t"}
+            {href 
+                ? <a href={href}>{value}</a>
+                : value
+            }
             <br />
         </span>
     );
@@ -19,7 +22,7 @@ export default function PostInfo(props) {
         <div id="postSidebar-postData">
             <Entry name="ID" value={post.id} />
             <Entry name="Created At" value={created_at} />
-            <Entry name="Source" value={post.source} />
+            <Entry name="Source" value={post.source} href={post.source} />
             <Entry name="Views" value={post.views} />
         </div>
     );
