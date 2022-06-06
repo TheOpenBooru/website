@@ -1,0 +1,96 @@
+@media screen and (max-aspect-ratio: 1/1) {
+    #fullscreenPosts{height: 100vh !important}
+    .fullscreenPosts-sidebar{display:none !important}
+}
+
+#fullscreenPosts{
+    /* Position */
+    position: relative;
+    width: 100%;
+    height: calc(100vh - var(--NAVBAR_HEIGHT));
+    top:0;
+    left:0;
+    
+    background-color: var(--COLOR-BACKGROUND);
+    user-select: none;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    
+    /* Flex */
+    display:flex;
+    justify-content: space-between;
+}
+
+.fullscreenPosts-center {
+    top:0;
+    width: 100%;
+    margin: 1rem;
+    margin-left: 0;
+    
+    /* Flex */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#fullscreenPosts-count{
+    align-self: flex-start;
+    text-align: center;
+    margin: .5rem 0 0 .5rem;
+    width: 4rem;
+}
+
+#fullscreen-indexText{
+    position: static;
+    align-self: flex-start;
+    justify-content: baseline;
+    left: 0;
+    top: 0;
+}
+
+#fullscreenPosts-image{
+    position: static;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullscreenPosts-button{
+    /* Position */
+    position: relative;
+    top: 0;
+    min-height: 100%;
+    min-width: 5rem;
+    max-width: 5rem;
+    width: 10rem;
+
+    /* Look */
+    background-color: var(--COLOR-1);
+    
+    /* Center Children (Icon) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#fullscreenPosts-leftButton{
+    left: 0;
+}
+
+#fullscreenPosts-rightButton{
+    right: 0;
+}
+
+.fullscreenPosts-button-icon{
+    width: 90%;
+}
+
+.fullscreenPosts-button:active > .fullscreenPosts-button-icon{
+    width: 80%;
+    transition: 0.05s;
+    filter: drop-shadow(2px 2px 2px #000);
+}

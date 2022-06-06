@@ -5,6 +5,7 @@
   --COLOR-3:#306173;
   --COLOR-4:#1e3d48;
   --COLOR-5:#0c181d;
+  --NAVBAR_HEIGHT: 3.5rem;
 }
 
 body {
@@ -17,7 +18,10 @@ body {
 }
 
 
-.centered{
+.centered, .center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   justify-self: center;
   align-self: center;
@@ -32,7 +36,7 @@ body {
 .bordered-hover:hover {
   transition: 0.3s ease-out;
   background-color:var(--COLOR-3);
-  border-radius: 0.5rem;
+  border-radius: .4rem;
 }
 
 .disable-link-text {

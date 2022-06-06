@@ -1,0 +1,21 @@
+#postSidebar{
+    /* Position */
+    position: relative;
+    height: 100%;
+    min-width: 14rem;
+    width: 12vw;
+    
+    /* Look */
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: var(--COLOR-2);
+    border-right: 1px solid black;
+}
+
+#postSidebar-postData{
+    padding: .5rem;
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+    #postSidebar{display:none !important}
+}

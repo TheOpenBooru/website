@@ -1,0 +1,20 @@
+#postSidebar-tagList{
+    border-top: 1px solid black;
+    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: .5rem;
+}
+
+.namespace-generic{
+    color: black;
+}
+
+.namespace-character{
+    color: purple;
+}
+
+.namespace-meta{
+    color: rgb(40, 40, 40);
+}

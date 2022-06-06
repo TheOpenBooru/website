@@ -1,0 +1,56 @@
+#gridPosts{
+    --IMAGE-SIZE: 9rem;
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+    .post-list {
+        --IMAGE-SIZE: 35vw  !important;
+    }
+}
+
+#gridPosts{
+    padding: 2rem 10vw 2rem 10vw;
+    
+    /* Position */
+    max-width: 100%;
+    max-height: calc(100vh - 4rem - var(--NAVBAR_HEIGHT));
+    overflow-y: auto;
+
+
+    /* Grid */
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    gap:1rem;
+    grid-template-columns: repeat(auto-fit,minmax(var(--IMAGE-SIZE),1fr));
+}
+
+.gridPosts-item{
+    --MAX-SIZE:var(--IMAGE-SIZE);
+    --MIN-SIZE:calc(var(--IMAGE-SIZE) / 4);
+
+    min-width: var(--MIN-SIZE);
+    min-height: var(--MIN-SIZE);
+    max-width: var(--MAX-SIZE);
+    max-height: var(--MAX-SIZE);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gridPosts-image{
+    height: var(--IMAGE-SIZE);
+    width: 100%;
+    object-fit: cover;
+    
+    background-color: var(--COLOR-2);
+    outline: var(--COLOR-2) 0.3rem solid;
+    border-radius: .2rem;
+}
+
+.gridPosts-item:hover  .gridPosts-image{
+    transition: 0.3s all ease-out;
+    border-color: var(--COLOR-3);
+    border-radius: calc(var(--IMAGE-SIZE) / 5);
+}

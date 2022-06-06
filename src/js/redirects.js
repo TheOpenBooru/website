@@ -1,19 +1,24 @@
 import Settings from "./settings";
 
-class Redirects{
+export default class Redirects {
+    static redirectCallback(url) {
+        return () => {
+            window.location.href = url;
+        };
+    }
+
     static home() {
         return "/posts";
     }
+
     static post(id) {
         return `/post/${id}`;
     }
 
-    static post_search(query = null) {
-        let layout = Settings.Search_Layout
+    static postSearch(layout = null, query = null) {
+        layout = layout || Settings.searchLayout;
         let url = `/posts/${layout}`;
-        url += query ? `?query=${query}` : '';
+        url += query ? `?query=${query}` : "";
         return url;
     }
 }
-
-export default Redirects;
