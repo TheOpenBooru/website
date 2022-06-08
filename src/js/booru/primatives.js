@@ -16,7 +16,8 @@ async function create(file) {
 }
 
 async function get(id) {
-    let r = await fetch(`${Settings.apiUrl}/posts/post/${id}`);
+    let url = `${Settings.apiUrl}/posts/post/${id}`
+    let r = await fetch(url, {"cache":"force-cache"});
     if (r.status === 404) {
         throw new Error("Post Not Found");
     } else {
@@ -36,7 +37,8 @@ async function search(query) {
             params.set(key, value);
         }
     }
-    let r = await fetch(Settings.apiUrl + `/posts/search?${params.toString()}`);
+    let url = Settings.apiUrl + `/posts/search?${params.toString()}`
+    let r = await fetch(url, {"cache":"force-cache"});
     if (r.ok) {
         return await r.json();
     } else {
