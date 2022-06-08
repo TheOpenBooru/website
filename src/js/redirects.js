@@ -1,5 +1,3 @@
-import Settings from "./settings";
-
 export default class Redirects {
     static redirectCallback(url) {
         return () => {
@@ -19,10 +17,9 @@ export default class Redirects {
         return `/post/${id}`;
     }
 
-    static postSearch(layout = null, query = null) {
-        layout = layout || Settings.searchLayout;
-        let url = `/posts/${layout}`;
-        url += query ? `?query=${query}` : "";
+    static postSearch(layout = null) {
+        let url = "/posts";
+        if (layout) url += `/${layout}`;
         return url;
     }
 }
