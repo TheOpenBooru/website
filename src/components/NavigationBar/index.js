@@ -32,7 +32,7 @@ export default function NavigationBar() {
             <PageButton
                 id="navbar-versionNumber"
                 className="bordered-hover"
-                text="Alpha: Beryllium"
+                text="Alpha: Boron"
                 icon="/images/github.svg"
                 href="https://github.com/TheOpenBooru"
             />

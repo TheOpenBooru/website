@@ -1,4 +1,4 @@
-class PostQuery {
+export class PostQuery {
     limit = 64;
     index = 0;
 
@@ -15,4 +15,9 @@ class PostQuery {
     sha256 = null;
 }
 
-export { PostQuery };
+export class TagQuery {
+    name_like = null
+    namespace = null
+    count_gt = null
+    limit = null
+}

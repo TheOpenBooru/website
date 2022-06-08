@@ -1,18 +1,17 @@
-import { PostQuery } from "./query"
-import { search } from "./primatives.js"
+import Posts from "./posts";
+import { PostQuery } from "./types"
 
-
-let defaultQuery = new PostQuery();
-class PostSearch {
+export class PostSearch {
     index = 0;
-    posts = [];
     finished = false;
     __lock = false;
+    posts = [];
     query = new PostQuery();
 
-    constructor(query = defaultQuery) {
-        this.query = query;
-        this.posts = [];
+    constructor(query = null) {
+        if (query) {
+            this.query = query;
+        }
     }
 
     async extend(count = null) {
@@ -23,7 +22,7 @@ class PostSearch {
         let new_query = this.query;
         new_query.limit = count;
         
-        let posts = await search(this.query);
+        let posts = await Posts.search(this.query);
         this.posts = this.posts.concat(posts);
         this.query.index += posts.length;
         
@@ -33,5 +32,3 @@ class PostSearch {
         this.__lock = false;
     }
 }
-
-export { PostSearch };

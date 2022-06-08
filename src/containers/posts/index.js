@@ -5,14 +5,14 @@ import ColumnPosts from "components/ColumnPosts";
 import GridPosts from "components/GridPosts";
 import Core from "containers/core";
 import FullscreenPosts from "components/FullscreenPosts";
-import { PostSearch, PostQuery } from "js/booru";
+import { PostSearch } from "js/booru";
 import "./search.css"
 
 export default function Posts(props) {
     let { layout } = useParams();
     let searchRef = useRef();
     let [ search, setSearch ] = useState(new PostSearch());
-    let [posts, setPosts] = useState([]);
+    let [ posts, setPosts ] = useState([]);
     
     function setQuery(query) {
         toggleSearchBox();

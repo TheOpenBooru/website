@@ -19,6 +19,7 @@
     /* Change colour to black */
     filter: invert(13%) sepia(51%) saturate(6190%) hue-rotate(359deg) brightness(78%) contrast(118%);
 }
+
 .searchbox-tag-remove, .searchbox-tag-include{
     cursor: pointer;
     user-select: none;

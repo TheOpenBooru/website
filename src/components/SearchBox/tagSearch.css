@@ -1,0 +1,32 @@
+
+#searchbox-search{
+    width:100%;
+    border-radius: .5rem;
+    justify-self: flex-start;
+}
+
+#searchbox-autocomplete{
+    /* Position */
+    position: absolute;
+    top: 2.5rem;
+    left: 9rem;
+
+    border: .1rem solid var(--COLOR-3);
+    border-radius: 1rem;
+    background-color: var(--COLOR-1);
+    padding: .2rem;
+
+    display:flex;
+    flex-direction: column;
+}
+
+.searchbox-autocomplete-item{
+    cursor: pointer;
+    width: fit-content;
+    
+    padding: .2rem;
+    border-radius: 1rem;
+    background-color: var(--COLOR-3);
+    border: .1rem solid var(--COLOR-4);
+
+}

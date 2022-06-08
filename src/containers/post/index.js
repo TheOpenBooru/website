@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import SideBar from "components/PostSidebar";
 import Core from "containers/core";
 import Media from "components/Media";
-import { get } from "js/booru";
+import { Posts } from "js/booru";
 import redirects from "js/redirects";
 import "./post.css";
 
@@ -15,7 +15,7 @@ export default function Post(props) {
     useEffect(() =>
         (async () => {
             try {
-                let post = await get(id);
+                let post = await Posts.get(id);
                 setPost(post);
             } catch (e) {
                 window.location.replace(redirects.home());

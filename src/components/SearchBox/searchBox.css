@@ -29,14 +29,6 @@
     margin: .2rem;
 }
 
-
-#searchbox-search{
-    width:100%;
-    border-radius: .5rem;
-    justify-self: flex-start;
-}
-
-
 #searchbox-sort{
     border-radius: .2rem;
     color: black;
@@ -52,6 +44,7 @@
 
 #searchbox-bottom{
     height: 4rem;
+    min-height: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
