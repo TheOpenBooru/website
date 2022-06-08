@@ -16,15 +16,9 @@ class PostSearch {
     }
 
     async extend(count = null) {
-        if (this.__lock) {
-            return;
-        } else {
-            this.__lock = true;
-        }
-        
-        if (this.finished) {
-            return;
-        }
+        if (this.__lock) return;
+        if (this.finished) return;
+        this.__lock = true;
 
         let new_query = this.query;
         new_query.limit = count;
