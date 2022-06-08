@@ -8,6 +8,7 @@
     /* Look */
     overflow-x: hidden;
     overflow-y: auto;
+    
     background-color: var(--COLOR-2);
     border-right: 1px solid black;
 }
@@ -19,4 +20,37 @@
 
 @media screen and (max-aspect-ratio: 1/1) {
     #postSidebar{display:none !important}
+}
+
+
+#postSidebar-tagList{
+    border-top: 1px solid black;
+    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: .2rem;
+    padding: .5rem;
+}
+
+.postSidebar-tagList-tag{
+    cursor: pointer;
+    width: fit-content;
+    border: .1rem solid var(--COLOR-4);
+    border-radius: 1rem;
+    background-color: var(--COLOR-3);
+
+    padding: 0 .3rem 0 .3rem;
+}
+
+.namespace-generic{
+    color: black;
+}
+
+.namespace-character{
+    color: purple;
+}
+
+.namespace-meta{
+    color: rgb(40, 40, 40);
 }
