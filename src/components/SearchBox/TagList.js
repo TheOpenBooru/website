@@ -26,11 +26,6 @@ export default function TagList(props) {
         }
     }
 
-    function formatTag(tag) {
-        tag = tag.charAt(0).toUpperCase() + tag.slice(1);
-        return tag;
-    }
-    
     let allTags = includeTags.concat(excludeTags);
     return (
         <div>
@@ -51,14 +46,7 @@ export default function TagList(props) {
                         alt="Remove Tag"
                         />
                 </div>
-                {/* <div >
-                    <img
-                        className="searchbox-tag-include"
-                        src="/images/plus-minus.svg"
-                        alt="Toggle Tag Use"
-                        />
-                </div> */}
-                <span onClick={() => toggleTagInclude(tag)} className={"searchbox-tag-text " + tag_class}>{formatTag(tag)}</span>
+                <span onClick={() => toggleTagInclude(tag)} className={"searchbox-tag-text " + tag_class}>{tag}</span>
             </div>
         );
     }
