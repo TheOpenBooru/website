@@ -1,7 +1,4 @@
 export class PostQuery {
-    limit = 64;
-    index = 0;
-
     sort = "created_at";
     descending = true;
 

@@ -24,7 +24,7 @@ export default class Posts{
     }
 
 
-    static async search(query: PostQuery) {
+    static async search(query: PostQuery, index=0, count=64) {
         let params = new URLSearchParams();
         
         for (let key in query) {
@@ -37,6 +37,8 @@ export default class Posts{
             }
         }
         params.set("descending", query.descending)
+        params.set("index", index)
+        params.set("count", count)
 
         let url = Settings.apiUrl + `/posts/search?${params.toString()}`
         let r = await fetch(url, {"cache":"default"});
