@@ -4,7 +4,7 @@ import Helmet from "react-helmet";
 export default function OpenGraphTags(props) {
     let { title, description, image, video} = props;
     return (
-        <Helmet>
+        <React.Fragment>
             <meta property="og:site_name " content="Open Booru" />
             <meta property="og:url" content={document.location.href} />
             {title ? <meta property="og:title" content={title} /> : null}
@@ -12,7 +12,6 @@ export default function OpenGraphTags(props) {
             
             {image ? <meta property="og:image" content={image} /> : null}
             {video ? <meta property="og:video" content={video} /> : null}
-            
-        </Helmet>
+        </React.Fragment>
     )
 }
