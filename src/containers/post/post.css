@@ -8,14 +8,12 @@
     justify-content: center;
     align-items: center;
 
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: auto;
     height: 100%;
     width: 100%;
 }
 
 #post-image{
     max-height: calc(100vh - var(--NAVBAR_HEIGHT) - 1rem);
-    width:100%;
-    padding: 2rem;
+    max-width:calc(100% - 2rem);
 }
