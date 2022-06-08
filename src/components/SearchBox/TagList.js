@@ -28,7 +28,7 @@ export default function TagList(props) {
 
     let allTags = includeTags.concat(excludeTags);
     return (
-        <div>
+        <div id="searchbox-taglist">
             {allTags.map((tag) => <Tag tag={tag} key={tag}/>)}
         </div>
     );
@@ -39,13 +39,12 @@ export default function TagList(props) {
         let tag_class = included ? "searchbox-tag-included" : "searchbox-tag-excluded";
         return (
             <div className="searchbox-tag">
-                <div onClick={() => removeTag(tag)}>
-                    <img
-                        className="searchbox-tag-remove"
-                        src="/images/cross.svg"
-                        alt="Remove Tag"
-                        />
-                </div>
+                <img
+                    className="searchbox-tag-remove"
+                    src="/images/cross.svg"
+                    alt="Remove Tag"
+                    onClick={() => removeTag(tag)}
+                />
                 <span onClick={() => toggleTagInclude(tag)} className={"searchbox-tag-text " + tag_class}>{tag}</span>
             </div>
         );

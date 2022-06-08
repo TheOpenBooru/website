@@ -30,17 +30,13 @@ export default function SearchBox(props) {
                 <SortSelect sort={sort} setSort={setSort} />
                 <TagSearch includeTags={includeTags} setIncludeTags={setIncludeTags} />
             </div>
-            <div id="searchbox-taglist">
-                <TagList
-                    includeTags={includeTags}
-                    setIncludeTags={setIncludeTags}
-                    excludeTags={excludeTags}
-                    setExcludeTags={setExcludeTags}
-                />
-            </div>
-            <div id="searchbox-bottom">
-                <button id="searchbox-searchButton" onClick={saveQuery}>Search</button>
-            </div>
+            <TagList
+                includeTags={includeTags}
+                setIncludeTags={setIncludeTags}
+                excludeTags={excludeTags}
+                setExcludeTags={setExcludeTags}
+            />
+            <button id="searchbox-searchButton" onClick={saveQuery}>Search</button>
         </div>
     );
 }

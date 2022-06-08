@@ -1,9 +1,9 @@
 #searchbox-container{
     /* Position */
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16/9;
+    min-height: 15rem;
     min-width: 15rem;
     width: min(50vw,30rem);
-    
 
     /* Look */
     background-color: var(--COLOR-2);
@@ -16,7 +16,6 @@
 }
 
 #searchbox-top{
-    height: 3rem;
     border-bottom: .2em solid var(--COLOR-4);
     display: flex;
     padding: .2rem;
@@ -42,17 +41,10 @@
     width: 1rem;
 }
 
-#searchbox-bottom{
-    height: 4rem;
-    min-height: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
 #searchbox-searchButton{
-    width: 100%;
-    height: 100%;
+    width:100%;
+    height: 2.5rem;
+    min-height: 1rem;
     border-radius: 0 0 .9rem .9rem;
     
     border-width: 0;
