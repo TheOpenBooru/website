@@ -5,16 +5,26 @@ import ColumnPosts from "components/ColumnPosts";
 import GridPosts from "components/GridPosts";
 import Core from "containers/core";
 import FullscreenPosts from "components/FullscreenPosts";
-import { PostSearch } from "js/booru";
-import "./search.css"
+import { PostSearch, PostQuery } from "js/booru";
+import "./search.css";
+
+function getQuery() {
+    let savedQueryJSON = window.sessionStorage.getItem("posts-search");
+    if (savedQueryJSON) {
+        return JSON.parse(savedQueryJSON);
+    } else {
+        return new PostQuery();
+    }
+}
 
 export default function Posts(props) {
     let { layout } = useParams();
     let searchRef = useRef();
-    let [ search, setSearch ] = useState(new PostSearch());
+    let [ search, setSearch ] = useState(new PostSearch(getQuery()));
     let [ posts, setPosts ] = useState([]);
     
     function setQuery(query) {
+        window.sessionStorage.setItem("posts-search", JSON.stringify(query));
         toggleSearchBox();
         setSearch(new PostSearch(query));
     }
