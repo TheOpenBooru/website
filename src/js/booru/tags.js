@@ -19,7 +19,6 @@ export default class Tags{
         let r = await fetch(url, {"cache":"default"});
         if (r.ok) {
             let tags = await r.json()
-            console.log(tags);
             return tags;
         } else {
             return [];
