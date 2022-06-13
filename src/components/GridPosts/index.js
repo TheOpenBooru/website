@@ -28,6 +28,7 @@ function GridItem(props) {
     let className = `gridPosts-item media-${post.media_type}`;
     let redirect = Redirects.post(post.id);
     let { preview, thumbnail } = post;
+    let callback = preview && preview.type === "image" ? onLoadCallback(preview, thumbnail) : null;
     return (
         <a key={post.id} className={className} href={redirect}>
             <img
@@ -36,7 +37,7 @@ function GridItem(props) {
                 width={thumbnail.width}
                 height={thumbnail.height}
                 alt=""
-                onLoad={onLoadCallback(preview, thumbnail, true)}
+                onLoad={callback}
             />
         </a>
     );
