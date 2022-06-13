@@ -13,6 +13,13 @@ export default class Redirects {
         return "/posts";
     }
 
+    static auth() {
+        return "/auth";
+    }
+    static profile() {
+        return "/profile";
+    }
+
     static post(id) {
         return `/post/${id}`;
     }
