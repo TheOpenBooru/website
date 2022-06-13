@@ -5,8 +5,10 @@ export default function Video(props) {
     function updateVolume(e) {
         localStorage.setItem("volume", e.target.value);
     }
+
     function setVolume(e) {
-        e.target.volume = localStorage.getItem("volume") || .99;
+        let volume = Number(localStorage.getItem("volume"))
+        e.target.volume = volume || 1.0;
     }
 
 
