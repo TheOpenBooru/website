@@ -1,17 +1,8 @@
 import Settings from "js/settings";
+import Account from "./account"
 import { PostQuery } from "./types"
 
 export default class Posts{
-    static async create(file) {
-        let form = new FormData();
-        form.append("image_file", file);
-    
-        let request = new XMLHttpRequest();
-        request.open("POST", `${Settings.apiUrl}/posts/create`);
-        request.send(form);
-    }
-
-
     static async get(id) {
         let url = `${Settings.apiUrl}/posts/post/${id}`
         let r = await fetch(url, {"cache":"default"});
@@ -23,6 +14,30 @@ export default class Posts{
         }
     }
 
+    static async create(file: File) {
+        if (!Account.loggedIn){
+            throw new Error("Not logged in");
+        } else {
+            let formData = new FormData();
+            formData.append("image", file);
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", Settings.apiUrl + "/posts/create");
+                xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
+                xhr.onload = () => {
+                    if (xhr.status === 201) {
+                        let json = JSON.parse(xhr.response);
+                        
+                        resolve(json)
+                    } else {
+                        let error = new Error(xhr.response)
+                        reject(error)
+                    }
+                }
+                xhr.send(formData);
+            });
+        }
+    }
 
     static async search(query: PostQuery, index=0, count=64) {
         let params = new URLSearchParams();
