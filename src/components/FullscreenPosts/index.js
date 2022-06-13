@@ -77,7 +77,6 @@ export default function FullscreenPosts(props) {
             <PostCount index={index} max={posts.length} />
             <div className="fullscreenPosts-center">
                 <CenterImage post={post} />
-
             </div>
             <SideButton direction="right" img={nextImg} callback={nextPost} />
         </div>
@@ -87,7 +86,7 @@ export default function FullscreenPosts(props) {
 function CenterImage(props) {
     let { post } = props;
     
-    if (post.type === "video") {
+    if (post.media_type === "video") {
         return <Video video={post.full}/>
     } else {
         return <Image full={post.full} preview={post.preview} lazy={true} />
