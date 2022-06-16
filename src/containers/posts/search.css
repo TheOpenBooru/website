@@ -4,21 +4,6 @@
     height: 100vh;
 }
 
-#posts-searchBox{
-    z-index: 1;
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 30%;
-    transform: translate(-50%, -50%);
-    margin: 0 auto;
-
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    transition: .05s ease-out;
-}
-
 #posts-overlayButtons{
     position: fixed;
     top: calc(var(--NAVBAR-HEIGHT) + 2rem);

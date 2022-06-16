@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import SearchBox from "components/SearchBox";
 import ColumnPosts from "components/ColumnPosts";
 import GridPosts from "components/GridPosts";
+import MessageBox from "components/MessageBox";
 import Core from "containers/core";
 import FullscreenPosts from "components/FullscreenPosts";
 import { PostSearch, PostQuery } from "js/booru";
@@ -55,8 +56,10 @@ export default function Posts(props) {
 
     return (
         <Core title={`Open Booru: ${layout ? layout : "Post"} Search`}>
-            <div id="posts-searchBox" ref={searchRef} style={{"display":"none"}}>
-                <SearchBox query={search.query} setQuery={setQuery} />
+            <div id="posts-searchBox" ref={searchRef} style={{ "display": "none" }}>
+                <MessageBox>
+                    <SearchBox query={search.query} setQuery={setQuery} />
+                </MessageBox>
             </div>
             <div id="posts-overlayButtons">
                 <div id="posts-searchButton" title="Search">

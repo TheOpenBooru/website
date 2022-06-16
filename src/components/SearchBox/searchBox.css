@@ -5,11 +5,6 @@
     min-width: 15rem;
     width: min(50vw,30rem);
 
-    /* Look */
-    background-color: var(--COLOR-2);
-    border: .2em solid var(--COLOR-4);
-    border-radius: 1rem;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
