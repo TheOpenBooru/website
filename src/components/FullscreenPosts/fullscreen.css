@@ -16,7 +16,6 @@
 #fullscreenPosts-post{
     width: 100%;
     height: 100%;
-    margin: 1rem;
     user-select: none;
     
     background-color: var(--COLOR-BACKGROUND);
@@ -30,7 +29,9 @@
 
 #fullscreenPosts-media{
     position: relative;
-    height: 100%;
+    height: calc(100% - 2rem);
+    width: calc(100% - 2rem);
+    margin:1rem;
     left: var(--BUTTON-WIDTH);
     width: calc(100% - (2 * var(--BUTTON-WIDTH)));
 
