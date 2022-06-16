@@ -18,7 +18,6 @@ export default function PostInfo(props) {
     let { post } = props;
 
     let created_at = new Date(post.created_at * 1000).toLocaleDateString();
-    
     let SourceEntry = () => {
         if (post.source) {
             let url = new URL(post.source);
@@ -27,7 +26,7 @@ export default function PostInfo(props) {
             return <Entry name="Source" value="None" />
         }
     }
-    }
+
     return (
         <div id="PostInfo-postData">
             <Entry name="ID" value={post.id} />
