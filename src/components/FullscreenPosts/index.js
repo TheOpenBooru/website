@@ -7,6 +7,7 @@ import "./fullscreen.css";
 
 export default function FullscreenPosts(props) {
     let { posts, morePostsCallback, noButtons } = props;
+    let baseRef = React.useRef(null);
     let [ index, setIndex ] = useState(0);
     let [searchHash, setSearchHash] = useState(0);
     
@@ -23,27 +24,29 @@ export default function FullscreenPosts(props) {
         return null;
     }
 
-
+    
     let firstPost = posts[0];
     if (firstPost && searchHash !== firstPost.id) {
         setSearchHash(firstPost.id);
         setIndex(0);
     }
-
-
+    
+    
     function VisitPost() {
         let link = Redirects.post(postData.id);
         window.location.href = link;
     }
-
+    
     function GoToNextPost() {
         if (index !== posts.length - 1) {
+            baseRef.current.scrollTo(0,0)
             setIndex(index + 1);
         }
     }
-
+    
     function GoToPreviousPost() {
         if (index > 0) {
+            baseRef.current.scrollTo(0,0)
             setIndex(index - 1);
         }
     }
@@ -63,7 +66,7 @@ export default function FullscreenPosts(props) {
     };
 
     return (
-        <div id="fullscreenPosts">
+        <div id="fullscreenPosts" ref={baseRef}>
             <div id="fullscreenPosts-post">
                 {noButtons ? null : <LeftButton callback={GoToPreviousPost} post={prevPost} />}
                 <PostMedia post={postData} />
