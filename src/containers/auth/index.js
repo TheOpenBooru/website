@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import Core from "containers/core";
+import MessageBox from "components/MessageBox";
 import { Account } from "js/booru";
-import "./auth.css";
 import Redirects from "js/redirects";
+import "./auth.css";
 
 export default function AccountPage(props) {
     let usernameRef = useRef(null);
@@ -52,17 +53,21 @@ export default function AccountPage(props) {
     return (
         <Core title={"Open Booru: Login"} description={`Open Booru Login and Register`}>
             <div id="auth">
-                <div>
-                    <input type="username" placeholder="Username" ref={usernameRef} />
-                    <br />
-                    <input type="password" placeholder="Password" ref={passwordRef}/>
-                    <br />
-                    <span ref={errorRef} />
-                </div>
-                <div style={{"display":"flex","flexDirection":"row","justifyContent":"space-around"}}>
-                    <input type="submit" value="Login" onClick={LoginCallback}/>
-                    <input type="submit" value="Register" onClick={RegisterCallback}/>
-                </div>
+                <MessageBox>
+                    <div style={{margin:".5rem"}}>
+                        <div>
+                            <input type="username" placeholder="Username" ref={usernameRef} />
+                            <br />
+                            <input type="password" placeholder="Password" ref={passwordRef}/>
+                            <br />
+                            <span ref={errorRef} />
+                        </div>
+                        <div style={{"display":"flex","flexDirection":"row","justifyContent":"space-around"}}>
+                            <input type="submit" value="Login" onClick={LoginCallback}/>
+                            <input type="submit" value="Register" onClick={RegisterCallback}/>
+                        </div>
+                    </div>
+                </MessageBox>
             </div>
         </Core>
     );
