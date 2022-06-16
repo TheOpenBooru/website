@@ -70,7 +70,7 @@
     object-fit: contain;
 }
 
-.fullscreenPosts-button:active > .fullscreenPosts-button-icon{
+.fullscreenPosts-Button:active > .fullscreenPosts-button-icon{
     width: 80%;
     transition: 0.05s;
     filter: drop-shadow(2px 2px 2px #000);
