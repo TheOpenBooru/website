@@ -1,8 +1,8 @@
 class Settings {
-    static get fullscreenButtonPreviews() {
-        return get_setting("fullscreenButtonPreviews", false);
+    static get fullscreenPreviews() {
+        return get_setting("fullscreenButtonPreviews", true);
     }
-    static set fullscreenButtonPreviews(value) {
+    static set fullscreenPreviews(value) {
         set_setting("fullscreenButtonPreviews", value);
     }
     static set searchLayout(value) {

@@ -1,14 +1,14 @@
 import React from "react";
-import TagList from "./TagList";
 import PostInfo from "./PostInfo";
-import "./sidebar.css";
+import TagList from "./TagList";
+import "./PostInfo.css"
 
-export default function SideBar(props) {
+export default function Info(props) {
     let { post } = props;
     return (
-        <div id="postSidebar">
+        <div id="PostInfo">
             <PostInfo post={post} />
             <TagList tags={post.tags} />
         </div>
-    );
+    )
 }

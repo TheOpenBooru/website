@@ -1,26 +1,28 @@
 import React, { useState } from "react";
-import Video from "components/Media/video";
-import Image from "components/Media/image";
-import Sidebar from "components/PostSidebar";
-import titleCase from "ap-style-title-case";
 import Redirects from "js/redirects";
-import Settings from "js/settings";
+import PostInfo from "components/PostInfo";
+import PostMedia from "./media";
+import { LeftButton, RightButton} from "./buttons";
 import "./fullscreen.css";
 
 export default function FullscreenPosts(props) {
-    let { posts, morePostsCallback } = props;
-    let [index, setIndex] = useState(0);
+    let { posts, morePostsCallback, noButtons } = props;
+    let [ index, setIndex ] = useState(0);
     let [searchHash, setSearchHash] = useState(0);
-    let post = posts[index];
-
-    if (post == null) {
-        morePostsCallback();
-        return null;
-    }
+    
+    morePostsCallback ||= () => {};
+    let postData = posts[index];
+    let prevPost = posts[index - 1];
+    let nextPost = posts[index + 1];
 
     if (posts.length - index < 32) {
         morePostsCallback();
     }
+
+    if (postData == null) {
+        return null;
+    }
+
 
     let firstPost = posts[0];
     if (firstPost && searchHash !== firstPost.id) {
@@ -28,18 +30,19 @@ export default function FullscreenPosts(props) {
         setIndex(0);
     }
 
-    // Handlers
-    function visitPost() {
-        window.location.href = Redirects.post(post.id);
+
+    function VisitPost() {
+        let link = Redirects.post(postData.id);
+        window.location.href = link;
     }
 
-    function nextPost() {
+    function GoToNextPost() {
         if (index !== posts.length - 1) {
             setIndex(index + 1);
         }
     }
 
-    function prevPost() {
+    function GoToPreviousPost() {
         if (index > 0) {
             setIndex(index - 1);
         }
@@ -47,76 +50,26 @@ export default function FullscreenPosts(props) {
 
     onkeydown = (e) => {
         let KEYBINDS = {
-            a: nextPost,
-            ArrowRight: nextPost,
-            d: prevPost,
-            ArrowLeft: prevPost,
-            w: visitPost,
-            ArrowUp: visitPost,
+            w: GoToNextPost,
+            ArrowUp: VisitPost,
+            a: GoToNextPost,
+            ArrowRight: GoToNextPost,
+            d: GoToPreviousPost,
+            ArrowLeft: GoToPreviousPost,
         };
         if (e.key in KEYBINDS) {
             KEYBINDS[e.key]();
         }
     };
 
-    let prevImg, nextImg;
-    if (Settings.fullscreenButtonPreviews) {
-        prevImg = posts[index - 1] ? posts[index - 1].thumbnail.url : null;
-        nextImg = posts[index + 1] ? posts[index + 1].thumbnail.url : null;
-    } else {
-        prevImg = "/images/left-arrow.svg";
-        nextImg = "/images/right-arrow.svg";
-    }
     return (
         <div id="fullscreenPosts">
-            <div className="fullscreenPosts-sidebar">
-                <Sidebar post={post} />
+            <div id="fullscreenPosts-post">
+                {noButtons ? null : <LeftButton callback={GoToPreviousPost} post={prevPost} />}
+                <PostMedia post={postData} />
+                {noButtons ? null : <RightButton callback={GoToNextPost} post={nextPost} />}
             </div>
-
-            <SideButton direction="left" img={prevImg} callback={prevPost} />
-            <PostCount index={index} max={posts.length} />
-            <div className="fullscreenPosts-center">
-                <CenterImage post={post} />
-            </div>
-            <SideButton direction="right" img={nextImg} callback={nextPost} />
+            <PostInfo post={postData}/>
         </div>
-    );
-}
-
-function CenterImage(props) {
-    let { post } = props;
-    
-    if (post.media_type === "video") {
-        return <Video video={post.full}/>
-    } else {
-        return <Image full={post.full} preview={post.preview} lazy={true} />
-    }
-}
-
-function SideButton(props) { 
-    let { callback, img, direction } = props;
-    if (img) {
-        return (
-            <div
-                id={`fullscreenPosts-${direction}Button`}
-                className="fullscreenPosts-button"
-                title={titleCase(direction)}
-                onClick={callback}
-                >
-                <img className="fullscreenPosts-button-icon" src={img} alt="" />
-            </div>
-        );
-    } else {
-        return <div id={`fullscreenPosts-${direction}Button`} className="fullscreenPosts-button" />
-    }
-}
-function PostCount(props) {
-    let { index, max } = props;
-    return (
-        <span id="fullscreenPosts-count">
-            {index + 1}
-            <div style={{ marginTop: ".1rem", borderBottom: ".1rem solid black" }} />
-            {max}
-        </span>
     );
 }

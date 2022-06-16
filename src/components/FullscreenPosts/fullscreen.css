@@ -1,74 +1,51 @@
-@media screen and (max-aspect-ratio: 1/1) {
-    #fullscreenPosts{height: 100vh !important}
-    .fullscreenPosts-sidebar{display:none !important}
+#fullscreenPosts{
+    --BUTTON-WIDTH: 5rem;
 }
 
 #fullscreenPosts{
     /* Position */
     position: relative;
+    height: var(--PAGE-HEIGHT);
     width: 100%;
-    height: calc(100vh - var(--NAVBAR_HEIGHT));
     top:0;
     left:0;
     
-    background-color: var(--COLOR-BACKGROUND);
+    overflow-y: auto;
+}
+
+#fullscreenPosts-post{
+    width: 100%;
+    height: 100%;
+    margin: 1rem;
     user-select: none;
-    overflow-y: hidden;
-    overflow-x: hidden;
     
+    background-color: var(--COLOR-BACKGROUND);
+    border-bottom: #000 solid 1px;
+
     /* Flex */
     display:flex;
+    flex-flow: column nowrap;
     justify-content: space-between;
 }
 
-.fullscreenPosts-center {
-    top:0;
-    width: 100%;
-    margin: 1rem;
-    margin-left: 0;
-    
-    /* Flex */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-#fullscreenPosts-count{
-    align-self: flex-start;
-    text-align: center;
-    margin: .5rem 0 0 .5rem;
-    width: 4rem;
-}
-
-#fullscreen-indexText{
-    position: static;
-    align-self: flex-start;
-    justify-content: baseline;
-    left: 0;
-    top: 0;
-}
-
-#fullscreenPosts-image{
-    position: static;
-    height: 100%;
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.fullscreenPosts-button{
-    /* Position */
+#fullscreenPosts-media{
     position: relative;
-    top: 0;
-    min-height: 100%;
-    min-width: 5rem;
-    max-width: 5rem;
-    width: 10rem;
+    height: 100%;
+    left: var(--BUTTON-WIDTH);
+    width: calc(100% - (2 * var(--BUTTON-WIDTH)));
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Buttons */
+.fullscreenPosts-Button{
+    height: 100%;
+    width: var(--BUTTON-WIDTH);
 
     /* Look */
+    outline: solid 1px #000;
     background-color: var(--COLOR-1);
     
     /* Center Children (Icon) */
@@ -77,19 +54,19 @@
     justify-content: center;
 }
 
-#fullscreenPosts-leftButton{
+#fullscreenPost-LeftButton{
+    position: absolute;
     left: 0;
 }
 
-#fullscreenPosts-rightButton{
+#fullscreenPost-RightButton{
+    position: absolute;
     right: 0;
 }
 
 .fullscreenPosts-button-icon{
     width: 90%;
-    max-height: 10rem;
-    min-width: 2rem;
-    min-height: 2rem;
+    padding: .5rem;
     object-fit: contain;
 }
 

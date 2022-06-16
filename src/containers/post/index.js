@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import SideBar from "components/PostSidebar";
 import Core from "containers/core";
-import Media from "components/Media";
+import FullscreenPosts from "components/FullscreenPosts";
 import { Posts } from "js/booru";
 import redirects from "js/redirects";
-import "./post.css";
 
-export default function Post(props) {
-    let [post, setPost] = useState(undefined);
+export default function PostPage(props) {
     let { id } = useParams();
+    let [post, setPost] = useState(undefined);
     if (id === undefined) window.location.replace(redirects.home());
 
     useEffect(() =>
@@ -29,17 +27,10 @@ export default function Post(props) {
     } else {
         return (
             <Core
-                title={"Open Booru: Post"}
+                title={`Open Booru: Post ${id}`}
                 description={`Open Booru Post ${id}: ${post.tags.join(" ")}`}
             >
-                <div id="post-page">
-                    <SideBar post={post} />
-                    <div id="post-image-container">
-                        <div id="post-image">
-                            <Media full={post.full} preview={post.preview} type={post.media_type}/>
-                        </div>
-                    </div>
-                </div>
+                <FullscreenPosts posts={[post]} noButtons/>
             </Core>
         );
     }
