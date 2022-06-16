@@ -30,10 +30,9 @@
 #fullscreenPosts-media{
     position: relative;
     height: calc(100% - 2rem);
-    width: calc(100% - 2rem);
+    width: calc(100% - 2rem - (2 * var(--BUTTON-WIDTH)));
     margin:1rem;
     left: var(--BUTTON-WIDTH);
-    width: calc(100% - (2 * var(--BUTTON-WIDTH)));
 
     display: flex;
     align-items: center;
