@@ -11,15 +11,11 @@
 }
 
 #PostInfo-postData{
+    height: 100%;
     padding: .5rem;
     white-space: nowrap;
     border-right: 1px solid black;
 }
-
-@media screen and (max-aspect-ratio: 1/1) {
-    #PostInfo{display:none !important}
-}
-
 
 #PostInfo-tagList{
     position: relative;
