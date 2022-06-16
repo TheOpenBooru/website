@@ -19,22 +19,23 @@ export default function PostInfo(props) {
 
     let created_at = new Date(post.created_at * 1000).toLocaleDateString();
     
-    let source;
-    if (post.source) {
-        let url = new URL(post.source)
-        source = url.hostname
+    let SourceEntry = () => {
+        if (post.source) {
+            let url = new URL(post.source);
+            return <Entry name="Source" value={url.hostna} href={post.source} />
+        } else {
+            return <Entry name="Source" value="None" />
+        }
+    }
     }
     return (
         <div id="PostInfo-postData">
             <Entry name="ID" value={post.id} />
             <Entry name="Created On" value={created_at} />
-            <Entry name="Views" value={post.views} />
+            <Entry name="Rating" value={created_at} />
+            <SourceEntry />
             <Entry name="Upvotes" value={post.upvotes} />
             <Entry name="Downvotes" value={post.downvotes} />
-            {post.source
-                ? <Entry name="Source" value={source} href={post.source} />
-                : <Entry name="Source" value="None" />
-            }
             
         </div>
     );
