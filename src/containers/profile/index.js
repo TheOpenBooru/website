@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Core from "containers/core";
 import Redirects from "js/redirects";
 import { Account } from "js/booru";
