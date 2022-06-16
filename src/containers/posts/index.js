@@ -1,12 +1,14 @@
-import React, { useState,useEffect, useRef } from "react";
+import React, { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
-import SearchBox from "components/SearchBox";
 import ColumnPosts from "components/ColumnPosts";
 import GridPosts from "components/GridPosts";
+import FullscreenPosts from "components/FullscreenPosts";
+import SearchBox from "components/SearchBox";
+import CreatePost from "components/CreatePost";
 import MessageBox from "components/MessageBox";
 import Core from "containers/core";
-import FullscreenPosts from "components/FullscreenPosts";
 import { PostSearch, PostQuery } from "js/booru";
+import ButtonOverlay from "./overlay";
 import "./search.css";
 
 function getQuery() {
@@ -20,13 +22,13 @@ function getQuery() {
 
 export default function Posts(props) {
     let { layout } = useParams();
-    let searchRef = useRef();
+    let searchRef = React.useRef(null);
+    let createRef = React.useRef(null);
     let [ search, setSearch ] = useState(new PostSearch(getQuery()));
     let [ posts, setPosts ] = useState([]);
     
     function setQuery(query) {
         window.sessionStorage.setItem("posts-search", JSON.stringify(query));
-        toggleSearchBox();
         setSearch(new PostSearch(query));
     }
     
@@ -37,6 +39,13 @@ export default function Posts(props) {
         setPosts(search.posts);
     }
     
+    let LayoutLookup = {
+        "fullscreen": FullscreenPosts,
+        "grid": GridPosts,
+        "column": ColumnPosts,
+    }
+    let PostsLayout = LayoutLookup[layout] ?? ColumnPosts;
+
     function toggleSearchBox() {
         if (searchRef.current) {
             if (searchRef.current.style.display === "none") {
@@ -46,26 +55,30 @@ export default function Posts(props) {
             }
         }
     }
-    
-    let LayoutLookup = {
-        "fullscreen": FullscreenPosts,
-        "grid": GridPosts,
-        "column": ColumnPosts,
+
+    function toggleCreateBox() {
+        if (createRef.current) {
+            if (createRef.current.style.display === "none") {
+                createRef.current.style.display = "block";
+            } else {
+                createRef.current.style.display = "none";
+            }
+        }
     }
-    let PostsLayout = LayoutLookup[layout] ?? ColumnPosts;
 
     return (
         <Core title={`Open Booru: ${layout ? layout : "Post"} Search`}>
-            <div id="posts-searchBox" ref={searchRef} style={{ "display": "none" }}>
+            <div ref={searchRef} style={{ "display": "none" }}>
                 <MessageBox>
                     <SearchBox query={search.query} setQuery={setQuery} />
                 </MessageBox>
             </div>
-            <div id="posts-overlayButtons">
-                <div id="posts-searchButton" title="Search">
-                    <img src="/images/search.svg" alt="Search" onClick={toggleSearchBox} />
-                </div>
+            <div ref={createRef} style={{ "display": "none" }}>
+                <MessageBox>
+                    <CreatePost/>
+                </MessageBox>
             </div>
+            <ButtonOverlay toggleSearchBox={toggleSearchBox} toggleCreateBox={toggleCreateBox} />
             {
                 search.finished && posts.length === 0 
                     ? <span className="posts-ErrorText">No Posts Found</span>

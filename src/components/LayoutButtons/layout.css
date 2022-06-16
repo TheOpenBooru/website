@@ -31,13 +31,10 @@
 .layoutSelector-button:hover{
     background-color: var(--COLOR-3);
 }
+
 .layoutSelector-button:hover .layoutSelector-button-icon{
     cursor: pointer;
     width: 90%;
     height: 90%;
     filter: invert(90%);
-}
-
-@media screen and (max-aspect-ratio: 1/1) {
-    #layout-fullscreen{display:none !important}
 }
