@@ -9,21 +9,16 @@ export class PostSearch {
     query: PostQuery;
 
     constructor(query = null) {
-        if (query) {
-            this.query = query;
-        } else {
-            this.query = new PostQuery()
-        }
+        this.query = query || new PostQuery();
     }
 
     async extend(count = 64) {
         if (this.__lock) return;
         if (this.finished) return;
-        this.__lock = true;
         
         let posts = await Posts.search(this.query, this.index, count);
         this.posts = this.posts.concat(posts);
-        this.query.index += posts.length;
+        this.index += posts.length;
         
         if (posts.length < count) {
             this.finished = true;
