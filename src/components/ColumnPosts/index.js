@@ -44,7 +44,7 @@ function ColumnItem(props) {
                 width={thumbnail.width}
                 height={thumbnail.height}
                 alt=""
-                onLoad={onLoadCallback(preview,thumbnail,true)}
+                onLoad={preview ? onLoadCallback(preview,thumbnail,true) : null}
             />
         </a>
     );
