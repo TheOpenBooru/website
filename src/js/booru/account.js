@@ -1,6 +1,13 @@
 import Settings from "js/settings.js";
 
+
+const LoginFailure = new Error("Failed to Login")
+const PasswordReset = new Error("Password Was Reset")
+
 export default class Account {
+    LoginFailure = LoginFailure
+    PasswordReset = PasswordReset
+
     static get username(): String {
         return window.localStorage.getItem("LoginUsername");
     }
@@ -24,20 +31,26 @@ export default class Account {
 
 
     static async login(username, password) {
+        if (username === "" || password === "") {
+            throw new Error("Username or Password is empty");
+        }
         return new Promise((resolve, reject) => {
             let xhr = new XMLHttpRequest();
             xhr.open("POST", Settings.apiUrl + "/account/login");
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onload = async () => {
-                if (xhr.status !== 200) {
-                    let error = new Error(xhr.response);
-                    reject(error);
-                } else {
+                if (xhr.status === 200) {
                     let json = JSON.parse(xhr.response);
                     this.token = json["access_token"];
                     let profile = await this.profile();
                     this.username = profile["username"];
                     resolve();
+                } else if (xhr.status === 401) {
+                    reject(LoginFailure);
+                } else if (xhr.status === 406) {
+                    reject(PasswordReset)
+                } else {
+                    reject(new Error(xhr.response));
                 }
             };
             xhr.send(`username=${username}&password=${password}`);
