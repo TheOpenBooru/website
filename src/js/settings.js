@@ -1,36 +1,25 @@
-class Settings {
-    static get fullscreenPreviews() {
-        return get_setting("fullscreenButtonPreviews", true);
-    }
-    static set fullscreenPreviews(value) {
-        set_setting("fullscreenButtonPreviews", value);
-    }
-    static set searchLayout(value) {
-        set_setting("view_mode", value);
-    }
-    static get searchLayout() {
-        return get_setting("view_mode", "grid");
-    }
-    static get apiUrl() {
-        return get_setting("api_url", "https://api.openbooru.org");
-    }
-}
+const SettingsDefaults = {
+    "fullscreenPreviews":true,
+    "pauseVideosInBackground":true,
+    "searchLayout":"grid",
+    "apiUrl":"https://api.openbooru.org",
+};
 
-function set_setting(key, value) {
-    value = JSON.stringify(value);
-    localStorage.setItem(key, value);
-}
-function get_setting(key, default_value) {
-    let value = localStorage.getItem(key);
-    if (value) {
-        try {
-            return JSON.parse(value);
-        } catch {
-            return value;
+const Settings = new Proxy(SettingsDefaults, {
+    get(obj, prop) {
+        if (!(prop in obj)) {
+            return undefined
+        } else if (localStorage.getItem(prop)) {
+            return localStorage.getItem(prop);
+        } else {
+            return obj[prop];
         }
-    } else {
-        localStorage.setItem(key, default_value);
-        return default_value;
+    },
+    set(obj, prop, value) {
+        if (prop in obj) {
+            localStorage.setItem(prop,value)
+        }
     }
-}
+})
+
 export default Settings;
