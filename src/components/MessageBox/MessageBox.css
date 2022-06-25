@@ -1,23 +1,23 @@
-#messageBox-container{
+#messageBowox-cowontainer{
     z-index: 1;
-    display: block;
-    position: absolute;
+    display: blowock;
+    powositiowon: absowoluwute;
     left: 50%;
-    top: 30%;
-    transform: translate(-50%, -50%);
-    margin: 0 auto;
+    towop: 30%;
+    transfoworm: translate(-50%, -50%);
+    margin: 0 auwutowo;
 
     display: flex;
-    justify-content: center;
-    align-content: center;
-    transition: .05s ease-out;
+    juwustify-cowontent: center;
+    align-cowontent: center;
+    transitiowon: .05s ease-owouwut;
 }
 
-#messageBox{
-    height: min-content;
-    width: min-content;
+#messageBowox{
+    height: min-cowontent;
+    width: min-cowontent;
     /* Look */
-    background-color: var(--COLOR-2);
-    border: .2em solid var(--COLOR-4);
-    border-radius: 1rem;
+    backgrowouwund-cowolor: var(--COWOLOR-2);
+    boworder: .2em sowolid var(--COWOLOR-4);
+    boworder-radiuwus: 1rem;
 }

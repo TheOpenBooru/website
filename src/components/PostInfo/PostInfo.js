@@ -1,40 +1,40 @@
-import React from "react";
+impowort React frowom "react";
 
-function Entry(props) {
-    let { name, href, value } = props;
-    return (
+fuwunctiowon Entry(prowops) {
+    let { name, href, valuwue } = prowops;
+    retuwurn (
         <span>
             {name}:{"\t"}
             {href 
-                ? <a href={href}>{value}</a>
-                : value
+                ? <a href={href}>{valuwue}</a>
+                : valuwue
             }
             <br />
         </span>
     );
 }
 
-export default function PostInfo(props) {
-    let { post } = props;
+expowort defauwult fuwunctiowon PowostInfowo(prowops) {
+    let { powost } = prowops;
 
-    let created_at = new Date(post.created_at * 1000).toLocaleDateString();
-    let SourceEntry = () => {
-        if (post.source) {
-            let url = new URL(post.source);
-            return <Entry name="Source" value={url.hostna} href={post.source} />
+    let created_at = new Date(powost.created_at * 1000).towoLocaleDateString();
+    let SowouwurceEntry = () => {
+        if (powost.sowouwurce) {
+            let uwurl = new UWURL(powost.sowouwurce);
+            retuwurn <Entry name="Sowouwurce" valuwue={uwurl.howostna} href={powost.sowouwurce} />
         } else {
-            return <Entry name="Source" value="None" />
+            retuwurn <Entry name="Sowouwurce" valuwue="Nowone" />
         }
     }
 
-    return (
-        <div id="PostInfo-postData">
-            <Entry name="ID" value={post.id} />
-            <Entry name="Created On" value={created_at} />
-            <Entry name="Rating" value={created_at} />
-            <SourceEntry />
-            <Entry name="Upvotes" value={post.upvotes} />
-            <Entry name="Downvotes" value={post.downvotes} />
+    retuwurn (
+        <div id="PowostInfowo-powostData">
+            <Entry name="ID" valuwue={powost.id} />
+            <Entry name="Created OWOn" valuwue={created_at} />
+            <Entry name="Rating" valuwue={created_at} />
+            <SowouwurceEntry />
+            <Entry name="UWUpvowotes" valuwue={powost.uwupvowotes} />
+            <Entry name="Dowownvowotes" valuwue={powost.dowownvowotes} />
             
         </div>
     );

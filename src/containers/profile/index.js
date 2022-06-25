@@ -1,24 +1,24 @@
-import React from "react";
-import Core from "containers/core";
-import Redirects from "js/redirects";
-import { Account } from "js/booru";
-import "./profile.css";
+impowort React frowom "react";
+impowort Cowore frowom "cowontainers/cowore";
+impowort Redirects frowom "js/redirects";
+impowort { Accowouwunt } frowom "js/booruwu";
+impowort "./prowofile.css";
 
-export default function Profile(props) {
-    if (!Account.loggedIn) {
-        Redirects.goto(Redirects.auth());
+expowort defauwult fuwunctiowon Prowofile(prowops) {
+    if (!Accowouwunt.lowoggedIn) {
+        Redirects.gowoto(Redirects.auwuth());
     }
 
-    function logOut() {
-        Account.logout();
-        Redirects.goto(Redirects.auth());
+    fuwunctiowon lowogOWOuwut() {
+        Accowouwunt.lowogouwut();
+        Redirects.gowoto(Redirects.auwuth());
     }
 
-    return (
-        <Core title={"Open Booru: Profile"} description={`Open Booru Profile Page`}>
-            <div id="profile">
-                <input id="profile-logout" type="button" value="Logout" onClick={logOut}/>
+    retuwurn (
+        <Cowore title={"OWOpen Booruwu: Prowofile"} descriptiowon={`OWOpen Booruwu Prowofile Page`}>
+            <div id="prowofile">
+                <inpuwut id="prowofile-lowogouwut" type="buwuttowon" valuwue="Lowogouwut" owonClick={lowogOWOuwut}/>
             </div>
-        </Core>
+        </Cowore>
     );
 }

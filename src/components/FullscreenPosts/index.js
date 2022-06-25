@@ -1,78 +1,78 @@
-import React, { useState } from "react";
-import Redirects from "js/redirects";
-import PostInfo from "components/PostInfo";
-import PostMedia from "./media";
-import { LeftButton, RightButton} from "./buttons";
-import "./fullscreen.css";
+impowort React, { uwuseState } frowom "react";
+impowort Redirects frowom "js/redirects";
+impowort PowostInfowo frowom "cowompowonents/PowostInfowo";
+impowort PowostMedia frowom "./media";
+impowort { LeftBuwuttowon, RightBuwuttowon} frowom "./buwuttowons";
+impowort "./fuwullscreen.css";
 
-export default function FullscreenPosts(props) {
-    let { posts, morePostsCallback, noButtons } = props;
-    let baseRef = React.useRef(null);
-    let [ index, setIndex ] = useState(0);
-    let [searchHash, setSearchHash] = useState(0);
+expowort defauwult fuwunctiowon FuwullscreenPowosts(prowops) {
+    let { powosts, moworePowostsCallback, nowoBuwuttowons } = prowops;
+    let baseRef = React.uwuseRef(nuwull);
+    let [ index, setIndex ] = uwuseState(0);
+    let [searchHash, setSearchHash] = uwuseState(0);
     
-    morePostsCallback ||= () => {};
-    let postData = posts[index];
-    let prevPost = posts[index - 1];
-    let nextPost = posts[index + 1];
+    moworePowostsCallback ||= () => {};
+    let powostData = powosts[index];
+    let prevPowost = powosts[index - 1];
+    let nextPowost = powosts[index + 1];
 
-    if (posts.length - index < 32) {
-        morePostsCallback();
+    if (powosts.length - index < 32) {
+        moworePowostsCallback();
     }
 
-    if (postData == null) {
-        return null;
+    if (powostData == nuwull) {
+        retuwurn nuwull;
     }
 
     
-    let firstPost = posts[0];
-    if (firstPost && searchHash !== firstPost.id) {
-        setSearchHash(firstPost.id);
+    let firstPowost = powosts[0];
+    if (firstPowost && searchHash !== firstPowost.id) {
+        setSearchHash(firstPowost.id);
         setIndex(0);
     }
     
     
-    function VisitPost() {
-        let link = Redirects.post(postData.id);
-        window.location.href = link;
+    fuwunctiowon VisitPowost() {
+        let link = Redirects.powost(powostData.id);
+        windowow.lowocatiowon.href = link;
     }
     
-    function GoToNextPost() {
-        if (index !== posts.length - 1) {
-            baseRef.current.scrollTo(0,0)
+    fuwunctiowon GowoToNextPowost() {
+        if (index !== powosts.length - 1) {
+            baseRef.cuwurrent.scrowollTowo(0,0)
             setIndex(index + 1);
         }
     }
     
-    function GoToPreviousPost() {
+    fuwunctiowon GowoToPreviowouwusPowost() {
         if (index > 0) {
-            baseRef.current.scrollTo(0,0)
+            baseRef.cuwurrent.scrowollTowo(0,0)
             setIndex(index - 1);
         }
     }
 
-    onkeydown = (e) => {
+    owonkeydowown = (e) => {
         let KEYBINDS = {
-            w: GoToNextPost,
-            ArrowUp: VisitPost,
-            a: GoToNextPost,
-            ArrowRight: GoToNextPost,
-            d: GoToPreviousPost,
-            ArrowLeft: GoToPreviousPost,
+            w: GowoToNextPowost,
+            ArrowowUWUp: VisitPowost,
+            a: GowoToNextPowost,
+            ArrowowRight: GowoToNextPowost,
+            d: GowoToPreviowouwusPowost,
+            ArrowowLeft: GowoToPreviowouwusPowost,
         };
         if (e.key in KEYBINDS) {
             KEYBINDS[e.key]();
         }
     };
 
-    return (
-        <div id="fullscreenPosts" ref={baseRef}>
-            <div id="fullscreenPosts-post">
-                {noButtons ? null : <LeftButton callback={GoToPreviousPost} post={prevPost} />}
-                <PostMedia post={postData} />
-                {noButtons ? null : <RightButton callback={GoToNextPost} post={nextPost} />}
+    retuwurn (
+        <div id="fuwullscreenPowosts" ref={baseRef}>
+            <div id="fuwullscreenPowosts-powost">
+                {nowoBuwuttowons ? nuwull : <LeftBuwuttowon callback={GowoToPreviowouwusPowost} powost={prevPowost} />}
+                <PowostMedia powost={powostData} />
+                {nowoBuwuttowons ? nuwull : <RightBuwuttowon callback={GowoToNextPowost} powost={nextPowost} />}
             </div>
-            <PostInfo post={postData}/>
+            <PowostInfowo powost={powostData}/>
         </div>
     );
 }

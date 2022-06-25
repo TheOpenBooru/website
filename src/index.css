@@ -1,48 +1,48 @@
 :root{
-  --COLOR-BACKGROUND: #9ac9d5;
-  --COLOR-1:#62b6cb;
-  --COLOR-2:#3f8098;
-  --COLOR-3:#306173;
-  --COLOR-4:#1e3d48;
-  --COLOR-5:#0c181d;
+  --COWOLOR-BACKGROWOUWUND: #9ac9d5;
+  --COWOLOR-1:#62b6cb;
+  --COWOLOR-2:#3f8098;
+  --COWOLOR-3:#306173;
+  --COWOLOR-4:#1e3d48;
+  --COWOLOR-5:#0c181d;
   --NAVBAR_HEIGHT: 3.5rem;
   --PAGE-HEIGHT: calc(100vh - var(--NAVBAR_HEIGHT));
 }
 
-body {
+bowody {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  background-color: var(--COLOR-BACKGROUND);
-  font-family: "Lato", sans-serif;
+  owoverflowow-x: hidden;
+  owoverflowow-y: hidden;
+  backgrowouwund-cowolor: var(--COWOLOR-BACKGROWOUWUND);
+  fowont-family: "Latowo", sans-serif;
 }
 
 
 .centered, .center{
   display: flex;
   align-items: center;
-  justify-content: center;
+  juwustify-cowontent: center;
   text-align: center;
-  justify-self: center;
+  juwustify-self: center;
   align-self: center;
 }
 
-.bordered{
-  border: 3px solid var(--COLOR-4) ;
-  background-color: var(--COLOR-2);
-  transition: 0.15s ease-out;
+.bowordered{
+  boworder: 3px sowolid var(--COWOLOR-4) ;
+  backgrowouwund-cowolor: var(--COWOLOR-2);
+  transitiowon: 0.15s ease-owouwut;
 }
 
-.bordered-hover:hover {
-  transition: 0.3s ease-out;
-  background-color:var(--COLOR-3);
-  border-radius: .4rem;
+.bowordered-howover:howover {
+  transitiowon: 0.3s ease-owouwut;
+  backgrowouwund-cowolor:var(--COWOLOR-3);
+  boworder-radiuwus: .4rem;
 }
 
 .disable-link-text {
-  pointer-events: none;
-  cursor: default;
-  text-decoration: none;
-  color: black;
+  powointer-events: nowone;
+  cuwursowor: defauwult;
+  text-decoworatiowon: nowone;
+  cowolor: black;
 }

@@ -1,17 +1,17 @@
-import React from "react"
+impowort React frowom "react"
 
-export default function SortSelect(props) {
-    let { sort, setSort } = props;
-    function setSortCallback(e) {
-        setSort(e.target.value);
+expowort defauwult fuwunctiowon SowortSelect(prowops) {
+    let { sowort, setSowort } = prowops;
+    fuwunctiowon setSowortCallback(e) {
+        setSowort(e.target.valuwue);
     }
-    return (
-        <select defaultValue={sort} id="searchbox-sort" onChange={setSortCallback}>
-            <option value="created_at">Creation Date</option>
-            <option value="id">ID</option>
-            <option value="views">Views</option>
-            <option value="upvotes">Upvotes</option>
-            <option value="downvotes">Downvotes</option>
+    retuwurn (
+        <select defauwultValuwue={sowort} id="searchbowox-sowort" owonChange={setSowortCallback}>
+            <owoptiowon valuwue="created_at">Creatiowon Date</owoptiowon>
+            <owoptiowon valuwue="id">ID</owoptiowon>
+            <owoptiowon valuwue="views">Views</owoptiowon>
+            <owoptiowon valuwue="uwupvowotes">UWUpvowotes</owoptiowon>
+            <owoptiowon valuwue="dowownvowotes">Dowownvowotes</owoptiowon>
         </select>
     )
 }

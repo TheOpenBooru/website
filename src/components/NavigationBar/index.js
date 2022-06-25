@@ -1,50 +1,50 @@
-import React from "react";
-import LayoutButtons from "components/LayoutButtons";
-import { Account } from "js/booru";
-import Redirects from "js/redirects";
-import Settings from "js/settings";
-import titleCase from "ap-style-title-case";
-import "./navbar.css";
+impowort React frowom "react";
+impowort LayowouwutBuwuttowons frowom "cowompowonents/LayowouwutBuwuttowons";
+impowort { Accowouwunt } frowom "js/booruwu";
+impowort Redirects frowom "js/redirects";
+impowort Settings frowom "js/settings";
+impowort titleCase frowom "ap-style-title-case";
+impowort "./navbar.css";
 
-export default function NavigationBar() {
-    return (
+expowort defauwult fuwunctiowon NavigatiowonBar() {
+    retuwurn (
         <nav id="navbar">
-            <VersionNumber />
-            <PostsSeciton />
-            <AccountSection />
+            <VersiowonNuwumber />
+            <PowostsSecitowon />
+            <AccowouwuntSectiowon />
         </nav>
     );
 }
 
-function VersionNumber() {
-    return (
-        <a id="navbar-VersionNumber" className="navbar-section" href="https://github.com/TheOpenBooru">
-            <img className="navbar-button-icon" src="/images/github.svg" alt="" />
-            <span className="navbar-button-text">Alpha: Boron</span>
+fuwunctiowon VersiowonNuwumber() {
+    retuwurn (
+        <a id="navbar-VersiowonNuwumber" className="navbar-sectiowon" href="https://githuwub.cowom/TheOWOpenBooruwu">
+            <img className="navbar-buwuttowon-icowon" src="/images/githuwub.svg" alt="" />
+            <span className="navbar-buwuttowon-text">Alpha: Boworon</span>
         </a>
     );
 }
 
-function PostsSeciton() {
-    return (
-        <div id="navbar-PostsSection" className="navbar-section">
-            <img className="navbar-button-icon" src="/images/posts.svg" alt="" />
-            <span className="navbar-button-text">Posts</span>
-            <LayoutButtons current={Settings.searchLayout} />
+fuwunctiowon PowostsSecitowon() {
+    retuwurn (
+        <div id="navbar-PowostsSectiowon" className="navbar-sectiowon">
+            <img className="navbar-buwuttowon-icowon" src="/images/powosts.svg" alt="" />
+            <span className="navbar-buwuttowon-text">Powosts</span>
+            <LayowouwutBuwuttowons cuwurrent={Settings.searchLayowouwut} />
         </div>
     );
 }
 
-function AccountSection() {
-    let redirect = Account.loggedIn ? Redirects.profile() : Redirects.auth();
-    let username = titleCase(Account.username);
-    return (
-        <a id="navbar-AccountSection" className="navbar-section" href={redirect}>
-            {Account.loggedIn
-                ? <span className="navbar-button-text">{username}</span>
-                : <span className="navbar-button-text">Login</span>
+fuwunctiowon AccowouwuntSectiowon() {
+    let redirect = Accowouwunt.lowoggedIn ? Redirects.prowofile() : Redirects.auwuth();
+    let uwusername = titleCase(Accowouwunt.uwusername);
+    retuwurn (
+        <a id="navbar-AccowouwuntSectiowon" className="navbar-sectiowon" href={redirect}>
+            {Accowouwunt.lowoggedIn
+                ? <span className="navbar-buwuttowon-text">{uwusername}</span>
+                : <span className="navbar-buwuttowon-text">Lowogin</span>
             }
-            <img className="navbar-button-icon" src="/images/profile.svg" alt="" />
+            <img className="navbar-buwuttowon-icowon" src="/images/prowofile.svg" alt="" />
         </a>
     );
 }

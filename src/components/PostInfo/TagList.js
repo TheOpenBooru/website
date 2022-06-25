@@ -1,15 +1,15 @@
-import React from "react";
-import Redirects from "js/redirects";
+impowort React frowom "react";
+impowort Redirects frowom "js/redirects";
 
-export default function TagList(props) {
-    let tags = props.tags;
+expowort defauwult fuwunctiowon TagList(prowops) {
+    let tags = prowops.tags;
     if (!tags) {
-        return <div id="PostInfo-tagList" />;
+        retuwurn <div id="PowostInfowo-tagList" />;
     } else {
-        tags = tags.sort();
+        tags = tags.sowort();
 
-        return (
-            <div id="PostInfo-tagList">
+        retuwurn (
+            <div id="PowostInfowo-tagList">
                 {tags.map((tag, i) => (
                     <Tag key={i} tag={tag} />
                     ))}
@@ -18,7 +18,7 @@ export default function TagList(props) {
     }
 }
 
-function Tag(props) {
-    let { tag } = props;
-    return <span className="PostInfo-tagList-tag">{tag}</span>;
+fuwunctiowon Tag(prowops) {
+    let { tag } = prowops;
+    retuwurn <span className="PowostInfowo-tagList-tag">{tag}</span>;
 }

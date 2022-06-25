@@ -1,39 +1,39 @@
-.layoutSelector {
+.layowouwutSelectowor {
     display: flex;
-    justify-content: space-around;
+    juwustify-cowontent: space-arowouwund;
     align-items: center;
 }
 
-.layoutSelector-button {
+.layowouwutSelectowor-buwuttowon {
     width: 1.6rem;
     height: 1.6rem;
     margin-left: .1rem;
     margin-right: .1rem;
 
-    background-color: var(--COLOR-2);
-    border: 0.2rem solid var(--COLOR-4);
-    border-radius: .4rem;
+    backgrowouwund-cowolor: var(--COWOLOR-2);
+    boworder: 0.2rem sowolid var(--COWOLOR-4);
+    boworder-radiuwus: .4rem;
     
     display: flex;
-    justify-content: space-around;
+    juwustify-cowontent: space-arowouwund;
     align-items: center;
 }
 
-.layoutSelector-button-icon {
-    transition: 0.2s ease-in-out;
-    animation-fill-mode: forwards;
+.layowouwutSelectowor-buwuttowon-icowon {
+    transitiowon: 0.2s ease-in-owouwut;
+    animatiowon-fill-mowode: foworwards;
     
     width: 80%;
     height: 80%;
     filter: invert(0%);
 }
 
-.layoutSelector-button:hover{
-    background-color: var(--COLOR-3);
+.layowouwutSelectowor-buwuttowon:howover{
+    backgrowouwund-cowolor: var(--COWOLOR-3);
 }
 
-.layoutSelector-button:hover .layoutSelector-button-icon{
-    cursor: pointer;
+.layowouwutSelectowor-buwuttowon:howover .layowouwutSelectowor-buwuttowon-icowon{
+    cuwursowor: powointer;
     width: 90%;
     height: 90%;
     filter: invert(90%);

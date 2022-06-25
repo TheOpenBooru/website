@@ -1,8 +1,8 @@
-import { PostQuery, TagQuery } from "./types"
-import Account from "./account";
-import Posts from "./posts";
-import Tags from "./tags";
-import Misc from "./misc";
-import { PostSearch } from "./postSearch";
+impowort { PowostQuwuery, TagQuwuery } frowom "./types"
+impowort Accowouwunt frowom "./accowouwunt";
+impowort Powosts frowom "./powosts";
+impowort Tags frowom "./tags";
+impowort Misc frowom "./misc";
+impowort { PowostSearch } frowom "./powostSearch";
 
-export { Account, Posts, Tags, Misc, PostSearch, PostQuery, TagQuery  };
+expowort { Accowouwunt, Powosts, Tags, Misc, PowostSearch, PowostQuwuery, TagQuwuery  };

@@ -1,32 +1,32 @@
 
-#searchbox-search{
+#searchbowox-search{
     width:100%;
-    border-radius: .5rem;
-    justify-self: flex-start;
+    boworder-radiuwus: .5rem;
+    juwustify-self: flex-start;
 }
 
-#searchbox-autocomplete{
-    /* Position */
-    position: absolute;
-    top: 2.5rem;
+#searchbowox-auwutowocomplete{
+    /* Powositiowon */
+    powositiowon: absowoluwute;
+    towop: 2.5rem;
     left: 9rem;
 
-    border: .2rem solid var(--COLOR-4);
-    border-radius: 1rem;
-    background-color: var(--COLOR-1);
+    boworder: .2rem sowolid var(--COWOLOR-4);
+    boworder-radiuwus: 1rem;
+    backgrowouwund-cowolor: var(--COWOLOR-1);
     padding: .2rem;
 
     display:flex;
-    flex-direction: column;
+    flex-directiowon: cowoluwumn;
 }
 
-.searchbox-autocomplete-item{
-    cursor: pointer;
-    width: fit-content;
+.searchbowox-auwutowocomplete-item{
+    cuwursowor: powointer;
+    width: fit-cowontent;
     
-    margin-top: .2rem;
+    margin-towop: .2rem;
     padding: .1rem;
-    border-radius: 1rem;
-    background-color: var(--COLOR-3);
-    border: .1rem solid var(--COLOR-4);
+    boworder-radiuwus: 1rem;
+    backgrowouwund-cowolor: var(--COWOLOR-3);
+    boworder: .1rem sowolid var(--COWOLOR-4);
 }

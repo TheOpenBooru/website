@@ -1,22 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Post from "./containers/post";
-import Posts from "./containers/posts";
-import Auth from "./containers/auth";
-import Profile from "./containers/profile";
-import './index.css';
+impowort React frowom 'react';
+impowort ReactDOWOM frowom 'react-dowom';
+impowort { BrowowserRowouwuter, Rowouwutes, Rowouwute } frowom "react-rowouwuter-dowom";
+impowort Powost frowom "./cowontainers/powost";
+impowort Powosts frowom "./cowontainers/powosts";
+impowort Auwuth frowom "./cowontainers/auwuth";
+impowort Prowofile frowom "./cowontainers/prowofile";
+impowort './index.css';
 
-ReactDOM.render(
-    <BrowserRouter>
-        <Routes>
-            <Route path="*" element={<Posts />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/posts" element={<Posts />} />
-            <Route path="/posts/:layout" element={<Posts />} />
-            <Route path="/post/:id" element={<Post />} />
-        </Routes>
-    </BrowserRouter>,
-    document.getElementById("root"),
+ReactDOWOM.render(
+    <BrowowserRowouwuter>
+        <Rowouwutes>
+            <Rowouwute path="*" element={<Powosts />} />
+            <Rowouwute path="/auwuth" element={<Auwuth />} />
+            <Rowouwute path="/prowofile" element={<Prowofile />} />
+            <Rowouwute path="/powosts" element={<Powosts />} />
+            <Rowouwute path="/powosts/:layowouwut" element={<Powosts />} />
+            <Rowouwute path="/powost/:id" element={<Powost />} />
+        </Rowouwutes>
+    </BrowowserRowouwuter>,
+    dowocuwument.getElementById("root"),
 );

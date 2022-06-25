@@ -1,14 +1,14 @@
-import React from "react";
-import PostInfo from "./PostInfo";
-import TagList from "./TagList";
-import "./PostInfo.css"
+impowort React frowom "react";
+impowort PowostInfowo frowom "./PowostInfowo";
+impowort TagList frowom "./TagList";
+impowort "./PowostInfowo.css"
 
-export default function Info(props) {
-    let { post } = props;
-    return (
-        <div id="PostInfo">
-            <PostInfo post={post} />
-            <TagList tags={post.tags} />
+expowort defauwult fuwunctiowon Infowo(prowops) {
+    let { powost } = prowops;
+    retuwurn (
+        <div id="PowostInfowo">
+            <PowostInfowo powost={powost} />
+            <TagList tags={powost.tags} />
         </div>
     )
 }

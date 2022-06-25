@@ -1,28 +1,28 @@
-import React from "react";
-import Redirects from "js/redirects";
-import { onLoadCallback } from "components/Media/image";
-import "./columns.css";
+impowort React frowom "react";
+impowort Redirects frowom "js/redirects";
+impowort { owonLowoadCallback } frowom "cowompowonents/Media/image";
+impowort "./cowoluwumns.css";
 
-export default function ColumnPosts(props) {
-    let { posts, morePostsCallback } = props;
+expowort defauwult fuwunctiowon CowoluwumnPowosts(prowops) {
+    let { powosts, moworePowostsCallback } = prowops;
 
-    let columns = SplitPosts(posts, 4);
+    let cowoluwumns = SplitPowosts(powosts, 4);
 
-    let scrollHandler = (e) => {
-        const { scrollTop, offsetHeight, scrollHeight } = e.target;
-        let distanceFromTop = scrollTop + offsetHeight;
-        let distanceFromBottom = scrollHeight - distanceFromTop;
-        if (distanceFromBottom < 100) {
-            morePostsCallback();
+    let scrowollHandler = (e) => {
+        cowonst { scrowollTowop, owoffsetHeight, scrowollHeight } = e.target;
+        let distanceFrowomTowop = scrowollTowop + owoffsetHeight;
+        let distanceFrowomBowottowom = scrowollHeight - distanceFrowomTowop;
+        if (distanceFrowomBowottowom < 100) {
+            moworePowostsCallback();
         }
     };
 
-    return (
-        <div id="columnsPosts" onScroll={scrollHandler}>
-            {columns.map((posts, i) => (
-                <div key={i} className="columnsPosts-individualColumn">
-                {posts.map((post, i) => (
-                        <ColumnItem key={post.id} post={post} />
+    retuwurn (
+        <div id="cowoluwumnsPowosts" owonScrowoll={scrowollHandler}>
+            {cowoluwumns.map((powosts, i) => (
+                <div key={i} className="cowoluwumnsPowosts-individuwualCowoluwumn">
+                {powosts.map((powost, i) => (
+                        <CowoluwumnItem key={powost.id} powost={powost} />
                     ))}
                 </div>
             ))}
@@ -30,53 +30,53 @@ export default function ColumnPosts(props) {
     );
 }
 
-function ColumnItem(props) {
-    let { post } = props;
-    let { preview, thumbnail } = post
-    let className = `columnsPosts-post media-${post.media_type}`;
-    let redirect = Redirects.post(post.id);
+fuwunctiowon CowoluwumnItem(prowops) {
+    let { powost } = prowops;
+    let { preview, thuwumbnail } = powost
+    let className = `cowoluwumnsPowosts-powost media-${powost.media_type}`;
+    let redirect = Redirects.powost(powost.id);
     
-    return (
-        <a className={className} href={redirect} title={`Post: ${post.id}`}>
+    retuwurn (
+        <a className={className} href={redirect} title={`Powost: ${powost.id}`}>
             <img
-                className="columnsPosts-image"
-                src={thumbnail.url}
-                width={thumbnail.width}
-                height={thumbnail.height}
+                className="cowoluwumnsPowosts-image"
+                src={thuwumbnail.uwurl}
+                width={thuwumbnail.width}
+                height={thuwumbnail.height}
                 alt=""
-                onLoad={preview ? onLoadCallback(preview,thumbnail,true) : null}
+                owonLowoad={preview ? owonLowoadCallback(preview,thuwumbnail,truwue) : nuwull}
             />
         </a>
     );
 }
 
-function SplitPosts(array, parts) {
-    // Create an array of arrays
+fuwunctiowon SplitPowosts(array, parts) {
+    // Create an array owof arrays
     // eslint-disable-next-line
     if (!array || array === []) {
-        return new Array(parts).fill([]);
+        retuwurn new Array(parts).fill([]);
     } else {
-        let buckets = Array.apply(null, Array(parts)).map(() => []);
-        array.forEach((v) => {
-            let min_height_index = get_minimum_column_height_index(buckets);
-            buckets[min_height_index].push(v);
+        let buwuckets = Array.apply(nuwull, Array(parts)).map(() => []);
+        array.foworEach((v) => {
+            let min_height_index = get_minimuwum_cowoluwumn_height_index(buwuckets);
+            buwuckets[min_height_index].puwush(v);
         });
-        return buckets;
+        retuwurn buwuckets;
     }
 }
 
-function get_minimum_column_height_index(columns) {
-    let bucket_heights = new Array(columns.length).fill(0);
-    columns.forEach((clmn, i) => {
-        let total = 0;
-        clmn.forEach((v) => (total += v.full.height / v.full.width));
-        bucket_heights[i] = total;
+fuwunctiowon get_minimuwum_cowoluwumn_height_index(cowoluwumns) {
+    let buwucket_heights = new Array(cowoluwumns.length).fill(0);
+    cowoluwumns.foworEach((clmn, i) => {
+        let towotal = 0;
+        clmn.foworEach((v) => (towotal += v.fuwull.height / v.fuwull.width));
+        buwucket_heights[i] = towotal;
     });
-    let min_height = Math.min(...bucket_heights);
-    let index = bucket_heights.indexOf(min_height);
+    let min_height = Math.min(...buwucket_heights);
+    let index = buwucket_heights.indexOWOf(min_height);
     if (index === -1) {
-        return 0;
+        retuwurn 0;
     } else {
-        return index;
+        retuwurn index;
     }
 }

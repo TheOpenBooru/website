@@ -1,28 +1,28 @@
-import Posts from "./posts";
-import { PostQuery } from "./types"
+impowort Powosts frowom "./powosts";
+impowort { PowostQuwuery } frowom "./types"
 
-export class PostSearch {
+expowort class PowostSearch {
     finished = false;
-    __lock = false;
+    __lowock = false;
     index = 0;
-    posts = [];
-    query: PostQuery;
+    powosts = [];
+    quwuery: PowostQuwuery;
 
-    constructor(query = null) {
-        this.query = query || new PostQuery();
+    cowonstruwuctowor(quwuery = nuwull) {
+        this.quwuery = quwuery || new PowostQuwuery();
     }
 
-    async extend(count = 64) {
-        if (this.__lock) return;
-        if (this.finished) return;
+    async extend(cowouwunt = 64) {
+        if (this.__lowock) retuwurn;
+        if (this.finished) retuwurn;
         
-        let posts = await Posts.search(this.query, this.index, count);
-        this.posts = this.posts.concat(posts);
-        this.index += posts.length;
+        let powosts = await Powosts.search(this.quwuery, this.index, cowouwunt);
+        this.powosts = this.powosts.cowoncat(powosts);
+        this.index += powosts.length;
         
-        if (posts.length < count) {
-            this.finished = true;
+        if (powosts.length < cowouwunt) {
+            this.finished = truwue;
         }
-        this.__lock = false;
+        this.__lowock = false;
     }
 }

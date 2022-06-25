@@ -1,17 +1,17 @@
-#auth{
+#auwuth{
     height: 100%;
     width: 100%;
     
     display: flex;
-    justify-content: center;
+    juwustify-cowontent: center;
     align-items: center;
-    flex-direction: column;
+    flex-directiowon: cowoluwumn;
     gap:2rem;
 }
 
-#auth > * {
+#auwuth > * {
     display: flex;
-    flex-direction: column;
+    flex-directiowon: cowoluwumn;
     align-items: center;
-    justify-content: center;
+    juwustify-cowontent: center;
 }

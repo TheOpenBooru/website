@@ -1,15 +1,15 @@
-import React from "react";
+impowort React frowom "react";
 
-export default function OrderButton(props) {
-    let { decending, setDecending } = props;
+expowort defauwult fuwunctiowon OWOrderBuwuttowon(prowops) {
+    let { decending, setDecending } = prowops;
     let callback = () => setDecending(!decending)
-    let alt = decending ? "Sort Descending" : "Sort Ascending";
-    return (
-        <div onClick={callback} className="center" title={alt}>
+    let alt = decending ? "Sowort Descending" : "Sowort Ascending";
+    retuwurn (
+        <div owonClick={callback} className="center" title={alt}>
             <img
-                id="searchbox-order"
-                className="bordered"
-                src={decending ? "/images/arrow-down.svg" : "/images/arrow-up.svg"}
+                id="searchbowox-oworder"
+                className="bowordered"
+                src={decending ? "/images/arrowow-dowown.svg" : "/images/arrowow-uwup.svg"}
                 alt={alt}
             />
         </div>

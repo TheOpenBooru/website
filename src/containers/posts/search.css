@@ -1,53 +1,53 @@
-#posts-overlay{
-    position: fixed;
+#powosts-owoverlay{
+    powositiowon: fixed;
     z-index: 1;
-    top: var(--NAVBAR-HEIGHT);
+    towop: var(--NAVBAR-HEIGHT);
     right: 1rem;
     padding: .5rem;
 
     display: flex;
-    flex-direction: row;
-    justify-content: right;
+    flex-directiowon: rowow;
+    juwustify-cowontent: right;
 }
 
-.posts-overlay-button{
+.powosts-owoverlay-buwuttowon{
     width: 2rem;
     height: 2rem;
     margin: .2rem;
 
-    background-color: var(--COLOR-2);
-    border: .2rem solid var(--COLOR-4);
-    border-radius: .5rem;
+    backgrowouwund-cowolor: var(--COWOLOR-2);
+    boworder: .2rem sowolid var(--COWOLOR-4);
+    boworder-radiuwus: .5rem;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    juwustify-cowontent: center;
 
 }
 
-.posts-overlay-button:hover{
-    background-color: var(--COLOR-3);
-    border-color: var(--COLOR-5);
+.powosts-owoverlay-buwuttowon:howover{
+    backgrowouwund-cowolor: var(--COWOLOR-3);
+    boworder-cowolor: var(--COWOLOR-5);
 }
 
-.posts-overlay-button img{
+.powosts-owoverlay-buwuttowon img{
     width: 80%;
     height: 80%;
     filter: invert(0%);
-    transition: .2s ease-in-out;
+    transitiowon: .2s ease-in-owouwut;
 }
 
-.posts-overlay-button:hover img{
+.powosts-owoverlay-buwuttowon:howover img{
     width: 90%;
     height: 90%;
     filter: invert(90%);
 }
 
-.posts-ErrorText{
+.powosts-ErroworText{
     display: flex;
     align-items: center;
-    justify-content: center;
+    juwustify-cowontent: center;
     text-align: center;
-    margin-top: 1rem;
-    font-size: 2rem;
+    margin-towop: 1rem;
+    fowont-size: 2rem;
 }

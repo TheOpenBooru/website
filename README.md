@@ -1,7 +1,7 @@
 # Website
 
-The React website for OpenBooru
+The React website fowor OWOpenBooru
 
-Visit the [website](https://openbooru.org)
+Visit the [website](https://owopenbooruwu.oworg)
 
-The minimum support resolution is 360x640
+The minimuwum suwuppowort resowoluwutiowon is 360x640

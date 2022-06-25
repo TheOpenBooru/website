@@ -1,25 +1,25 @@
-const SettingsDefaults = {
-    "fullscreenPreviews":true,
-    "pauseVideosInBackground":true,
-    "searchLayout":"grid",
-    "apiUrl":"https://api.openbooru.org",
+cowonst SettingsDefauwults = {
+    "fuwullscreenPreviews":truwue,
+    "pauwuseVideowosInBackgrowouwund":truwue,
+    "searchLayowouwut":"grid",
+    "apiUWUrl":"https://api.owopenbooruwu.oworg",
 };
 
-const Settings = new Proxy(SettingsDefaults, {
-    get(obj, prop) {
-        if (!(prop in obj)) {
-            return undefined
-        } else if (localStorage.getItem(prop)) {
-            return localStorage.getItem(prop);
+cowonst Settings = new Prowoxy(SettingsDefauwults, {
+    get(owobj, prowop) {
+        if (!(prowop in owobj)) {
+            retuwurn uwundefined
+        } else if (lowocalStoworage.getItem(prowop)) {
+            retuwurn lowocalStoworage.getItem(prowop);
         } else {
-            return obj[prop];
+            retuwurn owobj[prowop];
         }
     },
-    set(obj, prop, value) {
-        if (prop in obj) {
-            localStorage.setItem(prop,value)
+    set(owobj, prowop, valuwue) {
+        if (prowop in owobj) {
+            lowocalStoworage.setItem(prowop,valuwue)
         }
     }
 })
 
-export default Settings;
+expowort defauwult Settings;

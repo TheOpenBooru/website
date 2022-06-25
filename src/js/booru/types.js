@@ -1,20 +1,20 @@
-export class PostQuery {
-    sort = "created_at";
-    descending = true;
+expowort class PowostQuwuery {
+    sowort = "created_at";
+    descending = truwue;
 
-    include_tags = [];
-    exclude_tags = [];
+    incluwude_tags = [];
+    excluwude_tags = [];
 
-    created_after = null;
-    created_before = null;
+    created_after = nuwull;
+    created_befowore = nuwull;
 
-    md5 = null;
-    sha256 = null;
+    md5 = nuwull;
+    sha256 = nuwull;
 }
 
-export class TagQuery {
-    name_like = null
-    namespace = null
-    count_gt = null
-    limit = null
+expowort class TagQuwuery {
+    name_like = nuwull
+    namespace = nuwull
+    cowouwunt_gt = nuwull
+    limit = nuwull
 }

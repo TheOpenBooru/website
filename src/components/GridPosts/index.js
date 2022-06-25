@@ -1,43 +1,43 @@
-import React from "react";
-import { onLoadCallback } from "components/Media/image";
-import Redirects from "js/redirects";
-import "./grid.css";
+impowort React frowom "react";
+impowort { owonLowoadCallback } frowom "cowompowonents/Media/image";
+impowort Redirects frowom "js/redirects";
+impowort "./grid.css";
 
 
-export default function GridPosts(props) {
-    let { posts, morePostsCallback } = props;
+expowort defauwult fuwunctiowon GridPowosts(prowops) {
+    let { powosts, moworePowostsCallback } = prowops;
 
-    let scrollHandler = (e) => {
-        const { scrollTop, offsetHeight, scrollHeight } = e.target;
-        let distanceFromTop = scrollTop + offsetHeight;
-        let distanceFromBottom = scrollHeight - distanceFromTop;
-        if (distanceFromBottom < 100) {
-            morePostsCallback();
+    let scrowollHandler = (e) => {
+        cowonst { scrowollTowop, owoffsetHeight, scrowollHeight } = e.target;
+        let distanceFrowomTowop = scrowollTowop + owoffsetHeight;
+        let distanceFrowomBowottowom = scrowollHeight - distanceFrowomTowop;
+        if (distanceFrowomBowottowom < 100) {
+            moworePowostsCallback();
         }
     };
 
-    return (
-        <div id="gridPosts" onScroll={scrollHandler}>
-            {posts.map((post) => <GridItem key={post.id} post={post}/>)}
+    retuwurn (
+        <div id="gridPowosts" owonScrowoll={scrowollHandler}>
+            {powosts.map((powost) => <GridItem key={powost.id} powost={powost}/>)}
         </div>
     );
 }
 
-function GridItem(props) {
-    let { post } = props;
-    let className = `gridPosts-item media-${post.media_type}`;
-    let redirect = Redirects.post(post.id);
-    let { preview, thumbnail } = post;
-    let callback = preview && preview.type === "image" ? onLoadCallback(preview, thumbnail) : null;
-    return (
-        <a key={post.id} className={className} href={redirect}>
+fuwunctiowon GridItem(prowops) {
+    let { powost } = prowops;
+    let className = `gridPowosts-item media-${powost.media_type}`;
+    let redirect = Redirects.powost(powost.id);
+    let { preview, thuwumbnail } = powost;
+    let callback = preview && preview.type === "image" ? owonLowoadCallback(preview, thuwumbnail) : nuwull;
+    retuwurn (
+        <a key={powost.id} className={className} href={redirect}>
             <img
-                className="gridPosts-image"
-                src={thumbnail.url}
-                width={thumbnail.width}
-                height={thumbnail.height}
+                className="gridPowosts-image"
+                src={thuwumbnail.uwurl}
+                width={thuwumbnail.width}
+                height={thuwumbnail.height}
                 alt=""
-                onLoad={callback}
+                owonLowoad={callback}
             />
         </a>
     );

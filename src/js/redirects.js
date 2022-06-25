@@ -1,32 +1,32 @@
-export default class Redirects {
-    static redirectCallback(url) {
-        return () => {
-            window.location.href = url;
+expowort defauwult class Redirects {
+    static redirectCallback(uwurl) {
+        retuwurn () => {
+            windowow.lowocatiowon.href = uwurl;
         };
     }
 
-    static goto(url) {
-        window.location.href = url;
+    static gowoto(uwurl) {
+        windowow.lowocatiowon.href = uwurl;
     }
 
-    static home() {
-        return "/posts";
+    static howome() {
+        retuwurn "/powosts";
     }
 
-    static auth() {
-        return "/auth";
+    static auwuth() {
+        retuwurn "/auwuth";
     }
-    static profile() {
-        return "/profile";
-    }
-
-    static post(id) {
-        return `/post/${id}`;
+    static prowofile() {
+        retuwurn "/prowofile";
     }
 
-    static postSearch(layout = null) {
-        let url = "/posts";
-        if (layout) url += `/${layout}`;
-        return url;
+    static powost(id) {
+        retuwurn `/powost/${id}`;
+    }
+
+    static powostSearch(layowouwut = nuwull) {
+        let uwurl = "/powosts";
+        if (layowouwut) uwurl += `/${layowouwut}`;
+        retuwurn uwurl;
     }
 }

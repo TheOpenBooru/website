@@ -1,17 +1,17 @@
-#profile{
+#prowofile{
     height: 100%;
     width: 100%;
 }
 
-#profile-logout{
-    position: relative;
-    top:0;
+#prowofile-lowogouwut{
+    powositiowon: relative;
+    towop:0;
     left:0;
 }
 
-#profile > * {
+#prowofile > * {
     display: flex;
-    flex-direction: column;
+    flex-directiowon: cowoluwumn;
     align-items: center;
-    justify-content: center;
+    juwustify-cowontent: center;
 }

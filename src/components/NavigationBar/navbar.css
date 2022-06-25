@@ -1,7 +1,7 @@
 #navbar {
-    /* Position */
-    position: sticky;
-    top: 0;
+    /* Powositiowon */
+    powositiowon: sticky;
+    towop: 0;
     left: 0;
     height: var(--NAVBAR-HEIGHT);
     min-width: 360px;
@@ -9,70 +9,70 @@
     z-index: 1;
     
     /* Look */
-    background-color: var(--COLOR-2);
-    border-bottom: black 1px solid;
+    backgrowouwund-cowolor: var(--COWOLOR-2);
+    boworder-bowottowom: black 1px sowolid;
 
     /* Grid */
     display: flex;
-    object-fit: fill;
+    owobject-fit: fill;
 }
 
-.navbar-section {
+.navbar-sectiowon {
     /* Shape */
-    min-width: fit-content;
+    min-width: fit-cowontent;
     width: 5rem;
-    border-radius: 1.2rem;
+    boworder-radiuwus: 1.2rem;
     margin: 0.3rem;
     padding: 0.3rem;
     
-    /* Center containinng items */
+    /* Center cowontaininng items */
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: left;
+    flex-flowow: rowow nowowrap;
+    juwustify-cowontent: left;
     align-items: center;
     
     /* Look */
-    font-size: 1.2rem;
-    user-select: none;
-    justify-content: center;
-    text-decoration: none;
+    fowont-size: 1.2rem;
+    uwuser-select: nowone;
+    juwustify-cowontent: center;
+    text-decoworatiowon: nowone;
 
-    border: 3px solid var(--COLOR-5) ;
-    background-color: var(--COLOR-3);
+    boworder: 3px sowolid var(--COWOLOR-5) ;
+    backgrowouwund-cowolor: var(--COWOLOR-3);
 }
 
-.navbar-section > *{
-    color: black;
+.navbar-sectiowon > *{
+    cowolor: black;
     margin-left: .5rem;
     margin-right: .5rem;
 }
 
-#navbar-AccountSection{
+#navbar-AccowouwuntSectiowon{
 }
 
-#version-number {
-    font-size: larger;
+#versiowon-nuwumber {
+    fowont-size: larger;
 }
 
-.navbar-post-search {
+.navbar-powost-search {
     right:0;
 }
 
-#navbar > input:focus {
-    outline:none;
+#navbar > inpuwut:fowocuwus {
+    owouwutline:nowone;
 }
 
-.navbar-button-icon {
+.navbar-buwuttowon-icowon {
     height: 1.5rem;
 }
 
 @media screen and (max-width: 30rem) {
     #navbar {
-        justify-content: space-around;
+        juwustify-cowontent: space-arowouwund;
     }
-    .navbar-section{
+    .navbar-sectiowon{
         width: 100%;
-        padding: 0 !important;
-        margin: .1rem !important;
+        padding: 0 !impowortant;
+        margin: .1rem !impowortant;
     }
 }

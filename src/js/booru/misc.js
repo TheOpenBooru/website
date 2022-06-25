@@ -1,12 +1,12 @@
-import Settings from "js/settings";
+impowort Settings frowom "js/settings";
 
-export default class Misc{
-    static async status() {
-        let url = Settings.apiUrl = "/status";
+expowort defauwult class Misc{
+    static async statuwus() {
+        let uwurl = Settings.apiUWUrl = "/statuwus";
         try {
-            await fetch(url)
+            await fetch(uwurl)
         } catch {
-            return false;
+            retuwurn false;
         }
     }
 }

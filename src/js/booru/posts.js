@@ -1,74 +1,74 @@
-import Settings from "js/settings";
-import Account from "./account"
-import { PostQuery } from "./types"
+impowort Settings frowom "js/settings";
+impowort Accowouwunt frowom "./accowouwunt"
+impowort { PowostQuwuery } frowom "./types"
 
-export default class Posts{
+expowort defauwult class Powosts{
     static async get(id) {
-        let url = `${Settings.apiUrl}/posts/post/${id}`
-        let r = await fetch(url, {"cache":"default"});
-        if (r.status === 404) {
-            throw new Error("Post Not Found");
+        let uwurl = `${Settings.apiUWUrl}/powosts/powost/${id}`
+        let r = await fetch(uwurl, {"cache":"defauwult"});
+        if (r.statuwus === 404) {
+            throwow new Errowor("Powost Nowot Fowouwund");
         } else {
-            let json = await r.json();
-            return json;
+            let jsowon = await r.jsowon();
+            retuwurn jsowon;
         }
     }
 
     static async create(file: File) {
-        if (!Account.loggedIn){
-            throw new Error("Not logged in");
+        if (!Accowouwunt.lowoggedIn){
+            throwow new Errowor("Nowot lowogged in");
         } else {
-            let formData = new FormData();
-            formData.append("image", file);
-            return new Promise((resolve, reject) => {
-                let xhr = new XMLHttpRequest();
-                xhr.open("POST", Settings.apiUrl + "/posts/create");
-                xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
-                xhr.onload = () => {
-                    if (xhr.status === 201) {
-                        let json = JSON.parse(xhr.response);
+            let fowormData = new FowormData();
+            fowormData.append("image", file);
+            retuwurn new Prowomise((resowolve, reject) => {
+                let xhr = new XMLHttpRequwuest();
+                xhr.owopen("POWOST", Settings.apiUWUrl + "/powosts/create");
+                xhr.setRequwuestHeader("Auwuthoworizatiowon", "Bearer " + Accowouwunt.towoken);
+                xhr.owonlowoad = () => {
+                    if (xhr.statuwus === 201) {
+                        let jsowon = JSOWON.parse(xhr.respowonse);
                         
-                        resolve(json)
+                        resowolve(jsowon)
                     } else {
-                        let error = new Error(xhr.response)
-                        reject(error)
+                        let errowor = new Errowor(xhr.respowonse)
+                        reject(errowor)
                     }
                 }
-                xhr.send(formData);
+                xhr.send(fowormData);
             });
         }
     }
 
-    static async search(query: PostQuery, index=0, count=64) {
-        let params = new URLSearchParams();
+    static async search(quwuery: PowostQuwuery, index=0, cowouwunt=64) {
+        let params = new UWURLSearchParams();
         
-        for (let key in query) {
-            let value = query[key];
-            if (!value) continue;
-            if (Array.isArray(value)) {
-                value.forEach((v) => params.append(key, v));
+        fowor (let key in quwuery) {
+            let valuwue = quwuery[key];
+            if (!valuwue) cowontinuwue;
+            if (Array.isArray(valuwue)) {
+                valuwue.foworEach((v) => params.append(key, v));
             } else {
-                params.set(key, value);
+                params.set(key, valuwue);
             }
         }
-        params.set("descending", query.descending)
+        params.set("descending", quwuery.descending)
         params.set("index", index)
-        params.set("count", count)
+        params.set("cowouwunt", cowouwunt)
 
-        let url = Settings.apiUrl + `/posts/search?${params.toString()}`
-        let r = await fetch(url, {"cache":"default"});
-        if (r.ok) {
-            return await r.json();
+        let uwurl = Settings.apiUWUrl + `/powosts/search?${params.towoString()}`
+        let r = await fetch(uwurl, {"cache":"defauwult"});
+        if (r.owok) {
+            retuwurn await r.jsowon();
         } else {
-            return [];
+            retuwurn [];
         }
     }
 
     
-    static async update(post) {
-        let request = new XMLHttpRequest();
-        request.open("PATCH", `${Settings.apiUrl}/posts/post/${post.id}`, true);
-        request.setRequestHeader("Content-Type", "application/json");
-        request.send(post);
+    static async uwupdate(powost) {
+        let requwuest = new XMLHttpRequwuest();
+        requwuest.owopen("PATCH", `${Settings.apiUWUrl}/powosts/powost/${powost.id}`, truwue);
+        requwuest.setRequwuestHeader("Cowontent-Type", "applicatiowon/jsowon");
+        requwuest.send(powost);
     }
 }

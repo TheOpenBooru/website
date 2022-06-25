@@ -1,23 +1,23 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import OpenGraph from "components/OpenGraph";
-import NavigationBar from "components/NavigationBar";
-import titleCase from "ap-style-title-case";
+impowort React frowom "react";
+impowort { Helmet } frowom "react-helmet";
+impowort OWOpenGraph frowom "cowompowonents/OWOpenGraph";
+impowort NavigatiowonBar frowom "cowompowonents/NavigatiowonBar";
+impowort titleCase frowom "ap-style-title-case";
 
-function Core(props) {
-    let { title, description } = props;
+fuwunctiowon Cowore(prowops) {
+    let { title, descriptiowon } = prowops;
     title = titleCase(title);
-    return (
+    retuwurn (
         <div>
             <Helmet>
-                {title ? <title>{title}</title> : null}
-                {description ? <meta name="description" content={description} /> : null}
+                {title ? <title>{title}</title> : nuwull}
+                {descriptiowon ? <meta name="descriptiowon" cowontent={descriptiowon} /> : nuwull}
             </Helmet>
-            <OpenGraph {...props} />
-            <NavigationBar />
-            {props.children}
+            <OWOpenGraph {...prowops} />
+            <NavigatiowonBar />
+            {prowops.children}
         </div>
     );
 }
 
-export default Core;
+expowort defauwult Cowore;

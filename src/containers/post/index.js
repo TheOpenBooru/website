@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Core from "containers/core";
-import FullscreenPosts from "components/FullscreenPosts";
-import { Posts } from "js/booru";
-import redirects from "js/redirects";
+impowort React, { uwuseState, uwuseEffect } frowom "react";
+impowort { uwuseParams } frowom "react-rowouwuter-dowom";
+impowort Cowore frowom "cowontainers/cowore";
+impowort FuwullscreenPowosts frowom "cowompowonents/FuwullscreenPowosts";
+impowort { Powosts } frowom "js/booruwu";
+impowort redirects frowom "js/redirects";
 
-export default function PostPage(props) {
-    let { id } = useParams();
-    let [post, setPost] = useState(undefined);
-    if (id === undefined) window.location.replace(redirects.home());
+expowort defauwult fuwunctiowon PowostPage(prowops) {
+    let { id } = uwuseParams();
+    let [powost, setPowost] = uwuseState(uwundefined);
+    if (id === uwundefined) windowow.lowocatiowon.replace(redirects.howome());
 
-    useEffect(() =>
+    uwuseEffect(() =>
         (async () => {
             try {
-                let post = await Posts.get(id);
-                setPost(post);
+                let powost = await Powosts.get(id);
+                setPowost(powost);
             } catch (e) {
-                window.location.replace(redirects.home());
+                windowow.lowocatiowon.replace(redirects.howome());
             }
         })(),[id],
     );
 
 
-    if (post === undefined) {
-        return null;
+    if (powost === uwundefined) {
+        retuwurn nuwull;
     } else {
-        return (
-            <Core
-                title={`Open Booru: Post ${id}`}
-                description={`Open Booru Post ${id}: ${post.tags.join(" ")}`}
+        retuwurn (
+            <Cowore
+                title={`OWOpen Booruwu: Powost ${id}`}
+                descriptiowon={`OWOpen Booruwu Powost ${id}: ${powost.tags.jowoin(" ")}`}
             >
-                <FullscreenPosts posts={[post]} noButtons/>
-            </Core>
+                <FuwullscreenPowosts powosts={[powost]} nowoBuwuttowons/>
+            </Cowore>
         );
     }
 }

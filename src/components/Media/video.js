@@ -1,35 +1,35 @@
-import React from "react";
+impowort React frowom "react";
 
-export default function Video(props) {
-    let { video } = props;
-    function updateVolume(e) {
-        localStorage.setItem("volume", e.target.value);
+expowort defauwult fuwunctiowon Videowo(prowops) {
+    let { videowo } = prowops;
+    fuwunctiowon uwupdateVowoluwume(e) {
+        lowocalStoworage.setItem("vowoluwume", e.target.valuwue);
     }
 
-    function setVolume(e) {
-        let volume = Number(localStorage.getItem("volume"))
-        e.target.volume = volume || 1.0;
+    fuwunctiowon setVowoluwume(e) {
+        let vowoluwume = Nuwumber(lowocalStoworage.getItem("vowoluwume"))
+        e.target.vowoluwume = vowoluwume || 1.0;
     }
 
 
-    const VideoStyle = {
+    cowonst VideowoStyle = {
         width: "100%",
         height: "100%",
-        objectFit: "contain",
+        owobjectFit: "cowontain",
     };
 
-    return (
+    retuwurn (
         <video
-            className={props.className}
-            style={VideoStyle}
-            src={video.url}
-            height={video.height}
-            width={video.width}
-            autoPlay
+            className={prowops.className}
+            style={VideowoStyle}
+            src={videowo.uwurl}
+            height={videowo.height}
+            width={videowo.width}
+            auwutowoPlay
             loop
-            controls
-            onCanPlay={setVolume}
-            onVolumeChange={updateVolume}
+            cowontrowols
+            owonCanPlay={setVowoluwume}
+            owonVowoluwumeChange={uwupdateVowoluwume}
         />
     );
 }

@@ -1,54 +1,54 @@
-#PostInfo{
-    /* Position */
-    position: relative;
+#PowostInfowo{
+    /* Powositiowon */
+    powositiowon: relative;
     
-    background-color: var(--COLOR-2);
-    border-right: 1px solid black;
+    backgrowouwund-cowolor: var(--COWOLOR-2);
+    boworder-right: 1px sowolid black;
 
     display: flex;
-    flex-flow: row nowrap;
+    flex-flowow: rowow nowowrap;
     align-items: baseline;
 }
 
-#PostInfo-postData{
+#PowostInfowo-powostData{
     height: 100%;
     padding: .5rem;
-    white-space: nowrap;
-    border-right: 1px solid black;
+    white-space: nowowrap;
+    boworder-right: 1px sowolid black;
 }
 
-#PostInfo-tagList{
-    position: relative;
+#PowostInfowo-tagList{
+    powositiowon: relative;
     width: 100%;
 
     display: flex;
-    flex-flow: row wrap;
+    flex-flowow: rowow wrap;
     align-items: center;
-    justify-content: center;
+    juwustify-cowontent: center;
     gap: .5rem;
     padding: .5rem;
 }
 
-.PostInfo-tagList-tag{
-    cursor: pointer;
-    user-select: none;
-    width: fit-content;
+.PowostInfowo-tagList-tag{
+    cuwursowor: powointer;
+    uwuser-select: nowone;
+    width: fit-cowontent;
 
-    border: .1rem solid var(--COLOR-4);
-    border-radius: 1rem;
-    background-color: var(--COLOR-3);
+    boworder: .1rem sowolid var(--COWOLOR-4);
+    boworder-radiuwus: 1rem;
+    backgrowouwund-cowolor: var(--COWOLOR-3);
 
     padding: 0 .3rem 0 .3rem;
 }
 
-.PostInfo-namespace-generic{
-    color: black;
+.PowostInfowo-namespace-generic{
+    cowolor: black;
 }
 
-.PostInfo-namespace-character{
-    color: purple;
+.PowostInfowo-namespace-character{
+    cowolor: puwurple;
 }
 
-.PostInfo-namespace-meta{
-    color: rgb(40, 40, 40);
+.PowostInfowo-namespace-meta{
+    cowolor: rgb(40, 40, 40);
 }

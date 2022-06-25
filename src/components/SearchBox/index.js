@@ -1,42 +1,42 @@
-import React, { useState } from "react";
-import { PostQuery } from "js/booru";
-import SortSelect from "./SortSelect";
-import OrderButton from "./OrderButton";
-import TagSearch from "./TagSearch";
-import TagList from "./TagList";
-import "./searchBox.css";
+impowort React, { uwuseState } frowom "react";
+impowort { PowostQuwuery } frowom "js/booruwu";
+impowort SowortSelect frowom "./SowortSelect";
+impowort OWOrderBuwuttowon frowom "./OWOrderBuwuttowon";
+impowort TagSearch frowom "./TagSearch";
+impowort TagList frowom "./TagList";
+impowort "./searchBowox.css";
 
-export default function SearchBox(props) {
-    let { query, setQuery } = props;
-    if (!query) query = new PostQuery();
-    let [includeTags, setIncludeTags] = useState(query.include_tags);
-    let [excludeTags, setExcludeTags] = useState(query.exclude_tags);
-    let [sort, setSort] = useState(query.sort);
-    let [decending, setDecending] = useState(query.descending);
+expowort defauwult fuwunctiowon SearchBowox(prowops) {
+    let { quwuery, setQuwuery } = prowops;
+    if (!quwuery) quwuery = new PowostQuwuery();
+    let [incluwudeTags, setIncluwudeTags] = uwuseState(quwuery.incluwude_tags);
+    let [excluwudeTags, setExcluwudeTags] = uwuseState(quwuery.excluwude_tags);
+    let [sowort, setSowort] = uwuseState(quwuery.sowort);
+    let [decending, setDecending] = uwuseState(quwuery.descending);
 
-    function saveQuery() {
-        let tmp_query = new PostQuery();
-        tmp_query.sort = sort;
-        tmp_query.descending = decending;
-        tmp_query.include_tags = includeTags;
-        tmp_query.exclude_tags = excludeTags;
-        setQuery(tmp_query);
+    fuwunctiowon saveQuwuery() {
+        let tmp_quwuery = new PowostQuwuery();
+        tmp_quwuery.sowort = sowort;
+        tmp_quwuery.descending = decending;
+        tmp_quwuery.incluwude_tags = incluwudeTags;
+        tmp_quwuery.excluwude_tags = excluwudeTags;
+        setQuwuery(tmp_quwuery);
     }
 
-    return (
-        <div id="searchbox-container">
-            <div id="searchbox-top">
-                <OrderButton decending={decending} setDecending={setDecending} />
-                <SortSelect sort={sort} setSort={setSort} />
-                <TagSearch includeTags={includeTags} setIncludeTags={setIncludeTags} />
+    retuwurn (
+        <div id="searchbowox-cowontainer">
+            <div id="searchbowox-towop">
+                <OWOrderBuwuttowon decending={decending} setDecending={setDecending} />
+                <SowortSelect sowort={sowort} setSowort={setSowort} />
+                <TagSearch incluwudeTags={incluwudeTags} setIncluwudeTags={setIncluwudeTags} />
             </div>
             <TagList
-                includeTags={includeTags}
-                setIncludeTags={setIncludeTags}
-                excludeTags={excludeTags}
-                setExcludeTags={setExcludeTags}
+                incluwudeTags={incluwudeTags}
+                setIncluwudeTags={setIncluwudeTags}
+                excluwudeTags={excluwudeTags}
+                setExcluwudeTags={setExcluwudeTags}
             />
-            <button id="searchbox-searchButton" onClick={saveQuery}>Search</button>
+            <buwuttowon id="searchbowox-searchBuwuttowon" owonClick={saveQuwuery}>Search</buwuttowon>
         </div>
     );
 }

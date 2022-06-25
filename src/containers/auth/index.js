@@ -1,74 +1,74 @@
-import React, { useRef } from "react";
-import Core from "containers/core";
-import MessageBox from "components/MessageBox";
-import { Account } from "js/booru";
-import Redirects from "js/redirects";
-import "./auth.css";
+impowort React, { uwuseRef } frowom "react";
+impowort Cowore frowom "cowontainers/cowore";
+impowort MessageBowox frowom "cowompowonents/MessageBowox";
+impowort { Accowouwunt } frowom "js/booruwu";
+impowort Redirects frowom "js/redirects";
+impowort "./auwuth.css";
 
-export default function AccountPage(props) {
-    let usernameRef = useRef(null);
-    let passwordRef = useRef(null);
-    let errorRef = useRef(null);
+expowort defauwult fuwunctiowon AccowouwuntPage(prowops) {
+    let uwusernameRef = uwuseRef(nuwull);
+    let passwowordRef = uwuseRef(nuwull);
+    let erroworRef = uwuseRef(nuwull);
 
-    function _RetriveInput() {
-        let username = usernameRef.current.value;
-        usernameRef.current.value = "";
-        let password = passwordRef.current.value;
+    fuwunctiowon _RetriveInpuwut() {
+        let uwusername = uwusernameRef.cuwurrent.valuwue;
+        uwusernameRef.cuwurrent.valuwue = "";
+        let passwoword = passwowordRef.cuwurrent.valuwue;
 
-        passwordRef.current.value = "";
-        return { username, password };
+        passwowordRef.cuwurrent.valuwue = "";
+        retuwurn { uwusername, passwoword };
     }
-    function showError(msg) {
-        errorRef.current.value = msg;
+    fuwunctiowon showowErrowor(msg) {
+        erroworRef.cuwurrent.valuwue = msg;
     }
 
-    function LoginCallback(e) {
+    fuwunctiowon LowoginCallback(e) {
         (async () => {
-            e.preventDefault();
-            let { username, password } = _RetriveInput();
+            e.preventDefauwult();
+            let { uwusername, passwoword } = _RetriveInpuwut();
             try {
-                await Account.login(username, password);
-                Redirects.goto(Redirects.profile());
+                await Accowouwunt.lowogin(uwusername, passwoword);
+                Redirects.gowoto(Redirects.prowofile());
             } catch (e) {
-                showError(e.message);
+                showowErrowor(e.message);
             }
         })()
     }
     
-    function RegisterCallback(e) {
+    fuwunctiowon RegisterCallback(e) {
         (async () => {
-            e.preventDefault();
-            let { username, password } = _RetriveInput();
+            e.preventDefauwult();
+            let { uwusername, passwoword } = _RetriveInpuwut();
             try {
-                await Account.register(username, password);
-                await Account.login(username, password);
-                Redirects.goto(Redirects.profile());
+                await Accowouwunt.register(uwusername, passwoword);
+                await Accowouwunt.lowogin(uwusername, passwoword);
+                Redirects.gowoto(Redirects.prowofile());
             } catch (e) {
                 alert(e);
-                return;
+                retuwurn;
             }
         })();
     }
 
-    return (
-        <Core title={"Open Booru: Login"} description={`Open Booru Login and Register`}>
-            <div id="auth">
-                <MessageBox>
+    retuwurn (
+        <Cowore title={"OWOpen Booruwu: Lowogin"} descriptiowon={`OWOpen Booruwu Lowogin and Register`}>
+            <div id="auwuth">
+                <MessageBowox>
                     <div style={{margin:".5rem"}}>
                         <div>
-                            <input type="username" placeholder="Username" ref={usernameRef} />
+                            <inpuwut type="uwusername" placehowolder="UWUsername" ref={uwusernameRef} />
                             <br />
-                            <input type="password" placeholder="Password" ref={passwordRef}/>
+                            <inpuwut type="passwoword" placehowolder="Passwoword" ref={passwowordRef}/>
                             <br />
-                            <span ref={errorRef} />
+                            <span ref={erroworRef} />
                         </div>
-                        <div style={{"display":"flex","flexDirection":"row","justifyContent":"space-around"}}>
-                            <input type="submit" value="Login" onClick={LoginCallback}/>
-                            <input type="submit" value="Register" onClick={RegisterCallback}/>
+                        <div style={{"display":"flex","flexDirectiowon":"rowow","juwustifyCowontent":"space-arowouwund"}}>
+                            <inpuwut type="suwubmit" valuwue="Lowogin" owonClick={LowoginCallback}/>
+                            <inpuwut type="suwubmit" valuwue="Register" owonClick={RegisterCallback}/>
                         </div>
                     </div>
-                </MessageBox>
+                </MessageBowox>
             </div>
-        </Core>
+        </Cowore>
     );
 }

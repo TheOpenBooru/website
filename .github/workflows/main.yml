@@ -1,18 +1,18 @@
 name: CI
 
-# Controls when the workflow will run
+# Cowontrowols when the woworkflowow will ruwun
 on:
-  push:
+  puwush:
     branches: [ master ]
-  pull_request:
+  puwull_requwuest:
     branches: [ master ]
 
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+jowobs:
+  buwuild:
+    ruwuns-owon: uwubuntuwu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uwuses: actiowons/checkowouwut@v3
 
-      - name: Deploy React code to GitHub Pages
-        uses: amitsingh-007/deploy-to-github-pages@v1.2
+      - name: Deplowoy React cowode towo GitHuwub Pages
+        uwuses: amitsingh-007/deplowoy-towo-githuwub-pages@v1.2

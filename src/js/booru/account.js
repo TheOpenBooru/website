@@ -1,91 +1,91 @@
-import Settings from "js/settings.js";
+impowort Settings frowom "js/settings.js";
 
 
-const LoginFailure = new Error("Failed to Login")
-const PasswordReset = new Error("Password Was Reset")
+cowonst LowoginFailuwure = new Errowor("Failed towo Lowogin")
+cowonst PasswowordReset = new Errowor("Passwoword Was Reset")
 
-export default class Account {
-    LoginFailure = LoginFailure
-    PasswordReset = PasswordReset
+expowort defauwult class Accowouwunt {
+    LowoginFailuwure = LowoginFailuwure
+    PasswowordReset = PasswowordReset
 
-    static get username(): String {
-        return window.localStorage.getItem("LoginUsername");
+    static get uwusername(): String {
+        retuwurn windowow.lowocalStoworage.getItem("LowoginUWUsername");
     }
-    static set username(value) {
-        window.localStorage.setItem("LoginUsername", value);
-    }
-
-    static get token(): String {
-        return window.localStorage.getItem("LoginToken");
-    }
-    static set token(value) {
-        window.localStorage.setItem("LoginToken", value);
-    }
-    static get loggedIn(): Boolean {
-        return Boolean(this.token);
-    }
-    static async logout() {
-        window.localStorage.removeItem("LoginToken");
-        window.localStorage.removeItem("LoginProfile");
+    static set uwusername(valuwue) {
+        windowow.lowocalStoworage.setItem("LowoginUWUsername", valuwue);
     }
 
+    static get towoken(): String {
+        retuwurn windowow.lowocalStoworage.getItem("LowoginTowoken");
+    }
+    static set towoken(valuwue) {
+        windowow.lowocalStoworage.setItem("LowoginTowoken", valuwue);
+    }
+    static get lowoggedIn(): Boolean {
+        retuwurn Boolean(this.towoken);
+    }
+    static async lowogouwut() {
+        windowow.lowocalStoworage.remowoveItem("LowoginTowoken");
+        windowow.lowocalStoworage.remowoveItem("LowoginProwofile");
+    }
 
-    static async login(username, password) {
-        if (username === "" || password === "") {
-            throw new Error("Username or Password is empty");
+
+    static async lowogin(uwusername, passwoword) {
+        if (uwusername === "" || passwoword === "") {
+            throwow new Errowor("UWUsername owor Passwoword is empty");
         }
-        return new Promise((resolve, reject) => {
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", Settings.apiUrl + "/account/login");
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onload = async () => {
-                if (xhr.status === 200) {
-                    let json = JSON.parse(xhr.response);
-                    this.token = json["access_token"];
-                    let profile = await this.profile();
-                    this.username = profile["username"];
-                    resolve();
-                } else if (xhr.status === 401) {
-                    reject(LoginFailure);
-                } else if (xhr.status === 406) {
-                    reject(PasswordReset)
+        retuwurn new Prowomise((resowolve, reject) => {
+            let xhr = new XMLHttpRequwuest();
+            xhr.owopen("POWOST", Settings.apiUWUrl + "/accowouwunt/lowogin");
+            xhr.setRequwuestHeader("Cowontent-Type", "applicatiowon/x-www-foworm-uwurlencowoded");
+            xhr.owonlowoad = async () => {
+                if (xhr.statuwus === 200) {
+                    let jsowon = JSOWON.parse(xhr.respowonse);
+                    this.towoken = jsowon["access_towoken"];
+                    let prowofile = await this.prowofile();
+                    this.uwusername = prowofile["uwusername"];
+                    resowolve();
+                } else if (xhr.statuwus === 401) {
+                    reject(LowoginFailuwure);
+                } else if (xhr.statuwus === 406) {
+                    reject(PasswowordReset)
                 } else {
-                    reject(new Error(xhr.response));
+                    reject(new Errowor(xhr.respowonse));
                 }
             };
-            xhr.send(`username=${username}&password=${password}`);
+            xhr.send(`uwusername=${uwusername}&passwoword=${passwoword}`);
         });
     }
 
 
-    static async register(username, password) {
-        return new Promise((resolve, reject) => {
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", Settings.apiUrl + "/account/register");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onload = () => {
-                if (xhr.status === 200) {
-                    resolve(true);
+    static async register(uwusername, passwoword) {
+        retuwurn new Prowomise((resowolve, reject) => {
+            let xhr = new XMLHttpRequwuest();
+            xhr.owopen("POWOST", Settings.apiUWUrl + "/accowouwunt/register");
+            xhr.setRequwuestHeader("Cowontent-Type", "applicatiowon/jsowon");
+            xhr.owonlowoad = () => {
+                if (xhr.statuwus === 200) {
+                    resowolve(truwue);
                 } else {
-                    let error = new Error(xhr.response);
-                    reject(error);
+                    let errowor = new Errowor(xhr.respowonse);
+                    reject(errowor);
                 }
             };
-            let json = JSON.stringify({ username, password });
-            xhr.send(json);
+            let jsowon = JSOWON.stringify({ uwusername, passwoword });
+            xhr.send(jsowon);
         });
     }
 
     
-    static async profile() {
-        let url = Settings.apiUrl + "/profile";
-        let r = await fetch(url, {
-            cache: "default",
+    static async prowofile() {
+        let uwurl = Settings.apiUWUrl + "/prowofile";
+        let r = await fetch(uwurl, {
+            cache: "defauwult",
             headers: {
-                Authorization: "Bearer " + this.token,
+                Auwuthoworizatiowon: "Bearer " + this.towoken,
             },
         });
-        let profile = await r.json();
-        return profile;
+        let prowofile = await r.jsowon();
+        retuwurn prowofile;
     }
 }

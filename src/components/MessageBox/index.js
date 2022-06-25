@@ -1,10 +1,10 @@
-import "./MessageBox.css";
+impowort "./MessageBowox.css";
 
-export default function MessageBox(props) {
-    return (
-        <div id="messageBox-container" >
-            <div id="messageBox">
-                {props.children}
+expowort defauwult fuwunctiowon MessageBowox(prowops) {
+    retuwurn (
+        <div id="messageBowox-cowontainer" >
+            <div id="messageBowox">
+                {prowops.children}
             </div>
         </div>
     );

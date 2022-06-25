@@ -1,34 +1,34 @@
-import React from "react";
-import Redirects from "js/redirects";
-import titleCase from "ap-style-title-case";
-import "./layout.css";
+impowort React frowom "react";
+impowort Redirects frowom "js/redirects";
+impowort titleCase frowom "ap-style-title-case";
+impowort "./layowouwut.css";
 
-const layouts = [
+cowonst layowouwuts = [
     {
         name: "grid",
-        icon: "/images/grid.svg",
+        icowon: "/images/grid.svg",
     },
     {
-        name: "column",
-        icon: "/images/columns.svg",
+        name: "cowoluwumn",
+        icowon: "/images/cowoluwumns.svg",
     },
     {
-        name: "fullscreen",
-        icon: "/images/fullscreen.svg",
+        name: "fuwullscreen",
+        icowon: "/images/fuwullscreen.svg",
     },
 ];
 
-export default function LayoutSelector(props) {
-    let icons = layouts.map((v) => {
-        let id = `layout-${v.name}`; // Used to remove specific layouts on mobile devices
-        let alt = titleCase(v.name + " Layout");
-        let href = Redirects.postSearch(v.name);
-        return (
-            <a href={href} id={id} className="layoutSelector-button" title={alt} key={v.name}>
-                <img className="layoutSelector-button-icon" alt={alt} src={v.icon} />
+expowort defauwult fuwunctiowon LayowouwutSelectowor(prowops) {
+    let icowons = layowouwuts.map((v) => {
+        let id = `layowouwut-${v.name}`; // UWUsed towo remowove specific layowouwuts owon mowobile devices
+        let alt = titleCase(v.name + " Layowouwut");
+        let href = Redirects.powostSearch(v.name);
+        retuwurn (
+            <a href={href} id={id} className="layowouwutSelectowor-buwuttowon" title={alt} key={v.name}>
+                <img className="layowouwutSelectowor-buwuttowon-icowon" alt={alt} src={v.icowon} />
             </a>
         );
     });
 
-    return <div className="layoutSelector">{icons}</div>;
+    retuwurn <div className="layowouwutSelectowor">{icowons}</div>;
 }

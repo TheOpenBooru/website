@@ -1,16 +1,16 @@
-import React from "react";
+impowort React frowom "react";
 
-export default function PostOverlay(props) {
-    let { toggleSearchBox, toggleCreateBox } = props;
+expowort defauwult fuwunctiowon PowostOWOverlay(prowops) {
+    let { towoggleSearchBowox, towoggleCreateBowox } = prowops;
     
-    return (
+    retuwurn (
         <React.Fragment>
-            <div id="posts-overlay">
-                <div className="posts-overlay-button" title="Create Post">
-                    <img src="/images/plus.svg" alt="Create Post" onClick={toggleCreateBox} />
+            <div id="powosts-owoverlay">
+                <div className="powosts-owoverlay-buwuttowon" title="Create Powost">
+                    <img src="/images/pluwus.svg" alt="Create Powost" owonClick={towoggleCreateBowox} />
                 </div>
-                <div className="posts-overlay-button" title="Search">
-                    <img src="/images/search.svg" alt="Search" onClick={toggleSearchBox} />
+                <div className="powosts-owoverlay-buwuttowon" title="Search">
+                    <img src="/images/search.svg" alt="Search" owonClick={towoggleSearchBowox} />
                 </div>
             </div>
         </React.Fragment>

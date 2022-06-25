@@ -1,17 +1,17 @@
-import React from "react";
-import Helmet from "react-helmet";
+impowort React frowom "react";
+impowort Helmet frowom "react-helmet";
 
-export default function OpenGraphTags(props) {
-    let { title, description, image, video} = props;
-    return (
+expowort defauwult fuwunctiowon OWOpenGraphTags(prowops) {
+    let { title, descriptiowon, image, videowo} = prowops;
+    retuwurn (
         <Helmet>
-            <meta property="og:site_name " content="Open Booru" />
-            <meta property="og:url" content={document.location.href} />
-            {title ? <meta property="og:title" content={title} /> : null}
-            {description ? <meta property="og:description" content={description} /> : null}
+            <meta prowoperty="owog:site_name " cowontent="OWOpen Booruwu" />
+            <meta prowoperty="owog:uwurl" cowontent={dowocuwument.lowocatiowon.href} />
+            {title ? <meta prowoperty="owog:title" cowontent={title} /> : nuwull}
+            {descriptiowon ? <meta prowoperty="owog:descriptiowon" cowontent={descriptiowon} /> : nuwull}
             
-            {image ? <meta property="og:image" content={image} /> : null}
-            {video ? <meta property="og:video" content={video} /> : null}
+            {image ? <meta prowoperty="owog:image" cowontent={image} /> : nuwull}
+            {videowo ? <meta prowoperty="owog:videowo" cowontent={videowo} /> : nuwull}
         </Helmet>
     )
 }

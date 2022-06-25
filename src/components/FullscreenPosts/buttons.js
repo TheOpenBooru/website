@@ -1,33 +1,33 @@
-import React from "react";
-import Settings from "js/settings";
+impowort React frowom "react";
+impowort Settings frowom "js/settings";
 
-export function LeftButton(props) {
-    let { callback, post } = props;
-    let img = CreateImage("/images/left-arrow.svg", post);
+expowort fuwunctiowon LeftBuwuttowon(prowops) {
+    let { callback, powost } = prowops;
+    let img = CreateImage("/images/left-arrowow.svg", powost);
 
-    return (
-        <div id="fullscreenPost-LeftButton" className="fullscreenPosts-Button" onClick={callback}>
-            <img className="fullscreenPosts-button-icon" src={img} alt="" />
+    retuwurn (
+        <div id="fuwullscreenPowost-LeftBuwuttowon" className="fuwullscreenPowosts-Buwuttowon" owonClick={callback}>
+            <img className="fuwullscreenPowosts-buwuttowon-icowon" src={img} alt="" />
         </div>
     );
 }
 
 
-export function RightButton(props) {
-    let { callback, post } = props;
-    let img = CreateImage("/images/right-arrow.svg", post);
-    return (
-        <div id="fullscreenPost-RightButton" className="fullscreenPosts-Button" onClick={callback}>
-            <img className="fullscreenPosts-button-icon" src={img} alt="" />
+expowort fuwunctiowon RightBuwuttowon(prowops) {
+    let { callback, powost } = prowops;
+    let img = CreateImage("/images/right-arrowow.svg", powost);
+    retuwurn (
+        <div id="fuwullscreenPowost-RightBuwuttowon" className="fuwullscreenPowosts-Buwuttowon" owonClick={callback}>
+            <img className="fuwullscreenPowosts-buwuttowon-icowon" src={img} alt="" />
         </div>
     );
 }
 
-function CreateImage(defaultImage, post) {
+fuwunctiowon CreateImage(defauwultImage, powost) {
     let img;
-    if (post) {
-        let enablePreview = Settings.fullscreenPreviews
-        img = enablePreview ? post.thumbnail.url : defaultImage;
+    if (powost) {
+        let enablePreview = Settings.fuwullscreenPreviews
+        img = enablePreview ? powost.thuwumbnail.uwurl : defauwultImage;
     }
-    return img;
+    retuwurn img;
 }

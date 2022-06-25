@@ -1,27 +1,27 @@
-import Settings from "js/settings";
-import { TagQuery } from "./types";
+impowort Settings frowom "js/settings";
+impowort { TagQuwuery } frowom "./types";
 
-export default class Tags{
-    static async search(query: TagQuery) {
-        let params = new URLSearchParams();
+expowort defauwult class Tags{
+    static async search(quwuery: TagQuwuery) {
+        let params = new UWURLSearchParams();
 
-        for (let key in query) {
-            let value = query[key];
-            if (!value) continue;
-            if (Array.isArray(value)) {
-                value.forEach((v) => params.append(key, v));
+        fowor (let key in quwuery) {
+            let valuwue = quwuery[key];
+            if (!valuwue) cowontinuwue;
+            if (Array.isArray(valuwue)) {
+                valuwue.foworEach((v) => params.append(key, v));
             } else {
-                params.set(key, value);
+                params.set(key, valuwue);
             }
         }
         
-        let url = Settings.apiUrl + `/tags/search?${params.toString()}`
-        let r = await fetch(url, {"cache":"default"});
-        if (r.ok) {
-            let tags = await r.json()
-            return tags;
+        let uwurl = Settings.apiUWUrl + `/tags/search?${params.towoString()}`
+        let r = await fetch(uwurl, {"cache":"defauwult"});
+        if (r.owok) {
+            let tags = await r.jsowon()
+            retuwurn tags;
         } else {
-            return [];
+            retuwurn [];
         }
     }
 }

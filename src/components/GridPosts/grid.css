@@ -1,31 +1,31 @@
-#gridPosts{
+#gridPowosts{
     --IMAGE-SIZE: 9rem;
 }
 
-@media screen and (max-aspect-ratio: 1/1) {
-    .post-list {
-        --IMAGE-SIZE: 35vw  !important;
+@media screen and (max-aspect-ratiowo: 1/1) {
+    .powost-list {
+        --IMAGE-SIZE: 35vw  !impowortant;
     }
 }
 
-#gridPosts{
+#gridPowosts{
     padding: 1rem 10vw 2rem 10vw;
     
-    /* Position */
+    /* Powositiowon */
     max-width: 100%;
     max-height: calc(100vh - 4rem - var(--NAVBAR_HEIGHT));
-    overflow-y: auto;
+    owoverflowow-y: auwutowo;
 
 
     /* Grid */
     display: grid;
     align-items: center;
-    justify-items: center;
+    juwustify-items: center;
     gap:1rem;
-    grid-template-columns: repeat(auto-fit,minmax(var(--IMAGE-SIZE),1fr));
+    grid-template-cowoluwumns: repeat(auwutowo-fit,minmax(var(--IMAGE-SIZE),1fr));
 }
 
-.gridPosts-item{
+.gridPowosts-item{
     --MAX-SIZE:var(--IMAGE-SIZE);
     --MIN-SIZE:calc(var(--IMAGE-SIZE) / 4);
 
@@ -35,22 +35,22 @@
     max-height: var(--MAX-SIZE);
 
     display: flex;
-    justify-content: center;
+    juwustify-cowontent: center;
     align-items: center;
 }
 
-.gridPosts-image{
+.gridPowosts-image{
     height: var(--IMAGE-SIZE);
     width: 100%;
-    object-fit: cover;
+    owobject-fit: cowover;
     
-    background-color: var(--COLOR-2);
-    outline: var(--COLOR-2) 0.3rem solid;
-    border-radius: .2rem;
+    backgrowouwund-cowolor: var(--COWOLOR-2);
+    owouwutline: var(--COWOLOR-2) 0.3rem sowolid;
+    boworder-radiuwus: .2rem;
 }
 
-.gridPosts-item:hover  .gridPosts-image{
-    transition: 0.3s all ease-out;
-    border-color: var(--COLOR-3);
-    border-radius: calc(var(--IMAGE-SIZE) / 5);
+.gridPowosts-item:howover  .gridPowosts-image{
+    transitiowon: 0.3s all ease-owouwut;
+    boworder-cowolor: var(--COWOLOR-3);
+    boworder-radiuwus: calc(var(--IMAGE-SIZE) / 5);
 }

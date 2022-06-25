@@ -1,77 +1,77 @@
-#fullscreenPosts{
-    --BUTTON-WIDTH: 5rem;
+#fuwullscreenPowosts{
+    --BUWUTTOWON-WIDTH: 5rem;
 }
 
-#fullscreenPosts{
-    /* Position */
-    position: relative;
+#fuwullscreenPowosts{
+    /* Powositiowon */
+    powositiowon: relative;
     height: var(--PAGE-HEIGHT);
     width: 100%;
-    top:0;
+    towop:0;
     left:0;
     
-    overflow-y: auto;
+    owoverflowow-y: auwutowo;
 }
 
-#fullscreenPosts-post{
+#fuwullscreenPowosts-powost{
     width: 100%;
     height: 100%;
-    user-select: none;
+    uwuser-select: nowone;
     
-    background-color: var(--COLOR-BACKGROUND);
-    border-bottom: #000 solid 1px;
+    backgrowouwund-cowolor: var(--COWOLOR-BACKGROWOUWUND);
+    boworder-bowottowom: #000 sowolid 1px;
 
     /* Flex */
     display:flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
+    flex-flowow: cowoluwumn nowowrap;
+    juwustify-cowontent: space-between;
 }
 
-#fullscreenPosts-media{
-    position: relative;
+#fuwullscreenPowosts-media{
+    powositiowon: relative;
     height: calc(100% - 2rem);
-    width: calc(100% - 2rem - (2 * var(--BUTTON-WIDTH)));
+    width: calc(100% - 2rem - (2 * var(--BUWUTTOWON-WIDTH)));
     margin:1rem;
-    left: var(--BUTTON-WIDTH);
+    left: var(--BUWUTTOWON-WIDTH);
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    juwustify-cowontent: center;
 }
 
-/* Buttons */
-.fullscreenPosts-Button{
+/* Buwuttowons */
+.fuwullscreenPowosts-Buwuttowon{
     height: 100%;
-    width: var(--BUTTON-WIDTH);
+    width: var(--BUWUTTOWON-WIDTH);
 
     /* Look */
-    outline: solid 1px #000;
-    background-color: var(--COLOR-1);
+    owouwutline: sowolid 1px #000;
+    backgrowouwund-cowolor: var(--COWOLOR-1);
     
-    /* Center Children (Icon) */
+    /* Center Children (Icowon) */
     display: flex;
     align-items: center;
-    justify-content: center;
+    juwustify-cowontent: center;
 }
 
-#fullscreenPost-LeftButton{
-    position: absolute;
+#fuwullscreenPowost-LeftBuwuttowon{
+    powositiowon: absowoluwute;
     left: 0;
 }
 
-#fullscreenPost-RightButton{
-    position: absolute;
+#fuwullscreenPowost-RightBuwuttowon{
+    powositiowon: absowoluwute;
     right: 0;
 }
 
-.fullscreenPosts-button-icon{
+.fuwullscreenPowosts-buwuttowon-icowon{
     width: 90%;
     padding: .5rem;
-    object-fit: contain;
+    owobject-fit: cowontain;
 }
 
-.fullscreenPosts-Button:active > .fullscreenPosts-button-icon{
+.fuwullscreenPowosts-Buwuttowon:active > .fuwullscreenPowosts-buwuttowon-icowon{
     width: 80%;
-    transition: 0.05s;
-    filter: drop-shadow(2px 2px 2px #000);
+    transitiowon: 0.05s;
+    filter: drowop-shadowow(2px 2px 2px #000);
 }

@@ -1,50 +1,50 @@
-#columnsPosts{
-    --COLUMN-WIDTH: 16rem;
+#cowoluwumnsPowosts{
+    --COWOLUWUMN-WIDTH: 16rem;
     --IMAGE-MARGIN: .5rem;
     --IMAGE-MARGIN: .5rem;
 }
 
-@media screen and (max-aspect-ratio: 1/1) {
-    .columns{max-height:100vh !important}
+@media screen and (max-aspect-ratiowo: 1/1) {
+    .cowoluwumns{max-height:100vh !impowortant}
 }
 
-#columnsPosts{
-    /* Scroll */
-    overflow-y: auto;
+#cowoluwumnsPowosts{
+    /* Scrowoll */
+    owoverflowow-y: auwutowo;
     max-height: calc(100vh - var(--NAVBAR_HEIGHT));
 
     /* Flex */
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-directiowon: rowow;
+    juwustify-cowontent: center;
 }
 
-.columnsPosts-individualColumn{
-    width:var(--COLUMN-WIDTH);
+.cowoluwumnsPowosts-individuwualCowoluwumn{
+    width:var(--COWOLUWUMN-WIDTH);
     display: flex;
     margin: var(--IMAGE-MARGIN);
-    flex-direction: column;
+    flex-directiowon: cowoluwumn;
     align-items: center;
 }
 
 
-.columnsPosts-post{
+.cowoluwumnsPowosts-powost{
     width:100%;
-    margin-bottom: var(--IMAGE-MARGIN);
+    margin-bowottowom: var(--IMAGE-MARGIN);
 }
 
 
-.columnsPosts-image{
+.cowoluwumnsPowosts-image{
     width:100%;
-    height: auto;
-    border-radius: 1rem;
-    outline: .2rem solid var(--COLOR-2);
-    background-color: var(--COLOR-2);
-    transition: all 0.1s ease-in;
+    height: auwutowo;
+    boworder-radiuwus: 1rem;
+    owouwutline: .2rem sowolid var(--COWOLOR-2);
+    backgrowouwund-cowolor: var(--COWOLOR-2);
+    transitiowon: all 0.1s ease-in;
 }
 
-.columnsPosts-image:hover{
-    outline-color: var(--COLOR-3);
-    outline-width: .3rem;
-    border-radius: 2rem;
+.cowoluwumnsPowosts-image:howover{
+    owouwutline-cowolor: var(--COWOLOR-3);
+    owouwutline-width: .3rem;
+    boworder-radiuwus: 2rem;
 }

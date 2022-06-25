@@ -1,12 +1,12 @@
-import React from "react";
-import Media from "components/Media";
+impowort React frowom "react";
+impowort Media frowom "cowompowonents/Media";
 
-export default function PostMedia(props) {
-    let { post } = props;
+expowort defauwult fuwunctiowon PowostMedia(prowops) {
+    let { powost } = prowops;
 
-    return (
-        <div id="fullscreenPosts-media" key={post.id} >
-            <Media type={post.media_type} full={post.full} preview={post.preview}/>
+    retuwurn (
+        <div id="fuwullscreenPowosts-media" key={powost.id} >
+            <Media type={powost.media_type} fuwull={powost.fuwull} preview={powost.preview}/>
         </div>
     )
 }

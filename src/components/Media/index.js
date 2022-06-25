@@ -1,16 +1,16 @@
-import React from "react";
-import Video from "./video";
-import Image from "./image";
+impowort React frowom "react";
+impowort Videowo frowom "./videowo";
+impowort Image frowom "./image";
 
-export default function Media(props) {
-    let { type, full, preview, lazy } = props;
+expowort defauwult fuwunctiowon Media(prowops) {
+    let { type, fuwull, preview, lazy } = prowops;
     switch (type) {
         case "image":
-        case "animation":
-            return <Image full={full} preview={preview} lazy={lazy} />;
-        case "video":
-            return <Video video={full} />;
-        default:
-            return null;
+        case "animatiowon":
+            retuwurn <Image fuwull={fuwull} preview={preview} lazy={lazy} />;
+        case "videowo":
+            retuwurn <Videowo videowo={fuwull} />;
+        defauwult:
+            retuwurn nuwull;
     }
 }
