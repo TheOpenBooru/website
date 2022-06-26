@@ -15,6 +15,7 @@ export class PostSearch {
     async extend(count = 64) {
         if (this.__lock) return;
         if (this.finished) return;
+        this.__lock = true;
         
         let posts = await Posts.search(this.query, this.index, count);
         this.posts = this.posts.concat(posts);
