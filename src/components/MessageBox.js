@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function MessageBox(props) {
+export default React.forwardRef(function MessageBox(props, ref) {
     let attributes = { ...props }
     attributes.children = null;
     return (
-        <Background {...attributes}>
-            <MessageContainer id="messageBox">
+        <Background ref={ref} {...attributes}>
+            <MessageContainer>
                 {props.children}
             </MessageContainer>
         </Background>
     );
-}
+})
 
 
 const Background = styled.div`
@@ -34,6 +34,4 @@ const Background = styled.div`
 const MessageContainer = styled.div`
     position: absolute;
     top:10%;
-    height: min-content;
-    width: min-content;
 `

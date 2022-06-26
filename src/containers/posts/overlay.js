@@ -8,42 +8,39 @@ export default function PostOverlay(props) {
     let searchBoxRef = useRef(null);
     let createBoxRef = useRef(null);
     
+    
     function toggleSearchBox() {
         let searchBoxElem = searchBoxRef.current
         let createBoxElem = createBoxRef.current
-        let isVisible = searchBoxElem.style.display === "none"
+        let isVisible = searchBoxElem.style.display !== "none"
         if (isVisible) {
-            createBoxElem.style.display = "none";
-            searchBoxElem.style.display = "unset";
-        } else {
             searchBoxElem.style.display = "none";
+        } else {
+            searchBoxElem.style.display = null;
+            createBoxElem.style.display = "none";
         }
     }
     
     function toggleCreateBox() {
         let searchBoxElem = searchBoxRef.current
         let createBoxElem = createBoxRef.current
-        let isVisible = createBoxElem.style.display === "none"
+        let isVisible = createBoxElem.style.display !== "none"
         if (isVisible) {
-            searchBoxElem.style.display = "none";
-            createBoxElem.style.display = "unset";
-        } else {
             createBoxElem.style.display = "none";
+        } else {
+            searchBoxElem.style.display = "none";
+            createBoxElem.style.display = null;
         }
     }
 
     return (
         <React.Fragment>
-            <div ref={searchBoxRef} style={{display:"none"}}>
-                <MessageBox>
-                    <SearchBox query={query} setQuery={setQuery} />
-                </MessageBox>
-            </div>
-            <div ref={createBoxRef} style={{display:"none"}}>
-                <MessageBox >
-                    <CreatePost />
-                </MessageBox>
-            </div>
+            <MessageBox ref={searchBoxRef} style={{display:"none"}}>
+                <SearchBox query={query} setQuery={setQuery} />
+            </MessageBox>
+            <MessageBox ref={createBoxRef}  style={{display:"none"}}>
+                <CreatePost />
+            </MessageBox>
             <div id="posts-overlay">
                 <div className="posts-overlay-button" title="Create Post">
                     <img src="/images/plus.svg" alt="Create Post" onClick={toggleCreateBox} />
