@@ -1,5 +1,6 @@
 import React from "react";
 import { onLoadCallback } from "components/Media/image";
+import Settings from "js/settings";
 import Redirects from "js/redirects";
 import "./grid.css";
 
@@ -15,9 +16,11 @@ export default function GridPosts(props) {
             morePostsCallback();
         }
     };
-
+    let style = {
+        "--IMAGE-SIZE": Settings.PostsGridSize + "rem",
+    };
     return (
-        <div id="gridPosts" onScroll={scrollHandler}>
+        <div id="gridPosts" onScroll={scrollHandler} style={style}>
             {posts.map((post) => <GridItem key={post.id} post={post}/>)}
         </div>
     );

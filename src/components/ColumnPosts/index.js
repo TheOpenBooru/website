@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Redirects from "js/redirects";
-import { onLoadCallback } from "components/Media/image";
+import Column from "./column";
 import "./columns.css";
 
 
@@ -9,86 +7,57 @@ export default function ColumnPosts(props) {
     let { posts, morePostsCallback } = props;
     let [columnCount, setColumnCount] = useState(4);
     
-    function calculateColumnCount(e) {
-        let increments = (window.innerWidth / 500).toFixed();
-        let columnCount = Math.max(2,Math.min(6,increments))
-        setColumnCount(columnCount)
-        
-    }
     window.addEventListener('resize',calculateColumnCount, true);
     useEffect(calculateColumnCount,[])
+    function calculateColumnCount(e) {
+        let increments = (window.innerWidth / 500).toFixed();
+        let columnCount = Math.max(2, Math.min(6, increments))
+        setColumnCount(columnCount)
+    }
 
-    let columns = SplitPosts(posts, columnCount);
-
-    let scrollHandler = (e) => {
+    function scrollHandler(e){
         const { scrollTop, offsetHeight, scrollHeight } = e.target;
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
         if (distanceFromBottom < 100) {
             morePostsCallback();
         }
-    };
+    }
+    
+    let columns = SplitPosts(posts, columnCount);
 
     return (
-        <div id="columnsPosts" onScroll={scrollHandler}>
-            {columns.map((posts, i) => (
-                <div key={i} className="columnsPosts-individualColumn">
-                {posts.map((post, i) => (
-                        <ColumnItem key={post.id} post={post} />
-                    ))}
-                </div>
-            ))}
+        <div id="columnsPosts-container">
+            <div id="columnsPosts" onScroll={scrollHandler}>
+                {columns.map((posts, i) => <Column key={i} posts={posts} />)}
+            </div>
         </div>
     );
 }
 
-function ColumnItem(props) {
-    let { post } = props;
-    let { preview, thumbnail } = post
-    let className = `columnsPosts-post media-${post.media_type}`;
-    let redirect = Redirects.post(post.id);
-    
-    return (
-        <a className={className} href={redirect} title={`Post: ${post.id}`}>
-            <img
-                className="columnsPosts-image"
-                src={thumbnail.url}
-                width={thumbnail.width}
-                height={thumbnail.height}
-                alt=""
-                onLoad={preview ? onLoadCallback(preview,thumbnail,true) : null}
-            />
-        </a>
-    );
-}
+
+
 
 function SplitPosts(array, parts) {
-    // Create an array of arrays
-    // eslint-disable-next-line
-    if (!array || array === []) {
-        return new Array(parts).fill([]);
-    } else {
-        let buckets = Array.apply(null, Array(parts)).map(() => []);
-        array.forEach((v) => {
-            let min_height_index = get_minimum_column_height_index(buckets);
-            buckets[min_height_index].push(v);
-        });
-        return buckets;
-    }
+    let buckets = Array.apply(null, Array(parts)).map(() => []);
+    array.forEach((v) => {
+        let smallestColumnIndex = getShortestColumnIndex(buckets);
+        buckets[smallestColumnIndex].push(v);
+    });
+    return buckets;
 }
 
-function get_minimum_column_height_index(columns) {
-    let bucket_heights = new Array(columns.length).fill(0);
+
+function getShortestColumnIndex(columns) {
+    let heights = new Array(columns.length).fill(0);
+
     columns.forEach((clmn, i) => {
         let total = 0;
         clmn.forEach((v) => (total += v.full.height / v.full.width));
-        bucket_heights[i] = total;
+        heights[i] = total;
     });
-    let min_height = Math.min(...bucket_heights);
-    let index = bucket_heights.indexOf(min_height);
-    if (index === -1) {
-        return 0;
-    } else {
-        return index;
-    }
+    
+    let MinHeight = Math.min(...heights);
+    let index = heights.indexOf(MinHeight);
+    return index;
 }
