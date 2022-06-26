@@ -8,15 +8,16 @@ function Core(props) {
     let { title, description } = props;
     title = titleCase(title);
     return (
-        <div>
+        <React.Fragment>
             <Helmet>
                 {title ? <title>{title}</title> : null}
                 {description ? <meta name="description" content={description} /> : null}
             </Helmet>
             <OpenGraph {...props} />
+            
             <NavigationBar />
             {props.children}
-        </div>
+        </React.Fragment>
     );
 }
 
