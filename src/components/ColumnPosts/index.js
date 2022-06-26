@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import Redirects from "js/redirects";
 import { onLoadCallback } from "components/Media/image";
 import "./columns.css";
 
+
 export default function ColumnPosts(props) {
     let { posts, morePostsCallback } = props;
+    let [columnCount, setColumnCount] = useState(4);
+    
+    function calculateColumnCount(e) {
+        let increments = (window.innerWidth / 500).toFixed();
+        let columnCount = Math.max(2,Math.min(6,increments))
+        setColumnCount(columnCount)
+        
+    }
+    window.addEventListener('resize',calculateColumnCount, true);
+    useEffect(calculateColumnCount,[])
 
-    let columns = SplitPosts(posts, 4);
+    let columns = SplitPosts(posts, columnCount);
 
     let scrollHandler = (e) => {
         const { scrollTop, offsetHeight, scrollHeight } = e.target;
