@@ -9,7 +9,9 @@ export default function SettingsEditor(props) {
     return (
         <Container>
             <SettingContainer>
-                <SettingLabel htmlFor="PostPreview">Use Post Fullscreen Previews:</SettingLabel>
+                <SettingLabel htmlFor="PostPreview">
+                    Fullscreen Button Previews:
+                </SettingLabel>
                 <SettingInput
                     type="checkbox"
                     name="PostPreview"
@@ -18,6 +20,21 @@ export default function SettingsEditor(props) {
                 />
             </SettingContainer>
             <SettingContainer>
+                <SettingLabel htmlFor="GridSize">Grid Size:</SettingLabel>
+                <SettingInput
+                    type="range"
+                    min="4"
+                    defaultValue={Settings.PostsGridSize}
+                    max="24"
+                    name="GridSize"
+                    onChange={(e) => {
+                        let value = e.target.value;
+                        Settings.PostsGridSize = value;
+                        e.target.title = `Grid Size is ${value}rems`;
+                    }}
+                />
+            </SettingContainer>
+            {/* <SettingContainer>
                 <SettingLabel htmlFor="ApiUrl">API Url:</SettingLabel>
                 <SettingInput
                     type="url"
@@ -25,7 +42,7 @@ export default function SettingsEditor(props) {
                     defaultValue={Settings.apiUrl}
                     onChange={(e) => (Settings.apiUrl = e.target.value)}
                 />
-            </SettingContainer>
+            </SettingContainer> */}
         </Container>
     );
 }
@@ -48,5 +65,5 @@ const SettingLabel = styled.label`
 `;
 
 const SettingInput = styled.input`
-    width: 15rem;
+    width: fit-content;
 `;
