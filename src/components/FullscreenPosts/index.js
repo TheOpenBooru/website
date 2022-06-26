@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import Redirects from "js/redirects";
 import PostInfo from "components/PostInfo";
 import PostMedia from "./media";
 import { LeftButton, RightButton} from "./buttons";
-import "./fullscreen.css";
 
 export default function FullscreenPosts(props) {
     let { posts, morePostsCallback, noButtons } = props;
@@ -66,13 +66,40 @@ export default function FullscreenPosts(props) {
     };
 
     return (
-        <div id="fullscreenPosts" ref={baseRef}>
-            <div id="fullscreenPosts-post">
+        <Container ref={baseRef}>
+            <PostContainer>
                 {noButtons ? null : <LeftButton callback={GoToPreviousPost} post={prevPost} />}
-                <PostMedia post={postData} />
+                <PostMedia post={postData} noButtons={noButtons} />
                 {noButtons ? null : <RightButton callback={GoToNextPost} post={nextPost} />}
-            </div>
+            </PostContainer>
             <PostInfo post={postData}/>
-        </div>
+        </Container>
     );
 }
+
+
+const Container = styled.div`
+    position: relative;
+    height: var(--PAGE-HEIGHT);
+    width: 100%;
+    top:0;
+    left:0;
+    overflow-y: auto;
+
+    --BUTTON-WIDTH: 8rem;
+`
+
+
+const PostContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    
+    background-color: var(--COLOR-BACKGROUND);
+    border-bottom: #000 solid 1px;
+
+    /* Flex */
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+`
