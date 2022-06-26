@@ -8,7 +8,7 @@ const SettingsDefaults = {
 const Settings = new Proxy(SettingsDefaults, {
     get(obj, prop) {
         if (!(prop in obj)) {
-            return undefined
+            return undefined;
         } else if (localStorage.getItem(prop)) {
             return localStorage.getItem(prop);
         } else {
@@ -17,8 +17,12 @@ const Settings = new Proxy(SettingsDefaults, {
     },
     set(obj, prop, value) {
         if (prop in obj) {
-            localStorage.setItem(prop,value)
+            localStorage.setItem(prop, value)
+            return true;
+        } else {
+            return false;
         }
+
     }
 })
 
