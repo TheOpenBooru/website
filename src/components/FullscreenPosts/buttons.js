@@ -31,13 +31,8 @@ function GenerateImageUrl(post, defaultImage) {
     if (!post) {
         return null
     } else {
-        let PreviewEnabled = Settings.fullscreenPostPreviews
-        if (PreviewEnabled) {
-            return post.thumbnail.url
-        }
-        else {
-            return defaultImage
-        }
+        let isPreviewEnabled = Settings.fullscreenPostPreviews
+        return isPreviewEnabled ? defaultImage : post.thumbnail.url
     }
 }
 
