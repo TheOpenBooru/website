@@ -70,14 +70,13 @@
     #navbar {
         justify-content: space-around;
     }
+
     .navbar-section{
         width: 100%;
         padding: 0 !important;
         margin: .1rem !important;
     }
-    #navbar-PostsSection .navbar-button-text{
-        display: none;
-    }
+    
     #navbar-VersionNumber{
         display: none;
     }

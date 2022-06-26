@@ -53,7 +53,7 @@ const LayoutButton = styled.a`
     margin-right: .1rem;
     
     background-color: var(--COLOR-2);
-    border: 0.2rem solid var(--COLOR-4);
+    border: .15rem solid var(--COLOR-4);
     border-radius: .4rem;
     
     display: flex;

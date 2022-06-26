@@ -1,8 +1,6 @@
 import React from "react";
-import LayoutButtons from "./LayoutButtons";
 import { Account } from "js/booru";
 import Redirects from "js/redirects";
-import Settings from "js/settings";
 import PostsSection from "./PostsSection";
 import titleCase from "ap-style-title-case";
 import "./navbar.css";
