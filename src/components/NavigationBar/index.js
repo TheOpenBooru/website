@@ -1,8 +1,9 @@
 import React from "react";
-import LayoutButtons from "components/LayoutButtons";
+import LayoutButtons from "./LayoutButtons";
 import { Account } from "js/booru";
 import Redirects from "js/redirects";
 import Settings from "js/settings";
+import PostsSection from "./PostsSection";
 import titleCase from "ap-style-title-case";
 import "./navbar.css";
 
@@ -10,7 +11,7 @@ export default function NavigationBar() {
     return (
         <nav id="navbar">
             <VersionNumber />
-            <PostsSeciton />
+            <PostsSection />
             <AccountSection />
         </nav>
     );
@@ -25,15 +26,7 @@ function VersionNumber() {
     );
 }
 
-function PostsSeciton() {
-    return (
-        <div id="navbar-PostsSection" className="navbar-section">
-            <img className="navbar-button-icon" src="/images/posts.svg" alt="" />
-            <span className="navbar-button-text">Posts</span>
-            <LayoutButtons current={Settings.searchLayout} />
-        </div>
-    );
-}
+
 
 function AccountSection() {
     let redirect = Account.loggedIn ? Redirects.profile() : Redirects.auth();
