@@ -4,6 +4,8 @@ import Settings from "js/settings.js";
 const LoginFailure = new Error("Failed to Login")
 const PasswordReset = new Error("Password Was Reset")
 const WrongAPIVersion = new Error("The API is the wrong version")
+const RateLimited = new Error("Your being rate-limited, please wait")
+
 
 export default class Account {
     LoginFailure = LoginFailure
@@ -54,6 +56,8 @@ export default class Account {
                         err = PasswordReset
                     } else if (xhr.status === 422) {
                         err = WrongAPIVersion;
+                    } else if (xhr.status === 429) {
+                        err = RateLimited;
                     } else {
                         err = new Error(xhr.response);
                     }
