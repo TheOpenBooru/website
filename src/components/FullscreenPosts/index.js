@@ -85,6 +85,7 @@ const Container = styled.div`
     top:0;
     left:0;
     overflow-y: auto;
+    overflow-x: hidden;
 
     --BUTTON-WIDTH: 8rem;
 `
