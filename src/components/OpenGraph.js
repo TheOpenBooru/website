@@ -2,7 +2,7 @@ import React from "react";
 import Helmet from "react-helmet";
 
 export default function OpenGraphTags(props) {
-    let { title, description, image, video} = props;
+    let { title, description, image, video } = props;
     return (
         <Helmet>
             <meta property="og:site_name " content="Open Booru" />
