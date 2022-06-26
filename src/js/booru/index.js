@@ -3,6 +3,6 @@ import Account from "./account";
 import Posts from "./posts";
 import Tags from "./tags";
 import Misc from "./misc";
-import { PostSearch } from "./postSearch";
+import { PostSearch } from "./search";
 
 export { Account, Posts, Tags, Misc, PostSearch, PostQuery, TagQuery  };
