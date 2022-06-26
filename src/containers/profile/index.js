@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import Core from "containers/core";
 import MessageBox from "components/MessageBox";
@@ -8,20 +8,25 @@ import Redirects from "js/redirects";
 import { Account } from "js/booru";
 
 export default function Profile(props) {
+    let LoginRef = useRef();
     function logOut() {
         Account.logout();
-        Redirects.goto(Redirects.auth);
     }
     function logIn() {
-        Redirects.goto(Redirects.auth)
+        toggleLoginBox();
     }
 
-    
+
+    function toggleLoginBox() {
+        let elem = LoginRef.current;
+        let isVisible = elem.style.display !== "none"
+        elem.style.display = isVisible ? "none" : null
+    }
     
     return (
         <Core title={"Open Booru: Profile"} description={`Open Booru Profile Page`}>
             <Container>
-                <MessageBox>
+                <MessageBox ref={LoginRef} style={{display:"none"}}>
                     <LoginForm/>
                 </MessageBox>
                 {Account.loggedIn
