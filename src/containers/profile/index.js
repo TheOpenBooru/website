@@ -1,24 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 import Core from "containers/core";
+import MessageBox from "components/MessageBox";
+import LoginForm from "components/LoginForm";
 import SettingsEditor from "./settings";
 import Redirects from "js/redirects";
 import { Account } from "js/booru";
 
 export default function Profile(props) {
-    if (!Account.loggedIn) {
-        Redirects.goto(Redirects.auth());
-    }
-
     function logOut() {
         Account.logout();
-        Redirects.goto(Redirects.auth());
+        Redirects.goto(Redirects.auth);
+    }
+    function logIn() {
+        Redirects.goto(Redirects.auth)
     }
 
+    
+    
     return (
         <Core title={"Open Booru: Profile"} description={`Open Booru Profile Page`}>
             <Container>
-                <LogoutButton id="profile-logout" type="button" value="Logout" onClick={logOut}/>
+                <MessageBox>
+                    <LoginForm/>
+                </MessageBox>
+                {Account.loggedIn
+                    ? <LogoutButton onClick={logOut}>Logout</LogoutButton>
+                    : <LogoutButton onClick={logIn}>Login</LogoutButton>
+                }
                 <SettingsEditor/>
             </Container>
         </Core>
@@ -26,7 +35,7 @@ export default function Profile(props) {
 }
 
 
-const LogoutButton = styled.input`
+const LogoutButton = styled.button`
     position:absolute;
     right:0;
     height:2rem;

@@ -39,14 +39,12 @@ export default function FullscreenPosts(props) {
     
     function GoToNextPost() {
         if (index !== posts.length - 1) {
-            baseRef.current.scrollTo(0,0)
             setIndex(index + 1);
         }
     }
     
     function GoToPreviousPost() {
         if (index > 0) {
-            baseRef.current.scrollTo(0,0)
             setIndex(index - 1);
         }
     }
