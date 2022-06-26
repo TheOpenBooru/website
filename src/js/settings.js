@@ -1,8 +1,8 @@
 const SettingsDefaults = {
-    "fullscreenPostPreviews":true,
-    "pauseVideosInBackground":true,
-    "searchLayout":"grid",
-    "apiUrl":"https://api.openbooru.org",
+    fullscreenPostPreviews : true,
+    pauseVideosInBackground : true,
+    searchLayout : "grid",
+    apiUrl : "https://api.openbooru.org",
 };
 
 const Settings = new Proxy(SettingsDefaults, {
