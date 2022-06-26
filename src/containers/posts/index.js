@@ -45,11 +45,10 @@ export default function Posts(props) {
     return (
         <Core title={`Open Booru: ${layout ? layout : "Post"} Search`}>
             <Overlay query={ search.query} setQuery={setQuery} />
-            {search.finished && posts.length === 0 ? (
-                <span className="posts-ErrorText">No Posts Found</span>
-            ) : (
-                <PostsLayout posts={posts} morePostsCallback={prepend_posts} />
-            )}
+            {search.finished && posts.length === 0
+                ? <span className="posts-ErrorText">No Posts Found</span>
+                : <PostsLayout posts={posts} morePostsCallback={prepend_posts} />
+            }
         </Core>
     );
 }
