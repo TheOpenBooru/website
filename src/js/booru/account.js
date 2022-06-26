@@ -3,6 +3,7 @@ import Settings from "js/settings.js";
 
 const LoginFailure = new Error("Failed to Login")
 const PasswordReset = new Error("Password Was Reset")
+const WrongAPIVersion = new Error("The API is the wrong version")
 
 export default class Account {
     LoginFailure = LoginFailure
@@ -45,12 +46,18 @@ export default class Account {
                     let profile = await this.profile();
                     this.username = profile["username"];
                     resolve();
-                } else if (xhr.status === 401) {
-                    reject(LoginFailure);
-                } else if (xhr.status === 406) {
-                    reject(PasswordReset)
                 } else {
-                    reject(new Error(xhr.response));
+                    let err;
+                    if (xhr.status === 401) {
+                        err = LoginFailure;
+                    } else if (xhr.status === 406) {
+                        err = PasswordReset
+                    } else if (xhr.status === 422) {
+                        err = WrongAPIVersion;
+                    } else {
+                        err = new Error(xhr.response);
+                    }
+                    throw (err)
                 }
             };
             xhr.send(`username=${username}&password=${password}`);
