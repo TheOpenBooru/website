@@ -1,25 +1,14 @@
 import React from "react";
-import Redirects from "js/redirects";
 
 export default function TagList(props) {
-    let tags = props.tags;
-
-    function createTag() {
-    }
-
-    if (!tags) {
-        return <div id="PostInfo-tagList" />;
-    } else {
-        tags = tags.sort();
-
-        return (
-            <div>
-                <div id="PostInfo-tagList">
-                    {tags.map((tag) => <Tag key={tag} tag={tag} />)}
-                </div>
-            </div>
-        );
-    }
+    let { tags } = props;
+    tags ||= [];
+    tags = tags.sort();
+    return (
+        <div id="PostInfo-tagList">
+            {tags.map((tag) => <Tag key={tag} tag={tag} />)}
+        </div>
+    );
 }
 
 function Tag(props) {
