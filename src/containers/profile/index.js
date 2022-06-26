@@ -1,8 +1,9 @@
 import React from "react";
+import styled from "styled-components";
 import Core from "containers/core";
+import SettingsEditor from "./settings";
 import Redirects from "js/redirects";
 import { Account } from "js/booru";
-import "./profile.css";
 
 export default function Profile(props) {
     if (!Account.loggedIn) {
@@ -16,9 +17,26 @@ export default function Profile(props) {
 
     return (
         <Core title={"Open Booru: Profile"} description={`Open Booru Profile Page`}>
-            <div id="profile">
-                <input id="profile-logout" type="button" value="Logout" onClick={logOut}/>
-            </div>
+            <Container>
+                <LogoutButton id="profile-logout" type="button" value="Logout" onClick={logOut}/>
+                <SettingsEditor/>
+            </Container>
         </Core>
     );
 }
+
+
+const LogoutButton = styled.input`
+    position:absolute;
+    right:0;
+    height:2rem;
+    width:6rem;
+    border: var(--COLOR-4) .2em solid;
+    background-color: var(--COLOR-2);
+    border-radius: 1rem;
+`
+
+const Container = styled.div`
+    height: 100%;
+    width: 100%;
+`
