@@ -1,5 +1,5 @@
 const SettingsDefaults = {
-    "fullscreenPreviews":true,
+    "fullscreenPostPreviews":true,
     "pauseVideosInBackground":true,
     "searchLayout":"grid",
     "apiUrl":"https://api.openbooru.org",
