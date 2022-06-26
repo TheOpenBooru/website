@@ -27,7 +27,7 @@ export default function PostsSection(props) {
             <a
                 id="navbar-PostsSection"
                 className="navbar-section"
-                href={Redirects.postSearch("columns")}
+                href={Redirects.search("columns")}
             >
                 <img className="navbar-button-icon" src="/images/posts.svg" alt="" />
                 <span className="navbar-button-text">Posts</span>

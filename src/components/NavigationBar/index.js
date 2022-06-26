@@ -1,8 +1,6 @@
 import React from "react";
-import { Account } from "js/booru";
 import Redirects from "js/redirects";
 import PostsSection from "./PostsSection";
-import titleCase from "ap-style-title-case";
 import "./navbar.css";
 
 export default function NavigationBar() {
@@ -27,14 +25,9 @@ function VersionNumber() {
 
 
 function AccountSection() {
-    let redirect = Account.loggedIn ? Redirects.profile() : Redirects.auth();
-    let username = titleCase(Account.username);
     return (
-        <a id="navbar-AccountSection" className="navbar-section" href={redirect}>
-            {Account.loggedIn
-                ? <span className="navbar-button-text">{username}</span>
-                : <span className="navbar-button-text">Login</span>
-            }
+        <a id="navbar-AccountSection" className="navbar-section" href={Redirects.profile}>
+            <span className="navbar-button-text">Profile</span>
             <img className="navbar-button-icon" src="/images/profile.svg" alt="" />
         </a>
     );

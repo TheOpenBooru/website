@@ -23,7 +23,7 @@ export default function LayoutSelector(props) {
         let { name, icon } = v;
         let id = "layout-" + name
         let alt = titleCase(name + " Layout");
-        let href = Redirects.postSearch(name);
+        let href = Redirects.search(name);
         return (
             <LayoutButton id={id} href={href} title={alt} key={v.name}>
                 <LayoutIcon alt={alt} src={icon} />

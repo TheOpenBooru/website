@@ -1,5 +1,5 @@
 export default class Redirects {
-    static redirectCallback(url) {
+    static callback(url) {
         return () => {
             window.location.href = url;
         };
@@ -13,18 +13,14 @@ export default class Redirects {
         return "/posts";
     }
 
-    static auth() {
-        return "/auth";
-    }
-    static profile() {
-        return "/profile";
-    }
+    static auth ="/auth";
+    static profile = "/profile";
 
     static post(id) {
         return `/post/${id}`;
     }
 
-    static postSearch(layout = null) {
+    static search(layout = null) {
         let url = "/posts";
         if (layout) url += `/${layout}`;
         return url;
