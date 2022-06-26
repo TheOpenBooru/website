@@ -3,7 +3,7 @@
     position: sticky;
     top: 0;
     left: 0;
-    height: var(--NAVBAR-HEIGHT);
+    height: var(--NAVBAR_HEIGHT);
     min-width: 360px;
     width: 100vw;
     z-index: 1;
