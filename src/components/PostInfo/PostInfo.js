@@ -21,7 +21,7 @@ export default function PostInfo(props) {
     let SourceEntry = () => {
         if (post.source) {
             let url = new URL(post.source);
-            return <Entry name="Source" value={url.hostna} href={post.source} />
+            return <Entry name="Source" value={url.hostname} href={post.source} />
         } else {
             return <Entry name="Source" value="None" />
         }

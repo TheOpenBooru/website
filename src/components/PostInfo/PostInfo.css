@@ -41,6 +41,11 @@
     padding: 0 .3rem 0 .3rem;
 }
 
+#PostInfo-TagList-AddTagIcon{
+    height:1rem;
+    width:1rem;
+}
+
 .PostInfo-namespace-generic{
     color: black;
 }
