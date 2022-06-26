@@ -1,7 +1,8 @@
 import React from "react";
 import Redirects from "js/redirects";
 import { Account, Posts } from "js/booru";
-import "./CreatePost.css";
+import styled from "styled-components";
+
 
 export default function CreatePost() {
     async function FormHandler(e) {
@@ -9,6 +10,7 @@ export default function CreatePost() {
 
         if (!Account.loggedIn) {
             alert("You must be logged in to create a post");
+            Redirects.goto(Redirects.login);
             return;
         }
 
@@ -23,12 +25,21 @@ export default function CreatePost() {
         }
     }
 
+    
     return (
-        <form onSubmit={(e) => FormHandler(e)} style={{margin:".5rem"}}>
+        <Container onSubmit={(e) => FormHandler(e)} style={{margin:".5rem"}}>
             <input type="file" content="Create Post" accept="video/*,image/*" />
             <br/>
             <input type="submit" value="Create"/>
-        </form>
+        </Container>
     );
 }
 
+const Container = styled.form`
+    padding: .5rem;
+
+    /* Look */
+    background-color: var(--COLOR-2);
+    border: .2em solid var(--COLOR-4);
+    border-radius: 1rem;
+`
