@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 export default function Video(props) {
     let { video } = props;
@@ -11,25 +12,29 @@ export default function Video(props) {
         e.target.volume = volume || 1.0;
     }
 
-
-    const VideoStyle = {
-        width: "100%",
-        height: "100%",
-        objectFit: "contain",
-    };
-
     return (
-        <video
+        <Player
             className={props.className}
-            style={VideoStyle}
-            src={video.url}
-            height={video.height}
-            width={video.width}
+            onCanPlay={setVolume}
+            onVolumeChange={updateVolume}
             autoPlay
             loop
             controls
-            onCanPlay={setVolume}
-            onVolumeChange={updateVolume}
-        />
+        >
+            <source
+                src={video.url}
+                height={video.height}
+                width={video.width}
+                media={video.mime}
+            />
+        </Player>
     );
 }
+
+
+const Player = styled.video`
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: black;
+`
