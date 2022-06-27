@@ -8,8 +8,10 @@ const RateLimited = new Error("Your being rate-limited, please wait")
 
 
 export default class Account {
-    LoginFailure = LoginFailure
-    PasswordReset = PasswordReset
+    static LoginFailure = LoginFailure
+    static PasswordReset = PasswordReset
+    static WrongAPIVersion = WrongAPIVersion
+    static RateLimited = RateLimited
 
     static get username(): String {
         return window.localStorage.getItem("LoginUsername");
@@ -50,6 +52,7 @@ export default class Account {
                     resolve();
                 } else {
                     let err;
+                    console.log(xhr.status)
                     if (xhr.status === 401) {
                         err = LoginFailure;
                     } else if (xhr.status === 406) {
@@ -61,7 +64,7 @@ export default class Account {
                     } else {
                         err = new Error(xhr.response);
                     }
-                    throw (err)
+                    reject(err)
                 }
             };
             xhr.send(`username=${username}&password=${password}`);
