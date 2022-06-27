@@ -4,7 +4,8 @@ import Redirects from "js/redirects";
 import { Account } from "js/booru";
 
 
-export default function LoginForm() {
+export default function LoginForm(props) {
+    let { hide } = props;
     let usernameRef = useRef(null);
     let passwordRef = useRef(null);
     let errorRef = useRef(null);
@@ -18,8 +19,20 @@ export default function LoginForm() {
         return { username, password };
     }
 
-    function showError(msg) {
-        errorRef.current.innerText = msg;
+    function showError(err) {
+        let text;
+        if (err === Account.LoginFailure) {
+            text = "Invalid Username or Passowrd"
+        } else if (err === Account.PasswordReset) {
+            text = "Your password was reset"
+        } else if (err === Account.WrongAPIVersion) {
+            text = "Wrong API Version"
+        } else if (err === Account.RateLimited) {
+            text = "Your being ratelimited, please wait"
+        } else {
+            text = "An Unknown Error Occured"
+        }
+        errorRef.current.innerText = text;
     }
 
     function LoginCallback(e) {
@@ -29,8 +42,8 @@ export default function LoginForm() {
             try {
                 await Account.login(username, password);
                 Redirects.goto(Redirects.profile());
-            } catch (error) {
-                showError(error.message);
+            } catch (err) {
+                showError(err);
             }
         })()
     }
@@ -43,8 +56,8 @@ export default function LoginForm() {
                 await Account.register(username, password);
                 await Account.login(username, password);
                 Redirects.goto(Redirects.profile());
-            } catch (e) {
-                showError(e);
+            } catch (err) {
+                showError(err);
             }
         })();
     }
@@ -52,11 +65,13 @@ export default function LoginForm() {
 
     return (
         <Container className="bordered">
+            <ExitButton onClick={hide} src="/images/cross.svg"/>
             <div>
                 <TextInput type="username" placeholder="Username" ref={usernameRef} />
                 <br />
                 <TextInput type="password" placeholder="Password" ref={passwordRef} />
             </div>
+            <br />
             <ButtonContainer>
                 <Button type="submit" value="Login" onClick={LoginCallback} />
                 <Button type="submit" value="Register" onClick={RegisterCallback} />
@@ -67,7 +82,7 @@ export default function LoginForm() {
 }
 
 const Container = styled.div`
-    padding: .5rem;
+    padding: 1.5rem;
     width: min(20rem,50vw);
     border-radius: 1rem;
 `
@@ -80,7 +95,6 @@ const TextInput = styled.input`
 const Button = styled.input`
     width: 100%;
     font-weight: bold;
-
 `
 
 const ButtonContainer = styled.div`
@@ -92,4 +106,15 @@ const ButtonContainer = styled.div`
 const ErrorText = styled.div`
     text-align:center;
     font-size:medium;
+`
+
+
+const ExitButton = styled.img`
+    position:absolute;
+    top:.5rem;
+    right:.5rem;
+    width: 1rem;
+    height: 1rem;
+
+    cursor:pointer;
 `

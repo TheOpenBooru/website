@@ -8,7 +8,7 @@ export default function SettingsEditor(props) {
     }
     return (
         <Container>
-            <SettingContainer>
+            <Setting>
                 <SettingLabel htmlFor="PostPreview">
                     Fullscreen Button Previews:
                 </SettingLabel>
@@ -18,8 +18,8 @@ export default function SettingsEditor(props) {
                     defaultChecked={Settings.fullscreenPostPreviews}
                     onClick={(e) => UpdateSetting("fullscreenPostPreviews", e.target.checked) }
                 />
-            </SettingContainer>
-            <SettingContainer>
+            </Setting>
+            <Setting>
                 <SettingLabel htmlFor="GridSize">Grid Size:</SettingLabel>
                 <SettingInput
                     type="range"
@@ -33,37 +33,58 @@ export default function SettingsEditor(props) {
                         e.target.title = `Grid Size is ${value}rems`;
                     }}
                 />
-            </SettingContainer>
-            {/* <SettingContainer>
+            </Setting>
+            <Setting>
                 <SettingLabel htmlFor="ApiUrl">API Url:</SettingLabel>
                 <SettingInput
                     type="url"
                     name="ApiUrl"
                     defaultValue={Settings.apiUrl}
-                    onChange={(e) => (Settings.apiUrl = e.target.value)}
+                    onChange={updateAPI}
                 />
-            </SettingContainer> */}
+            </Setting>
         </Container>
     );
 }
 
-const SettingContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    padding: .5rem;
-    border-bottom: 1px solid black;
-`;
+
+function updateAPI(e) {
+    const url_regex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
+    (async () => {
+        let url = e.target.value;
+        if (url_regex.test(url)) {
+            let r = await fetch(url);
+            if (r.status === 200) {
+                Settings.apiUrl = url;
+            }
+        }
+    })()
+}
+
 
 const Container = styled.div`
-    border: var(--COLOR-4) .2rem solid;
+    position: absolute;
+    right:0;
+    border-left: var(--COLOR-4) .2rem solid;
     background-color: var(--COLOR-2);
     width: fit-content;
+    height: var(--PAGE-HEIGHT);
 `;
+
+
+const Setting = styled.div`
+    padding: .5rem;
+    border-bottom: 1px solid black;
+
+    display: flex;
+    flex-direction: row;
+`;
+
 
 const SettingLabel = styled.label`
     width: 15rem;
-`;
+    `;
 
 const SettingInput = styled.input`
-    width: fit-content;
+    width: 10rem;
 `;

@@ -11,6 +11,7 @@ export default function Profile(props) {
     let LoginRef = useRef();
     function logOut() {
         Account.logout();
+        Redirects.goto(Redirects.home)
     }
     function logIn() {
         toggleLoginBox();
@@ -26,13 +27,13 @@ export default function Profile(props) {
     return (
         <Core title={"Open Booru: Profile"} description={`Open Booru Profile Page`}>
             <Container>
-                <MessageBox ref={LoginRef} style={{display:"none"}}>
-                    <LoginForm/>
-                </MessageBox>
                 {Account.loggedIn
                     ? <LogoutButton onClick={logOut}>Logout</LogoutButton>
                     : <LogoutButton onClick={logIn}>Login</LogoutButton>
                 }
+                <MessageBox ref={LoginRef} style={{display:"none"}}>
+                    <LoginForm hide={toggleLoginBox} />
+                </MessageBox>
                 <SettingsEditor/>
             </Container>
         </Core>
@@ -42,7 +43,7 @@ export default function Profile(props) {
 
 const LogoutButton = styled.button`
     position:absolute;
-    right:0;
+    left:0;
     height:2rem;
     width:6rem;
     border: var(--COLOR-4) .2em solid;
