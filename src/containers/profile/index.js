@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 import Core from "containers/core";
 import MessageBox from "components/MessageBox";
-import LoginForm from "components/LoginForm";
+import LoginForm from "./LoginForm";
 import SettingsEditor from "./settings";
 import Redirects from "js/redirects";
 import { Account } from "js/booru";
