@@ -11,8 +11,6 @@ export function useIsMobile(): Boolean {
 
     function updateMobileStatus() {
         let isMobileCurrent = getMobileStatus()
-        console.log("Checking Is Mobile")
-        console.log(isMobileCurrent)
         setMobileStatus(isMobileCurrent);
     }
 

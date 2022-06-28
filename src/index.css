@@ -5,8 +5,8 @@
   --COLOR-3:#306173;
   --COLOR-4:#1e3d48;
   --COLOR-5:#0c181d;
-  --NAVBAR_HEIGHT: 3.2rem;
-  --PAGE-HEIGHT: calc(100vh - var(--NAVBAR_HEIGHT));
+  --NAVBAR-HEIGHT: 2.8rem;
+  --PAGE-HEIGHT: calc(100vh - var(--NAVBAR-HEIGHT));
 }
 
 body {

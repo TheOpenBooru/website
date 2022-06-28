@@ -3,9 +3,7 @@ import styled from "styled-components";
 import Settings from "js/settings";
 
 export default function SettingsEditor(props) {
-    function UpdateSetting(key, value) {
-        Settings[key] = value;
-    }
+    console.log(Settings.fullscreenPostPreviews)
     return (
         <Container>
             <Setting>
@@ -15,8 +13,8 @@ export default function SettingsEditor(props) {
                 <SettingInput
                     type="checkbox"
                     name="PostPreview"
-                    defaultChecked={Settings.fullscreenPostPreviews}
-                    onClick={(e) => UpdateSetting("fullscreenPostPreviews", e.target.checked) }
+                    defaultChecked={Settings.fullscreenPostPreviews ? true : null}
+                    onChange={() => {Settings.fullscreenPostPreviews = !Settings.fullscreenPostPreviews}}
                 />
             </Setting>
             <Setting>
@@ -63,11 +61,9 @@ function updateAPI(e) {
 
 
 const Container = styled.div`
-    position: absolute;
-    right:0;
-    border-left: var(--COLOR-4) .2rem solid;
+    border-right: var(--COLOR-4) .2rem solid;
+    width: 100vw;
     background-color: var(--COLOR-2);
-    width: fit-content;
     height: var(--PAGE-HEIGHT);
 `;
 

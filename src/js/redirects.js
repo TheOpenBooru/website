@@ -9,20 +9,12 @@ export default class Redirects {
         window.location.href = url;
     }
 
-    static home() {
-        return "/posts";
-    }
+    static home = () => "/"
+    static post = (id) =>`/post/${id}`
 
     static auth ="/auth";
     static profile = "/profile";
+    static settings = "/settings";
 
-    static post(id) {
-        return `/post/${id}`;
-    }
-
-    static search(layout = null) {
-        let url = "/posts";
-        if (layout) url += `/${layout}`;
-        return url;
-    }
+    static search = (layout = "") => "/posts/" + layout 
 }

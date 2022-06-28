@@ -32,7 +32,7 @@ function GenerateImageUrl(post, defaultImage) {
         return null
     } else {
         let isPreviewEnabled = Settings.fullscreenPostPreviews
-        return isPreviewEnabled ? defaultImage : post.thumbnail.url
+        return isPreviewEnabled ? post.thumbnail.url : defaultImage
     }
 }
 

@@ -27,7 +27,8 @@ export default function Posts(props) {
         setSearch(new PostSearch(query));
     }
 
-    useEffect(() => (async () => prepend_posts())(), [search]); // eslint-disable-line
+    useEffect(() => (async () => await prepend_posts())(), [search]);
+
 
     async function prepend_posts() {
         await search.extend(100);

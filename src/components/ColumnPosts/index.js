@@ -8,7 +8,7 @@ export default function ColumnPosts(props) {
     let [columnCount, setColumnCount] = useState(4);
     
     window.addEventListener('resize',calculateColumnCount, true);
-    useEffect(calculateColumnCount,[])
+    useEffect(calculateColumnCount, [])
     function calculateColumnCount(e) {
         let increments = (window.innerWidth / 500).toFixed();
         let columnCount = Math.max(2, Math.min(6, increments))
@@ -19,6 +19,7 @@ export default function ColumnPosts(props) {
         const { scrollTop, offsetHeight, scrollHeight } = e.target;
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
+        console.log(distanceFromBottom)
         if (distanceFromBottom < 100) {
             morePostsCallback();
         }

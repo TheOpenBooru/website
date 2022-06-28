@@ -2,7 +2,14 @@ import Settings from "js/settings";
 import Account from "./account"
 import { PostQuery } from "./types"
 
+
+let PermissionError = new Error("You don't have the Permissions to do this")
+
+
 export default class Posts{
+    static PermissionError = PermissionError
+
+
     static async get(id) {
         let url = `${Settings.apiUrl}/posts/post/${id}`
         let r = await fetch(url, {"cache":"default"});
@@ -15,28 +22,26 @@ export default class Posts{
     }
 
     static async create(file: File) {
-        if (!Account.loggedIn){
-            throw new Error("Not logged in");
-        } else {
-            let formData = new FormData();
-            formData.append("image", file);
-            return new Promise((resolve, reject) => {
-                let xhr = new XMLHttpRequest();
-                xhr.open("POST", Settings.apiUrl + "/posts/create");
-                xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
-                xhr.onload = () => {
-                    if (xhr.status === 201) {
-                        let json = JSON.parse(xhr.response);
-                        
-                        resolve(json)
+        let formData = new FormData();
+        formData.append("image", file);
+        return new Promise((resolve, reject) => {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", Settings.apiUrl + "/posts/create");
+            xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
+            xhr.onload = () => {
+                if (xhr.status === 201) {
+                    let json = JSON.parse(xhr.response);
+                    resolve(json)
+                } else {
+                    if (xhr.status === 401) {
+                        reject(this.PermissionError)
                     } else {
-                        let error = new Error(xhr.response)
-                        reject(error)
+                        reject(new Error("Generic Error"))
                     }
                 }
-                xhr.send(formData);
-            });
-        }
+            }
+            xhr.send(formData);
+        });
     }
 
     static async search(query: PostQuery, index=0, count=64) {

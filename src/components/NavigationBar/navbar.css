@@ -3,7 +3,7 @@
     position: sticky;
     top: 0;
     left: 0;
-    height: var(--NAVBAR_HEIGHT);
+    height: var(--NAVBAR-HEIGHT);
     min-width: 360px;
     width: 100vw;
     z-index: 1;
@@ -15,15 +15,16 @@
     /* Grid */
     display: flex;
     object-fit: fill;
+    align-items: center;
 }
 
 .navbar-section {
     /* Shape */
     min-width: fit-content;
     width: 5rem;
-    border-radius: 1.2rem;
+    height: calc(var(--NAVBAR-HEIGHT) - 0.6rem);
+    border-radius: 1rem;
     margin: 0.3rem;
-    padding: 0.3rem;
     
     /* Center containinng items */
     display: flex;
@@ -47,9 +48,6 @@
     margin-right: .5rem;
 }
 
-#navbar-AccountSection{
-}
-
 #version-number {
     font-size: larger;
 }
@@ -66,7 +64,7 @@
     height: 1.5rem;
 }
 
-@media screen and (max-width: 40rem) {
+@media screen and ((max-width: 50rem) or (max-aspect-ratio: 1/1)){
     #navbar {
         justify-content: space-around;
     }

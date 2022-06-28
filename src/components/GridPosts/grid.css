@@ -13,7 +13,7 @@
     
     /* Position */
     max-width: 100%;
-    max-height: calc(100vh - 4rem - var(--NAVBAR_HEIGHT));
+    max-height: var(--PAGE-HEIGHT);
     overflow-y: auto;
 
 
