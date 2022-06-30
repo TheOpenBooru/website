@@ -66,9 +66,9 @@ export default function FullscreenPosts(props) {
     return (
         <Container ref={baseRef}>
             <PostContainer>
-                {noButtons ? null : <LeftButton callback={GoToPreviousPost} post={prevPost} />}
+                {!noButtons ? <LeftButton callback={GoToPreviousPost} post={prevPost}/> : null }
                 <PostMedia post={postData} noButtons={noButtons} />
-                {noButtons ? null : <RightButton callback={GoToNextPost} post={nextPost} />}
+                {!noButtons ? <RightButton callback={GoToNextPost} post={nextPost}/> : null}
             </PostContainer>
             <PostInfo post={postData}/>
         </Container>
@@ -94,7 +94,7 @@ const PostContainer = styled.div`
     height: 100%;
     user-select: none;
     
-    background-color: var(--COLOR-BACKGROUND);
+    background-color: var(--BACKGROUND);
     border-bottom: #000 solid 1px;
 
     /* Flex */

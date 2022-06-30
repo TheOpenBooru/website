@@ -52,29 +52,29 @@ const LayoutButton = styled.a`
     margin-left: .1rem;
     margin-right: .1rem;
     
-    background-color: var(--COLOR-2);
-    border: .15rem solid var(--COLOR-4);
+    background-color: var(--BACKGROUND-3);
+    border: .15rem solid black;
     border-radius: .4rem;
     
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
     &:hover{
-        background-color: var(--COLOR-3);
+        background-color: var(--BACKGROUND-3-HOVER);
     }
 `
 
 const LayoutIcon = styled.img`
-    transition: 0.2s ease-in-out;
-    animation-fill-mode: forwards;
-    
     width: 80%;
     height: 80%;
     filter: invert(0%);
+    
+    animation-fill-mode: forwards;
+    transition: 0.2s ease-in-out;
     ${LayoutButton}:hover &{
-        cursor: pointer;
-        width: 90%;
-        height: 90%;
         filter: invert(90%);
     }
 `

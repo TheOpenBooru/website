@@ -61,9 +61,8 @@ function updateAPI(e) {
 
 
 const Container = styled.div`
-    border-right: var(--COLOR-4) .2rem solid;
     width: 100vw;
-    background-color: var(--COLOR-2);
+    background-color: var(--BACKGROUND-3);
     height: var(--PAGE-HEIGHT);
 `;
 

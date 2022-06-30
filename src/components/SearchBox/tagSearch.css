@@ -11,9 +11,9 @@
     top: 2.5rem;
     left: 9rem;
 
-    border: .2rem solid var(--COLOR-4);
+    border: .2rem solid var(--BORDER-1);
     border-radius: 1rem;
-    background-color: var(--COLOR-1);
+    background-color: var(--BACKGROUND-2);
     padding: .2rem;
 
     display:flex;
@@ -27,6 +27,6 @@
     margin-top: .2rem;
     padding: .1rem;
     border-radius: 1rem;
-    background-color: var(--COLOR-3);
-    border: .1rem solid var(--COLOR-4);
+    background-color: var(--BACKGROUND-4);
+    border: .1rem solid var(--BORDER-1);
 }

@@ -1,7 +1,7 @@
 #PostInfo{
     /* Position */
     position: relative;
-    background-color: var(--COLOR-2);
+    background-color: var(--BACKGROUND-3);
 
     display: flex;
     flex-flow: row nowrap;
@@ -31,9 +31,9 @@
     user-select: none;
     width: fit-content;
 
-    border: .1rem solid var(--COLOR-4);
+    border: .1rem solid var(--BORDER-2);
     border-radius: 1rem;
-    background-color: var(--COLOR-3);
+    background-color: var(--BACKGROUND-4);
 
     padding: 0 .3rem 0 .3rem;
 }

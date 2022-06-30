@@ -9,11 +9,10 @@ export function LeftButton(props) {
 
     return (
         <LeftButtonContainer onClick={callback}>
-            <Icon src={img} alt="" />
+            <Icon key={img} src={img} alt="" />
         </LeftButtonContainer>
     );
 }
-
 
 export function RightButton(props) {
     let { callback, post } = props;
@@ -21,7 +20,7 @@ export function RightButton(props) {
 
     return (
         <RightButtonContainer onClick={callback}>
-            <Icon src={img} alt="" />
+            <Icon key={img} src={img} alt="" />
         </RightButtonContainer>
     );
 }
@@ -43,13 +42,13 @@ const ButtonContainer = styled.div`
 
     /* Look */
     outline: solid 1px #000;
-    background-color: var(--COLOR-1);
-    
+    background-color: var(--BACKGROUND-2);
+
     /* Center Children (Icon) */
     display: flex;
     align-items: center;
     justify-content: center;
-`
+`;
 
 
 const LeftButtonContainer = styled(ButtonContainer)`

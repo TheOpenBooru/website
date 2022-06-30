@@ -9,7 +9,7 @@
     z-index: 1;
     
     /* Look */
-    background-color: var(--COLOR-1);
+    background-color: var(--BACKGROUND-2);
     border-bottom: black 1px solid;
 
     /* Grid */
@@ -37,9 +37,15 @@
     user-select: none;
     justify-content: center;
     text-decoration: none;
+    cursor: pointer;
 
-    border: 3px solid var(--COLOR-4);
-    background-color: var(--COLOR-2);
+    transition: .2s ease-in-out;
+    border: 3px solid var(--BORDER-1);
+    background-color: var(--BACKGROUND-3);
+}
+
+.navbar-section:hover{
+    border-color: var(--BORDER-1-HOVER);
 }
 
 .navbar-section > *{

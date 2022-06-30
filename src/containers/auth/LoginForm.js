@@ -88,8 +88,8 @@ export default function LoginForm() {
 }
 
 const ContainerForm = styled.form`
-    border: 3px solid var(--COLOR-4) ;
-    background-color: var(--COLOR-2);
+    border: 3px solid var(--BORDER-1) ;
+    background-color: var(--BACKGROUND-3);
     transition: 0.15s ease-out;
 
     width: min(20rem,50vw);
@@ -109,18 +109,18 @@ const InputsContainer = styled.div`
 
 const InputText = styled.input`
     font-size: larger;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
 
-    background-color: var(--COLOR-1);
-    border-color: var(--COLOR-3);
+    background-color: var(--BACKGROUND-2);
+    border-color: var(--BACKGROUND-4);
     color: black;
-    
+
     width: calc(100% - 1.5rem);
-    &::placeholder{
-        opacity:0.8;
-        color:black;
+    &::placeholder {
+        opacity: 0.8;
+        color: black;
     }
-`
+`;
 
 
 const ButtonsContainer = styled.div`
@@ -138,8 +138,8 @@ const SubmitButton = styled.input`
     font-size: large;
     font-weight: bold;
 
-    background-color: var(--COLOR-3);
-    border-color: var(--COLOR-4);
+    background-color: var(--BACKGROUND-4);
+    border-color: var(--BORDER-1);
 `
 
 

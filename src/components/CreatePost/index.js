@@ -40,7 +40,7 @@ const Container = styled.form`
     padding: .5rem;
 
     /* Look */
-    background-color: var(--COLOR-2);
-    border: .2em solid var(--COLOR-4);
+    background-color: var(--BACKGROUND-3);
+    border: .2em solid var(--BORDER-1);
     border-radius: 1rem;
 `

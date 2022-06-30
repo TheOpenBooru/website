@@ -35,9 +35,9 @@
     padding: .2rem;
     border-radius: 2rem;
     
-    background-color: var(--COLOR-3);
+    background-color: var(--BACKGROUND-4);
     border-radius: 1rem;
-    border: .1rem solid var(--COLOR-4);
+    border: .1rem solid var(--BORDER-1);
 
     display: flex;
     justify-content: center;

@@ -57,12 +57,11 @@ const Image = styled.img`
     width:100%;
     height: auto;
     border-radius: 1rem;
-    outline: .2rem solid var(--COLOR-2);
-    background-color: var(--COLOR-2);
+    outline: .2rem solid var(--BACKGROUND-3);
+    background-color: var(--BACKGROUND-3);
     transition: all 0.1s ease-in;
     &:hover{
-        outline-color: var(--COLOR-3);
         outline-width: .3rem;
-        border-radius: 2rem;
+        border-radius: 3rem;
     }
 `

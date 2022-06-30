@@ -15,8 +15,8 @@
     height: 2rem;
     margin: .2rem;
 
-    background-color: var(--COLOR-2);
-    border: .2rem solid var(--COLOR-4);
+    background-color: var(--BACKGROUND-3);
+    border: .2rem solid var(--BORDER-1);
     border-radius: .5rem;
 
     display: flex;
@@ -26,8 +26,8 @@
 }
 
 .posts-overlay-button:hover{
-    background-color: var(--COLOR-3);
-    border-color: var(--COLOR-5);
+    background-color: var(--BACKGROUND-3);
+    border-color: var(--BORDER-2);
 }
 
 .posts-overlay-button img{
@@ -40,7 +40,7 @@
 .posts-overlay-button:hover img{
     width: 90%;
     height: 90%;
-    filter: invert(90%);
+    filter: invert(100%);
 }
 
 .posts-ErrorText{
