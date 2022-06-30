@@ -7,7 +7,7 @@ import TagList from "./TagList";
 import "./searchBox.css";
 
 export default function SearchBox(props) {
-    let { query, setQuery } = props;
+    let { query, setQuery, close } = props;
     if (!query) query = new PostQuery();
     let [includeTags, setIncludeTags] = useState(query.include_tags);
     let [excludeTags, setExcludeTags] = useState(query.exclude_tags);
@@ -21,6 +21,7 @@ export default function SearchBox(props) {
         tmp_query.include_tags = includeTags;
         tmp_query.exclude_tags = excludeTags;
         setQuery(tmp_query);
+        close();
     }
 
     return (

@@ -36,7 +36,7 @@ export default function PostOverlay(props) {
     return (
         <React.Fragment>
             <MessageBox ref={searchBoxRef} style={{display:"none"}}>
-                <SearchBox query={query} setQuery={setQuery} />
+                <SearchBox query={query} setQuery={setQuery} close={toggleSearchBox} />
             </MessageBox>
             <MessageBox ref={createBoxRef}  style={{display:"none"}}>
                 <CreatePost />

@@ -35,7 +35,6 @@ export default function PostInfo(props) {
             <SourceEntry />
             <Entry name="Upvotes" value={post.upvotes} />
             <Entry name="Downvotes" value={post.downvotes} />
-            
         </div>
     );
 }
