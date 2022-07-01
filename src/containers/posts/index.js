@@ -7,6 +7,7 @@ import FullscreenPosts from "components/FullscreenPosts";
 import { PostSearch, PostQuery } from "js/booru";
 import Overlay from "./overlay";
 import "./search.css";
+import "./loading.css";
 
 function getQuery() {
     let savedQueryJSON = window.sessionStorage.getItem("posts-search");
@@ -23,6 +24,7 @@ export default function Posts(props) {
     let [ posts, setPosts ] = useState([]);
 
     function setQuery(query) {
+        setPosts([]);
         window.sessionStorage.setItem("posts-search", JSON.stringify(query));
         setSearch(new PostSearch(query));
     }
@@ -46,8 +48,13 @@ export default function Posts(props) {
     return (
         <Core title={`Open Booru: ${layout ? layout : "Post"} Search`}>
             <Overlay query={ search.query} setQuery={setQuery} />
-            {search.finished && posts.length === 0
-                ? <span className="posts-ErrorText">No Posts Found</span>
+            {posts.length === 0
+                ? <div className="posts-ErrorText">
+                    {search.finished
+                        ? "No Posts Found"
+                        : <div className="lds-facebook"><div></div><div></div><div></div></div>
+                    }
+                </div>
                 : <PostsLayout posts={posts} morePostsCallback={prepend_posts} />
             }
         </Core>
