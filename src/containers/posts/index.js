@@ -30,7 +30,7 @@ export default function Posts(props) {
     }
 
     useEffect(() => (async () => await prepend_posts())(), [search]);
-
+    
 
     async function prepend_posts() {
         await search.extend();
@@ -55,7 +55,13 @@ export default function Posts(props) {
                         : <LoadingIcon fadeIn />
                     }
                 </div>
-                : <PostsLayout finished={search.finished} posts={posts} morePostsCallback={prepend_posts} />
+                : <PostsLayout 
+                    finished={search.finished}
+                    posts={posts}
+                    morePostsCallback={prepend_posts}
+                    setQuery={setQuery}
+                    query={search.query}
+                />
             }
         </Core>
     );
