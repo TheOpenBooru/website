@@ -30,6 +30,14 @@ export default function TagSearch(props) {
         }
     }
 
+    function keyPressHandler(e) {
+        if (e.key !== "Enter") return;
+        if (predictedTags.length > 0) {
+            let tag = predictedTags[0]
+            addTagCallback(tag.name)()
+        }
+    }
+
     function onInput(e) {
         let text = e.target.value;
         text = text.replace(' ','_')
@@ -44,6 +52,7 @@ export default function TagSearch(props) {
                 id="searchbox-search"
                 type="search"
                 value={text}
+                onKeyDownCapture={keyPressHandler}
                 onChange={onInput}
                 onKeyDown={addTagCallback}
             />
