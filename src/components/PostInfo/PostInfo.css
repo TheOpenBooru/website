@@ -6,7 +6,7 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: baseline;
-    padding-bottom: 4rem;
+    padding-bottom: 1rem;
 }
 
 #PostInfo-postData{
