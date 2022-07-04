@@ -4,8 +4,8 @@ import "./tagSearch.css"
 
 export default function TagSearch(props) {
     let { includeTags, setIncludeTags } = props;
-    let [predictedTags, setPredictedTags] = useState([]);
-    let [ text, setText] = useState("");
+    let [ predictedTags, setPredictedTags ] = useState([]);
+    let [ text, setText ] = useState("");
     
     function addTagCallback(tag) {
         return () => {
@@ -56,19 +56,30 @@ export default function TagSearch(props) {
                 onChange={onInput}
                 onKeyDown={addTagCallback}
             />
-            {predictedTags.length === 0 ? null : (
-                <div id="searchbox-autocomplete">
-                    {predictedTags.map((tag) => (
-                        <span
-                            key={tag.name}
-                            className="searchbox-autocomplete-item searchbox-autocomplete"
-                            onClick={addTagCallback(tag.name)}
-                        >
-                            {tag.name}
-                        </span>
-                    ))}
-                </div>
-            )}
+            <PredictedTags tags={predictedTags} callback={addTagCallback} />
         </React.Fragment>
     );
+}
+
+
+function PredictedTags(props) {
+    let { tags, callback } = props;
+    if (tags.length === 0) {
+        return null
+    } else {
+        return (
+            <div id="searchbox-autocomplete">
+                {tags.map((tag) => (
+                    <span
+                        key={tag.name}
+                        className="searchbox-autocomplete-item searchbox-autocomplete"
+                        onClick={callback(tag.name)}
+                    >
+                        {tag.name}
+                    </span>
+                ))}
+            </div>
+
+        )
+    }
 }
