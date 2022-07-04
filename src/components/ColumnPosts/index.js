@@ -1,64 +1,79 @@
 import React, { useEffect, useState } from "react";
 import Column from "./column";
+import LoadingIcon from "components/Loading";
+import { SplitPosts } from "./utils";
+import styled from "styled-components";
 import "./columns.css";
 
-
 export default function ColumnPosts(props) {
-    let { posts, morePostsCallback } = props;
+    let { posts, finished, morePostsCallback } = props;
     let [columnCount, setColumnCount] = useState(4);
-    
-    window.addEventListener('resize',calculateColumnCount, true);
-    useEffect(calculateColumnCount, [])
+
+    window.addEventListener("resize", calculateColumnCount, true);
+    useEffect(calculateColumnCount, []);
     function calculateColumnCount(e) {
         let increments = (window.innerWidth / 500).toFixed();
-        let columnCount = Math.max(2, Math.min(6, increments))
-        setColumnCount(columnCount)
+        let columnCount = Math.max(2, Math.min(6, increments));
+        setColumnCount(columnCount);
     }
 
-    function scrollHandler(e){
+    function scrollHandler(e) {
         const { scrollTop, offsetHeight, scrollHeight } = e.target;
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
-        console.log(distanceFromBottom)
-        if (distanceFromBottom < 100) {
+        if (distanceFromBottom < 400) {
             morePostsCallback();
         }
     }
-    
+
     let columns = SplitPosts(posts, columnCount);
 
     return (
-        <div id="columnsPosts-container">
-            <div id="columnsPosts" onScroll={scrollHandler}>
-                {columns.map((posts, i) => <Column key={i} posts={posts} />)}
-            </div>
-        </div>
+        <Container onScroll={scrollHandler}>
+            <ColumnsContainer>
+                {columns.map((posts, i) => (
+                    <Column key={i} posts={posts} />
+                ))}
+            </ColumnsContainer>
+            {finished ? (
+                <HorzontalLine />
+            ) : (
+                <LoadingContainer>
+                    <LoadingIcon />
+                </LoadingContainer>
+            )}
+        </Container>
     );
 }
 
 
+const HorzontalLine = styled.div`
+    width: 100%;
+    min-height: 0.5rem;
+    background-color: var(--BACKGROUND-3);
+`;
 
 
-function SplitPosts(array, parts) {
-    let buckets = Array.apply(null, Array(parts)).map(() => []);
-    array.forEach((v) => {
-        let smallestColumnIndex = getShortestColumnIndex(buckets);
-        buckets[smallestColumnIndex].push(v);
-    });
-    return buckets;
-}
+const ColumnsContainer = styled.div`
+    width: 100%;
+    /* Flex */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`;
 
+const Container = styled.div`
+    --COLUMN-WIDTH: 18rem;
+    --IMAGE-MARGIN: 0.5rem;
 
-function getShortestColumnIndex(columns) {
-    let heights = new Array(columns.length).fill(0);
+    height: var(--PAGE-HEIGHT);
+    overflow-y: auto;
 
-    columns.forEach((clmn, i) => {
-        let total = 0;
-        clmn.forEach((v) => (total += v.full.height / v.full.width));
-        heights[i] = total;
-    });
-    
-    let MinHeight = Math.min(...heights);
-    let index = heights.indexOf(MinHeight);
-    return index;
-}
+    display: flex;
+    flex-flow: nowrap column;
+    align-items: center;
+`;
+
+const LoadingContainer = styled.div`
+    margin-bottom: 2rem;
+`;

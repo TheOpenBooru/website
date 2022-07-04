@@ -2,18 +2,3 @@
     --COLUMN-WIDTH: 18rem;
     --IMAGE-MARGIN: .5rem;
 }
-
-@media screen and (max-aspect-ratio: 1/1) {
-    .columns{max-height:100vh !important}
-}
-
-#columnsPosts{
-    height:var(--PAGE-HEIGHT);
-    /* Scroll */
-    overflow-y: auto;
-
-    /* Flex */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
