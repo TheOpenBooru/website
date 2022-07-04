@@ -14,9 +14,7 @@ ReactDOM.render(
             <Route path="/posts" element={<Posts />} />
             <Route path="/posts/:layout" element={<Posts />} />
             <Route path="/post/:id" element={<Post />} />
-            
             <Route path="/auth" element={<Auth />} />
-            <Route path="/settings" element={<Settings />} />
         </Routes>
     </BrowserRouter>,
     document.getElementById("root"),

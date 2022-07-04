@@ -2,17 +2,16 @@ import React from "react";
 import PostsSection from "./PostsSection";
 import { Account } from "js/booru";
 import Redirects from "js/redirects";
-import { useIsMobile } from "js/mobileHook";
+import useMobile from "js/mobileHook";
 import "./navbar.css";
 
 export default function NavigationBar() {
-    let isMobile = useIsMobile();
+    let isMobile = useMobile();
     if (!isMobile) {
         return (
             <nav id="navbar">
                 <VersionNumber text />
                 <PostsSection text />
-                <SettingsSection text />
                 <AccountSection text />
             </nav>
         );
@@ -21,7 +20,6 @@ export default function NavigationBar() {
             <nav id="navbar">
                 <AccountSection text />
                 <PostsSection text />
-                <SettingsSection text />
             </nav>
         );
     }

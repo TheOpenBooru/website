@@ -1,13 +1,13 @@
 import React from "react";
 import Settings from "js/settings";
 import Redirects from "js/redirects";
-import { useIsMobile } from "js/mobileHook";
+import useMobile from "js/mobileHook";
 import LayoutButtons from "./LayoutButtons";
 
 
 export default function PostsSection(props) {
     let { text } = props;
-    let isMobile = useIsMobile();
+    let isMobile = useMobile();
 
     if (isMobile) {
         return (

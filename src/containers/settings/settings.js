@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Settings from "js/settings";
 
 export default function SettingsEditor(props) {
-    console.log(Settings.fullscreenPostPreviews)
     return (
         <Container>
             <Setting>
@@ -14,7 +13,7 @@ export default function SettingsEditor(props) {
                     type="checkbox"
                     name="PostPreview"
                     defaultChecked={Settings.fullscreenPostPreviews ? true : null}
-                    onChange={() => {Settings.fullscreenPostPreviews = !Settings.fullscreenPostPreviews}}
+                    onChange={() => { Settings.fullscreenPostPreviews = !Settings.fullscreenPostPreviews }}
                 />
             </Setting>
             <Setting>
@@ -22,15 +21,17 @@ export default function SettingsEditor(props) {
                 <SettingInput
                     type="range"
                     min="4"
-                    defaultValue={Settings.PostsGridSize}
+                    defaultValue={Settings.GridItemSize}
                     max="24"
                     name="GridSize"
+                    title={`Grid Size is ${Settings.GridItemSize}rems`}
                     onChange={(e) => {
                         let value = e.target.value;
-                        Settings.PostsGridSize = value;
+                        Settings.GridItemSize = value;
                         e.target.title = `Grid Size is ${value}rems`;
                     }}
                 />
+                
             </Setting>
             <Setting>
                 <SettingLabel htmlFor="ApiUrl">API Url:</SettingLabel>

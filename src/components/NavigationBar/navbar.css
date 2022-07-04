@@ -70,7 +70,7 @@
     height: 1.5rem;
 }
 
-@media screen and ((max-width: 50rem) or (max-aspect-ratio: 1/1)){
+@media screen and (max-width: 60rem){
     #navbar {
         justify-content: space-around;
     }
