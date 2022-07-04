@@ -8,15 +8,14 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 export default function LoginForm() {
     let errorRef = useRef(null);
 
-    function showError(err) {
-        console.log(err)
+    function parseError(err) {
         let text;
         if (err === Account.LoginFailure) {
-            text = "Invalid Username or Passowrd"
+            text = "Invalid Username or Password"
         } else if (err === Account.PasswordReset) {
             text = "Your password was reset"
         } else if (err === Account.WrongAPIVersion) {
-            text = "Wrong API Version"
+            text = "The API is the wrong version"
         } else if (err === Account.RateLimited) {
             text = "Your being ratelimited, please wait"
         } else if (err === Account.BadPasswordRequirements) {
@@ -26,29 +25,46 @@ export default function LoginForm() {
         } else {
             text = "An Unknown Error Occured"
         }
-        errorRef.current.innerText = text;
+        showText(text);
     }
 
-    async function HandleLogin(username,password) {
-        try {
+    function showText(text) {
+        errorRef.current.innerText = text;
+    }
+    
+    function handleInput(username, password) {
+        if (username === "" || password === "") {
             if (username === "" && password === "") {
-                throw new Error("")
-                
+                showText("Please enter a username and password")
+            } else if (username === "") {
+                showText("Please enter a username")
+            } else if (password === "") {
+                showText("Please enter a password")
             }
+            throw new Error()
+        }
+    }
+
+    async function HandleLogin(username, password) {
+        handleInput(username,password)
+        
+        try {
             await Account.login(username, password);
             Redirects.goto(Redirects.home());
         } catch (err) {
-            showError(err);
+            parseError(err);
         }
     }
     
     async function HandleRegister(username,password) {
+        handleInput(username,password)
+
         try {
             await Account.register(username, password);
             await Account.login(username, password);
             Redirects.goto(Redirects.home());
         } catch (err) {
-            showError(err);
+            parseError(err);
         }
     }
 
