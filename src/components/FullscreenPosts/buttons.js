@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import LoadingIcon from "components/Loading";
 import Settings from "js/settings";
 
 
@@ -15,12 +16,15 @@ export function LeftButton(props) {
 }
 
 export function RightButton(props) {
-    let { callback, post } = props;
+    let { callback, post, finished } = props;
     let img = GenerateImageUrl(post, "/images/right-arrow.svg");
 
     return (
         <RightButtonContainer onClick={callback}>
-            <Icon key={img} src={img} alt="" />
+            {!post && !finished
+                ? <LoadingIcon/>
+                : <Icon key={img} src={img} alt="" />
+            }
         </RightButtonContainer>
     );
 }

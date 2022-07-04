@@ -6,34 +6,29 @@ import PostMedia from "./media";
 import { LeftButton, RightButton} from "./buttons";
 
 export default function FullscreenPosts(props) {
-    let { posts, morePostsCallback, noButtons } = props;
+    let { finished, posts, morePostsCallback, query, setQuery, noButtons } = props;
     let baseRef = React.useRef(null);
     let [ index, setIndex ] = useState(0);
-    let [searchHash, setSearchHash] = useState(0);
+    let [ crntSearchQuery, setCrntSearchQuery ] = useState(query);
     
     morePostsCallback ||= () => {};
-    let postData = posts[index];
+    let crntPost = posts[index];
     let prevPost = posts[index - 1];
     let nextPost = posts[index + 1];
 
-    if (posts.length - index < 32) {
+    let postsRemaining = posts.length - (index + 1)
+    if (postsRemaining < 32) {
         morePostsCallback();
     }
-
-    if (postData == null) {
-        return null;
-    }
-
     
-    let firstPost = posts[0];
-    if (firstPost && searchHash !== firstPost.id) {
-        setSearchHash(firstPost.id);
+    if (query !== crntSearchQuery) {
+        setCrntSearchQuery(query);
         setIndex(0);
     }
     
     
     function VisitPost() {
-        let link = Redirects.post(postData.id);
+        let link = Redirects.post(crntPost.id);
         window.location.href = link;
     }
     
@@ -66,11 +61,11 @@ export default function FullscreenPosts(props) {
     return (
         <Container ref={baseRef}>
             <PostContainer>
-                {!noButtons ? <LeftButton callback={GoToPreviousPost} post={prevPost}/> : null }
-                <PostMedia post={postData} noButtons={noButtons} />
-                {!noButtons ? <RightButton callback={GoToNextPost} post={nextPost}/> : null}
+                {noButtons ? null : <LeftButton callback={GoToPreviousPost} post={prevPost}/> }
+                <PostMedia post={crntPost} noButtons={noButtons} />
+                {noButtons ? null : <RightButton callback={GoToNextPost} post={nextPost} finished={finished}/> }
             </PostContainer>
-            <PostInfo post={postData}/>
+            <PostInfo post={crntPost}/>
         </Container>
     );
 }
@@ -91,7 +86,7 @@ const Container = styled.div`
 
 const PostContainer = styled.div`
     width: 100%;
-    height: 100%;
+    height: calc(100%  - 1.5rem);
     user-select: none;
     
     background-color: var(--BACKGROUND);
