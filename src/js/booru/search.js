@@ -12,7 +12,7 @@ export class PostSearch {
         this.query = query || new PostQuery();
     }
 
-    async extend(count = 64) {
+    async extend(count = 100) {
         if (this.__lock) return;
         if (this.finished) return;
         this.__lock = true;

@@ -2,7 +2,7 @@ const SettingsDefaults = {
     fullscreenPostPreviews: true,
     pauseVideosInBackground: true,
     searchLayout: "column",
-    PostsGridSize: 12,
+    GridItemSize: 12,
     apiUrl: "https://api.openbooru.org",
 };
 

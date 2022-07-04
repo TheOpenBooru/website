@@ -16,7 +16,6 @@ export default function CreatePost() {
                 let post = await Posts.create(file)
                 window.location.href = Redirects.post(post.id);
             } catch (e) {
-                console.log(e)
                 if (e === Posts.PermissionError) {
                     alert("Error: You don't have the permission to do this")
                 } else {

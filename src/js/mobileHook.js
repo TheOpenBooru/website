@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useIsMobile(): Boolean {
+export default function useMobile(): Boolean {
     const [ MobileStatus, setMobileStatus ] = useState(null);
 
     function getMobileStatus() {
