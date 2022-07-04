@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export default function Video(props) {
-    let { video } = props;
+    let { video } = props
     function updateVolume(e) {
         localStorage.setItem("volume", e.target.value);
     }
@@ -14,7 +14,6 @@ export default function Video(props) {
 
     return (
         <Player
-            className={props.className}
             onCanPlay={setVolume}
             onVolumeChange={updateVolume}
             autoPlay
