@@ -1,7 +1,3 @@
-#gridPosts{
-    --IMAGE-SIZE: 9rem;
-}
-
 @media screen and (max-aspect-ratio: 1/1) {
     .post-list {
         --IMAGE-SIZE: 35vw  !important;
@@ -9,11 +5,15 @@
 }
 
 #gridPosts{
-    padding: 1rem 10vw 2rem 10vw;
+     /* Default Variables */
+    --IMAGE-SIZE: 12rem;
+    --MIN-COLUMNS: 2;
+
+    padding: 2rem 10vw 2rem 10vw;
     
     /* Position */
     max-width: 100%;
-    max-height: var(--PAGE-HEIGHT);
+    max-height: calc(var(--PAGE-HEIGHT) - 4rem);
     overflow-y: auto;
 
 
@@ -22,7 +22,7 @@
     align-items: center;
     justify-items: center;
     gap:1rem;
-    grid-template-columns: repeat(auto-fit,minmax(var(--IMAGE-SIZE),1fr));
+    grid-template-columns: repeat(auto-fit,minmax(min(calc(40vw - 2rem),var(--IMAGE-SIZE)),1fr));
 }
 
 .gridPosts-item{

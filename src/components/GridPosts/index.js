@@ -8,7 +8,7 @@ import "./grid.css";
 export default function GridPosts(props) {
     let { posts, morePostsCallback } = props;
 
-    let scrollHandler = (e) => {
+    let checkScroll = (e) => {
         const { scrollTop, offsetHeight, scrollHeight } = e.target;
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
@@ -17,10 +17,10 @@ export default function GridPosts(props) {
         }
     };
     let style = {
-        "--IMAGE-SIZE": Settings.PostsGridSize + "rem",
+        "--IMAGE-SIZE": Settings.GridItemSize + "rem",
     };
     return (
-        <div id="gridPosts" onScroll={scrollHandler} style={style}>
+        <div id="gridPosts" onLoad={checkScroll} onScroll={checkScroll} style={style}>
             {posts.map((post) => <GridItem key={post.id} post={post}/>)}
         </div>
     );
