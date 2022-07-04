@@ -43,11 +43,12 @@
     filter: invert(100%);
 }
 
-.posts-ErrorText{
+.posts-Error{
+    margin-top:10%;
+
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-top: 1rem;
     font-size: 2rem;
 }

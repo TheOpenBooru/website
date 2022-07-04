@@ -4,10 +4,10 @@ import Core from "containers/core";
 import ColumnPosts from "components/ColumnPosts";
 import GridPosts from "components/GridPosts";
 import FullscreenPosts from "components/FullscreenPosts";
+import LoadingIcon from "components/Loading";
 import { PostSearch, PostQuery } from "js/booru";
 import Overlay from "./overlay";
 import "./search.css";
-import "./loading.css";
 
 function getQuery() {
     let savedQueryJSON = window.sessionStorage.getItem("posts-search");
@@ -33,7 +33,7 @@ export default function Posts(props) {
 
 
     async function prepend_posts() {
-        await search.extend(100);
+        await search.extend();
         setPosts(search.posts);
     }
     
@@ -49,13 +49,13 @@ export default function Posts(props) {
         <Core title={`Open Booru: ${layout ? layout : "Post"} Search`}>
             <Overlay query={ search.query} setQuery={setQuery} />
             {posts.length === 0
-                ? <div className="posts-ErrorText">
+                ? <div className="posts-Error">
                     {search.finished
                         ? "No Posts Found"
-                        : <div className="lds-facebook"><div></div><div></div><div></div></div>
+                        : <LoadingIcon fadeIn />
                     }
                 </div>
-                : <PostsLayout posts={posts} morePostsCallback={prepend_posts} />
+                : <PostsLayout finished={search.finished} posts={posts} morePostsCallback={prepend_posts} />
             }
         </Core>
     );
