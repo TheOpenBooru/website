@@ -4,8 +4,12 @@ export function onLoadCallback(full, preview, lazy = false) {
     return (e) => {
         let target = e.target;
         if (target.src === full.url) return;
-        let { width: elmWidth, height: elmHeight } = target.getBoundingClientRect();
-        if (preview.width < elmWidth || preview.height < elmHeight) {
+        let element = target.getBoundingClientRect();
+        let CurrentUpscalePercentage = Math.max(
+            element.width / preview.width,
+            element.height / preview.height
+        );
+        if (CurrentUpscalePercentage > 2) {
             if (lazy) {
                 target.loading = "lazy";
             }
