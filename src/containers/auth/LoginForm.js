@@ -109,6 +109,7 @@ const ContainerForm = styled.form`
     transition: 0.15s ease-out;
 
     width: min(20rem,50vw);
+    min-width: 16rem;
     border-radius: 1rem;
     padding:1rem;
 `
