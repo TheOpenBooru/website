@@ -21,9 +21,11 @@ export default function PostPage(props) {
         })(),[id],
     );
 
-
     if (post === undefined) {
-        return null;
+        return (
+            <Core title={`Open Booru: Post ${id}`} description={`Open Booru Post ${id}`}>
+            </Core>
+        );
     } else {
         return (
             <Core
