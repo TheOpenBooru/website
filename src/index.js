@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Post from "./containers/post";
 import Posts from "./containers/posts";
 import Auth from "./containers/auth";
-import Base from "./containers/base";
 import Settings from "./containers/settings";
 import "./index.css";
 
@@ -22,7 +21,7 @@ function Router() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="*" element={<Base />} />
+                <Route index element={<Posts />} />
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/posts/:layout" element={<Posts />} />
                 <Route path="/post/:id" element={<Post />} />

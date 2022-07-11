@@ -9,8 +9,6 @@ import FullscreenPosts from "components/FullscreenPosts";
 import LoadingIcon from "components/Loading";
 import Overlay from "./overlay";
 import { PostSearch, BSL } from "js/booru";
-import Redirects from "js/redirects";
-import Settings from "js/settings";
 import "./search.css";
 
 export default function Posts() {
@@ -42,12 +40,14 @@ export default function Posts() {
         grid: GridPosts,
         column: ColumnPosts,
     };
-    if (!(layout in LayoutLookup)) Redirects.goto(Redirects.search(Settings.searchLayout));
-    
-    let PostsLayout = LayoutLookup[layout];
+    let PostsLayout = LayoutLookup[layout] ?? ColumnPosts;
 
     return (
-        <Core title={`Open Booru: ${layout ? TitleCase(layout) : "Post"} Search`}>
+        <Core
+            title="Open Booru"
+            description="Open Booru, an open-source imageboard booru serving user's posts nmd videos"
+            image="favicon.ico"
+        >
             <Overlay query={search.query} setQuery={setQuery} />
             {posts.length === 0 ? (
                 <div className="posts-Error">
