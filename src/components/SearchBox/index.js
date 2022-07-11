@@ -1,26 +1,29 @@
 import React, { useState } from "react";
-import { PostQuery } from "js/booru";
+import Booru from "js/booru";
 import SortSelect from "./SortSelect";
 import OrderButton from "./OrderButton";
 import TagSearch from "./TagSearch";
 import TagList from "./TagList";
+import { BSL } from "js/booru";
 import "./searchBox.css";
 
 export default function SearchBox(props) {
     let { query, setQuery, close } = props;
-    if (!query) query = new PostQuery();
+    if (query === null) {
+        query = new Booru.Types.PostQuery();
+    }
     let [includeTags, setIncludeTags] = useState(query.include_tags);
     let [excludeTags, setExcludeTags] = useState(query.exclude_tags);
     let [sort, setSort] = useState(query.sort);
     let [decending, setDecending] = useState(query.descending);
 
     function saveQuery() {
-        let tmp_query = new PostQuery();
-        tmp_query.sort = sort;
-        tmp_query.descending = decending;
-        tmp_query.include_tags = includeTags;
-        tmp_query.exclude_tags = excludeTags;
-        setQuery(tmp_query);
+        let NewQuery = new Booru.Types.PostQuery();
+        NewQuery.sort = sort;
+        NewQuery.descending = decending;
+        NewQuery.include_tags = includeTags;
+        NewQuery.exclude_tags = excludeTags;
+        setQuery(NewQuery);
         close();
     }
 

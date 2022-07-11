@@ -1,27 +1,32 @@
-import React from "react";
+import React, { useRef } from "react";
 import { onLoadCallback } from "components/Media/image";
+import LoadingIcon from "components/Loading";
 import Settings from "js/settings";
 import Redirects from "js/redirects";
 import "./grid.css";
 
 
 export default function GridPosts(props) {
-    let { posts, morePostsCallback } = props;
+    let { posts, morePostsCallback, loading } = props;
+    let scrollRef = useRef();
 
-    let checkScroll = (e) => {
-        const { scrollTop, offsetHeight, scrollHeight } = e.target;
+    let checkScroll = () => {
+        if (scrollRef.current === undefined) return;
+        const { scrollTop, offsetHeight, scrollHeight } = scrollRef.current;
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
         if (distanceFromBottom < 100) {
             morePostsCallback();
         }
     };
+    setTimeout(checkScroll,50)
     let style = {
         "--IMAGE-SIZE": Settings.GridItemSize + "rem",
     };
     return (
-        <div id="gridPosts" onLoad={checkScroll} onScroll={checkScroll} style={style}>
-            {posts.map((post) => <GridItem key={post.id} post={post}/>)}
+        <div id="gridPosts" ref={scrollRef} style={style}>
+            {posts.map((post) => <GridItem key={post.id} post={post} />)}
+            {loading ? <LoadingIcon/> : null}
         </div>
     );
 }

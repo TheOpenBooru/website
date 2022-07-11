@@ -1,6 +1,6 @@
 import React from "react";
 import Redirects from "js/redirects";
-import { Account, Posts } from "js/booru";
+import Booru from "js/booru";
 import styled from "styled-components";
 
 
@@ -13,10 +13,10 @@ export default function CreatePost() {
             alert("Please Select a File")
         } else {
             try {
-                let post = await Posts.create(file)
+                let post = await Booru.Posts.create(file)
                 window.location.href = Redirects.post(post.id);
             } catch (e) {
-                if (e === Posts.PermissionError) {
+                if (e === Booru.Posts.PermissionError) {
                     alert("Error: You don't have the permission to do this")
                 } else {
                     alert("Error: Unknown Error");

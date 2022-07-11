@@ -6,7 +6,7 @@ import PostMedia from "./media";
 import { LeftButton, RightButton} from "./buttons";
 
 export default function FullscreenPosts(props) {
-    let { finished, posts, morePostsCallback, query, setQuery, noButtons } = props;
+    let { posts, morePostsCallback, finished, query, setQuery, noButtons } = props;
     let baseRef = React.useRef(null);
     let [ index, setIndex ] = useState(0);
     let [ crntSearchQuery, setCrntSearchQuery ] = useState(query);

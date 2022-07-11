@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Tags, TagQuery } from "js/booru";
+import Booru from "js/booru";
 import "./tagSearch.css"
 
 export default function TagSearch(props) {
@@ -22,10 +22,10 @@ export default function TagSearch(props) {
         if (text.length === 0) {
             setPredictedTags([]);
         } else {
-            let query = new TagQuery();
+            let query = new Booru.Types.TagQuery();
             query.name_like = text;
             query.limit = 7;
-            let tags = await Tags.search(query)
+            let tags = await Booru.Tags.search(query)
             setPredictedTags(tags);
         }
     }

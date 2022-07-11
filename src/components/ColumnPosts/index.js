@@ -6,7 +6,7 @@ import styled from "styled-components";
 import "./columns.css";
 
 export default function ColumnPosts(props) {
-    let { posts, finished, morePostsCallback } = props;
+    let { posts, loading, morePostsCallback } = props;
     let [columnCount, setColumnCount] = useState(4);
 
     window.addEventListener("resize", calculateColumnCount, true);
@@ -35,23 +35,10 @@ export default function ColumnPosts(props) {
                     <Column key={i} posts={posts} />
                 ))}
             </ColumnsContainer>
-            {finished ? (
-                <HorzontalLine />
-            ) : (
-                <LoadingContainer>
-                    <LoadingIcon />
-                </LoadingContainer>
-            )}
+            {loading ? <LoadingContainer><LoadingIcon /></LoadingContainer>: null}
         </Container>
     );
 }
-
-
-const HorzontalLine = styled.div`
-    width: 100%;
-    min-height: 0.5rem;
-    background-color: var(--BACKGROUND-3);
-`;
 
 
 const ColumnsContainer = styled.div`

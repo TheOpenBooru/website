@@ -4,22 +4,30 @@ export function onLoadCallback(full, preview, lazy = false) {
     return (e) => {
         let target = e.target;
         if (target.src === full.url) return;
-        let element = target.getBoundingClientRect();
-        let CurrentUpscalePercentage = Math.max(
-            element.width / preview.width,
-            element.height / preview.height
-        );
-        if (CurrentUpscalePercentage > 2) {
-            if (lazy) {
-                target.loading = "lazy";
-            }
+
+        function UpdateImage() {
             target.src = full.url;
             target.height = full.height;
             target.width = full.width;
             target.onload = null;
         }
+
+
+        let element = target.getBoundingClientRect();
+        let CurrentUpscalePercentage = Math.max(
+            element.width / preview.width,
+            element.height / preview.height
+        );
+
+        if (lazy === false || (lazy && CurrentUpscalePercentage > 2)) {
+            if (lazy) {
+                target.loading = "lazy";
+            }
+            UpdateImage();
+        }
     }
 }
+
 
 export default function Image(props) {
     let { full, preview, lazy } = props;

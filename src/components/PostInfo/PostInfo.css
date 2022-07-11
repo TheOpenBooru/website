@@ -1,41 +1,6 @@
-#PostInfo{
-    /* Position */
-    position: relative;
-    background-color: var(--BACKGROUND-3);
-
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: baseline;
-    padding-bottom: 1rem;
-}
-
 #PostInfo-postData{
     padding: .5rem;
     white-space: nowrap;
-}
-
-#PostInfo-tagList{
-    position: relative;
-    width: 100%;
-    padding: .5rem;
-
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-}
-
-.PostInfo-tagList-tag{
-    cursor: pointer;
-    user-select: none;
-    width: fit-content;
-
-    border: .1rem solid var(--BORDER-2);
-    border-radius: 1rem;
-    background-color: var(--BACKGROUND-4);
-
-    padding: 0 .3rem 0 .3rem;
 }
 
 #PostInfo-TagList-AddTagIcon{

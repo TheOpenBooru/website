@@ -5,7 +5,7 @@ import NavigationBar from "components/NavigationBar";
 import titleCase from "ap-style-title-case";
 
 function Core(props) {
-    let { title, description } = props;
+    let { title, description, image, video } = props;
     title = titleCase(title);
     return (
         <React.Fragment>

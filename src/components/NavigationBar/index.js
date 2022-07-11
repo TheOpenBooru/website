@@ -1,6 +1,6 @@
 import React from "react";
 import PostsSection from "./PostsSection";
-import { Account } from "js/booru";
+import Booru from "js/booru";
 import Redirects from "js/redirects";
 import useMobile from "js/mobileHook";
 import "./navbar.css";
@@ -42,12 +42,12 @@ function VersionNumber(props) {
 function AccountSection(props) {
     let { text } = props;
     let username, onClick;
-    if (Account.loggedIn) {
+    if (Booru.Account.loggedIn) {
         onClick = () => {
-            Account.logout();
+            Booru.Account.logout();
             window.location.reload();
         }
-        username = Account.username
+        username = Booru.Account.username
     } else {
         onClick = () => Redirects.goto(Redirects.auth)
         username = "Login"

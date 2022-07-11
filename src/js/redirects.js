@@ -1,3 +1,5 @@
+import Settings from "./settings";
+
 export default class Redirects {
     static callback(url) {
         return () => {
@@ -9,12 +11,12 @@ export default class Redirects {
         window.location.href = url;
     }
 
-    static home = () => "/"
-    static post = (id) =>`/post/${id}`
+    static home = () => "/";
+    static post = (id) => `/post/${id}`;
 
-    static auth ="/auth";
+    static auth = "/auth";
     static profile = "/profile";
     static settings = "/settings";
 
-    static search = (layout = "") => "/posts/" + layout 
+    static search = (layout) => "/posts/" + layout;
 }
