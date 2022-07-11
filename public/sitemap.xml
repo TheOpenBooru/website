@@ -3,14 +3,41 @@
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
+http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
   <loc>https://openbooru.org/</loc>
-  <lastmod>2022-03-23T09:33:32+00:00</lastmod>
-</url>
-
-
+<lastmod>2022-07-11</lastmod>
+<changefreq>monthly</changefreq>
+<priority>1</priority>
+<url>
+  <url>
+    <loc>https://openbooru.org/posts</loc>
+    <lastmod>2022-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+    <url>
+      <url>
+        <loc>https://openbooru.org/posts/grid</loc>
+        <lastmod>2022-07-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <url>
+          <url>
+            <loc>https://openbooru.org/posts/column</loc>
+            <lastmod>2022-07-11</lastmod>
+            <changefreq>monthly</changefreq>
+            <priority>0.8</priority>
+            <url>
+              <url>
+                <loc>https://openbooru.org/posts/fullscreen</loc>
+                <lastmod>2022-07-11</lastmod>
+                <changefreq>monthly</changefreq>
+                <priority>0.8</priority>
+                <url>
+                  <url>
+                    <loc>https://openbooru.org/auth</loc>
+                    <lastmod>2022-07-11</lastmod>
+                    <changefreq>monthly</changefreq>
+                    <priority>0.2</priority>
+                    <url>
 </urlset>
