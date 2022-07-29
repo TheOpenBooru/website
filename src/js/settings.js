@@ -35,4 +35,4 @@ const Settings = new Proxy(SettingsDefaults, {
     }
 })
 
-export default SettingsDefaults;
+export default Settings;
