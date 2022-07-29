@@ -11,11 +11,12 @@ export default function SourceEntry({ source }) {
             </Source>
         );
     } else {
-        return <Source>None: </Source>;
+        return <Source/>;
     }
 }
 
 const Source = styled.a`
+    min-height: 1.2rem;
     color: #0c181d;
     display: block;
     overflow: hidden;
