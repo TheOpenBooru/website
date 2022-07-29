@@ -1,17 +1,25 @@
-import React, { useRef } from "react";
-import { onLoadCallback } from "components/Media/image";
-import LoadingIcon from "components/Loading";
+import React, { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import LoadingIcon from "components/LoadingIcon";
+import Item from "./item";
 import Settings from "js/settings";
-import Redirects from "js/redirects";
-import "./grid.css";
 
-
-export default function GridPosts(props) {
-    let { posts, morePostsCallback, loading } = props;
+GridPosts.propTypes = {
+    loading: PropTypes.bool,
+    finished: PropTypes.bool,
+    posts: PropTypes.arrayOf(PropTypes.object),
+    index: PropTypes.number,
+    query: PropTypes.object,
+    setQuery: PropTypes.func,
+    postCallback: PropTypes.func,
+    morePostsCallback: PropTypes.func,
+};
+export default function GridPosts({ posts, morePostsCallback, loading, postCallback, index }) {
     let scrollRef = useRef();
 
     let checkScroll = () => {
-        if (scrollRef.current === undefined) return;
+        if (scrollRef.current === null) return;
         const { scrollTop, offsetHeight, scrollHeight } = scrollRef.current;
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
@@ -19,35 +27,51 @@ export default function GridPosts(props) {
             morePostsCallback();
         }
     };
-    setTimeout(checkScroll,50)
-    let style = {
-        "--IMAGE-SIZE": Settings.GridItemSize + "rem",
-    };
+    
+    useEffect(checkScroll, [morePostsCallback]);
+    let style = { "--IMAGE-SIZE": Settings.GridItemSize + "rem" };
     return (
-        <div id="gridPosts" ref={scrollRef} style={style}>
-            {posts.map((post) => <GridItem key={post.id} post={post} />)}
-            {loading ? <LoadingIcon/> : null}
-        </div>
+        <Container ref={scrollRef} style={style} onScroll={checkScroll}>
+            <Grid>
+                {posts.map((post, i) => (
+                    <Item key={post.id} post={post} callback={postCallback(post.id)} isTarget={i === index} />
+                ))}
+            </Grid>
+            {loading ? (
+                <LoadingContainer>
+                    <LoadingIcon fadeIn/>
+                </LoadingContainer>
+            ) : null}
+        </Container>
     );
 }
 
-function GridItem(props) {
-    let { post } = props;
-    let className = `gridPosts-item media-${post.media_type}`;
-    let redirect = Redirects.post(post.id);
-    let { preview, thumbnail } = post;
-    let callback = preview && preview.type === "image" ? onLoadCallback(preview, thumbnail) : null;
-    return (
-        <a key={post.id} className={className} href={redirect}>
-            <img
-                className="gridPosts-image"
-                src={thumbnail.url}
-                width={thumbnail.width}
-                height={thumbnail.height}
-                alt=""
-                onLoad={callback}
-            />
-        </a>
-    );
-    
-}
+const Container = styled.div`
+    --IMAGE-SIZE: 12rem;
+    --MIN-COLUMNS: 2;
+
+    /* Position */
+    max-width: 100vw;
+    max-height: var(--PAGE-HEIGHT);
+    overflow-y: auto;
+    overflow-x: hidden;
+`;
+
+const Grid = styled.div`
+    overflow-x: hidden;
+
+    padding: 2rem 10vw 2rem 10vw;
+
+    /* Grid */
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(calc(40vw - 2rem), var(--IMAGE-SIZE)), 1fr));
+`;
+
+const LoadingContainer = styled.div`
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+`;

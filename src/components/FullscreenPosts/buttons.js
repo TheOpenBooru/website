@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import LoadingIcon from "components/Loading";
+import LoadingIcon from "components/LoadingIcon";
 import Settings from "js/settings";
 
 
-export function LeftButton(props) {
-    let { callback, post } = props;
+export function LeftButton({ callback, post }) {
     let img = GenerateImageUrl(post, "/images/left-arrow.svg");
 
     return (
@@ -15,13 +14,12 @@ export function LeftButton(props) {
     );
 }
 
-export function RightButton(props) {
-    let { callback, post, finished } = props;
+export function RightButton({ callback, post, loading, finished }) {
     let img = GenerateImageUrl(post, "/images/right-arrow.svg");
 
     return (
         <RightButtonContainer onClick={callback}>
-            {!post && !finished
+            {!post && loading
                 ? <LoadingIcon/>
                 : <Icon key={img} src={img} alt="" />
             }
@@ -41,9 +39,11 @@ function GenerateImageUrl(post, defaultImage) {
 
 
 const ButtonContainer = styled.div`
+    /* margin-top: var(--BUTTON-WIDTH);
+    height: calc(100% - var(--BUTTON-WIDTH)); */
     height: 100%;
     width: var(--BUTTON-WIDTH);
-
+    
     /* Look */
     outline: solid 1px #000;
     background-color: var(--BACKGROUND-2);

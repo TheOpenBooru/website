@@ -23,10 +23,14 @@
 .searchbox-autocomplete-item{
     cursor: pointer;
     width: fit-content;
-    
     margin-top: .2rem;
-    padding: .1rem;
-    border-radius: 1rem;
+    padding: .2rem;
+    border-radius: .8rem;
+
+    font-size: 1rem;
+    font-weight: normal;
+    font-style: normal;
+    
     background-color: var(--BACKGROUND-4);
     border: .1rem solid var(--BORDER-1);
 }

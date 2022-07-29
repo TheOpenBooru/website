@@ -22,6 +22,13 @@
   --PAGE-HEIGHT: calc(100vh - var(--NAVBAR-HEIGHT));
 }
 
+@media screen and (orientation: portrait) {
+  :root{
+    --PAGE-HEIGHT: calc(100vh - var(--NAVBAR-HEIGHT) - 3.6rem) !important;
+  }
+}
+
+
 body {
   margin: 0;
   padding: 0;

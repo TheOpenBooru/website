@@ -1,99 +1,62 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import Redirects from "js/redirects";
-import PostInfo from "components/PostInfo";
-import PostMedia from "./media";
-import { LeftButton, RightButton} from "./buttons";
+import MobileFullscreen from "./mobile";
+import DesktopFullscreen from "./desktop";
+import useMobile from "js/mobileHook";
 
-export default function FullscreenPosts(props) {
-    let { posts, morePostsCallback, finished, query, setQuery, noButtons } = props;
-    let baseRef = React.useRef(null);
-    let [ index, setIndex ] = useState(0);
-    let [ crntSearchQuery, setCrntSearchQuery ] = useState(query);
+FullscreenPosts.propTypes = {
+    loading: PropTypes.bool,
+    finished: PropTypes.bool,
+    posts: PropTypes.arrayOf(Object),
+    morePostsCallback: PropTypes.func,
+    exitCallback: PropTypes.func,
+    query: PropTypes.object,
+    setQuery: PropTypes.func,
+    index: PropTypes.number,
+    setIndex: PropTypes.func,
+};
+
+export default function FullscreenPosts({
+    loading,
+    finished,
+    posts,
+    morePostsCallback,
+    exitCallback,
+    query,
+    setQuery,
+    index,
+    setIndex,
+}) {
+    let isMobile = useMobile();
     
-    morePostsCallback ||= () => {};
-    let crntPost = posts[index];
-    let prevPost = posts[index - 1];
-    let nextPost = posts[index + 1];
+    const post = posts[index];
+    if (post === undefined) return null;
+    const prevPost = posts[index - 1];
+    const nextPost = posts[index + 1];
 
-    let postsRemaining = posts.length - (index + 1)
+    const postsRemaining = posts.length - (index + 1);
     if (postsRemaining < 32) {
         morePostsCallback();
     }
+
     
-    if (query !== crntSearchQuery) {
-        setCrntSearchQuery(query);
-        setIndex(0);
-    }
-    
-    
-    function VisitPost() {
-        let link = Redirects.post(crntPost.id);
+    function visitCallback() {
+        let link = Redirects.post(post.id);
         window.location.href = link;
     }
-    
-    function GoToNextPost() {
+
+    function nextPostCallback() {
         if (index !== posts.length - 1) {
             setIndex(index + 1);
         }
     }
-    
-    function GoToPreviousPost() {
+
+    function prevPostCallback() {
         if (index > 0) {
-            setIndex(index - 1);
+            setIndex(index - 1)
         }
     }
-
-    onkeydown = (e) => {
-        let KEYBINDS = {
-            w: GoToNextPost,
-            ArrowUp: VisitPost,
-            a: GoToNextPost,
-            ArrowRight: GoToNextPost,
-            d: GoToPreviousPost,
-            ArrowLeft: GoToPreviousPost,
-        };
-        if (e.key in KEYBINDS) {
-            KEYBINDS[e.key]();
-        }
-    };
-
-    return (
-        <Container ref={baseRef}>
-            <PostContainer>
-                {noButtons ? null : <LeftButton callback={GoToPreviousPost} post={prevPost}/> }
-                <PostMedia post={crntPost} noButtons={noButtons} />
-                {noButtons ? null : <RightButton callback={GoToNextPost} post={nextPost} finished={finished}/> }
-            </PostContainer>
-            <PostInfo post={crntPost}/>
-        </Container>
-    );
-}
-
-
-const Container = styled.div`
-    position: relative;
-    height: var(--PAGE-HEIGHT);
-    width: 100%;
-    top:0;
-    left:0;
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    --BUTTON-WIDTH: 5rem;
-`
-
-
-const PostContainer = styled.div`
-    width: 100%;
-    height: calc(100%  - 1.5rem);
-    user-select: none;
     
-    background-color: var(--BACKGROUND);
-    border-bottom: #000 solid 1px;
-
-    /* Flex */
-    display:flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-`
+    return <DesktopFullscreen {...{exitCallback, visitCallback, nextPostCallback, prevPostCallback, prevPost, post, nextPost, loading, finished}} />
+}

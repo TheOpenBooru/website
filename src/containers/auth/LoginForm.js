@@ -1,37 +1,15 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import Redirects from "js/redirects";
 import { Account } from "js/booru";
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 
-
-export default function LoginForm() {
-    let errorRef = useRef(null);
-
-    function parseError(err) {
-        let text;
-        if (err === Account.LoginFailure) {
-            text = "Invalid Username or Password"
-        } else if (err === Account.PasswordReset) {
-            text = "Your password was reset"
-        } else if (err === Account.WrongAPIVersion) {
-            text = "The API is the wrong version"
-        } else if (err === Account.RateLimited) {
-            text = "Your being ratelimited, please wait"
-        } else if (err === Account.BadPasswordRequirements) {
-            text = "Your Password Does Not Meet the Requirements"
-        } else if (err === Account.UserAlreadyExists) {
-            text = "Use with that name already exists"
-        } else {
-            text = "An Unknown Error Occured"
-        }
-        showText(text);
-    }
-
-    function showText(text) {
-        errorRef.current.innerText = text;
-    }
-    
+LoginForm.propTypes = {
+    errorHandler:PropTypes.func,
+    showText:PropTypes.func,
+}
+export default function LoginForm({errorHandler,showText}) {
     function handleInput(username, password) {
         if (username === "" || password === "") {
             if (username === "" && password === "") {
@@ -44,75 +22,39 @@ export default function LoginForm() {
             throw new Error()
         }
     }
-
-    async function HandleLogin(username, password) {
-        handleInput(username,password)
-        
-        try {
-            await Account.login(username, password);
-            Redirects.goto(Redirects.home());
-        } catch (err) {
-            parseError(err);
-        }
-    }
     
-    async function HandleRegister(username,password) {
-        handleInput(username,password)
-
+    async function HandleLogin(username, password) {
+        handleInput(username, password)
         try {
-            await Account.register(username, password);
             await Account.login(username, password);
             Redirects.goto(Redirects.home());
         } catch (err) {
-            parseError(err);
+            errorHandler(err);
         }
     }
-
 
     function FormCallback(e) {
         e.preventDefault();
-        let elements = e.target.elements;
-        let [UsernameElm, PasswordElm, LoginElm, RegisterElm] = elements
+        let [UsernameElm, PasswordElm] = e.target.elements;
         
         let username = UsernameElm.value;
-        let password = PasswordElm.value;
         UsernameElm.value = "";
+        let password = PasswordElm.value;
         PasswordElm.value = "";
         
-        if (LoginElm["data-clicked"]) {
-            LoginElm["data-clicked"] = false;
-            HandleLogin(username,password)
-        } else if (RegisterElm["data-clicked"]) {
-            RegisterElm["data-clicked"] = false;
-            HandleRegister(username,password)
-        }
+        HandleLogin(username,password)
     }
 
     return (
-        <ContainerForm onSubmit={FormCallback}>
+        <form onSubmit={FormCallback}>
             <InputsContainer>
                 <InputText type="username" placeholder="Username" />
                 <InputText type="password" placeholder="Password" />
             </InputsContainer>
-            <ButtonsContainer>
-                <SubmitButton type="submit" value="Login" onClick={(e) => e.target["data-clicked"] = true}/>
-                <SubmitButton type="submit" value="Register" onClick={(e) => e.target["data-clicked"] = true}/>
-            </ButtonsContainer>
-            <ErrorText ref={errorRef}/>
-        </ContainerForm>
+            <LoginButton type="submit" value="Login"/>
+        </form>
     )
 }
-
-const ContainerForm = styled.form`
-    border: 3px solid var(--BORDER-1) ;
-    background-color: var(--BACKGROUND-3);
-    transition: 0.15s ease-out;
-
-    width: min(20rem,50vw);
-    min-width: 16rem;
-    border-radius: 1rem;
-    padding:1rem;
-`
 
 
 const InputsContainer = styled.div`
@@ -140,27 +82,15 @@ const InputText = styled.input`
 `;
 
 
-const ButtonsContainer = styled.div`
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-`
-
-const SubmitButton = styled.input`
-    border-radius: 1rem;
-    
+const LoginButton = styled.input`
     height: 2rem;
-    width: 40%;
+    width: 100%;
+    margin-top:1rem;
+    
+    border-radius: 1rem;
     font-size: large;
     font-weight: bold;
 
     background-color: var(--BACKGROUND-4);
     border-color: var(--BORDER-1);
-`
-
-
-const ErrorText = styled.div`
-    text-align:center;
-    font-size:medium;
 `

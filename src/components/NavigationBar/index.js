@@ -1,6 +1,6 @@
 import React from "react";
 import PostsSection from "./PostsSection";
-import Booru from "js/booru";
+import Booru, { Account } from "js/booru";
 import Redirects from "js/redirects";
 import useMobile from "js/mobileHook";
 import "./navbar.css";
@@ -34,33 +34,31 @@ function VersionNumber(props) {
             href="https://github.com/TheOpenBooru"
         >
             <img className="navbar-button-icon" src="/images/github.svg" alt="" />
-            {text ? <span className="navbar-button-text">Alpha: Boron</span> : null}
+            {text ? <span className="navbar-button-text">Alpha: Carbon</span> : null}
         </a>
     );
 }
 
-function AccountSection(props) {
-    let { text } = props;
-    let username, onClick;
-    if (Booru.Account.loggedIn) {
-        onClick = () => {
-            Booru.Account.logout();
+function AccountSection({ text }) {
+    if (Account.loggedIn) {
+        let callback = () => {
+            Account.logout();
             window.location.reload();
         }
-        username = Booru.Account.username
+        return (
+            <div id="navbar-AccountSection" className="navbar-section" onClick={callback}>
+                <img className="navbar-button-icon" src="/images/profile.svg" alt="" />
+                {text ? <span className="navbar-button-text">{Account.username}</span> : null}
+            </div>
+        );
     } else {
-        onClick = () => Redirects.goto(Redirects.auth)
-        username = "Login"
+        return (
+            <a id="navbar-AccountSection" className="navbar-section" href={Redirects.login}>
+                <img className="navbar-button-icon" src="/images/profile.svg" alt="" />
+                {text ? <span className="navbar-button-text">Login</span> : null}
+            </a>
+        );
     }
-    return (
-        <div id="navbar-AccountSection" className="navbar-section" onClick={onClick}>
-            <img className="navbar-button-icon" src="/images/profile.svg" alt="" />
-            {text
-                ? <span className="navbar-button-text">{username}</span>
-                : null
-            }
-        </div>
-    );
 }
 
 function SettingsSection(props) {

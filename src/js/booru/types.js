@@ -1,15 +1,18 @@
+import { Data } from "dataclass";
+
 export class PostQuery {
-    sort: String = "created_at";
-    descending: Boolean = true;
+    sort = "created_at";
+    descending = true;
 
-    include_tags: Array<String> = [];
-    exclude_tags: Array<String> = [];
+    include_tags: Array<string> = [];
+    exclude_tags: Array<string> = [];
 
-    created_after: BigInt = null;
-    created_before: BigInt = null;
+    created_after: bigint = null;
+    created_before: bigint = null;
 
-    md5: String = null;
-    sha256: String = null;
+    ids: Array<bigint> = null;
+    md5: string = null;
+    sha256: string = null;
 }
 
 export class TagQuery {
@@ -20,10 +23,50 @@ export class TagQuery {
 }
 
 export class PostEdit {
-    rating: String = null;
-    source: String = null;
-    tags: Array<String> = null;
+    rating: string = null;
+    source: string = null;
+    tags: Array<string> = null;
 }
 
-const Types = { PostQuery, TagQuery, PostEdit };
+export class Image {
+    url: string;
+    mimetype: string;
+    height: bigint;
+    width: bigint;
+    type: string;
+}
+
+export class Post {
+    id: bigint;
+    created_at: number;
+    uploader: bigint;
+    deleted: boolean;
+    source: string;
+    rating: string;
+    full: Image;
+    preview: Image | null;
+    thumbnail: Image;
+    media_type: string;
+    hashes: object;
+    tags: Array<string>;
+    comments: Array<bigint>;
+    edits: Array<bigint>;
+    upvotes: bigint;
+    downvotes: bigint;
+}
+
+export class Profile {
+    id: string;
+    created_at: bigint;
+    username: string;
+    level: string;
+    posts: array<bigint>;
+    comments: array<bigint>;
+    email: string;
+    settings: string;
+    upvotes: array<bigint> = [];
+    downvotes: array<bigint> = [];
+}
+
+const Types = { Post, PostQuery, TagQuery, PostEdit, Image, Profile };
 export default Types;

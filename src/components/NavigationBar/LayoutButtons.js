@@ -12,10 +12,6 @@ const layouts = [
         name: "column",
         icon: "/images/columns.svg",
     },
-    {
-        name: "fullscreen",
-        icon: "/images/fullscreen.svg",
-    },
 ];
 
 export default function LayoutSelector(props) {
@@ -23,7 +19,7 @@ export default function LayoutSelector(props) {
         let { name, icon } = v;
         let id = "layout-" + name
         let alt = titleCase(name + " Layout");
-        let href = Redirects.search(name);
+        let href = Redirects.search({layout:name});
         return (
             <LayoutButton id={id} href={href} title={alt} key={v.name}>
                 <LayoutIcon alt={alt} src={icon} />

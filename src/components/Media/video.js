@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-export default function Video(props) {
-    let { video } = props
+
+Video.propTypes = { video: PropTypes.object }
+export default function Video({ video }) {
     function updateVolume(e) {
         localStorage.setItem("volume", e.target.value);
     }
@@ -24,7 +26,7 @@ export default function Video(props) {
                 src={video.url}
                 height={video.height}
                 width={video.width}
-                media={video.mime}
+                type={video.mimetype}
             />
         </Player>
     );

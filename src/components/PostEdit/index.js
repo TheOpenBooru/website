@@ -1,57 +1,93 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import TagEditor from "./TagEditor";
+import PropTypes from "prop-types";
+import TagEditor from "components/TagEditor";
+import Captcha from "components/Captcha";
 import SourceInput from "./SourceInput";
 import RatingSelector from "./RatingSelector";
-import Booru from "js/booru";
+import { Types, Posts, Info } from "js/booru";
 
-export default function PostEdit(props) {
-    // let { post } = props;
-    let [tags, setTags] = useState([]);
-    let [source, setSource] = useState(null);
-    let [ sourceInvalid, setSourceInvalid ] = useState(true);
-    let [rating, setRating] = useState(null);
-    
+PostEdit.propTypes = {
+    post: PropTypes.objectOf(Types.Post),
+    reloadCallback: PropTypes.func,
+};
+export default function PostEdit({ post, reloadCallback }) {
+    let [captcha, setCaptcha] = useState(null);
+    let [tags, setTags] = useState(post.tags);
+    let [source, setSource] = useState(post.source);
+    let [rating, setRating] = useState(post.rating);
 
-    useEffect(() => (async () => {
-            let post = await Booru.Posts.get(1);
-            setTags(post.tags);
-            setSource(post.source);
-            setRating(post.rating);
-        })()
-    , [],);
+
+    const EMPTY_EDIT = new Types.PostEdit();
+    async function AttemptEdit() {
+        let edit = new Types.PostEdit();
+        if (post.rating !== rating) edit.rating = rating;
+        if (post.source !== source) edit.source = source;
+        if (post.tags !== tags) edit.tags = tags;
+        if (edit === EMPTY_EDIT) return;
+        if (captcha === null) return;
+
+        try {
+            await Posts.edit(post.id, edit, captcha);
+        } catch (err){
+            alert("An Error has occured: " + err.message);
+            return;
+        }
+
+        window.location.reload();
+    }
 
     return (
         <Container>
             <TagContainer>
-                <TagEditor tags={tags} setTags={setTags} />
+                <TagEditor baseTags={post.tags} setTags={setTags} />
             </TagContainer>
-            <div>
-                <SourceInput source={source} setSource={setSource} setValid={setSourceInvalid} />
+            <InputContainer>
+                <SourceInput source={source} setSource={setSource} />
                 <RatingSelector rating={rating} setRating={setRating} />
-            </div>
-            <SubmitButton>Submit</SubmitButton>
+                <CaptchaContainer>
+                    <Captcha setCaptchaToken={setCaptcha}/>
+                </CaptchaContainer>
+                <SubmitButton onClick={AttemptEdit}>Submit</SubmitButton>
+            </InputContainer>
         </Container>
     );
 }
 
-
 const Container = styled.div`
+    height: 100%;
+    width: 80rem;
     padding: 1rem;
 
     display: flex;
     flex-flow: row nowrap;
 `;
 
+const InputContainer = styled.div`
+    height: 100%;
+    padding: .5rem;
+    gap: .2rem;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: space-between;
+`;
 
 const TagContainer = styled.div`
     height: 100%;
     width: 25rem;
 `;
 
+const CaptchaContainer = styled.div`
+    display:flex;
+    justify-content: center;
+    align-items: center;
+`;
 
 const SubmitButton = styled.button`
+    position: relative;
+    width: 100%;
     height: 1.5rem;
-    right:1rem;
-    bottom:1rem;
+    left: 1rem;
+    top: 1rem;
 `;

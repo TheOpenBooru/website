@@ -1,8 +1,9 @@
 import Settings from "js/settings";
+import { Post } from "js/booru/types";
 
-export default async function get(id) {
-    let url = `${Settings.apiUrl}/posts/post/${id}`;
-    let r = await fetch(url, { cache: "default" });
+export default async function get(id, cache = true): Post {
+    let url = `${Settings.apiUrl}/post/${id}`;
+    let r = await fetch(url, { cache: cache ? "default" : "no-cache" });
     if (r.status === 404) {
         throw new Error("Post Not Found");
     } else {

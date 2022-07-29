@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 export default function SourceInput(props) {
-    let { source, setSource, setValid } = props;
+    let { source, setSource } = props;
+    let [valid, setValid] = useState(true);
     let [tempSource, setTempSource] = useState(source);
 
     const URL_REGEX = new RegExp(
@@ -15,13 +16,10 @@ export default function SourceInput(props) {
     function onChangeHandler(e) {
         let value = e.target.value;
         setTempSource(value);
-        
-        let valid = validateSource(value)
-        setValid(valid)
-        
-        if (valid) setSource(value);
+        setValid(validateSource(value));
 
-        if (valid || tempSource === source) {
+        if (valid) {
+            setSource(value);
             e.target.classList.remove("invalid");
             e.target.classList.add("valid");
         } else {
@@ -36,7 +34,7 @@ export default function SourceInput(props) {
             <InputField
                 type="text"
                 name="source"
-                className="valid"
+                className={valid ? null : "invalid"}
                 value={tempSource}
                 onChange={onChangeHandler}
             />
@@ -45,6 +43,7 @@ export default function SourceInput(props) {
 }
 
 const InputField = styled.input`
+    width: 20rem;
     &.invalid {
         border-color: red;
         filter: opacity(0.7);

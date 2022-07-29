@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import Booru from "js/booru";
+import React, { useState } from "react";
+import { Tags } from "js/booru";
 import "./tagSearch.css"
 
 export default function TagSearch(props) {
@@ -22,10 +22,7 @@ export default function TagSearch(props) {
         if (text.length === 0) {
             setPredictedTags([]);
         } else {
-            let query = new Booru.Types.TagQuery();
-            query.name_like = text;
-            query.limit = 7;
-            let tags = await Booru.Tags.search(query)
+            let tags = await Tags.autocomplete(text, 5);
             setPredictedTags(tags);
         }
     }
@@ -70,13 +67,13 @@ function PredictedTags(props) {
         return (
             <div id="searchbox-autocomplete">
                 {tags.map((tag) => (
-                    <span
+                    <button
                         key={tag.name}
                         className="searchbox-autocomplete-item searchbox-autocomplete"
                         onClick={callback(tag.name)}
                     >
                         {tag.name}
-                    </span>
+                    </button>
                 ))}
             </div>
 

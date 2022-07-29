@@ -31,11 +31,10 @@ export function encode(query: PostQuery): string {
 }
 
 export function decode(bsl: string): PostQuery {
-    const query = new PostQuery();
     let tags = bsl.split(" ");
     tags = tags.filter((tag) => tag !== "");
-
-    function getValue(prefix: String, defaultValue = null) {
+    
+    function getValue(prefix: string, defaultValue = null) {
         if (!bsl.includes(prefix)) {
             return defaultValue;
         } else {
@@ -44,20 +43,19 @@ export function decode(bsl: string): PostQuery {
             return bsl.slice(start, end);
         }
     }
-
-    query.created_after = getValue("created_after:", DEFAULTS_QUERY.created_after);
-    query.created_before = getValue("created_before:", DEFAULTS_QUERY.created_before);
-    query.sort = getValue("sort:", DEFAULTS_QUERY.sort);
-    query.descending = getValue("order:", "dsc") === "dsc";
-    query.md5 = getValue("md5:", DEFAULTS_QUERY.md5);
-    query.sha256 = getValue("sha256:", DEFAULTS_QUERY.sha256);
-    query.include_tags = tags.filter((tag) => !tag.includes(":") && !tag.includes("-"));
+    
+    const query = new PostQuery();
+    query.created_after =  getValue("created_after:", DEFAULTS_QUERY.created_after);
+    query.created_before =  getValue("created_before:", DEFAULTS_QUERY.created_before);
+    query.sort =  getValue("sort:", DEFAULTS_QUERY.sort);
+    query.descending =  getValue("order:", "dsc") === "dsc";
+    query.md5 =  getValue("md5:", DEFAULTS_QUERY.md5);
+    query.sha256 =  getValue("sha256:", DEFAULTS_QUERY.sha256);
+    query.include_tags =  tags.filter((tag) => !tag.includes(":") && !tag.includes("-"));
     query.exclude_tags = tags
         .filter((tag) => !tag.includes(":") && tag.includes("-"))
         .map((tag) => tag.slice(1));
     return query;
 }
-
-decode(encode(new PostQuery()));
 
 export default { encode, decode };

@@ -1,7 +1,7 @@
 import Settings from "js/settings";
 import { TagQuery } from "./types";
 
-export default class Tags{
+export default class Tags {
     static async search(query: TagQuery) {
         let params = new URLSearchParams();
 
@@ -14,14 +14,22 @@ export default class Tags{
                 params.set(key, value);
             }
         }
-        
-        let url = Settings.apiUrl + `/tags/search?${params.toString()}`
-        let r = await fetch(url, {"cache":"default"});
+
+        let url = Settings.apiUrl + `/tags/search?${params.toString()}`;
+        let r = await fetch(url, { cache: "default" });
         if (r.ok) {
-            let tags = await r.json()
+            let tags = await r.json();
             return tags;
         } else {
             return [];
         }
+    }
+
+    static async autocomplete(text, limit = 5) {
+        let query = new TagQuery();
+        query.name_like = text;
+        query.limit = limit;
+        let tags = await this.search(query);
+        return tags;
     }
 }

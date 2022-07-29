@@ -30,8 +30,8 @@ export default function SearchBox(props) {
     return (
         <div id="searchbox-container">
             <div id="searchbox-top">
-                <OrderButton decending={decending} setDecending={setDecending} />
                 <SortSelect sort={sort} setSort={setSort} />
+                <OrderButton decending={decending} setDecending={setDecending} />
                 <TagSearch includeTags={includeTags} setIncludeTags={setIncludeTags} />
             </div>
             <TagList

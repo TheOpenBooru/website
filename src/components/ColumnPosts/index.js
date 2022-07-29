@@ -1,24 +1,36 @@
-import React, { useEffect, useState } from "react";
-import Column from "./column";
-import LoadingIcon from "components/Loading";
-import { SplitPosts } from "./utils";
+import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
+import LoadingIcon from "components/LoadingIcon";
+import useWidth from "js/widthHook";
+import { SplitPosts } from "./utils";
+import Item from "./item";
 import "./columns.css";
 
-export default function ColumnPosts(props) {
-    let { posts, loading, morePostsCallback } = props;
-    let [columnCount, setColumnCount] = useState(4);
 
-    window.addEventListener("resize", calculateColumnCount, true);
-    useEffect(calculateColumnCount, []);
-    function calculateColumnCount(e) {
-        let increments = (window.innerWidth / 500).toFixed();
-        let columnCount = Math.max(2, Math.min(6, increments));
-        setColumnCount(columnCount);
-    }
+const Clamp = (value,min,max) => Math.max(min, Math.min(max, value))
+ColumnPosts.propTypes = {
+    loading: PropTypes.bool,
+    finished: PropTypes.bool,
+    posts: PropTypes.arrayOf(PropTypes.object),
+    index: PropTypes.number,
+    query: PropTypes.object,
+    setQuery: PropTypes.func,
+    postCallback: PropTypes.func,
+    morePostsCallback: PropTypes.func,
+};
+export default function ColumnPosts({ posts, loading, morePostsCallback, postCallback, index }) {
+    let width = useWidth()
+    let containerRef = useRef();
+    
+    let increments = (width / 500).toFixed();
+    let columnCount = Clamp(increments, 2,8);
+    let columns = SplitPosts(posts, columnCount);
 
-    function scrollHandler(e) {
-        const { scrollTop, offsetHeight, scrollHeight } = e.target;
+    function checkScroll() {
+        if (containerRef.current === null) return
+
+        const { scrollTop, offsetHeight, scrollHeight } = containerRef.current;
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
         if (distanceFromBottom < 400) {
@@ -26,31 +38,32 @@ export default function ColumnPosts(props) {
         }
     }
 
-    let columns = SplitPosts(posts, columnCount);
-
+    useEffect(checkScroll, [morePostsCallback]) 
+    let focusPostID = posts[index]?.id;
     return (
-        <Container onScroll={scrollHandler}>
-            <ColumnsContainer>
-                {columns.map((posts, i) => (
-                    <Column key={i} posts={posts} />
+        <Container ref={containerRef} onScroll={checkScroll}>
+            <Columns>
+                {columns.map((posts, a) => (
+                    <ColumnContainer key={a}>
+                        {posts.map((post) => (
+                            <Item
+                                key={post.id}
+                                post={post}
+                                postCallback={postCallback(post.id)}
+                                isTarget={focusPostID === post.id}
+                            />
+                        ))}
+                    </ColumnContainer>
                 ))}
-            </ColumnsContainer>
-            {loading ? <LoadingContainer><LoadingIcon /></LoadingContainer>: null}
+            </Columns>
+            {loading ? <LoadingContainer><LoadingIcon fadeIn/></LoadingContainer>: null}
         </Container>
     );
 }
 
 
-const ColumnsContainer = styled.div`
-    width: 100%;
-    /* Flex */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-`;
-
 const Container = styled.div`
-    --COLUMN-WIDTH: 18rem;
+    --COLUMN-WIDTH: 300px;
     --IMAGE-MARGIN: 0.5rem;
 
     height: var(--PAGE-HEIGHT);
@@ -60,6 +73,28 @@ const Container = styled.div`
     flex-flow: nowrap column;
     align-items: center;
 `;
+
+
+const Columns = styled.div`
+    width: 100%;
+    /* Flex */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`;
+
+
+const ColumnContainer = styled.div`
+    width:var(--COLUMN-WIDTH);
+    margin: var(--IMAGE-MARGIN);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:var(--IMAGE-MARGIN)
+`
+
+
 
 const LoadingContainer = styled.div`
     margin-bottom: 2rem;

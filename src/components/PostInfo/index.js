@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
-import PostInfo from "./PostInfo";
-import TagList from "./TagList";
+import { Posts } from "js/booru";
 import PostEdit from "components/PostEdit";
-import "./PostInfo.css";
+import Info from "./Info";
+import TagList from "./TagList";
+import Buttons from "./Buttons";
+import Source from "./Source";
 
-export default function Info(props) {
-    let { post } = props;
-    let [editting, setEditting] = React.useState();
-
+Info.propTypes = {
+    post: PropTypes.object,
+    reloadCallback: PropTypes.func,
+};
+export default function PostInfo({ post, reloadCallback }) {
+    let [editting, setEditting] = useState();
+    const toggleEditting = () => setEditting(!editting);
+    const deleteCallback = async () => {
+        await Posts.Delete(post.id);
+        window.location.reload();
+    }
+    
     return (
         <Container>
-            <PostInfo post={post} />
-            {editting ? <PostEdit post={post} /> : <TagList tags={post.tags} />}
-            {/* <EditButton src="/images/edit.svg" onClick={() => setEditting(!editting)}/> */}
+            <SourceContainer>
+                <Source source={post.source} />
+            </SourceContainer>
+            <InnerContainer>
+                <Info post={post}/>
+                {editting
+                    ? <PostEdit key={post.id} post={post} reloadCallback={reloadCallback} />
+                    : <TagList tags={post.tags} />
+                }
+                <Buttons editCallback={toggleEditting} deleteCallback={deleteCallback} />
+            </InnerContainer>
         </Container>
     );
 }
@@ -22,26 +41,20 @@ const Container = styled.div`
     /* Position */
     position: relative;
     min-height: 14rem;
-
     background-color: var(--BACKGROUND-3);
+`;
 
+const SourceContainer = styled.div`
+    margin-right: 2rem;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const InnerContainer = styled.div`
     display: flex;
     flex-flow: row nowrap;
-    align-items: baseline;
-    padding-bottom: 1rem;
+    align-items: flex-start;
 `;
 
-const EditButton = styled.img`
-    position: absolute;
-    z-index: 1;
-    width: 1.8rem;
-    height: 1.8rem;
-    right: 0.5rem;
-    top: 0.5rem;
-    padding: 0.2rem;
-
-    cursor: pointer;
-    background-color: var(--BACKGROUND-4);
-    border-radius: 0.5rem;
-    border: 0.2rem var(--BORDER-2) solid;
-`;

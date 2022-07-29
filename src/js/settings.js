@@ -3,7 +3,8 @@ const SettingsDefaults = {
     pauseVideosInBackground: true,
     searchLayout: "column",
     GridItemSize: 12,
-    apiUrl: "https://api.openbooru.org",
+    // apiUrl: "https://api.openbooru.org",
+    apiUrl: "http://192.168.0.82:8443",
 };
 
 const Settings = new Proxy(SettingsDefaults, {
@@ -35,4 +36,4 @@ const Settings = new Proxy(SettingsDefaults, {
     }
 })
 
-export default Settings;
+export default SettingsDefaults;

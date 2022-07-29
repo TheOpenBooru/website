@@ -4,8 +4,7 @@ import OpenGraph from "components/OpenGraph";
 import NavigationBar from "components/NavigationBar";
 import titleCase from "ap-style-title-case";
 
-function Core(props) {
-    let { title, description, image, video } = props;
+function Core({ title, description, image, video, ...props }) {
     title = titleCase(title);
     return (
         <React.Fragment>
@@ -13,8 +12,7 @@ function Core(props) {
                 {title ? <title>{title}</title> : null}
                 {description ? <meta name="description" content={description} /> : null}
             </Helmet>
-            <OpenGraph {...props} />
-            
+            <OpenGraph title={title} description={description} image={image} video={video} />
             <NavigationBar />
             {props.children}
         </React.Fragment>

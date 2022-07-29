@@ -1,27 +1,33 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import Media from "components/Media";
 
-export default function PostMedia(props) {
-    let { post, noButtons } = props;
-    
+
+PostMedia.propTypes = {
+    post: PropTypes.object,
+    noButtons: PropTypes.bool
+}
+export default function PostMedia({ post, noButtons = false , ...props}) {
     let style = {}
     if (noButtons) {
         style.width = "100%";
-        style.left = "unset";
+    } else {
+        style.width = "calc(100% - (2 * var(--BUTTON-WIDTH)))";
+        style.left = "var(--BUTTON-WIDTH)";
     }
+
     return (
-        <Container key={post.id} style={style}>
+        <Container key={post.id} style={style} {...props}>
             <Media type={post.media_type} full={post.full} preview={post.preview}/>
         </Container>
     )
 }
 
 const Container = styled.div`
+    cursor: pointer;
     position: relative;
     height: 100%;
-    width: calc(100% - (2 * var(--BUTTON-WIDTH)));
-    left: var(--BUTTON-WIDTH);
 
     display: flex;
     align-items: center;
