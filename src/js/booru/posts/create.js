@@ -16,7 +16,7 @@ export default async function create(file, captcha_response = null) {
         xhr.open("POST", url);
         xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
         xhr.onload = () => {
-            if (xhr.status === 201) {
+            if (xhr.status === 200) {
                 let json = JSON.parse(xhr.response);
                 resolve(json);
             } else {

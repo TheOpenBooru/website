@@ -10,7 +10,7 @@ export default function Delete(post_id){
         xhr.open("DELETE", Settings.apiUrl + "/post/" + post_id.toString());
         xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
         xhr.onload = () => {
-            if (xhr.status === 204) {
+            if (xhr.status === 200) {
                 resolve();
             } else {
                 if (xhr.status === 401) {

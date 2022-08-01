@@ -11,7 +11,7 @@ export default async function Import(import_url, captcha_response = null) {
         xhr.open("POST", url);
         xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
         xhr.onload = () => {
-            if (xhr.status === 201) {
+            if (xhr.status === 200) {
                 resolve();
             } else {
                 if (xhr.status === 400) {

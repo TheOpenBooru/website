@@ -11,7 +11,7 @@ export default async function edit(post_id, edit, captcha_response = null) {
         xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
         xhr.send(JSON.stringify(edit));
         xhr.onload = () => {
-            if (xhr.status === 202) {
+            if (xhr.status === 200) {
                 resolve();
             } else {
                 reject();
