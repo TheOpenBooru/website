@@ -16,9 +16,8 @@ export default function CreatePost() {
 
     async function FormHandler(e) {
         e.preventDefault();
-        // let file = fileRef.current.files[0];
-        
         let file = fileRef.current.files[0]
+        
         if (captchaResponse === null) {
             showText("Please Solve the Captcha")
         } else {
