@@ -31,6 +31,7 @@ export function encode(query: PostQuery): string {
 }
 
 export function decode(bsl: string): PostQuery {
+    bsl += " " // Fix for search for end of section, instead finds end of string
     let tags = bsl.split(" ");
     tags = tags.filter((tag) => tag !== "");
     
@@ -40,7 +41,8 @@ export function decode(bsl: string): PostQuery {
         } else {
             let start = bsl.indexOf(prefix) + prefix.length;
             let end = bsl.indexOf(" ", start);
-            return bsl.slice(start, end);
+            let value = bsl.slice(start, end);
+            return value
         }
     }
     
