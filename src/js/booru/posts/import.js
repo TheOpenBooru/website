@@ -12,7 +12,8 @@ export default async function Import(import_url, captcha_response = null) {
         xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
         xhr.onload = () => {
             if (xhr.status === 200) {
-                resolve();
+                let data = JSON.parse(xhr.response)
+                resolve(data);
             } else {
                 if (xhr.status === 400) {
                     reject(new Error(xhr.status));
