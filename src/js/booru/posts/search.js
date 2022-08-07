@@ -19,7 +19,7 @@ export default async function search(query: PostQuery, index = 0, limit = 100): 
     params.set("limit", limit);
     
     let url = SettingsDefaults.apiUrl + "/posts/search?" + params.toString();
-    let r = await fetch(url, { cache: "force-cache" });
+    let r = await fetch(url);
     if (r.ok) {
         return await r.json();
     } else {
