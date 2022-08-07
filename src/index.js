@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Post from "containers/post";
@@ -10,14 +10,6 @@ import "./index.css";
 
 export const queryClient = new QueryClient();
 
-ReactDOM.render(
-    <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <Router />
-        </QueryClientProvider>
-    </React.StrictMode>,
-    document.getElementById("root"),
-);
 
 function Router() {
     return (
@@ -41,3 +33,13 @@ function Redirect() {
     window.location.href = "/";
     return null
 }
+
+
+const root = ReactDOM.createRoot(document.getElementById('id'))
+root.render(
+    <React.StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <Router />
+        </QueryClientProvider>
+    </React.StrictMode>
+);
