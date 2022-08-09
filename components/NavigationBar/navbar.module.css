@@ -1,0 +1,95 @@
+#navbar {
+    /* Position */
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: var(--NAVBAR-HEIGHT);
+    min-width: 360px;
+    width: 100vw;
+    z-index: 1;
+    
+    /* Look */
+    background-color: var(--BACKGROUND-2);
+    border-bottom: black 1px solid;
+
+    /* Grid */
+    display: flex;
+    object-fit: fill;
+    align-items: center;
+}
+
+.section {
+    /* Shape */
+    min-width: fit-content;
+    width: 5rem;
+    height: calc(var(--NAVBAR-HEIGHT) - 0.6rem);
+    border-radius: 1rem;
+    margin: 0.3rem;
+    
+    /* Center containinng items */
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: left;
+    align-items: center;
+    
+    /* Look */
+    font-size: 1.2rem;
+    user-select: none;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: .2s ease-in-out;
+    border: 3px solid var(--BORDER-1);
+    background-color: var(--BACKGROUND-3);
+}
+
+.section:hover{
+    border-color: var(--BORDER-1-HOVER);
+}
+
+.section > *{
+    color: black;
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+#VersionNumber {
+    font-size: larger;
+}
+
+.icon {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+@media screen and (max-width: 40rem), (orientation: portrait){
+    #navbar {
+        justify-content: space-around;
+    }
+
+    .section{
+        width: 100%;
+        padding: 0 !important;
+        margin: .1rem !important;
+    }
+    
+    #VersionNumber{
+        display: none;
+    }
+}
+
+@keyframes fadeIn{
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.fadeIn{
+    opacity: 0;
+
+    animation: fadeIn forwards 0.3s;
+    animation-delay: 0.8s;
+}
