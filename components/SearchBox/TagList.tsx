@@ -1,5 +1,6 @@
+import Image from "next/image";
 import React from "react";
-import "./tagList.module.css"
+import styles from "./TagList.module.css";
 
 export default function TagList(props) {
     let { includeTags, setIncludeTags, excludeTags, setExcludeTags } = props;
@@ -28,7 +29,7 @@ export default function TagList(props) {
 
     let allTags = includeTags.concat(excludeTags);
     return (
-        <div id="searchbox-taglist">
+        <div id={styles.TagList}>
             {allTags.map((tag) => <Tag tag={tag} key={tag}/>)}
         </div>
     );
@@ -36,16 +37,19 @@ export default function TagList(props) {
     function Tag(props) {
         let { tag } = props;
         let included = includeTags.includes(tag);
-        let tag_class = included ? "searchbox-tag-included" : "searchbox-tag-excluded";
+        let tag_class = included ? styles.TagInclude : styles.ExcludedTag;
+        tag_class += " " + styles.TagText
         return (
-            <div className="searchbox-tag">
-                <img
-                    className="searchbox-tag-remove"
+            <div className={styles.Tag}>
+                <Image
+                    className={styles.RemoveTag}
                     src="/images/cross.svg"
                     alt="Remove Tag"
+                    height="20"
+                    width="20"
                     onClick={() => removeTag(tag)}
                 />
-                <span onClick={() => toggleTagInclude(tag)} className={"searchbox-tag-text " + tag_class}>{tag}</span>
+                <span onClick={() => toggleTagInclude(tag)} className={tag_class}>{tag}</span>
             </div>
         );
     }

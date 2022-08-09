@@ -1,4 +1,4 @@
-#searchbox-taglist{
+#TagList{
     height: 100%;
     gap:.5rem;
     padding: .3rem;
@@ -8,27 +8,27 @@
     align-items: baseline;
 }
 
-.searchbox-tag-text{
+.TagText{
     user-select: none;
 }
 
-.searchbox-tag-excluded{
+.ExcludedTag{
     color: #8b0000;
 }
 
-.searchbox-tag-remove{
+.RemoveTag{
     /* Change colour to red */
     filter: invert(13%) sepia(51%) saturate(6190%) hue-rotate(359deg) brightness(78%) contrast(118%);
 }
 
-.searchbox-tag-remove, .searchbox-tag-include{
+.RemoveTag, .TagIncluded{
     cursor: pointer;
     user-select: none;
     width: 1rem;
     height: 1rem;
 }
 
-.searchbox-tag{
+.Tag{
     min-width: 3rem;
     width: fit-content;
 

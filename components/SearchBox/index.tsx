@@ -5,8 +5,7 @@ import SortSelect from "./SortSelect";
 import OrderButton from "./OrderButton";
 import TagSearch from "./TagSearch";
 import TagList from "./TagList";
-import { BSL } from "js/booru";
-import "./searchBox.module.css";
+import styles from "./SearchBox.module.css";
 
 
 SearchBox.propTypes = {
@@ -34,8 +33,8 @@ export default function SearchBox({ query, setQuery, close }) {
     }
 
     return (
-        <div id="searchbox-container">
-            <div id="searchbox-top">
+        <div id={styles.Container}>
+            <div id={styles.Top}>
                 <SortSelect sort={sort} setSort={setSort} />
                 <OrderButton decending={decending} setDecending={setDecending} />
                 <TagSearch includeTags={includeTags} setIncludeTags={setIncludeTags} />
@@ -46,7 +45,7 @@ export default function SearchBox({ query, setQuery, close }) {
                 excludeTags={excludeTags}
                 setExcludeTags={setExcludeTags}
             />
-            <button id="searchbox-searchButton" onClick={saveQuery}>Search</button>
+            <button id={styles.SearchButton} onClick={saveQuery}>Search</button>
         </div>
     );
 }

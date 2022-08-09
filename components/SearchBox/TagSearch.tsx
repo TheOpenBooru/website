@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Tags } from "js/booru";
-import "./tagSearch.module.css"
+import styles from "./TagSearch.module.css"
 
 export default function TagSearch(props) {
     let { includeTags, setIncludeTags } = props;
@@ -46,7 +46,7 @@ export default function TagSearch(props) {
     return (
         <React.Fragment>
             <input
-                id="searchbox-search"
+                id={styles.Search}
                 type="search"
                 value={text}
                 onKeyDownCapture={keyPressHandler}
@@ -65,11 +65,11 @@ function PredictedTags(props) {
         return null
     } else {
         return (
-            <div id="searchbox-autocomplete">
+            <div id={styles.AutoComplete}>
                 {tags.map((tag) => (
                     <button
                         key={tag.name}
-                        className="searchbox-autocomplete-item searchbox-autocomplete"
+                        className={styles.AutoCompleteItem}
                         onClick={callback(tag.name)}
                     >
                         {tag.name}

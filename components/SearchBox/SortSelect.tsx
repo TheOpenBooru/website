@@ -1,12 +1,12 @@
 import React from "react"
+import styles from "./SearchBox.module.css";
 
-export default function SortSelect(props) {
-    let { sort, setSort } = props;
+export default function SortSelect({ sort, setSort }) {
     function setSortCallback(e) {
         setSort(e.target.value);
     }
     return (
-        <select defaultValue={sort} id="searchbox-sort" onChange={setSortCallback}>
+        <select id={styles.sort} defaultValue={sort} onChange={setSortCallback}>
             <option value="created_at">Creation Date</option>
             <option value="id">ID</option>
             <option value="upvotes">Upvotes</option>
