@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import Image from "next/image";
-import { onLoadCallback } from "components/Media/image";
 
 export default function GridItem({ post, callback, isTarget }) {
     let className = `media-${post.media_type}`;
