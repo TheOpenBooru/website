@@ -31,7 +31,7 @@ export default function ColumnPosts({ posts, loading, morePostsCallback, postCal
         const { scrollTop, offsetHeight, scrollHeight } = containerRef.current; 
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
-        if (distanceFromBottom < 400) {
+        if (distanceFromBottom < 1000) {
             morePostsCallback();
         }
     }
