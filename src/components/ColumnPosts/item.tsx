@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { onLoadCallback } from "components/Media/image";
 import { Types } from "openbooru";
 import Image from "next/image";
 
@@ -25,6 +24,9 @@ export default function Item({ post, postCallback, isTarget }:ItemProps) {
                     height={image.height}
                     width={image.width}
                     layout="responsive"
+
+                    placeholder="blur"
+                    blurDataURL={post.thumbnail.url}
                 />
             </ImageContainer>
         </Container>
