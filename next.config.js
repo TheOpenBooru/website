@@ -8,8 +8,11 @@ const nextConfig = {
     images: {
         domains: ["api.openbooru.org"],
     },
+    
     env: {
-        APIURL: 'https://api.openbooru.org',
+        SITE_NAME: "Open Booru",
+        SITE_DESCRIPTION: "",
+        API_URL: "https://api.openbooru.org",
     },
 };
 

@@ -3,7 +3,7 @@ const SettingsDefaults = {
     pauseVideosInBackground: true,
     searchLayout: "column",
     GridItemSize: 12,
-    apiUrl: process.env.APIURL,
+    apiUrl: process.env.API_URL,
 };
 
 
