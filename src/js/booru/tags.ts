@@ -1,35 +1,28 @@
 import Settings from "js/settings";
-import { TagQuery } from "js/booru/types";
+import { Store } from "js/booru/account";
+import OpenBooru, { Types } from "openbooru";
+import Worker from "worker-loader!workers/tags.worker";
+import { cache, CacheType, CacheScope } from 'cache-decorator';
 
-export default class Tags {
-    static async search(query: TagQuery) {
-        let params = new URLSearchParams();
+const booru = new OpenBooru(Settings.apiUrl, Store.token)
 
-        for (let key in query) {
-            let value = query[key];
-            if (!value) continue;
-            if (Array.isArray(value)) {
-                value.forEach((v) => params.append(key, v));
-            } else {
-                params.set(key, value);
-            }
-        }
-
-        let url = Settings.apiUrl + `/tags/search?${params.toString()}`;
-        let r = await fetch(url, { cache: "default" });
-        if (r.ok) {
-            let tags = await r.json();
-            return tags;
-        } else {
-            return [];
-        }
+export default class Tags{
+    static async get(tag: string): Promise<Types.Tag | null> {
+        TagWorker.post()
+        let tags = await booru.TagsSearch({
+            name_like: tag,
+            limit: 1
+        })
+        return tags[0] || null;
     }
-
-    static async autocomplete(text, limit = 5) {
-        let query = new TagQuery();
-        query.name_like = text;
-        query.limit = limit;
-        let tags = await this.search(query);
-        return tags;
+    
+    static async autocomplete(text: string, limit: number = 5): Promise<Types.Tag[]> {
+        if (!text) return []
+        
+        let tags = await booru.TagsSearch({
+            name_like: text,
+            limit: limit,
+        });
+        return tags
     }
 }

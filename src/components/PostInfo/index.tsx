@@ -8,9 +8,6 @@ import TagList from "./TagList";
 import Buttons from "./Buttons";
 import Source from "./Source";
 
-PostInfo.propTypes = {
-    reloadCallback: PropTypes.func,
-};
 export default function PostInfo({ post }) {
     let [editting, setEditting] = useState(false);
     const toggleEditting = () => setEditting(!editting);
@@ -52,9 +49,8 @@ const SourceContainer = styled.div`
 `
 
 const InnerContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: flex-start;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 13rem 1fr 4rem;
+    padding-bottom: 1rem;
 `;
 

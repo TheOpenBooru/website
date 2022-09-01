@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import Image from "next/image";
 import { Account, Posts } from "js/booru";
 
 Votes.propTypes = {
@@ -12,13 +13,13 @@ export default function Votes({ post }) {
 
     useEffect(() => {
         (async () => {
-            if (Account.loggedIn) {
+            if (Account.Store.loggedIn) {
                 let profile = await Account.profile(false);
                 setUpvoted(profile.upvotes.includes(post.id));
                 setDownvoted(profile.downvotes.includes(post.id));
             }
         })();
-    }, []);
+    }, [post]);
 
     let upvoteUrl = upvoted ? "/images/thumbs-up-solid.svg" : "/images/thumbs-up-regular.svg";
     let downvoteUrl = downvoted
@@ -26,7 +27,7 @@ export default function Votes({ post }) {
         : "/images/thumbs-down-regular.svg";
 
     const upvoteCallback = () => {
-        if (!Account.loggedIn) return;
+        if (!Account.Store.loggedIn) return;
         if (upvoted) {
             setUpvoted(false);
             Posts.RemoveUpvote(post.id);
@@ -38,7 +39,7 @@ export default function Votes({ post }) {
     };
 
     const downvoteCallback = () => {
-        if (!Account.loggedIn) return;
+        if (!Account.Store.loggedIn) return;
         if (downvoted) {
             setDownvoted(false);
             Posts.RemoveDownvote(post.id);
@@ -55,8 +56,11 @@ export default function Votes({ post }) {
                 <VoteIcon
                     src={upvoteUrl}
                     alt="Upvote"
+                    height="50"
+                    width="50"
+                    priority={true}
                     onClick={upvoteCallback}
-                    style={{ cursor: Account.loggedIn ? "pointer" : null }}
+                    style={{ cursor: Account.Store.loggedIn ? "pointer" : null }}
                 />
                 <span>{(post.upvotes + upvoted).toLocaleString("en-US")}</span>
             </VoteContainer>
@@ -64,8 +68,11 @@ export default function Votes({ post }) {
                 <VoteIcon
                     src={downvoteUrl}
                     alt="Downvote"
+                    height="50"
+                    width="50"
+                    priority={true}
                     onClick={downvoteCallback}
-                    style={{ cursor: Account.loggedIn ? "pointer" : null }}
+                    style={{ cursor: Account.Store.loggedIn ? "pointer" : null }}
                 />
                 <span>{(post.downvotes + downvoted).toLocaleString("en-US")}</span>
             </VoteContainer>
@@ -74,7 +81,9 @@ export default function Votes({ post }) {
 }
 
 const Container = styled.div`
+    width: fit-content;
     margin: 1rem;
+
     display: flex;
     flex-flow: nowrap row;
     justify-content: center;

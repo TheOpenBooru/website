@@ -1,16 +1,16 @@
 import { Data } from "dataclass";
 
 export class PostQuery {
-    sort = "created_at";
+    sort = "upvotes";
     descending = true;
 
     include_tags: Array<string> = [];
     exclude_tags: Array<string> = [];
 
-    created_after: bigint = null;
-    created_before: bigint = null;
+    created_after: number = null;
+    created_before: number = null;
 
-    ids: Array<bigint> = null;
+    ids: Array<number> = null;
     md5: string = null;
     sha256: string = null;
 }
@@ -31,15 +31,15 @@ export class PostEdit {
 export class Image {
     url: string;
     mimetype: string;
-    height: bigint;
-    width: bigint;
+    height: number;
+    width: number;
     type: string;
 }
 
 export class Post {
-    id: bigint;
+    id: number;
     created_at: number;
-    uploader: bigint;
+    uploader: number;
     deleted: boolean;
     source: string;
     rating: string;
@@ -49,23 +49,23 @@ export class Post {
     media_type: string;
     hashes: object;
     tags: Array<string>;
-    comments: Array<bigint>;
-    edits: Array<bigint>;
-    upvotes: bigint;
-    downvotes: bigint;
+    comments: Array<number>;
+    edits: Array<number>;
+    upvotes: number;
+    downvotes: number;
 }
 
 export class Profile {
     id: string;
-    created_at: bigint;
+    created_at: number;
     username: string;
     level: string;
-    posts: Array<bigint>;
-    comments: Array<bigint>;
+    posts: Array<number>;
+    comments: Array<number>;
     email: string;
     settings: string;
-    upvotes: Array<bigint> = [];
-    downvotes: Array<bigint> = [];
+    upvotes: Array<number> = [];
+    downvotes: Array<number> = [];
 }
 
 const Types = { Post, PostQuery, TagQuery, PostEdit, Image, Profile };

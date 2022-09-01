@@ -5,12 +5,14 @@ import HeadInfo from "components/HeadInfo";
 import Media from "components/Media";
 import PostInfo from "components/PostInfo";
 import { Posts } from "js/booru";
+import { Types } from "openbooru";
 
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    let { id } = context.query
+export const getServerSideProps: GetServerSideProps = async ({ query, res}) => {
+    let { id } = query
     try {
         const post = await Posts.get(id)
+        res.setHeader('Cache-Control',"")
         return {
             props: { post },
         }
@@ -21,35 +23,40 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-
-export default function PostPage({ post }) {
-    let headAttrs = {
-        title:`Open Booru: Post ${post.id}`,
-        description:`Open Booru Post ${post.id}, ${post.tags.join(" ")}`,
-        keywords:post.tags,
-    }
-    if (post.media_type === "video") {
-        headAttrs['video'] = post.full.url
-    } else {
-        headAttrs['image'] = post.preview.url
-    }
+type PostPageProps = {
+    post: Types.Post
+}
+export default function PostPage({ post }:PostPageProps) {
+    let HeadMedia =
+        post.media_type === "video"
+        ? { video: post.full.url }
+        : { image: post.full.url }
+    
     return (
-        <React.Fragment>
-            <HeadInfo {...headAttrs} />
+        <>
+            <HeadInfo
+                title={`Post ${post.id} | ${post.tags.join(" ")}`}
+                description={`Post ${post.id}, ${post.tags.join(" ")}`}
+                keywords={post.tags}
+                {...HeadMedia}
+            />
             <Container>
                 <MediaContainer>
                     <Media type={post.media_type} full={post.full} preview={post.preview} />
                 </MediaContainer>
                 <PostInfo post={post}/>
             </Container>
-        </React.Fragment>
+        </>
     );
 }
 
 
 const Container = styled.div`
+    position: relative;
     height: var(--PAGE-HEIGHT);
-    width: 100vw;
+    width: 100%;
+    top: 0;
+    left: 0;
     overflow-y: auto;
     overflow-x: hidden;
 `;

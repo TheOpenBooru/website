@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import PostsSection from "./PostsSection";
 import Booru, { Account } from "js/booru";
 import Redirects from "js/redirects";
 import useMobile from "hooks/mobileHook";
@@ -12,73 +11,78 @@ export default function NavigationBar() {
     if (!isMobile) {
         return (
             <nav id={styles.navbar}>
-                <VersionNumber text />
                 <PostsSection text />
-                <AccountSection text />
                 <InfoSection text />
+                <AccountSection text />
             </nav>
         );
     } else {
         return (
             <nav id={styles.navbar}>
-                <AccountSection text />
                 <PostsSection text />
                 <InfoSection text />
+                <AccountSection text />
             </nav>
         );
     }
 }
 
-function VersionNumber(props) {
-    let { text } = props;
+
+function PostsSection({ text }) {
     return (
-        <a
-            id={styles.VersionNumber}
-            className={styles.section}
-            href="https://github.com/TheOpenBooru"
-        >
-            <Icon src="/images/github.svg" />
-            {text ? <span className="navbar-button-text">Alpha: Carbon</span> : null}
-        </a>
-    );
+        <Link href="/">
+            <div className={styles.section}>
+                <Icon src="/images/home.svg" alt="Home" />
+                {text ? <span className="navbar-button-text">Home</span> : null}
+            </div>
+        </Link>
+    )
 }
 
+
 function AccountSection({ text }) {
-    if (Account.loggedIn) {
+    if (process.env.READ_ONLY) return null;
+    if (Account.Store.loggedIn) {
         let callback = () => {
             Account.logout();
             window.location.reload();
         };
         return (
             <div className={styles.section} onClick={callback}>
-                <Icon src="/images/profile.svg" />
-                {text ? <span className="navbar-button-text">{Account.username}</span> : null}
+                <Icon src="/images/profile.svg" alt="Profile" />
+                {text ? <span className="navbar-button-text">{Account.Store.username}</span> : null}
             </div>
         );
     } else {
         return (
-            <a className={styles.section} href={Redirects.login}>
-                <Icon src="/images/profile.svg" />
-                {text ? <span className="navbar-button-text">Login</span> : null}
-            </a>
+            <Link href={Redirects.login}>
+                <div className={styles.section}>
+                    <Icon src="/images/profile.svg" alt="Login" />
+                    {text ? <span className="navbar-button-text">Login</span> : null}
+                </div>
+            </Link>
         );
     }
 }
 
+
 function InfoSection(props) {
     let { text } = props;
     return (
-        <a className={styles.section} href={Redirects.info}>
-            <Icon src="/images/info.svg" />
-            {text ? <span className="navbar-button-text">Info</span> : null}
-        </a>
+        <Link href={Redirects.info}>
+            <div className={styles.section}>
+                <Icon src="/images/info.svg" alt="Info" />
+                {text ? <span className="navbar-button-text">Info</span> : null}
+            </div>
+        </Link>
     );
 }
 
-function Icon({ src }) {
+
+function Icon({ src, alt = "" }) {
     return (
         <div className={styles.icon}>
-            <Image src={src} alt="" height="128" width="128" />
+            <Image src={src} alt={alt} height="128" width="128" />
         </div>
     );
 }

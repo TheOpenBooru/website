@@ -1,9 +1,11 @@
 import React from "react";
+import HeadInfo from "components/HeadInfo";
 import css from "styled-jsx/css";
 
 export default function MissingPage() {
     return (
-        <React.Fragment>
+        <>
+            <HeadInfo title="Page Not Found"/>
             <style jsx>{`
                 h1 {
                     font-size: 5rem;
@@ -18,6 +20,6 @@ export default function MissingPage() {
                 <h1>404 - Page Not Found</h1>
                 <h2>Oopsie Woopsie, We Could Not Find The Pagey Wagey</h2>
             </div>
-        </React.Fragment>
+        </>
     );
 }

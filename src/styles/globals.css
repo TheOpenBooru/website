@@ -1,32 +1,43 @@
 :root{
-  --BACKGROUND-1: #9ac9d5;
+  /* --COLOR-1: #303a30;
+  --COLOR-2: #2C4543;
+  --COLOR-3: #2E423D;
+  --COLOR-4: #2F3E37;
+  --COLOR-5: #212A25;
+  --COLOR-6: #0E110E;
+  --COLOR-7: #090B09; */
+ 
 
-  --BACKGROUND-2: #62b6cb;
-  --BACKGROUND-2-HOVER: #3f8098;
+  --COLOR-1: #9ac9d5;
+  --COLOR-2: #62b6cb;
+  --COLOR-3: #3f8098;
+  --COLOR-4: #306173;
+  --COLOR-5: #1e3d48;
+  --COLOR-6: #0c181d;
+  --COLOR-7: #070e11;
+
+  --BACKGROUND-1: var(--COLOR-1);
+
+  --BACKGROUND-2: var(--COLOR-2);
+  --BACKGROUND-2-HOVER: var(--COLOR-3);
   
-  --BACKGROUND-3: #3f8098;
-  --BACKGROUND-3-HOVER: #306173;
+  --BACKGROUND-3: var(--COLOR-3);
+  --BACKGROUND-3-HOVER: var(--COLOR-4);
 
-  --BACKGROUND-4: #306173;
-  --BACKGROUND-4-HOVER: #1e3d48;
+  --BACKGROUND-4: var(--COLOR-4);
+  --BACKGROUND-4-HOVER: var(--COLOR-5);
 
-  --BORDER-1: #1e3d48;
-  --BORDER-1-HOVER: #0c181d;
+  --BORDER-1: var(--COLOR-5);
+  --BORDER-1-HOVER: var(--COLOR-6);
   
-  --BORDER-2: #0c181d;
-  --BORDER-2-HOVER: #070e11;
+  --BORDER-2: var(--COLOR-6);
+  --BORDER-2-HOVER: var(--COLOR-7);
 }
 
 :root{
   --NAVBAR-HEIGHT: 2.8rem;
   --PAGE-HEIGHT: calc(100vh - var(--NAVBAR-HEIGHT));
 }
-
-/* @media screen and (orientation: portrait) {
-  :root{
-    --PAGE-HEIGHT: calc(100vh - var(--NAVBAR-HEIGHT) - 3.6rem) !important;
-  }
-} */
 
 
 body {
@@ -38,7 +49,9 @@ body {
   background-color: var(--BACKGROUND-1);
 }
 
-
+a {
+  text-decoration: none;
+}
 .centered, .center{
   display: flex;
   align-items: center;

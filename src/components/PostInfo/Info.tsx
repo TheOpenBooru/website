@@ -5,10 +5,10 @@ import titleCase from "ap-style-title-case";
 import Votes from "./Votes";
 
 
-PostInfo.propTypes = {
+Info.propTypes = {
     post: PropTypes.object,
 };
-export default function PostInfo({ post }) {
+export default function Info({ post }) {
     let created_at = new Date(post.created_at * 1000).toDateString();
     let rating = titleCase(post.rating)
     return (
@@ -20,7 +20,7 @@ export default function PostInfo({ post }) {
 }
 
 const Container = styled.div`
-    width: max(10rem,15vw);
+    width: 100%;
     height: 100%;
     padding: 0.5rem;
     white-space: nowrap;

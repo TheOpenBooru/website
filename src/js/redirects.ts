@@ -15,7 +15,7 @@ const Redirects = {
     settings:"/settings",
     
     search: ({ layout = null, query = null } = {}) => {
-        let baseUrl = "/posts";
+        let baseUrl = "/";
         if (layout) baseUrl += "/" + layout
         if (query) baseUrl += "?query=" + query
         return baseUrl

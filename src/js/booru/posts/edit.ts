@@ -8,7 +8,7 @@ export default async function edit(post_id, edit, captcha_response = null) {
         if (captcha_response) url += "?h-captcha-response=" + captcha_response;
         xhr.open("PATCH", url);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
+        xhr.setRequestHeader("Authorization", "Bearer " + Account.Store.token);
         xhr.send(JSON.stringify(edit));
         xhr.onload = () => {
             if (xhr.status === 200) {

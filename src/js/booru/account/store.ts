@@ -1,23 +1,22 @@
-export const username = null
-export const level = null
-export const token = null
-export const loggedIn = null
+function get(key: string) {
+    if (typeof window === "undefined") return null;
+    return localStorage.getItem(key)
+}
 
-// Object.defineProperty(module.exports, "username", {
-//     get: () => window.localStorage.getItem("Login-Username"),
-//     set: (value) => window.localStorage.setItem("Login-Username", value)
-// })
+function set(key: string, value: any) {
+    if (typeof window === "undefined") return;
+    localStorage.setItem(key, value);
+}
 
-// Object.defineProperty(module.exports, "level", {
-//     get: () => window.localStorage.getItem("Login-Level") || "annonomous",
-//     set: (value) => window.localStorage.setItem("Login-Level", value)
-// })
+export default class Store{
+    static get username() {return get("Login-Username")}
+    static set username(value) {set("Login-Username", value)}
 
-// Object.defineProperty(module.exports, "token", {
-//     get: () => window.localStorage.getItem("Login-Token"),
-//     set: (value) => window.localStorage.setItem("Login-Token", value)
-// })
+    static get level() {return get("Login-Level") || "annonomous"}
+    static set level(value) { set("Login-Level", value) }
 
-// Object.defineProperty(module.exports, "loggedIn", {
-//     get: () => !!window.localStorage.getItem("Login-Token")
-// })
+    static get token() {return get("Login-Token")}
+    static set token(value) { set("Login-Token", value) }
+
+    static get loggedIn() {return Boolean(get("Login-Token"))}
+}

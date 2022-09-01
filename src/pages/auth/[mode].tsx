@@ -1,21 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
+import { GetServerSideProps } from "next";
 import styled from "styled-components";
 import MessageBox from "components/MessageBox";
+import LoginForm from "components/LoginForm";
+import RegisterForm from "components/RegisterForm";
+import Buttons from "components/AuthButtons";
 import { Account } from "js/booru";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
-import Buttons from "./Buttons";
-import HeadInfo from "components/HeadInfo";
 
 function compareError(err, other) {
     return err.message === other.message;
 }
 
-export default function Login() {
-    let [mode, setMode] = useState("login");
-    let errorRef = useRef(null);
+export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
+    let { mode } = query
+    return { props: { initial_mode: mode } }
+}
 
-    useEffect(() => showText(""), [mode]);
+export default function Login({ initial_mode }) {
+    let [mode, setMode] = useState(initial_mode);
+
+    let errorRef = useRef(null);
     function showText(text) {
         errorRef.current.innerText = text;
     }

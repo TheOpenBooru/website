@@ -16,15 +16,14 @@ GridPosts.propTypes = {
     morePostsCallback: PropTypes.func,
 };
 export default function GridPosts({ posts, morePostsCallback, loading, postCallback, index }) {
-    let scrollRef = useRef();
-
-    let checkScroll = () => {
+    const scrollRef = useRef();
+    const checkScroll = () => {
         if (!scrollRef.current) return;
 
         const { scrollTop, offsetHeight, scrollHeight } = scrollRef.current;
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
-        if (distanceFromBottom < 100) {
+        if (distanceFromBottom < 2000) {
             morePostsCallback();
         }
     };

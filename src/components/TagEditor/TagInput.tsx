@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import AutoComplete from "./AutoComplete";
+import TagAutocomplete from "components/TagAutocomplete";
 
 TagInput.propTypes = {
     addTagCallback: PropTypes.func,
@@ -36,7 +36,7 @@ export default function TagInput({ addTagCallback }) {
         <Container>
             <TextInput type="text" value={input} onKeyDown={onKeyPress} onChange={onInputChange} />
             <Button onClick={submitEntry}>Add</Button>
-            <AutoComplete input={input} addTagCallback={addTagCallback} />
+            <TagAutocomplete input={input} addTagCallback={addTagCallback} />
         </Container>
     );
 }

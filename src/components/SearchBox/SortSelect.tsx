@@ -1,16 +1,23 @@
 import React from "react"
-import styles from "./SearchBox.module.css";
+import styled from "styled-components";
 
 export default function SortSelect({ sort, setSort }) {
     function setSortCallback(e) {
         setSort(e.target.value);
     }
     return (
-        <select id={styles.sort} defaultValue={sort} onChange={setSortCallback}>
+        <Selector defaultValue={sort} onChange={setSortCallback}>
             <option value="created_at">Creation Date</option>
             <option value="id">ID</option>
             <option value="upvotes">Upvotes</option>
             <option value="downvotes">Downvotes</option>
-        </select>
+        </Selector>
     )
 }
+
+
+const Selector = styled.select`
+    border-radius: .2rem;
+    color: black;
+    border: 0;
+`

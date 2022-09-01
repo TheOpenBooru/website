@@ -9,7 +9,7 @@ export default async function Import(import_url, captcha_response = null) {
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST", url);
-        xhr.setRequestHeader("Authorization", "Bearer " + Account.token);
+        xhr.setRequestHeader("Authorization", "Bearer " + Account.Store.token);
         xhr.onload = () => {
             if (xhr.status === 200) {
                 let data = JSON.parse(xhr.response)

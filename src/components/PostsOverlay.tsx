@@ -1,14 +1,14 @@
-import React, { useRef, useState } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
+import styled from "styled-components";
 import MessageBox from "components/MessageBox";
 import SearchBox from "components/SearchBox";
 import CreatePost from "components/CreatePost";
 import ImportPost from "components/ImportPost";
+import Button from "components/Button";
 import { Account } from "js/booru";
 import UploadImage from 'images/upload.svg'
 import CreateImage from 'images/plus.svg'
 import SearchImage from 'images/search.svg'
-import styles from "./overlay.module.css";
 
 export default function PostOverlay({ query, setQuery }) {
     let [mode, setMode] = useState(null);
@@ -51,25 +51,32 @@ export default function PostOverlay({ query, setQuery }) {
     }
 
     return (
-        <React.Fragment>
+        <>
             <MessageBoxOverlay />
-            <div id={styles.overlay}>
-                {Account.loggedIn
-                    ? (<div className={styles.button} title="Import Post">
-                        <Image src={UploadImage} alt="Import Post" onClick={toggleModeCallback("import")} />
-                    </div>)
+            <Container>
+                {Account.Store.loggedIn
+                    ? <Button src={UploadImage} alt="Import Post"  title="Import Post" onClick={toggleModeCallback("import")} />
                     : null
                 }
-                {Account.loggedIn
-                    ? (<div className={styles.button} title="Create Post">
-                        <Image src={CreateImage} alt="Create Post" onClick={toggleModeCallback("create")} />
-                    </div>)
+                {Account.Store.loggedIn
+                    ? <Button src={CreateImage} title="Create Post" alt="Create Post" onClick={toggleModeCallback("create")} />
                     : null
                 }
-                <div className={styles.button} title="Search">
-                    <Image src={SearchImage} alt="Search" onClick={toggleModeCallback("search")} />
-                </div>
-            </div>
-        </React.Fragment>
+                <Button src={SearchImage} alt="Search" onClick={toggleModeCallback("search")} />
+            </Container>
+        </>
     );
 }
+
+
+const Container = styled.div`
+    position: fixed;
+    z-index: 1;
+    top: var(--NAVBAR-HEIGHT);
+    right: 1rem;
+    padding: .5rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+`

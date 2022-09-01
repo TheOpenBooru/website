@@ -5,72 +5,89 @@ import LoadingIcon from "components/LoadingIcon";
 import useWidth from "hooks/widthHook";
 import { SplitPosts } from "./utils";
 import Item from "./item";
+import { Types } from "openbooru";
+import { finished } from "stream";
 
-const Clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-ColumnPosts.propTypes = {
-    loading: PropTypes.bool,
-    finished: PropTypes.bool,
-    posts: PropTypes.arrayOf(PropTypes.object),
-    index: PropTypes.number,
-    query: PropTypes.object,
-    setQuery: PropTypes.func,
-    postCallback: PropTypes.func,
-    morePostsCallback: PropTypes.func,
+const Clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
+type ColumnProps = {
+    loading: boolean,
+    finished: boolean,
+    posts: Array<Types.Post>,
+    index: number,
+    query: Types.PostQuery,
+    setQuery: Function,
+    postCallback: Function,
+    morePostsCallback: Function,
 };
-export default function ColumnPosts({ posts, loading, morePostsCallback, postCallback, index }) {
+export default function ColumnPosts({ posts, loading, morePostsCallback, postCallback, index }:ColumnProps) {
     let width = useWidth();
-    let containerRef = useRef();
+    let ref = useRef();
 
-    let increments = (width / 500).toFixed();
-    let columnCount = Clamp(increments, 2, 8);
-    let columns = SplitPosts(posts, columnCount);
+    useEffect(checkScroll, [morePostsCallback]);
 
+    
     function checkScroll() {
-        if (!containerRef.current) return;
-
-        const { scrollTop, offsetHeight, scrollHeight } = containerRef.current; 
+        if (!ref.current) return;
+        
+        const { scrollTop, offsetHeight, scrollHeight } = ref.current; 
         let distanceFromTop = scrollTop + offsetHeight;
         let distanceFromBottom = scrollHeight - distanceFromTop;
-        if (distanceFromBottom < 1000) {
+        if (distanceFromBottom < 4000) {
             morePostsCallback();
         }
     }
 
-    useEffect(checkScroll, [morePostsCallback]);
+    let increments = Number((width / 450).toFixed());
+    let columnCount = Clamp(increments, 2, 8);
+    let columns = SplitPosts(posts, columnCount);
+    
     let focusPostID = posts[index]?.id;
-    return (
-        <Container ref={containerRef} onScroll={checkScroll}>
-            <Columns>
-                {columns.map((posts, a) => (
-                    <ColumnContainer key={a}>
-                        {posts.map((post) => (
-                            <Item
-                                key={post.id}
-                                post={post}
-                                postCallback={postCallback(post.id)}
-                                isTarget={focusPostID === post.id}
-                            />
-                        ))}
-                    </ColumnContainer>
-                ))}
-            </Columns>
-            {loading ? (
-                <LoadingContainer>
-                    <LoadingIcon fadeIn />
-                </LoadingContainer>
-            ) : null}
-        </Container>
-    );
+    
+    if (width === null) {
+        return (
+            <LoadingContainer>
+                <LoadingIcon />
+            </LoadingContainer>
+        )
+    } else {
+        return (
+            <Container ref={ref} onScroll={checkScroll}>
+                <Columns>
+                    {columns.map((posts, index) => (
+                        <ColumnContainer key={index}>
+                            {posts.map((post, index) => (
+                                <Item
+                                    key={post.id}
+                                    parentRef={ref}
+                                    post={post}
+                                    postCallback={postCallback}
+                                    isTarget={focusPostID === post.id}
+                                    priority={index < 5}
+                                />
+                            ))}
+                        </ColumnContainer>
+                    ))}
+                </Columns>
+                {loading ? (
+                    <LoadingContainer>
+                        <LoadingIcon fadeIn/>
+                    </LoadingContainer>
+                ) : null}
+            </Container>
+        );
+    }
 }
 
 const Container = styled.div`
     height: var(--PAGE-HEIGHT);
+    padding: 5rem;
     overflow-y: auto;
 
     display: flex;
     flex-flow: nowrap column;
     align-items: center;
 `;
+
 
 const Columns = styled.div`
     width: 100%;
@@ -94,5 +111,9 @@ const ColumnContainer = styled.div`
 `;
 
 const LoadingContainer = styled.div`
+    display: flex;
+    align-items:center;
+    justify-content: center;
+
     margin-bottom: 2rem;
 `;

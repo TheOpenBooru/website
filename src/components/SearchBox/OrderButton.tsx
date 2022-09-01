@@ -7,9 +7,8 @@ export default function OrderButton({ decending, setDecending }) {
     let alt = decending ? "Sort Descending" : "Sort Ascending";
     return (
         <Order onClick={callback} className="center" title={alt}>
-            <Image
-                width={128}
-                height={128}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
                 src={decending ? "/images/arrow-down.svg" : "/images/arrow-up.svg"}
                 alt={alt}
             />

@@ -2,14 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
-type ButtonProps = {
-    src: string
-}
-export default function Button({ src }: ButtonProps) {
+
+export default function Button({ src, alt, ...props}) {
     return (
         <ButtonContainer>
             <ImageContainer>
-                <Image src={src} alt="" layout="fill"/>
+                <Image src={src} alt={alt} {...props}/>
             </ImageContainer>
         </ButtonContainer>
     )
@@ -17,14 +15,15 @@ export default function Button({ src }: ButtonProps) {
 
 
 const ButtonContainer = styled.div`
-    width: 2rem;
-    height: 2rem;
+    aspect-ratio: 1/1;
+    width: 2.5rem;
+    height: 2.5rem;
     
     margin-left: 0.1rem;
     margin-right: 0.1rem;
 
     background-color: var(--BACKGROUND-3);
-    border: 0.15rem solid black;
+    border: 0.15rem solid var(--BORDER-1);
     border-radius: 0.4rem;
 
     display: flex;

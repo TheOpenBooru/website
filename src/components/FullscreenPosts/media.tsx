@@ -19,7 +19,7 @@ export default function PostMedia({ post, noButtons = false , ...props}) {
 
     return (
         <Container key={post.id} style={style} {...props}>
-            <Media type={post.media_type} full={post.full} preview={post.preview}/>
+            <Media type={post.media_type} full={post.full} preview={post.preview} />
         </Container>
     )
 }

@@ -1,34 +1,37 @@
-import React from "react";
-import Image from "next/image";
+import React, { useState } from "react";
+import Image from "next/future/image";
 import { Types } from "openbooru";
 import styled from "styled-components";
 
+
+
+
 type MediaImageProps = {
     full: Types.Image,
-    preview:Types.Image,
-    lazy: boolean,
+    lazy?: boolean,
+    preview?: Types.Image,
 }
-export default function MediaImage({ full, preview, lazy }: MediaImageProps) {
+export default function MediaImage({ full, lazy, preview }: MediaImageProps) {
+    let [useHiRes, setUseHiRes] = useState(!preview);
+    let image = useHiRes ? full : preview
+    image ??= full
+
     return (
-        <Container>
-            <Image
-                src={full.url}
-                alt=""
-                width={full.width}
-                height={full.height}
-                layout="responsive"
-                
-                
-                priority={!lazy}
-                placeholder={"blur"}
-                blurDataURL={preview.url}
-            />
-        </Container>
-    );
+        <SytledImage
+            alt=""
+            src={full.url}
+            width={full.width}
+            height={full.height}
+            priority={!lazy}
+
+            // onLoad={() => setUseHiRes(true)}
+        />
+    )
 }
 
-const Container = styled.div`
-    width:  100%;
-    height: 100%;
 
-`
+const SytledImage = styled(Image)`
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+`;

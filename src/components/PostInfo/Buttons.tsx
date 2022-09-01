@@ -13,14 +13,14 @@ export default function Buttons({ editCallback, deleteCallback }) {
     let isMobile = useMobile();
     return (
         <ButtonsContainer>
-            {Account.level !== "annonomous" && isMobile === false ? (
+            {Account.Store.level !== "annonomous" && isMobile === false ? (
                 <Button onClick={editCallback}>
                     <ImageContainer>
                         <Image src="/images/edit.svg" alt="" layout="fill"/>
                     </ImageContainer>
                 </Button>
             ) : null}
-            {Account.level === "admin" ? (
+            {Account.Store.level === "admin" ? (
                 <Button onClick={deleteCallback}>
                     <ImageContainer>
                         <Image src="/images/trash.svg" alt="" layout="fill"/>
@@ -36,7 +36,7 @@ const ButtonsContainer = styled.div`
     height: 100%;
 
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     gap: 0.5rem;
 `;
 

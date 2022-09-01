@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import HeadInfo from "components/HeadInfo";
-
-const Example = () => <div />
+import About from "components/About";
+import ContactUs from "components/ContactUs";
+import GDPR from "components/GDPR";
 
 
 export default function Info() {
-    let [mode, setMode] = useState();
+    let [mode, setMode] = useState("About");
     let options = {
-        "About": Example,
-        "Contact US": Example,
+        "About": About,
+        "GDPR": GDPR,
+        "Contact US": ContactUs,
     };
+    let MainElement = options[mode] || About
     return (
-        <React.Fragment>
-            <HeadInfo title="Open Booru: Info" />
-            <Options options={Object.entries(options)} currentOption={mode} callback={setMode}/>
-        </React.Fragment>
+        <>
+            <HeadInfo title="Info" />
+            <Container>
+                <Options options={Object.entries(options)} currentOption={mode} callback={setMode} />
+                <MainContainer>
+                    <MainElement key={mode} />
+                </MainContainer>
+            </Container>
+        </>
     );
 }
 
@@ -23,12 +31,14 @@ export default function Info() {
 function Options({ options, currentOption, callback }) {
     return (
         <OptionsContainer>
-            {options.map((name:string) => <Option
-                text={name}
-                key={name}
-                active={currentOption === name}
-                callback={() => callback(name)}
-            />)}
+            {options.map(([name, _]) =>
+                <Option
+                    key={name}
+                    text={name}
+                    active={currentOption === name}
+                    callback={() => callback(name)}
+                />
+            )}
         </OptionsContainer>
     );
 }
@@ -51,9 +61,20 @@ function Option({ text, callback, active }) {
 }
 
 
+const Container = styled.div`
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+`;
+
+
+const MainContainer = styled.div`
+    padding: .5rem;
+`;
+
+
 const OptionsContainer = styled.div`
+    width: 100%;
     height: var(--PAGE-HEIGHT);
-    width: 10rem;
     background-color: var(--BACKGROUND-2);
 
     display: flex;
@@ -64,9 +85,11 @@ const OptionsContainer = styled.div`
 
 
 const OptionSpan = styled.span`
+    margin-left: 1rem;
     font-size: 1.6rem;
     user-select: none;
-    `;
+    white-space: none;
+`;
 
 
 const ActiveOptionSpan = styled(OptionSpan)`
@@ -75,9 +98,9 @@ const ActiveOptionSpan = styled(OptionSpan)`
 
 
 const InactiveOptionSpan = styled(OptionSpan)`
-    transition: 150ms all ease-in-out;
     cursor: pointer;
     &:hover {
+        transition: 150ms all ease-in-out;
         color: #4e4e4e;
     }
 `;

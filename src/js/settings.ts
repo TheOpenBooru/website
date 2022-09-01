@@ -3,6 +3,7 @@ const SettingsDefaults = {
     pauseVideosInBackground: true,
     searchLayout: "column",
     GridItemSize: 12,
+    TagBlacklist: [],
     apiUrl: process.env.API_URL,
 };
 

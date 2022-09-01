@@ -1,11 +1,10 @@
-import Image from "next/image";
 import React from "react";
-import styles from "./TagList.module.css";
+import styled from "styled-components";
+import Image from "next/image";
+import Tag from "components/Tag";
 
-export default function TagList(props) {
-    let { includeTags, setIncludeTags, excludeTags, setExcludeTags } = props;
-    
-    function removeTag(tag) {
+export default function TagList({ includeTags, setIncludeTags, excludeTags, setExcludeTags }) {
+    const removeTagCallback = (tag) => () => {
         if (includeTags.includes(tag)) {
             includeTags = includeTags.filter((t) => t !== tag);
             setIncludeTags(includeTags);
@@ -15,42 +14,62 @@ export default function TagList(props) {
         }
     }
 
-    function toggleTagInclude(tag) {
+    const toggleTagCallback = (tag) => () => {
         if (!includeTags.includes(tag)) {
-            removeTag(tag);
-            includeTags.push(tag);
-            setIncludeTags(includeTags);
+            removeTagCallback(tag);
+            setIncludeTags(includeTags.concat(tag));
         } else {
-            removeTag(tag);
-            excludeTags.push(tag);
-            setExcludeTags(excludeTags);
+            removeTagCallback(tag);
+            
+            setExcludeTags(excludeTags.concat(tag));
         }
     }
 
     let allTags = includeTags.concat(excludeTags);
     return (
-        <div id={styles.TagList}>
-            {allTags.map((tag) => <Tag tag={tag} key={tag}/>)}
-        </div>
+        <Container>
+            {allTags.map((tag) => {
+                return (
+                    <TagContainer key={tag} active={includeTags.includes(tag)}>
+                        <Tag tag={tag} callback={removeTagCallback(tag)}>
+                            <RemoveTagImage
+                                src="/images/cross.svg"
+                                alt="Remove Tag"
+                                onClick={toggleTagCallback(tag)}
+                            />
+                        </Tag>
+                    </TagContainer>
+                )
+            })}
+        </Container>
     );
-
-    function Tag(props) {
-        let { tag } = props;
-        let included = includeTags.includes(tag);
-        let tag_class = included ? styles.TagInclude : styles.ExcludedTag;
-        tag_class += " " + styles.TagText
-        return (
-            <div className={styles.Tag}>
-                <Image
-                    className={styles.RemoveTag}
-                    src="/images/cross.svg"
-                    alt="Remove Tag"
-                    height="20"
-                    width="20"
-                    onClick={() => removeTag(tag)}
-                />
-                <span onClick={() => toggleTagInclude(tag)} className={tag_class}>{tag}</span>
-            </div>
-        );
-    }
 }
+
+const Container = styled.div`
+    height: 100%;
+    gap:.5rem;
+    padding: .3rem;
+    display: flex;
+
+    flex-direction: column;
+    align-items: baseline;
+`;
+
+
+const TagContainer = styled.div`
+    ${({ active }) => !active && `
+        font-style: italic;
+        color: #8b0000;
+    `}
+`
+
+
+const RemoveTagImage = styled.img`
+    cursor: pointer;
+    user-select: none;
+    width: 1rem;
+    height: 1rem;
+
+    /* Change colour to red */
+    filter: invert(13%) sepia(51%) saturate(6190%) hue-rotate(359deg) brightness(78%) contrast(118%);
+`;

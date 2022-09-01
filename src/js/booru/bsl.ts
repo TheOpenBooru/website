@@ -3,6 +3,7 @@ import { PostQuery } from "js/booru/types";
 const DEFAULTS_QUERY = new PostQuery();
 
 export function encode(query: PostQuery): string {
+    if (!query) return "";
     let tags = [];
     if (query.created_after !== DEFAULTS_QUERY.created_after) {
         tags.push("created_after:" + query.created_after.toString());
@@ -60,4 +61,5 @@ export function decode(bsl: string): PostQuery {
     return query;
 }
 
-export default { encode, decode };
+const BSL = { encode, decode }
+export default BSL;

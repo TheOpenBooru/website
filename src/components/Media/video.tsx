@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 Video.propTypes = { video: PropTypes.object }
 export default function Video({ video }) {
     function updateVolume(e) {
-        localStorage.setItem("volume", e.target.value);
+        localStorage.setItem("volume", e.target.volume);
     }
 
     function setVolume(e) {

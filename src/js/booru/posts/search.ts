@@ -1,9 +1,16 @@
-import SettingsDefaults from "js/settings";
+import Settings from "js/settings";
 import { Post, PostQuery } from "js/booru/types";
 
-export default async function search(query: PostQuery, index = 0, limit = 100): Promise<Array<Post>> {
-    let params = new URLSearchParams();
+export default async function search(search_query: PostQuery, index = 0, limit = 100): Promise<Array<Post>> {
+    // Reassign to prevent mutations
+    let query = Object.assign({}, search_query)
 
+    Settings.TagBlacklist.forEach((tag) => {
+        if (query.include_tags.includes(tag)) return
+        query.exclude_tags.push(tag);
+    })
+
+    let params = new URLSearchParams();
     for (let key in query) {
         let value = query[key];
         if (value || key === "descending") {
@@ -18,7 +25,7 @@ export default async function search(query: PostQuery, index = 0, limit = 100): 
     params.set("index", index.toString());
     params.set("limit", limit.toString());
     
-    let url = SettingsDefaults.apiUrl + "/posts/search?" + params.toString();
+    let url = Settings.apiUrl + "/posts/search?" + params.toString();
     let r = await fetch(url);
     if (r.ok) {
         return await r.json();

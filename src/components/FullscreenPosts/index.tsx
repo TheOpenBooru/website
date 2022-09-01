@@ -28,16 +28,11 @@ export default function FullscreenPosts({
     index,
     setIndex,
 }) {
-    let isMobile = useMobile();
     const post = posts[index];
     if (post === undefined) return null;
     const prevPost = posts[index - 1];
     const nextPost = posts[index + 1];
     
-    let url =Redirects.post(post.id);
-    if (window.location.pathname !== url) {
-        window.history.replaceState(null, null, url);
-    }
     const postsRemaining = posts.length - (index + 1);
     if (postsRemaining < 32) {
         morePostsCallback();

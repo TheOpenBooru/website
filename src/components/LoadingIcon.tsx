@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function LoadingIcon(props) {
-    let { fadeIn } = props;
+export default function LoadingIcon({ fadeIn = false as boolean}) {
     if (fadeIn) {
         return (
             <FadeIn>

@@ -68,9 +68,10 @@ const RightButtonContainer = styled(ButtonContainer)`
 
 
 const Icon = styled.img`
+    max-height: 50%;
     width: 90%;
     padding: .5rem;
-    object-fit: contain;
+    object-fit: cover;
     ${ButtonContainer}:active > &{
         width: 80%;
         transition: 0.05s;

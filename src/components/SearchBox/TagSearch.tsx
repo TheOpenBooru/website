@@ -1,82 +1,70 @@
 import React, { useState } from "react";
-import { Tags } from "js/booru";
-import styles from "./TagSearch.module.css"
+import styled from "styled-components";
+import Tag from "components/Tag";
+import TagAutocomplete from "components/TagAutocomplete";
 
-export default function TagSearch(props) {
-    let { includeTags, setIncludeTags } = props;
-    let [ predictedTags, setPredictedTags ] = useState([]);
+export default function TagSearch({
+        includeTags = [] as string[],
+        setIncludeTags,
+    }) {
     let [ text, setText ] = useState("");
     
     function addTagCallback(tag) {
-        return () => {
-            tag = tag.toLowerCase();
-            setPredictedTags([]);
-            setText("")
-            if (!includeTags.includes(tag)) {
-                setIncludeTags(includeTags.concat([tag]));
-            }
-        };
-    }
-
-    async function loadPredictedTags(text) {
-        if (text.length === 0) {
-            setPredictedTags([]);
-        } else {
-            let tags = await Tags.autocomplete(text, 5);
-            setPredictedTags(tags);
+        setText("");
+        if (tag && !includeTags.includes(tag)) {
+            setIncludeTags(includeTags.concat(tag));
         }
     }
+
 
     function keyPressHandler(e) {
         if (e.key !== "Enter") return;
-        if (predictedTags.length > 0) {
-            let tag = predictedTags[0]
-            addTagCallback(tag.name)()
-        }
+        addTagCallback(text);
     }
+
+    function NormaliseText(text: string): string{
+        return text
+            .replace(' ', '_')
+            .toLowerCase()
+            .split('')
+            .filter(char => /[_()a-z0-9]/.test(char))
+            .join('')
+    }
+
 
     function onInput(e) {
         let text = e.target.value;
-        text = text.replace(' ','_')
-        text = text.toLowerCase();
+        text = NormaliseText(text)
         setText(text);
-        loadPredictedTags(text);
     }
 
+
     return (
-        <React.Fragment>
-            <input
-                id={styles.Search}
+        <>
+            <SearchInput
                 type="search"
                 value={text}
                 onKeyDownCapture={keyPressHandler}
                 onChange={onInput}
-                onKeyDown={addTagCallback}
             />
-            <PredictedTags tags={predictedTags} callback={addTagCallback} />
-        </React.Fragment>
+            <AutoCompleteContainer>
+                <TagAutocomplete input={text} addTagCallback={addTagCallback} />
+            </AutoCompleteContainer>
+        </>
     );
 }
 
 
-function PredictedTags(props) {
-    let { tags, callback } = props;
-    if (tags.length === 0) {
-        return null
-    } else {
-        return (
-            <div id={styles.AutoComplete}>
-                {tags.map((tag) => (
-                    <button
-                        key={tag.name}
-                        className={styles.AutoCompleteItem}
-                        onClick={callback(tag.name)}
-                    >
-                        {tag.name}
-                    </button>
-                ))}
-            </div>
+const SearchInput = styled.input`
+    width:100%;
+    border-radius: .5rem;
+    justify-self: flex-start;
+`
 
-        )
-    }
-}
+
+const AutoCompleteContainer = styled.div`
+    z-index: 1;
+    position: absolute;
+    top: 2.5rem;
+    left: 9rem;
+`

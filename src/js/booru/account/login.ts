@@ -1,6 +1,7 @@
 import Settings from "js/settings";
 import Profile from "js/booru/account/profile";
 import Errors from "js/booru/account/errors";
+import Store from "js/booru/account/store";
 
 export default async function login(username, password): Promise<void> {
     return new Promise<void>((resolve, reject) => {
@@ -14,8 +15,12 @@ export default async function login(username, password): Promise<void> {
                 reject(err);
             } else {
                 let json = JSON.parse(xhr.response);
+                Store.token = json["access_token"]
                 
                 let profile = await Profile();
+                Store.username = profile["username"]
+                Store.level = profile["level"]
+
                 resolve();
             }
         };

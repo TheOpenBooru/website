@@ -1,33 +1,47 @@
-import React from "react";
+import React, { Ref, useState } from "react";
 import styled, { css } from "styled-components";
 import { Types } from "openbooru";
 import Image from "next/image";
+import Redirects from "js/redirects";
 
 
 type ItemProps = {
     post: Types.Post,
     postCallback: any,
     isTarget: boolean,
+    parentRef: Ref<Element>,
+    priority: boolean
 }
-export default function Item({ post, postCallback, isTarget }:ItemProps) {
-    let image = post.preview ?? post.thumbnail
+export default function Item({ post, postCallback, parentRef, isTarget, priority }: ItemProps) {
+    let preview_type = post.preview?.type
+    let image = preview_type !== "video"
+        ? post.preview
+        : post.thumbnail;
+    image ??= post.thumbnail
+
     return (
         // @ts-ignore, element has scrollIntoView function, Typescript doesn't see it?
         <Container onLoad={(e) => isTarget ? e.target.scrollIntoView() : null}> 
             <ImageContainer
                 title={`Post: ${post.id}`}
-                onClick={postCallback}
+                onClick={postCallback(post.id)}
+                // @ts-ignore, styled component custom prop
+                type={post.media_type}
             >
-                <StyledImage
-                    src={image.url}
-                    alt=""
-                    height={image.height}
-                    width={image.width}
-                    layout="responsive"
+                <a href={Redirects.post(post.id)} onClick={(e) => { e.preventDefault(); }}>
+                    <StyledImage
+                        src={image.url}
+                        alt=""
+                        height={image.height}
+                        width={image.width}
+                        layout="responsive"
+                        sizes="300px"
 
-                    placeholder="blur"
-                    blurDataURL={post.thumbnail.url}
-                />
+                        priority={priority}
+                        placeholder="blur"
+                        blurDataURL={post.thumbnail.url}
+                    />
+                </a>
             </ImageContainer>
         </Container>
     );
@@ -44,7 +58,7 @@ const BorderRadius = css`
     border-radius: 1rem;
     &:hover {
         outline-width: 0.3rem;
-        border-radius: 3rem;
+        border-radius: 2rem;
     }
 `;
 
@@ -55,9 +69,22 @@ const ImageContainer = styled.div`
     height: auto;
     cursor: pointer;
 
-    outline: 0.2rem solid var(--BACKGROUND-3);
-    background-color: var(--BACKGROUND-3);
+    margin: .2rem;
+    outline: 0.3rem solid;
+    background: var(--BACKGROUND-3);
     
+    ${({ type }) => {
+        switch (type) {
+            case "video":
+                return "outline-color: #008600;"
+            case "animation":
+                return "outline-color: #000085;"
+            case "image":
+                return "outline-color: var(--BACKGROUND-3);"
+            default:
+                return "";
+        }
+    }}
     ${BorderRadius}
 `;
 

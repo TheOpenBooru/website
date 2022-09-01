@@ -1,22 +1,30 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
 export default function SourceEntry({ source }) {
-    if (source) {
+    try {
         let url = new URL(source);
         return (
-            <Source href={source} title={url.hostname}>
-                {source}
-                <Icon src="/images/link.svg" height={10} width={10} />
-            </Source>
+            <Container>
+                <Span href={source} title={url.hostname}>
+                    <>
+                        {source}
+                        <Icon src="/images/link.svg" height={10} width={10} />
+                    </>
+                </Span>
+            </Container>
         );
-    } else {
-        return <Source/>;
+    } catch {
+        return <Container/>;
     }
 }
 
-const Source = styled.a`
+const Container = styled.div`
     min-height: 1.2rem;
+`
+
+const Span = styled(Link)`
     color: #0c181d;
     display: block;
     overflow: hidden;
