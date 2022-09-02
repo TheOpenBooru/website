@@ -39,6 +39,7 @@ export default function GridPosts({ posts, morePostsCallback, loading, postCallb
                         post={post}
                         callback={postCallback(post.id)}
                         isTarget={i === index}
+                        parentRef={scrollRef}
                     />
                 ))}
             </Grid>
