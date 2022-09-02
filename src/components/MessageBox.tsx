@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function MessageBox({ children }) {
+export default function MessageBox({ children, ...props }) {
     return (
-        <Background>
+        <Background {...props}>
             <MessageContainer>
                 {children}
             </MessageContainer>
@@ -30,6 +30,7 @@ const Background = styled.div`
 
 
 const MessageContainer = styled.div`
+    z-index: 2;
     position: absolute;
     top:10%;
 `
