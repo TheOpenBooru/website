@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import PostInfo from "components/PostInfo";
-import PostMedia from "./media";
+import PostMedia from "components/PostMedia";
 import { LeftButton, RightButton } from "./buttons";
 import { Types } from "js/booru";
 
@@ -48,42 +48,35 @@ export default function DesktopFullscreen({
     return (
         <Container>
             <PostContainer>
-                <LeftButton callback={prevPostCallback} post={prevPost} />
+                <LeftButton post={prevPost} callback={prevPostCallback} />
                 <PostMedia post={post} onClick={exitCallback} />
-                <RightButton
-                    callback={nextPostCallback}
-                    post={nextPost}
-                    loading={loading}
-                    finished={finished}
-                />
+                <RightButton post={nextPost} callback={nextPostCallback} loading={loading}/>
             </PostContainer>
             <PostInfo post={post} />
         </Container>
     );
 }
 
+
 const Container = styled.div`
     position: relative;
-    height: var(--PAGE-HEIGHT);
+    max-height: var(--PAGE-HEIGHT);
     width: 100%;
     top: 0;
     left: 0;
     overflow-y: auto;
     overflow-x: hidden;
-
-    --BUTTON-WIDTH: 5rem;
 `;
+
 
 const PostContainer = styled.div`
     width: 100%;
-    height: calc(100% - 1.5rem);
+    height: calc(var(--PAGE-HEIGHT) - 1.5rem);
     user-select: none;
-
-    background-color: var(--BACKGROUND);
     border-bottom: #000 solid 1px;
 
     /* Flex */
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 5rem 1fr 5rem;
+    grid-template-rows: 100%;
 `;

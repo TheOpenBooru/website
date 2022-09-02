@@ -10,8 +10,9 @@ type MediaImageProps = {
     full: Types.Image,
     lazy?: boolean,
     preview?: Types.Image,
+    thumbnail?: Types.Image,
 }
-export default function MediaImage({ full, lazy, preview }: MediaImageProps) {
+export default function MediaImage({ full, preview, thumbnail, lazy, }: MediaImageProps) {
     let [useHiRes, setUseHiRes] = useState(!preview);
     let image = useHiRes ? full : preview
     image ??= full
@@ -19,12 +20,14 @@ export default function MediaImage({ full, lazy, preview }: MediaImageProps) {
     return (
         <SytledImage
             alt=""
-            src={full.url}
-            width={full.width}
-            height={full.height}
+            src={image.url}
+            width={image.width}
+            height={image.height}
             priority={!lazy}
-
-            // onLoad={() => setUseHiRes(true)}
+            onLoad={() => setUseHiRes(true)}
+            
+            placeholder={thumbnail ? "blur" : null}
+            blurDataURL={thumbnail ? thumbnail.url : null}
         />
     )
 }
