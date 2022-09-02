@@ -8,22 +8,22 @@ export function LeftButton({ callback, post }) {
     let img = GenerateImageUrl(post, "/images/left-arrow.svg");
 
     return (
-        <LeftButtonContainer onClick={callback}>
+        <ButtonContainer onClick={callback}>
             <Icon key={img} src={img} alt="" />
-        </LeftButtonContainer>
+        </ButtonContainer>
     );
 }
 
-export function RightButton({ callback, post, loading, finished }) {
+export function RightButton({ callback, post, loading }) {
     let img = GenerateImageUrl(post, "/images/right-arrow.svg");
 
     return (
-        <RightButtonContainer onClick={callback}>
+        <ButtonContainer onClick={callback}>
             {!post && loading
                 ? <LoadingIcon/>
                 : <Icon key={img} src={img} alt="" />
             }
-        </RightButtonContainer>
+        </ButtonContainer>
     );
 }
 
@@ -53,18 +53,6 @@ const ButtonContainer = styled.div`
     align-items: center;
     justify-content: center;
 `;
-
-
-const LeftButtonContainer = styled(ButtonContainer)`
-    position: absolute;
-    left: 0;
-    `
-
-
-const RightButtonContainer = styled(ButtonContainer)`
-    position: absolute;
-    right: 0;
-    `
 
 
 const Icon = styled.img`
