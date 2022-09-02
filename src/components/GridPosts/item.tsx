@@ -4,15 +4,20 @@ import styled from "styled-components";
 import Redirects from "js/redirects";
 
 
-export default function GridItem({ post, callback, isTarget }) {
+export default function GridItem({ post, callback, parentRef, isTarget }) {
     let { thumbnail } = post;
     let className = `media-${post.media_type}`;
-    const scrollCallback = (e) => {
-        if (isTarget) e.target.scrollIntoView();
+    
+    function scrollToCallback(e) {
+        let elem: Element = e.target;
+        let scroller: Element = parentRef.current;
+        let { top } = elem.getBoundingClientRect()
+        top -= (window.innerHeight / 4)
+        scroller.scrollTo({top})
     }
     
     return (
-        <Container key={post.id} className={className} onClick={callback} onLoad={scrollCallback}>
+        <Container key={post.id} className={className} onClick={callback} onLoad={isTarget ? scrollToCallback : null}>
             <a href={Redirects.post(post.id)} onClick={(e) => { e.preventDefault(); }}>
                 <Image
                     alt=""

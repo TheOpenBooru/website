@@ -19,9 +19,17 @@ export default function Item({ post, postCallback, parentRef, isTarget, priority
         : post.thumbnail;
     image ??= post.thumbnail
 
+    function scrollTo(e) {
+        let elem: Element = e.target;
+        let scroller: Element = parentRef.current;
+        let { top } = elem.getBoundingClientRect()
+        top -= (window.innerHeight / 4)
+        scroller.scrollTo({top})
+    }
+
     return (
         // @ts-ignore, element has scrollIntoView function, Typescript doesn't see it?
-        <Container onLoad={(e) => isTarget ? e.target.scrollIntoView() : null}> 
+        <Container onLoad={(e) => isTarget ? scrollTo(e) : null}> 
             <ImageContainer
                 title={`Post: ${post.id}`}
                 onClick={postCallback(post.id)}
@@ -32,9 +40,9 @@ export default function Item({ post, postCallback, parentRef, isTarget, priority
                     <StyledImage
                         src={image.url}
                         alt=""
+                        layout="responsive"
                         height={image.height}
                         width={image.width}
-                        layout="responsive"
                         sizes="300px"
 
                         priority={priority}
