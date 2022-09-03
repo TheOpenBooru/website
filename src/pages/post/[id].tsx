@@ -2,7 +2,7 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import styled from "styled-components";
 import HeadInfo from "components/HeadInfo";
-import Media from "components/Media";
+import PostMedia from "components/PostMedia";
 import PostInfo from "components/PostInfo";
 import { Posts } from "js/booru";
 import { Types } from "openbooru";
@@ -42,7 +42,7 @@ export default function PostPage({ post }:PostPageProps) {
             />
             <Container>
                 <MediaContainer>
-                    <Media type={post.media_type} full={post.full} preview={post.preview} />
+                    <PostMedia post={post} />
                 </MediaContainer>
                 <PostInfo post={post}/>
             </Container>
