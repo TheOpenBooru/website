@@ -21,30 +21,31 @@ export default function PostOverlay({ query, setQuery }) {
         }
     }
 
+    function ModeSelector() {
+        switch (mode) {
+            case "create":
+                return <CreatePost/>
+            case "import":
+                return <ImportPost />
+            case "search":
+            return <SearchBox
+                    query={query}
+                    setQuery={setQuery}
+                    close={() => setMode(null)}
+            />
+            default:
+                setMode(null);
+                return null
+        }
+    }
 
     function MessageBoxOverlay() {
-        if (mode === "create") {
+        if (mode) {
             return (
                 <MessageBox>
-                    <CreatePost />
+                    <ModeSelector/>
                 </MessageBox>
             )
-        } else if (mode === "import") {
-            return (
-                <MessageBox>
-                    <ImportPost />
-                </MessageBox>
-            );
-        } else if (mode === "search") {
-            return (
-                <MessageBox>
-                    <SearchBox
-                        query={query}
-                        setQuery={setQuery}
-                        close={() => setMode(null)}
-                    />
-                </MessageBox>
-            );
         } else {
             return null
         }
