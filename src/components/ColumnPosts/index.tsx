@@ -79,7 +79,7 @@ export default function ColumnPosts({ posts, loading, morePostsCallback, postCal
 }
 
 const Container = styled.div`
-    height: var(--PAGE-HEIGHT);
+    height: calc(var(--PAGE-HEIGHT) - 3rem);
     padding-top: 3rem;
     overflow-y: auto;
 
