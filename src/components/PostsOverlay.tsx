@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import NoSSR from "react-no-ssr"
-import { Account } from "js/booru";
 import MessageBox from "components/MessageBox";
 import SearchBox from "components/SearchBox";
 import CreatePost from "components/CreatePost";
 import ImportPost from "components/ImportPost";
 import Button from "components/Button";
+import usePermission from "hooks/permissionHook";
 import UploadImage from 'images/upload.svg'
 import CreateImage from 'images/plus.svg'
 import SearchImage from 'images/search.svg'
 
 export default function PostOverlay({ query, setQuery }) {
     let [mode, setMode] = useState(null);
+    let canCreatePost = usePermission("canCreatePosts")
 
-    const toggleModeCallback = (value) => () => {
-        if (mode === null) {
-            setMode(value)
-        } else {
+    const ModeCallback = (value) => () => {
+        if (mode === value) {
             setMode(null)
+        } else {
+            setMode(value)
         }
     }
 
@@ -35,7 +36,6 @@ export default function PostOverlay({ query, setQuery }) {
                     close={() => setMode(null)}
             />
             default:
-                setMode(null);
                 return null
         }
     }
@@ -44,7 +44,9 @@ export default function PostOverlay({ query, setQuery }) {
         if (mode) {
             return (
                 <MessageBox>
-                    <ModeSelector/>
+                    <ModeContainer>
+                        <ModeSelector/>
+                    </ModeContainer>
                 </MessageBox>
             )
         } else {
@@ -56,15 +58,15 @@ export default function PostOverlay({ query, setQuery }) {
         <NoSSR>
             <MessageBoxOverlay />
             <Container>
-                {Account.Store.loggedIn
-                    ? <Button src={UploadImage} alt="Import Post"  title="Import Post" onClick={toggleModeCallback("import")} />
+                {canCreatePost
+                    ? <Button src={UploadImage} alt="Import Post"  title="Import Post" onClick={ModeCallback("import")} />
                     : null
                 }
-                {Account.Store.loggedIn
-                    ? <Button src={CreateImage} title="Create Post" alt="Create Post" onClick={toggleModeCallback("create")} />
+                {canCreatePost
+                    ? <Button src={CreateImage} title="Create Post" alt="Create Post" onClick={ModeCallback("create")} />
                     : null
                 }
-                <Button src={SearchImage} alt="Search" onClick={toggleModeCallback("search")} />
+                <Button src={SearchImage} alt="Search" onClick={ModeCallback("search")} />
             </Container>
         </NoSSR>
     );
@@ -81,4 +83,9 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: right;
+`
+
+const ModeContainer = styled.div`
+    z-index: 2;
+    position: relative;
 `
