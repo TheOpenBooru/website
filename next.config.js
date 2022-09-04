@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     typescript: {
+        reactStrictMode: true,
+        swcMinify: true,
+        compress: true,
       ignoreBuildErrors: true,
     },
     compiler: {
@@ -11,14 +14,12 @@ const nextConfig = {
             allowFutureImage: true
         }
     },
-    reactStrictMode: true,
-    swcMinify: true,
     images: {
         domains: [
             "safebooru.org",
             "static1.e621.net",
             "slate", "localhost", "192.168.0.82", 
-            "r34proxy.openbooru.workers.dev", "api.openbooru.org",
+            "r34proxy.openbooru.workers.dev", "cdn.openbooru.org", "api.openbooru.org",
         ]
     },
     env: {
@@ -32,7 +33,7 @@ const nextConfig = {
     },
     async headers() {
         return [{
-            source: "*",
+            source: "/:path*",
             headers: [
                 {
                     key:"X-Frame-Options",
