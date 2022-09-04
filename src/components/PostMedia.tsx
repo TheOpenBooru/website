@@ -6,16 +6,10 @@ import Media from "components/Media";
 
 PostMedia.propTypes = {
     post: PropTypes.object,
-    noButtons: PropTypes.bool
 }
-export default function PostMedia({ post, noButtons = false, ...props }) {
-    const ZoomCallback = console.log
-    //     (e) => {
-    //     console.log(e)
-    // }
-
+export default function PostMedia({ post, ...props }) {
     return (
-        <Container key={post.id} onKeyDown={console.log} {...props}>
+        <Container key={post.id} {...props}>
             <Media type={post.media_type} full={post.full} preview={post.preview} thumbnail={post.thumbnail} />
         </Container>
     )
@@ -23,7 +17,6 @@ export default function PostMedia({ post, noButtons = false, ...props }) {
 
 
 const Container = styled.div`
-    cursor: pointer;
     position: relative;
     height: 100%;
     width: 100%;
