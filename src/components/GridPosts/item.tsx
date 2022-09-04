@@ -17,31 +17,47 @@ export default function GridItem({ post, callback, parentRef, isTarget }) {
     }
     
     return (
-        <Container key={post.id} className={className} onClick={callback} onLoad={isTarget ? scrollToCallback : null}>
-            <a href={Redirects.post(post.id)} onClick={(e) => { e.preventDefault(); }}>
+        <Container
+            key={post.id}
+            className={className}
+            onClick={callback}
+            onLoad={isTarget ? scrollToCallback : null}
+            href={Redirects.post(post.id)}
+            onClick={(e) => { e.preventDefault(); }}
+        >
+            <Resizer>
                 <Image
                     alt=""
                     src={thumbnail.url}
                     width={thumbnail.width}
                     height={thumbnail.height}
+                    type={post.media_type}
+
+                    placeholder={"blur"}
+                    blurDataURL={thumbnail.url}
                 />
-            </a>
+            </Resizer>
         </Container>
     );
 }
 
 
-const Container = styled.div`
+const Container = styled.a`
+    height: var(--IMAGE-SIZE);
+    width: var(--IMAGE-SIZE);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const Resizer = styled.div`
     --MAX-SIZE:var(--IMAGE-SIZE);
-    --MIN-SIZE:calc(var(--IMAGE-SIZE) / 4);
-    
+    --MIN-SIZE:calc(var(--IMAGE-SIZE) / 6);
+
     min-width: var(--MIN-SIZE);
     min-height: var(--MIN-SIZE);
     max-width: var(--MAX-SIZE);
     max-height: var(--MAX-SIZE);
-    display: flex;
-    justify-content: center;
-    align-items: center;
 `
 
 
@@ -52,10 +68,22 @@ const Image = styled(FutureImage)`
     object-fit: cover;
     
     background-color: var(--BACKGROUND-3);
-    outline: var(--BACKGROUND-3) 0.3rem solid;
+    outline: 0.3rem solid;
     border-radius: .2rem;
     transition: 0.2s all ease-out;
     
+    ${({ type }) => {
+        switch (type) {
+            case "video":
+                return "outline-color: #008600;"
+            case "animation":
+                return "outline-color: #000085;"
+            case "image":
+                return "outline-color: var(--BACKGROUND-3);"
+            default:
+                return "";
+        }
+    }}
     &:hover{
         border-color: var(--BACKGROUND-3-HOVER);
         border-radius: calc(var(--IMAGE-SIZE) / 5);
