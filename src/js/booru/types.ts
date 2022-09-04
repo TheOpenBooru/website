@@ -1,5 +1,3 @@
-import { Data } from "dataclass";
-
 export class PostQuery {
     sort = "upvotes";
     descending = true;

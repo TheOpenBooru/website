@@ -1,14 +1,12 @@
 import Settings from "js/settings";
-import { Store } from "js/booru/account";
+import { Account } from "js/booru";
 import OpenBooru, { Types } from "openbooru";
-import Worker from "worker-loader!workers/tags.worker";
 import { cache, CacheType, CacheScope } from 'cache-decorator';
 
-const booru = new OpenBooru(Settings.apiUrl, Store.token)
+const booru = new OpenBooru(Settings.apiUrl, Account.Store.token)
 
 export default class Tags{
     static async get(tag: string): Promise<Types.Tag | null> {
-        TagWorker.post()
         let tags = await booru.TagsSearch({
             name_like: tag,
             limit: 1
