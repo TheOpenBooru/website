@@ -55,12 +55,12 @@ export default function useSearch() {
         if (!router.isReady) return;
 
         let new_query = getPostQueryfromParams(router.query)
-        if (new_query !== query) {
+        if (!query || BSL.encode(new_query) !== BSL.encode(query)) {
             clear();
             setQuery(new_query);
             extend();
-        } // @ts-ignore
-    }, [router.isReady, router.query])
+        }
+    }, [router.isReady, router.query, query]) // /* eslint-disable */
 
     let Export = { extend, updateQuery, query, posts, finished, loading: lock, getBSL };
     return Export
