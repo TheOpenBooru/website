@@ -42,10 +42,11 @@ const Contianer = styled.div`
     justify-content: space-around;
     align-items: center;
     background: var(--BACKGROUND-2);
-    `;
+`;
 
 const LayoutButton = styled.a`
     cursor: pointer;
+    position: relative;
 
     width: 1.6rem;
     height: 1.6rem;
