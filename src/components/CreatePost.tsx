@@ -43,7 +43,7 @@ export default function CreatePost() {
 
     return (
         <Container onSubmit={FormHandler}>
-            <input type="file" accept="video/*,image/*" ref={fileRef} />
+            <FileInput type="file" accept="video/*,image/*" ref={fileRef}/>
             <br />
             <br />
             <Captcha setCaptchaToken={setCaptchaResponse} />
@@ -62,3 +62,7 @@ const Container = styled.form`
     border: 0.2em solid var(--BORDER-1);
     border-radius: 1rem;
 `;
+
+const FileInput = styled.input`
+    max-width: 20rem;
+`
