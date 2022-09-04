@@ -48,7 +48,10 @@ export default function CreatePost() {
             <br />
             <Captcha setCaptchaToken={setCaptchaResponse} />
             <br />
-            {loading ? <LoadingIcon /> : <input type="submit" value="Create" />}
+            {loading
+                ? <LoadingContainer><LoadingIcon /></LoadingContainer>
+                : <input type="submit" value="Create" />
+            }
         </Container>
     );
 }
@@ -58,10 +61,17 @@ const Container = styled.form`
     margin: 0.5rem;
 
     /* Look */
-    background-color: var(--BACKGROUND-3);
+    background-color: var(--BACKGROUND-4);
     border: 0.2em solid var(--BORDER-1);
     border-radius: 1rem;
 `;
+
+const LoadingContainer = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
 
 const FileInput = styled.input`
     max-width: 20rem;

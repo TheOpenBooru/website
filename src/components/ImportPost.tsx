@@ -44,24 +44,35 @@ export default function ImportPost() {
     }
 
     return (
-        <Container onSubmit={FormHandler}>
+        <Form onSubmit={FormHandler}>
             <label htmlFor="url">URL:</label>
             <input type="url" name="url" ref={urlRef} required/>
             <br />
             <br />
             <Captcha setCaptchaToken={setCaptchaResponse} />
             <br />
-            {loading ? <LoadingIcon /> : <input type="submit" value="Create" />}
-        </Container>
+            {loading
+                ? <LoadingContainer><LoadingIcon /></LoadingContainer>
+                : <input type="submit" value="Create" />
+            }
+        </Form>
     );
 }
 
-const Container = styled.form`
+const LoadingContainer = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+
+const Form = styled.form`
     padding: 0.5rem;
     margin: 0.5rem;
 
     /* Look */
-    background-color: var(--BACKGROUND-3);
+    background-color: var(--BACKGROUND-4);
     border: 0.2em solid var(--BORDER-1);
     border-radius: 1rem;
 `;
