@@ -22,10 +22,8 @@ export default function GridItem({ post, callback, parentRef, isTarget }) {
             className={className}
             onClick={callback}
             onLoad={isTarget ? scrollToCallback : null}
-            href={Redirects.post(post.id)}
-            onClick={(e) => { e.preventDefault(); }}
         >
-            <Resizer>
+            <Resizer href={Redirects.post(post.id)} onClick={(e) => e.preventDefault()}>
                 <Image
                     alt=""
                     src={thumbnail.url}
@@ -42,7 +40,7 @@ export default function GridItem({ post, callback, parentRef, isTarget }) {
 }
 
 
-const Container = styled.a`
+const Container = styled.div`
     height: var(--IMAGE-SIZE);
     width: var(--IMAGE-SIZE);
     display: flex;
@@ -50,7 +48,7 @@ const Container = styled.a`
     align-items: center;
 `
 
-const Resizer = styled.div`
+const Resizer = styled.a`
     --MAX-SIZE:var(--IMAGE-SIZE);
     --MIN-SIZE:calc(var(--IMAGE-SIZE) / 6);
 
