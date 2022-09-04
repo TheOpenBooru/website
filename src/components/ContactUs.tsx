@@ -4,7 +4,10 @@ import React from "react";
 export default function ContactUs() {
     return (
         <div>
-            For any questions or inquites use our support email
+            GDPR:&nbsp;
+            <Link href={"mailto:gdpr@openbooru.org"}>
+                gdpr@openbooru.org
+            </Link>
             <br/>
             Support:&nbsp;
             <Link href={"mailto:support@openbooru.org"}>

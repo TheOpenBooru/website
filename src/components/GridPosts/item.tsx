@@ -1,6 +1,6 @@
 import React from "react";
 import FutureImage from "next/future/image";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import Redirects from "js/redirects";
 
 
@@ -17,38 +17,42 @@ export default function GridItem({ post, callback, parentRef, isTarget }) {
     }
     
     return (
-        <Container
-            key={post.id}
-            className={className}
-            onClick={callback}
-            onLoad={isTarget ? scrollToCallback : null}
-        >
-            <Resizer href={Redirects.post(post.id)} onClick={(e) => e.preventDefault()}>
+        <a href={Redirects.post(post.id)} onClick={(e) => e.preventDefault()}>
+            <Container
+                key={post.id}
+                className={className}
+                onClick={callback}
+                onLoad={isTarget ? scrollToCallback : null}
+                // @ts-ignore, styled component custom prop
+                type={post.media_type}
+            >
                 <Image
                     alt=""
                     src={thumbnail.url}
                     width={thumbnail.width}
                     height={thumbnail.height}
-                    type={post.media_type}
 
                     placeholder={"blur"}
                     blurDataURL={thumbnail.url}
                 />
-            </Resizer>
-        </Container>
+            </Container>
+        </a>
     );
 }
 
 
-const Container = styled.div`
-    height: var(--IMAGE-SIZE);
-    width: var(--IMAGE-SIZE);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
+const BorderRadius = css`
+    border-radius: 1rem;
 
-const Resizer = styled.a`
+    &:hover{
+        transition: 0.2s all ease-out;
+        border-color: var(--BACKGROUND-3-HOVER);
+        border-radius: calc(var(--IMAGE-SIZE) / 5);
+    }
+`;
+
+
+const Container = styled.div`
     --MAX-SIZE:var(--IMAGE-SIZE);
     --MIN-SIZE:calc(var(--IMAGE-SIZE) / 6);
 
@@ -56,21 +60,16 @@ const Resizer = styled.a`
     min-height: var(--MIN-SIZE);
     max-width: var(--MAX-SIZE);
     max-height: var(--MAX-SIZE);
-`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-
-const Image = styled(FutureImage)`
-    cursor: pointer;
-    height: var(--IMAGE-SIZE);
-    width: 100%;
-    object-fit: cover;
     
     background-color: var(--BACKGROUND-3);
     outline: 0.3rem solid;
-    border-radius: .2rem;
-    transition: 0.2s all ease-out;
-    
-    ${({ type }) => {
+    ${
+        // @ts-ignore, styled component custom prop
+        ({ type }) => {
         switch (type) {
             case "video":
                 return "outline-color: #008600;"
@@ -82,8 +81,16 @@ const Image = styled(FutureImage)`
                 return "";
         }
     }}
-    &:hover{
-        border-color: var(--BACKGROUND-3-HOVER);
-        border-radius: calc(var(--IMAGE-SIZE) / 5);
-    }
+    
+    ${BorderRadius}
+`
+
+
+const Image = styled(FutureImage)`
+    cursor: pointer;
+    height: var(--IMAGE-SIZE);
+    width: 100%;
+    object-fit: cover;
+    
+    ${BorderRadius}
 `

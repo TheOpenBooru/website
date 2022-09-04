@@ -6,6 +6,7 @@ import { Tags } from "js/booru";
 
 function CallbackContainer({ namespace, callback, children }) {
     return (
+        // @ts-ignore, styled-components prop
         <HoverableContainer namespace={namespace} onClick={callback}>
             {children}
         </HoverableContainer>
@@ -15,6 +16,7 @@ function CallbackContainer({ namespace, callback, children }) {
 function HrefContainer({ namespace, href, children }) {
     return (
         <a href={href}>
+            {/* @ts-ignore, styled-components prop */}
             <HoverableContainer namespace={namespace}>
                 {children}
             </HoverableContainer>
@@ -28,15 +30,11 @@ export default function Tag({
     data = {} as object,
     href = null as string,
     callback = null as Function,
-    children = [] as Element | Element[] }) {
+    children = null}) {
     
-    // let { data } = useQuery(
-    //     `tag-${tag_name}`,
-    //     async () => data || await Tags.get(tag_name),
-    //     {cacheTime:360}
-    // )
-    
+    // @ts-ignore, doesn't like ?. operator
     let namespace = data?.namespace ?? "generic"
+    // @ts-ignore, doesn't like ?. operator
     let count = data?.count ?? 0
 
     let DynamicContainer;
@@ -47,9 +45,10 @@ export default function Tag({
     } else {
         DynamicContainer = Container;
     }
-
+    
     return (
         <DynamicContainer namespace={namespace} href={href} callback={callback}>
+            {/* @ts-ignore, styled-components prop */}
             <NameSpan namespace={namespace}>
                 {tag_name}
             </NameSpan>
@@ -83,7 +82,9 @@ const Container = styled.span`
 `;
 
 const NameSpan = styled.span`
-    ${({ namespace }) => {
+    
+    ${/* @ts-ignore, styled-components prop */
+        ({ namespace }) => {
         switch (namespace) {
             case "copyright":
                 return `

@@ -1,7 +1,6 @@
 import Settings from "js/settings";
 import { Account } from "js/booru";
 import OpenBooru, { Types } from "openbooru";
-import { cache, CacheType, CacheScope } from 'cache-decorator';
 
 const booru = new OpenBooru(Settings.apiUrl, Account.Store.token)
 

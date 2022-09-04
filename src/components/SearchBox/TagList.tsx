@@ -30,6 +30,7 @@ export default function TagList({ includeTags, setIncludeTags, excludeTags, setE
         <Container>
             {allTags.map((tag) => {
                 return (
+                    // @ts-ignore, styled-components prop
                     <TagContainer key={tag} active={includeTags.includes(tag)}>
                         <Tag tag={tag} callback={removeTagCallback(tag)}>
                             <RemoveTagImage
@@ -57,10 +58,12 @@ const Container = styled.div`
 
 
 const TagContainer = styled.div`
-    ${({ active }) => !active && `
-        font-style: italic;
-        color: #8b0000;
-    `}
+    ${ // @ts-ignore, styled-components prop
+        ({ active }) => !active && `
+            font-style: italic;
+            color: #8b0000;
+        `
+    }
 `
 
 

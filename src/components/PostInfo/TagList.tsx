@@ -14,8 +14,13 @@ const NamespaceOrder = [
     "generic",
 ]
 
-
-type Tag = Types.Tag
+type Tag = {
+    url: string;
+    mimetype: string;
+    height: number;
+    width: number;
+    type: string;
+}
 // function TagList({ tags = [] as Tag[] }) {
 //     let { data, status } = useQuery("taglist-" + tags.join(''), async () => {
 //         let tagsData = []
@@ -52,7 +57,7 @@ type Tag = Types.Tag
 
 // }
 
-export default function FallbackTagList({ tags = [] as Tag[] }) {
+export default function FallbackTagList({ tags = [] as string[] }) {
     tags = tags.sort()
     return (
         <Container key={tags.join("")}>

@@ -3,9 +3,6 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     compress: true,
-    typescript: {
-      ignoreBuildErrors: true,
-    },
     compiler: {
         styledComponents: true,
     },
@@ -25,8 +22,8 @@ const nextConfig = {
     env: {
         SITE_NAME: "Open Booru",
         SITE_DESCRIPTION: "The Open Booru, the free and open-source image board",
-        API_URL: "http://slate:8443",
-        READ_ONLY: true,
+        API_URL: "https://api.openbooru.org",
+        READ_ONLY: false,
     },
     webpack(config, options) {
         return config

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import PostMedia from "./media";
+import PostMedia from "components/PostMedia";
 import PostInfo from "components/PostInfo";
 import useWidth from "hooks/widthHook";
 import { Types } from "openbooru";

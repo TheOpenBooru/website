@@ -9,6 +9,7 @@ export default function LayoutSelector({ layout: CurrentLayout, setLayout }) {
             <LayoutButton
                 title={`${titleCase(layout)} Layout`}
                 onClick={() => setLayout(layout)}
+                // @ts-ignore, styled-components prop
                 active={CurrentLayout === layout}
             >
                 <LayoutIcon>
@@ -64,8 +65,12 @@ const LayoutButton = styled.a`
     &:hover {
         background: var(--BACKGROUND-3-HOVER);
     }
-    
-    ${({active}) => active ? "background: var(--BACKGROUND-3-HOVER) !important;" : null}
+
+    ${ // @ts-ignore, styled-components prop
+        ({ active }) => active
+        ? "background: var(--BACKGROUND-3-HOVER) !important;"
+        : null
+    }
 `;
 
 const LayoutIcon = styled.div`

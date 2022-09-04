@@ -9,7 +9,7 @@ type ItemProps = {
     post: Types.Post,
     postCallback: any,
     isTarget: boolean,
-    parentRef: Ref<Element>,
+    parentRef,
     priority: boolean
 }
 export default function Item({ post, postCallback, parentRef, isTarget, priority }: ItemProps) {
@@ -21,44 +21,40 @@ export default function Item({ post, postCallback, parentRef, isTarget, priority
 
     function scrollTo(e) {
         let elem: Element = e.target;
-        let scroller: Element = parentRef.current;
-        let { top } = elem.getBoundingClientRect()
-        top -= (window.innerHeight / 4)
-        scroller.scrollTo({top})
+        let scroller = parentRef?.current;
+        if (scroller) {
+            let { top } = elem.getBoundingClientRect()
+            top -= (window.innerHeight / 4)
+            scroller.scrollTo({top})
+        }
     }
 
     return (
-        // @ts-ignore, element has scrollIntoView function, Typescript doesn't see it?
-        <Container onLoad={(e) => isTarget ? scrollTo(e) : null}> 
-            <ImageContainer
-                title={`Post: ${post.id}`}
-                onClick={postCallback(post.id)}
-                // @ts-ignore, styled component custom prop
-                type={post.media_type}
-            >
-                <a href={Redirects.post(post.id)} onClick={(e) => { e.preventDefault(); }}>
-                    <StyledImage
-                        src={image.url}
-                        alt=""
-                        layout="responsive"
-                        height={image.height}
-                        width={image.width}
-                        sizes="300px"
+        <ImageContainer
+            title={`Post: ${post.id}`}
+            onClick={postCallback(post.id)}
+            // @ts-ignore, element has scrollIntoView function, Typescript doesn't see it?
+            onLoad={(e) => isTarget ? scrollTo(e) : null}
+            // @ts-ignore, styled component custom prop
+            type={post.media_type}
+        >
+            <a href={Redirects.post(post.id)} onClick={(e) => { e.preventDefault(); }}>
+                <StyledImage
+                    src={image.url}
+                    alt=""
+                    layout="responsive"
+                    height={image.height}
+                    width={image.width}
+                    sizes="300px"
 
-                        priority={priority}
-                        placeholder="blur"
-                        blurDataURL={post.thumbnail.url}
-                    />
-                </a>
-            </ImageContainer>
-        </Container>
+                    priority={priority}
+                    placeholder="blur"
+                    blurDataURL={post.thumbnail.url}
+                />
+            </a>
+        </ImageContainer>
     );
 }
-
-
-const Container = styled.div`
-    width: 100%;
-`;
 
 
 const BorderRadius = css`
@@ -81,7 +77,9 @@ const ImageContainer = styled.div`
     outline: 0.3rem solid;
     background: var(--BACKGROUND-3);
     
-    ${({ type }) => {
+    ${
+        // @ts-ignore, styled components prop
+        ({ type }) => {
         switch (type) {
             case "video":
                 return "outline-color: #008600;"
@@ -95,6 +93,8 @@ const ImageContainer = styled.div`
     }}
     ${BorderRadius}
 `;
+
+
 
 
 const StyledImage = styled(Image)`

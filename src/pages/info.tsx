@@ -3,6 +3,7 @@ import styled from "styled-components";
 import HeadInfo from "components/HeadInfo";
 import About from "components/About";
 import ContactUs from "components/ContactUs";
+import Credits from "components/Credits";
 import GDPR from "components/GDPR";
 
 
@@ -10,7 +11,6 @@ export default function Info() {
     let [mode, setMode] = useState("About");
     let options = {
         "About": About,
-        "GDPR": GDPR,
         "Contact US": ContactUs,
     };
     let MainElement = options[mode] || About
@@ -19,9 +19,9 @@ export default function Info() {
             <HeadInfo title="Info" />
             <Container>
                 <Options options={Object.entries(options)} currentOption={mode} callback={setMode} />
-                <MainContainer>
+                <ContentContainer>
                     <MainElement key={mode} />
-                </MainContainer>
+                </ContentContainer>
             </Container>
         </>
     );
@@ -67,8 +67,9 @@ const Container = styled.div`
 `;
 
 
-const MainContainer = styled.div`
-    padding: .5rem;
+const ContentContainer = styled.div`
+    padding: 1rem;
+    font-size: 1.3rem;
 `;
 
 

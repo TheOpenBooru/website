@@ -60,7 +60,7 @@ export default function useSearch() {
             setQuery(new_query);
             extend();
         }
-    }, [router.isReady, router.query, query]) // /* eslint-disable */
+    }, [router.isReady, router.query, query]) // eslint-disable
 
     let Export = { extend, updateQuery, query, posts, finished, loading: lock, getBSL };
     return Export
