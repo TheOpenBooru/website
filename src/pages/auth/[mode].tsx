@@ -36,6 +36,8 @@ export default function Login({ initial_mode }) {
             text = "Your being ratelimited, please wait";
         } else if (compareError(err, Account.Errors.PasswordReset)) {
             text = "Your Password Does Not Meet the Requirements";
+        } else if (compareError(err, Account.Errors.UserAlreadyExists)) {
+            text = "User already exists";
         } else {
             text = "An Unknown Error Occured";
         }
