@@ -13,7 +13,7 @@ export default function Captcha({ setCaptchaToken }) {
         return info.captcha_sitekey
     }
 
-    let { data: sitekey, status} = useQuery("sitekey", getSitekey)
+    let { data: sitekey, status} = useQuery("sitekey", getSitekey, {staleTime: 120})
     
     if (status === "success") {
         return (
@@ -31,11 +31,4 @@ const CaptchaContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
-
-
-
-
-
-    
 `;
