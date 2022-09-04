@@ -8,12 +8,14 @@ import { Info } from "js/booru";
 
 
 export default function Captcha({ setCaptchaToken }) {
-    async function getSitekey() {
-        let info = await Info();
-        return info.captcha_sitekey
-    }
-
-    let { data: sitekey, status} = useQuery("sitekey", getSitekey, {staleTime: 120})
+    let { data: sitekey, status } = useQuery(
+        "sitekey",
+        async () => {
+            let info = await Info();
+            return info.captcha_sitekey
+        },
+        { staleTime: 120 }
+    )
     
     if (status === "success") {
         return (
