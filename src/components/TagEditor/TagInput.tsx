@@ -32,11 +32,18 @@ export default function TagInput({ addTagCallback }) {
         }
     }
 
+    function AutocompleteCallback(tag) {
+        setInput("")
+        addTagCallback(tag)
+    }
+
     return (
         <Container>
             <TextInput type="text" value={input} onKeyDown={onKeyPress} onChange={onInputChange} />
             <Button onClick={submitEntry}>Add</Button>
-            <TagAutocomplete input={input} addTagCallback={addTagCallback} />
+            <AutocompleteContainer>
+                <TagAutocomplete input={input} addTagCallback={AutocompleteCallback} />
+            </AutocompleteContainer>
         </Container>
     );
 }
@@ -66,3 +73,10 @@ const Button = styled.button`
         background: var(--BACKGROUND-4-HOVER);
     }
 `;
+
+const AutocompleteContainer = styled.div`
+    position: absolute;
+    left: 14rem;
+    top: 4rem;
+    z-index: 1;
+`
