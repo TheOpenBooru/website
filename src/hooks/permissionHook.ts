@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
-import Account from "js/booru/account";
+import { useQuery } from "react-query";
+import { Account } from "js/booru";
 
 export default function usePermission(permission): boolean {
-    const [Allowed, setAllowed] = useState(false);
+    let { data: allowed, status } = useQuery(
+        `${permission}-${Account.Store.level}`,
+        async () => {
+            return await Account.hasPermission(permission)
+        },
+        {
+            staleTime: 60,
+        }
+    )
 
-    useEffect(() => {
-        (async () => {
-            let allowed = await Account.hasPermission(permission)
-            setAllowed(allowed)
-        })()
-    }, [permission])
-    
-    return Allowed;
+    if (status == "success") {
+        return allowed
+    } else {
+        return false
+    }
 }

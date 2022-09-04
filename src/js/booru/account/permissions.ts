@@ -1,19 +1,32 @@
 import { Account } from "js/booru";
 import Settings from "js/settings";
 
-export default async function hasPermission(permission): Promise<boolean>{
+
+export async function permissions(): Promise<object> {
     let url = Settings.apiUrl + "/account/permissions";
+    let headers = {};
+    if (Account.Store.token) {
+        headers["Authorization"] = "Bearer " + Account.Store.token
+    }
     let r = await fetch(url, {
-        headers: {"Authorization": "Bearer " + Account.Store.token}
+        headers,
+        cache: "force-cache",
     });
     if (r.status === 200) {
         let data: object = await r.json();
-        if (!(permission in data)) {
-            throw new Error("Missing Permission")
-        } else {
-            return data[permission]["has_permission"]
-        }
+        return data
+    
+    } else if (r.status == 401) {
+        Account.logout()
     } else {
-        Account.logout();
+        throw new Error("Interal Server Error")
+    }
+}
+export async function hasPermission(permission): Promise<boolean>{
+    let data = await permissions();
+    if (!(permission in data)) {
+        throw new Error("Missing Permission")
+    } else {
+        return data[permission]["has_permission"]
     }
 }
