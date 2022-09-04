@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    reactStrictMode: true,
+    swcMinify: true,
+    compress: true,
     typescript: {
-        reactStrictMode: true,
-        swcMinify: true,
-        compress: true,
       ignoreBuildErrors: true,
     },
     compiler: {
@@ -25,7 +25,7 @@ const nextConfig = {
     env: {
         SITE_NAME: "Open Booru",
         SITE_DESCRIPTION: "The Open Booru, the free and open-source image board",
-        API_URL: "https://api.openbooru.org",
+        API_URL: "http://slate:8443",
         READ_ONLY: true,
     },
     webpack(config, options) {
