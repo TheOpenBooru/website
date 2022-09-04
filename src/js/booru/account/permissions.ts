@@ -8,10 +8,7 @@ export async function permissions(): Promise<object> {
     if (Account.Store.token) {
         headers["Authorization"] = "Bearer " + Account.Store.token
     }
-    let r = await fetch(url, {
-        headers,
-        cache: "force-cache",
-    });
+    let r = await fetch(url, { headers });
     if (r.status === 200) {
         let data: object = await r.json();
         return data
