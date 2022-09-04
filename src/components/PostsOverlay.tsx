@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import NoSSR from "react-no-ssr"
+import { Account } from "js/booru";
 import MessageBox from "components/MessageBox";
 import SearchBox from "components/SearchBox";
 import CreatePost from "components/CreatePost";
 import ImportPost from "components/ImportPost";
 import Button from "components/Button";
-import { Account } from "js/booru";
 import UploadImage from 'images/upload.svg'
 import CreateImage from 'images/plus.svg'
 import SearchImage from 'images/search.svg'
@@ -52,7 +53,7 @@ export default function PostOverlay({ query, setQuery }) {
     }
 
     return (
-        <>
+        <NoSSR>
             <MessageBoxOverlay />
             <Container>
                 {Account.Store.loggedIn
@@ -65,7 +66,7 @@ export default function PostOverlay({ query, setQuery }) {
                 }
                 <Button src={SearchImage} alt="Search" onClick={toggleModeCallback("search")} />
             </Container>
-        </>
+        </NoSSR>
     );
 }
 
