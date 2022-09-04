@@ -28,10 +28,10 @@ export default function TagEditor({ baseTags, setTags }) {
 
     return (
         <Container>
+            <TagInput addTagCallback={addTag} />
             <TagList
                 {...{ baseTags, setTags, addedTags, setAddedTags, removedTags, setRemovedTags }}
             />
-            <TagInput addTagCallback={addTag} />
         </Container>
     );
 }
