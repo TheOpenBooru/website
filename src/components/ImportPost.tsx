@@ -46,7 +46,7 @@ export default function ImportPost() {
     return (
         <Form onSubmit={FormHandler}>
             <label htmlFor="url">URL:</label>
-            <input type="url" name="url" ref={urlRef} required/>
+            <URLInput type="url" name="url" ref={urlRef} required/>
             <br />
             <br />
             <Captcha setCaptchaToken={setCaptchaResponse} />
@@ -64,6 +64,11 @@ const LoadingContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+`
+
+
+const URLInput = styled.input`
+    width: calc(100% - 3rem);
 `
 
 
