@@ -77,7 +77,7 @@ const Container = styled.div`
     position: fixed;
     z-index: 1;
     top: var(--NAVBAR-HEIGHT);
-    right: 1rem;
+    right: 15px;
     padding: .5rem;
 
     display: flex;
