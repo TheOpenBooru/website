@@ -1,5 +1,5 @@
 export class PostQuery {
-    sort = "upvotes";
+    sort = "created_at";
     descending = true;
 
     include_tags: Array<string> = [];
