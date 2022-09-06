@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res}) => {
     let { id } = query
     try {
         const post = await Posts.get(id)
-        res.setHeader('Cache-Control',"")
+        res.setHeader('Cache-Control',"max-age=60, public")
         return {
             props: { post },
         }
