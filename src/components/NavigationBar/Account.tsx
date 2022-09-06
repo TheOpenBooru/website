@@ -1,51 +1,52 @@
 import React, { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image";
-import { Account } from "js/booru" 
 import Redirects from "js/redirects";
+import useAccount from "hooks/accountHook";
 import NoSSR from "react-no-ssr"
 import styles from "./navbar.module.css";
 
 
-function AccountLoggedIn({ text }) {
+function AccountLoggedIn({ useText, username, logout }) {
     let callback = () => {
-        Account.logout();
+        logout();
         window.location.reload();
     };
     
     return (
         <div className={styles.section} onClick={callback}>
             <Icon src="/images/profile.svg" alt="Profile" />
-            {text ? <span className="navbar-button-text">{Account.Store.username}</span> : null}
+            {useText ? <span className="navbar-button-text">{username}</span> : null}
         </div>
     );
 }
 
 
-function AccountLogin({ text }) {
+function AccountLogin({ useText }) {
     return (
         <Link href={Redirects.login}>
             <div className={styles.section}>
                 <Icon src="/images/profile.svg" alt="Login" />
-                {text ? <span className="navbar-button-text">Login</span> : null}
+                {useText ? <span className="navbar-button-text">Login</span> : null}
             </div>
         </Link>
     );
 }
 
 
-export default function AccountSection({ text }) {
-    if (process.env.READ_ONLY) {
-        return null;
+export default function AccountSection({ text: useText }) {
+    const Account = useAccount();
+
+    if (Account.loggedIn) {
+        return <AccountLoggedIn
+            useText={useText}
+            logout={Account.logout}
+            username={Account.username}
+        />
     } else {
-        return (
-            <NoSSR>
-                {Account.Store.loggedIn
-                    ? <AccountLoggedIn text={text} />
-                    : <AccountLogin text={text} />
-                }
-            </NoSSR>
-        );
+        return <AccountLogin
+            useText={useText}
+        />
     }
 }
 

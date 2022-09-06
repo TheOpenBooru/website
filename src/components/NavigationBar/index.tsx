@@ -2,29 +2,17 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Redirects from "js/redirects";
-import useMobile from "hooks/mobileHook";
 import AccountSection from "./Account"
 import styles from "./navbar.module.css";
 
 export default function NavigationBar() {
-    let isMobile = useMobile();
-    if (!isMobile) {
-        return (
-            <nav id={styles.navbar}>
-                <PostsSection text />
-                <InfoSection text />
-                <AccountSection text />
-            </nav>
-        );
-    } else {
-        return (
-            <nav id={styles.navbar}>
-                <PostsSection text />
-                <InfoSection text />
-                <AccountSection text />
-            </nav>
-        );
-    }
+    return (
+        <nav id={styles.navbar}>
+            <PostsSection text />
+            <InfoSection text />
+            <AccountSection text />
+        </nav>
+    );
 }
 
 
@@ -40,8 +28,7 @@ function PostsSection({ text }) {
 }
 
 
-function InfoSection(props) {
-    let { text } = props;
+function InfoSection({ text }) {
     return (
         <Link href={Redirects.info}>
             <div className={styles.section}>
