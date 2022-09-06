@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Link from "next/link";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import { Tags } from "js/booru";
@@ -15,12 +16,12 @@ function CallbackContainer({ namespace, callback, children }) {
 
 function HrefContainer({ namespace, href, children }) {
     return (
-        <a href={href}>
+        <Link href={href}>
             {/* @ts-ignore, styled-components prop */}
             <HoverableContainer namespace={namespace}>
                 {children}
             </HoverableContainer>
-        </a>
+        </Link>
     )
 }
 
