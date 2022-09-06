@@ -21,8 +21,8 @@ export default function LayoutSelector({ layout: CurrentLayout, setLayout }) {
 
     return (
         <Contianer>
-            <Icon layout="grid" src="/images/grid.svg"/>
             <Icon layout="column" src="/images/columns.svg"/>
+            <Icon layout="grid" src="/images/grid.svg"/>
         </Contianer>
     );
 }
