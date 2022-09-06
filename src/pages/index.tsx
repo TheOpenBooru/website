@@ -1,13 +1,30 @@
 import React, { useState } from "react";
+import { Posts, BSL, Types } from "js/booru";
+import { GetServerSideProps } from "next";
 import titleCase from "ap-style-title-case";
 import GridPosts from "components/GridPosts";
 import ColumnPosts from "components/ColumnPosts";
 import PostsPage from "components/PostsPage";
 import HeadInfo from "components/HeadInfo";
-import useSearch from "hooks/searchHook";
+import LayoutSelector from "components/LayoutSelector";
 
 
-export default function Index() {
+export const getServerSideProps: GetServerSideProps = async ({ query: params, res }) => {
+    let {query: bsl = ""} = params
+    if (typeof bsl === "object") bsl = bsl[0]
+
+    let query = BSL.decode(bsl)
+    const PostQuery = Object.assign(new Types.PostQuery(), query)
+    let posts = await Posts.search(PostQuery);
+
+    res.setHeader('Cache-Control', "max-age=60, public")
+    return {
+        props: { posts, bsl },
+    }
+}
+
+
+export default function Index({ posts, bsl }) {
     let [layoutName, setLayoutName] = useState("column");
     let Layout = {
         "grid": GridPosts,
@@ -15,18 +32,22 @@ export default function Index() {
     }[layoutName];
 
     
+    
     return (
         <>
-            <HeadInfo title={GetTitle()} />
-            <PostsPage LayoutElement={Layout} currentLayout={layoutName} setLayout={setLayoutName} />
+            <HeadInfo title={GetTitle(bsl)} />
+            <LayoutSelector layout={layoutName} setLayout={setLayoutName} />
+            <PostsPage
+                LayoutElement={Layout}
+                currentLayout={layoutName}
+                setLayout={setLayoutName}
+                initialPosts={posts}
+            />
         </>
     )
 }
 
-function GetTitle() {
-    let search = useSearch();
-    let bsl = search.getBSL()
-
+function GetTitle(bsl: string) {
     if (!bsl) {
         return ""
     } else {
