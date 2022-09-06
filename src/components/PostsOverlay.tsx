@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import NoSSR from "react-no-ssr"
 import MessageBox from "components/MessageBox";
 import SearchBox from "components/SearchBox";
 import CreatePost from "components/CreatePost";
@@ -55,7 +54,7 @@ export default function PostOverlay({ query, setQuery }) {
     }
 
     return (
-        <NoSSR>
+        <>
             <MessageBoxOverlay />
             <Container>
                 {canCreatePost
@@ -68,7 +67,7 @@ export default function PostOverlay({ query, setQuery }) {
                 }
                 <Button src={SearchImage} alt="Search" onClick={ModeCallback("search")} />
             </Container>
-        </NoSSR>
+        </>
     );
 }
 

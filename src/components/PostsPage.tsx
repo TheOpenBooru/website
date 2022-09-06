@@ -12,7 +12,7 @@ import Redirects from "js/redirects";
 
 
 
-export default function Posts({ LayoutElement, currentLayout, setLayout }) {
+export default function Posts({ LayoutElement, currentLayout, setLayout, initialPosts = [] }) {
     const router = useRouter();
     let search = useSearch();
     let isMobile = useMobile();
@@ -22,7 +22,6 @@ export default function Posts({ LayoutElement, currentLayout, setLayout }) {
     useEffect(() => {
         setUseFullscreen(false);
     }, [search.query])
-
 
 
     function setQuery(query) {
@@ -42,14 +41,15 @@ export default function Posts({ LayoutElement, currentLayout, setLayout }) {
         setIndex(index);
         setUseFullscreen(true);
     }
-    if (search.posts.length === 0 && search.finished) {
+    const posts = search.posts.length == 0 ? initialPosts : search.posts
+    if (posts.length === 0) {
         return (
-            <NoSSR>
+            <>
                 <Overlay query={search.query} setQuery={setQuery} />
                 <ErrorText>
                     No Posts Found
                 </ErrorText>
-            </NoSSR>
+            </>
         )
     } else if (useFullscreen) {
         return (
@@ -67,38 +67,26 @@ export default function Posts({ LayoutElement, currentLayout, setLayout }) {
                 />
             </NoSSR>
         );
-    } else if (isMobile) {
-        return (
-            <NoSSR>
-                <Overlay query={search.query} setQuery={setQuery} />
-                <ColumnPosts
-                    loading={!search.finished}
-                    finished={search.finished}
-                    posts={search.posts}
-                    morePostsCallback={MorePostsCallback}
-                    query={search.query}
-                    setQuery={setQuery}
-                    postCallback={RedirectCallback}
-                    index={index}
-                />
-            </NoSSR>
-        );
     } else {
+        if (isMobile) LayoutElement = ColumnPosts
         return (
-            <NoSSR>
-                <LayoutSelector layout={currentLayout} setLayout={setLayout} />
+            <>
+                {isMobile
+                    ? null
+                    : <LayoutSelector layout={currentLayout}  setLayout={setLayout}/>
+                }
                 <Overlay query={search.query} setQuery={setQuery} />
                 <LayoutElement
+                    posts={posts}
+                    morePostsCallback={MorePostsCallback}
                     loading={!search.finished}
                     finished={search.finished}
-                    posts={search.posts}
-                    morePostsCallback={MorePostsCallback}
                     query={search.query}
                     setQuery={setQuery}
-                    postCallback={FullscreenCallback}
+                    postCallback={isMobile ? RedirectCallback : FullscreenCallback}
                     index={index}
                 />
-            </NoSSR>
+            </>
         );
     }
 }
