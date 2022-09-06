@@ -25,9 +25,6 @@ export default function MediaImage({ full, preview, thumbnail, lazy, }: MediaIma
             height={image.height}
             priority={!lazy}
             onLoad={() => setUseHiRes(true)}
-            
-            placeholder={thumbnail ? "blur" : null}
-            blurDataURL={thumbnail ? thumbnail.url : null}
         />
     )
 }
