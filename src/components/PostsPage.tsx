@@ -41,6 +41,7 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
         setIndex(index);
         setUseFullscreen(true);
     }
+    
     const posts = search.posts.length == 0 ? initialPosts : search.posts
     if (posts.length === 0) {
         return (
@@ -53,19 +54,17 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
         )
     } else if (useFullscreen) {
         return (
-            <NoSSR>
-                <FullscreenPosts
-                    loading={search.loading}
-                    finished={search.finished}
-                    posts={search.posts}
-                    morePostsCallback={MorePostsCallback}
-                    exitCallback={() => setUseFullscreen(false)}
-                    query={search.query}
-                    setQuery={setQuery}
-                    index={index}
-                    setIndex={setIndex}
-                />
-            </NoSSR>
+            <FullscreenPosts
+                loading={search.loading}
+                finished={search.finished}
+                posts={search.posts}
+                morePostsCallback={MorePostsCallback}
+                exitCallback={() => setUseFullscreen(false)}
+                query={search.query}
+                setQuery={setQuery}
+                index={index}
+                setIndex={setIndex}
+            />
         );
     } else {
         if (isMobile) LayoutElement = ColumnPosts
@@ -83,7 +82,7 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
                     finished={search.finished}
                     query={search.query}
                     setQuery={setQuery}
-                    postCallback={isMobile ? RedirectCallback : FullscreenCallback}
+                    postCallback={RedirectCallback}
                     index={index}
                 />
             </>
