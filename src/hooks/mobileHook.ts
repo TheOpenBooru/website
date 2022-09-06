@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function useMobile(): boolean {
-    const [MobileStatus, setMobileStatus] = useState(false);
+    const [MobileStatus, setMobileStatus] = useState(null);
 
     function getMobileStatus() {
         const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);

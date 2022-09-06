@@ -70,9 +70,9 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
         if (isMobile) LayoutElement = ColumnPosts
         return (
             <>
-                {isMobile
-                    ? null
-                    : <LayoutSelector layout={currentLayout}  setLayout={setLayout}/>
+                {isMobile === false
+                    ? <LayoutSelector layout={currentLayout} setLayout={setLayout} />
+                    : null
                 }
                 <Overlay query={search.query} setQuery={setQuery} />
                 <LayoutElement
@@ -82,7 +82,7 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
                     finished={search.finished}
                     query={search.query}
                     setQuery={setQuery}
-                    postCallback={RedirectCallback}
+                    postCallback={isMobile ? RedirectCallback : FullscreenCallback}
                     index={index}
                 />
             </>
