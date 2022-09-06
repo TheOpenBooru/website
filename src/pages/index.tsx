@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query: params, re
 
     let query = BSL.decode(bsl)
     const PostQuery = Object.assign(new Types.PostQuery(), query)
-    let posts = await Posts.search(PostQuery);
+    let posts = await Posts.search(PostQuery, 0, 20);
 
     res.setHeader('Cache-Control', "max-age=60, public")
     return {
@@ -31,8 +31,6 @@ export default function Index({ posts, bsl }) {
         "column": ColumnPosts
     }[layoutName];
 
-    
-    
     return (
         <>
             <HeadInfo title={GetTitle(bsl)} />
