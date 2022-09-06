@@ -34,6 +34,7 @@ export default function GridItem({ post, callback, parentRef, isTarget }) {
 
                     placeholder={"blur"}
                     blurDataURL={thumbnail.url}
+                    sizes="12rem"
                 />
             </Container>
         </a>
