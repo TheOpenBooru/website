@@ -43,39 +43,31 @@ export default function ColumnPosts({ posts, loading, morePostsCallback, postCal
     
     let focusPostID = posts[index]?.id;
     
-    if (width === null) {
-        return (
-            <LoadingContainer>
-                <LoadingIcon />
-            </LoadingContainer>
-        )
-    } else {
-        return (
-            <Container ref={ref} onScroll={checkScroll}>
-                <Columns>
-                    {columns.map((posts, index) => (
-                        <ColumnContainer key={index}>
-                            {posts.map((post, index) => (
-                                <Item
-                                    key={post.id}
-                                    parentRef={ref}
-                                    post={post}
-                                    postCallback={postCallback}
-                                    isTarget={focusPostID === post.id}
-                                    priority={index < 5}
-                                />
-                            ))}
-                        </ColumnContainer>
-                    ))}
-                </Columns>
-                {loading ? (
-                    <LoadingContainer>
-                        <LoadingIcon fadeIn/>
-                    </LoadingContainer>
-                ) : null}
-            </Container>
-        );
-    }
+    return (
+        <Container ref={ref} onScroll={checkScroll}>
+            <Columns>
+                {columns.map((posts, index) => (
+                    <ColumnContainer key={index}>
+                        {posts.map((post, index) => (
+                            <Item
+                                key={post.id}
+                                parentRef={ref}
+                                post={post}
+                                postCallback={postCallback}
+                                isTarget={focusPostID === post.id}
+                                priority={index < 5}
+                            />
+                        ))}
+                    </ColumnContainer>
+                ))}
+            </Columns>
+            {loading ? (
+                <LoadingContainer>
+                    <LoadingIcon fadeIn/>
+                </LoadingContainer>
+            ) : null}
+        </Container>
+    );
 }
 
 const Container = styled.div`
