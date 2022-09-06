@@ -4,7 +4,9 @@ const nextConfig = {
     swcMinify: true,
     compress: true,
     compiler: {
-        styledComponents: true,
+        styledComponents: {
+            ssr: true,
+        }
     },
     experimental: {
         images: {
