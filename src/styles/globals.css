@@ -49,9 +49,20 @@ body {
   background-color: var(--BACKGROUND-1);
 }
 
+* {
+  user-select: none;
+}
+
+text {
+  user-select: text;
+}
+
+
 a {
   text-decoration: none;
 }
+
+
 .centered, .center{
   display: flex;
   align-items: center;

@@ -53,8 +53,7 @@ const OptionSpan = styled.span`
     text-align: left;
     overflow: hidden;
     white-space: nowrap;
-    user-select: none;
-    `;
+`;
 
 
 const ActiveOptionSpan = styled(OptionSpan)`

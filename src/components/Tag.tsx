@@ -71,7 +71,6 @@ const Container = styled.span`
     
     
     text-decoration: none;
-    user-select: none;
     width: fit-content;
 
     border: 0.1rem solid var(--BORDER-2);

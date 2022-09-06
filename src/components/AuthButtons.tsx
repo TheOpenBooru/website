@@ -34,7 +34,6 @@ const Container = styled.div`
 `;
 
 const Button = styled.input`
-
     cursor: pointer;
     user-select: none;
 

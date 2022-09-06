@@ -88,7 +88,6 @@ const OptionsContainer = styled.div`
 const OptionSpan = styled.span`
     margin-left: 1rem;
     font-size: 1.6rem;
-    user-select: none;
     white-space: none;
 `;
 
