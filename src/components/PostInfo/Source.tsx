@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
@@ -7,11 +6,11 @@ export default function SourceEntry({ source }) {
         let url = new URL(source);
         return (
             <Container>
-                <Span href={source} title={url.hostname}>
-                    <>
-                        {source}
+                <Span title={url.hostname}>
+                    {source}
+                    <StyledLink href={source}>
                         <Icon src="/images/link.svg" height={10} width={10} />
-                    </>
+                    </StyledLink>
                 </Span>
             </Container>
         );
@@ -24,7 +23,7 @@ const Container = styled.div`
     min-height: 1.2rem;
 `
 
-const Span = styled(Link)`
+const Span = styled.span`
     color: #0c181d;
     display: block;
     overflow: hidden;
@@ -38,3 +37,8 @@ const Icon = styled.img`
     width: 0.8rem;
     height: 0.8rem;
 `;
+
+const StyledLink = styled.a`
+    user-select: none;
+    cursor: pointer;
+`
