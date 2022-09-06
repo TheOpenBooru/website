@@ -34,7 +34,6 @@ export default function Index({ posts, bsl }) {
     return (
         <>
             <HeadInfo title={GetTitle(bsl)} />
-            <LayoutSelector layout={layoutName} setLayout={setLayoutName} />
             <PostsPage
                 LayoutElement={Layout}
                 currentLayout={layoutName}
