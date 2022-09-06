@@ -4,7 +4,7 @@ import { Types, Posts, BSL } from "js/booru";
 
 const DefaultQuery = new Types.PostQuery();
 
-function getPostQueryfromParams(params) {
+export function getPostQueryfromParams(params) {
     let bsl = params["query"] || "";
     if (typeof bsl === "object") bsl = bsl[0]
     let query = BSL.decode(bsl);
