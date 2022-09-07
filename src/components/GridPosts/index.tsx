@@ -17,21 +17,23 @@ GridPosts.propTypes = {
 };
 export default function GridPosts({ posts, morePostsCallback, loading, postCallback, index }) {
     const scrollRef = useRef();
-    const checkScroll = () => {
-        if (!scrollRef.current) return;
-
-        const { scrollTop, offsetHeight, scrollHeight } = scrollRef.current;
-        let distanceFromTop = scrollTop + offsetHeight;
-        let distanceFromBottom = scrollHeight - distanceFromTop;
-        if (distanceFromBottom < 2000) {
-            morePostsCallback();
-        }
-    };
-
-    useEffect(checkScroll, [morePostsCallback]);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (!scrollRef.current) return;
+        
+            const { scrollTop, offsetHeight, scrollHeight } = scrollRef.current;
+            let distanceFromTop = scrollTop + offsetHeight;
+            let distanceFromBottom = scrollHeight - distanceFromTop;
+            if (distanceFromBottom < 2000) {
+                morePostsCallback();
+            }
+        }, 100)
+        
+        return () => clearInterval(interval);
+    }, [morePostsCallback])
 
     return (
-        <Container ref={scrollRef} onScroll={checkScroll}>
+        <Container ref={scrollRef}>
             <Grid>
                 {posts.map((post, i) => (
                     <Item

@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import PropTypes from "prop-types";
+import NoSSR from "react-no-ssr";
 import styled from "styled-components";
 import LoadingIcon from "components/LoadingIcon";
 import useWidth from "hooks/widthHook";
+import { Types } from "openbooru";
 import { SplitPosts } from "./utils";
 import Item from "./item";
-import { Types } from "openbooru";
-import { finished } from "stream";
+
 
 const Clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
 type ColumnProps = {
@@ -23,51 +23,56 @@ export default function ColumnPosts({ posts, loading, morePostsCallback, postCal
     let width = useWidth();
     let ref = useRef();
 
-    useEffect(checkScroll, [morePostsCallback]);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (!ref.current) return;
+            
+            const { scrollTop, offsetHeight, scrollHeight } = ref.current; 
+            let distanceFromTop = scrollTop + offsetHeight;
+            let distanceFromBottom = scrollHeight - distanceFromTop;
+            if (distanceFromBottom < 4000) {
+                morePostsCallback();
+            }
+        }, 100);
+        return () => clearInterval(interval);
+    }, [morePostsCallback])
 
-    
-    function checkScroll() {
-        if (!ref.current) return;
+
+    if (width === null) {
+        return null
+    } else {
+        let focusPostID = posts[index]?.id;
+
+        let increments = Number((width / 450).toFixed());
+        let columnCount = Clamp(increments, 2, 8);
+        let columns = SplitPosts(posts, columnCount);
         
-        const { scrollTop, offsetHeight, scrollHeight } = ref.current; 
-        let distanceFromTop = scrollTop + offsetHeight;
-        let distanceFromBottom = scrollHeight - distanceFromTop;
-        if (distanceFromBottom < 4000) {
-            morePostsCallback();
-        }
+        return (
+            <Container ref={ref}>
+                <Columns>
+                    {columns.map((posts, index) => (
+                        <ColumnContainer key={index}>
+                            {posts.map((post, index) => (
+                                <Item
+                                    key={post.id}
+                                    parentRef={ref}
+                                    post={post}
+                                    postCallback={postCallback}
+                                    isTarget={focusPostID === post.id}
+                                    priority={index < 5}
+                                />
+                            ))}
+                        </ColumnContainer>
+                    ))}
+                </Columns>
+                {loading ? (
+                    <LoadingContainer>
+                        <LoadingIcon fadeIn/>
+                    </LoadingContainer>
+                ) : null}
+            </Container>
+        );
     }
-
-    let increments = Number((width / 450).toFixed());
-    let columnCount = Clamp(increments, 2, 8);
-    let columns = SplitPosts(posts, columnCount);
-    
-    let focusPostID = posts[index]?.id;
-    
-    return (
-        <Container ref={ref} onScroll={checkScroll}>
-            <Columns>
-                {columns.map((posts, index) => (
-                    <ColumnContainer key={index}>
-                        {posts.map((post, index) => (
-                            <Item
-                                key={post.id}
-                                parentRef={ref}
-                                post={post}
-                                postCallback={postCallback}
-                                isTarget={focusPostID === post.id}
-                                priority={index < 5}
-                            />
-                        ))}
-                    </ColumnContainer>
-                ))}
-            </Columns>
-            {loading ? (
-                <LoadingContainer>
-                    <LoadingIcon fadeIn/>
-                </LoadingContainer>
-            ) : null}
-        </Container>
-    );
 }
 
 const Container = styled.div`
