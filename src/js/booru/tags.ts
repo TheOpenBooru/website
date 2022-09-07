@@ -8,7 +8,7 @@ export default class Tags{
     static async get(tag: string): Promise<Types.Tag | null> {
         let tags = await booru.TagsSearch({
             name_like: tag,
-            limit: 1
+            limit: 1,
         })
         return tags[0] || null;
     }

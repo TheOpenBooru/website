@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Types, Posts, BSL } from "js/booru";
 
-const DefaultQuery = new Types.PostQuery();
 
 export function getPostQueryfromParams(params) {
     let bsl = params["query"] || "";
@@ -10,6 +9,7 @@ export function getPostQueryfromParams(params) {
     let query = BSL.decode(bsl);
     return query;
 }
+
 
 export default function useSearch() {
     let [query, setQuery] = useState(null);

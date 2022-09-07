@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import NoSSR from 'react-no-ssr';
 import styled from "styled-components";
 import useSearch from "hooks/searchHook";
 import useMobile from "hooks/mobileHook";
@@ -19,9 +18,6 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
     let [index, setIndex] = useState(0);
     let [useFullscreen, setUseFullscreen] = useState(false);
     
-    useEffect(() => {
-        setUseFullscreen(false);
-    }, [search.query])
 
 
     function setQuery(query) {
@@ -41,6 +37,10 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
         setIndex(index);
         setUseFullscreen(true);
     }
+
+    useEffect(() => {
+        setUseFullscreen(false);
+    }, [search.query])
     
     const posts = search.posts.length == 0 ? initialPosts : search.posts
     if (posts.length === 0) {

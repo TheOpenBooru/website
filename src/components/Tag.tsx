@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { useQuery } from "react-query";
 import styled from "styled-components";
 import { Tags } from "js/booru";
 
