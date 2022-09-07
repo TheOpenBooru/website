@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
 import HeadInfo from "components/HeadInfo";
-import ContactUs from "components/ContactUs";
-import GDPR from "components/GDPR";
-import About from "components/About";
+import About from "./About";
+import ContactUs from "./ContactUs";
+import Credits from "./Credits";
+import GDPR from "./GDPR";
 import { useRouter } from "next/router";
 
 type InfoProps = {
-    mode: string
+    mode?: string
 }
 
-export default function Info({mode}:InfoProps) {
+export default function Info({mode = "About"}:InfoProps) {
     let [currentMode, setMode] = useState(mode);
 
     const options = {
         "About": About,
-        "GDPR": GDPR,
+        // "GDPR": GDPR,
         "Contact US": ContactUs,
     };
 
@@ -24,7 +25,7 @@ export default function Info({mode}:InfoProps) {
         <>
             <HeadInfo title="Info" />
             <Container>
-                <Sidebar options={Object.entries(options)} currentOption={mode} callback={setMode} />
+                <Sidebar options={Object.entries(options)} currentOption={currentMode} callback={setMode} />
                 <PageContainer>
                     <GDPR/>
                 </PageContainer>
