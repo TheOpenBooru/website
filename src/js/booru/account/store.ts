@@ -15,7 +15,13 @@ export default class Store{
     static get level() {return get("Login-Level") || "annonomous"}
     static set level(value) { set("Login-Level", value) }
 
-    static get token() {return get("Login-Token")}
+    static get token() {
+        if (typeof window === "undefined") {
+            return process.env.SERVER_API_KEY
+        } else {
+            return get("Login-Token")
+        }
+    }
     static set token(value) { set("Login-Token", value) }
 
     static get loggedIn() {return Boolean(get("Login-Token"))}

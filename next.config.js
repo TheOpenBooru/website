@@ -25,6 +25,7 @@ const nextConfig = {
         SITE_NAME: "Open Booru",
         SITE_DESCRIPTION: "The Open Booru, the free and open-source image board",
         API_URL: "https://api.openbooru.org",
+        SERVER_API_KEY: null,
         READ_ONLY: false,
     },
     webpack(config, options) {
