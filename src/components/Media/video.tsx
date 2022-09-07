@@ -18,7 +18,6 @@ export default function Video({ video }) {
         <Player
             onCanPlay={setVolume}
             onVolumeChange={updateVolume}
-            autoPlay
             loop
             controls
         >
