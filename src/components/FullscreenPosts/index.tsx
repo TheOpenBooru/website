@@ -43,15 +43,19 @@ export default function FullscreenPosts({
         window.location.href = link;
     }
 
-    function nextPostCallback() {
-        if (index !== posts.length - 1) {
-            setIndex(index + 1);
-        }
+    function updateIndex(index) {
+        setIndex(index);
     }
 
+    function nextPostCallback() {
+        if (index !== posts.length - 1) {
+            updateIndex(index + 1)
+        }
+    }
+    
     function prevPostCallback() {
         if (index > 0) {
-            setIndex(index - 1);
+            updateIndex(index - 1)
         }
     }
 
