@@ -2,14 +2,13 @@ import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import Tag from "./Tag";
 import { Tags } from "js/booru";
-import { useQuery } from "react-query";
+import useSWR from "swr";
 
 
 export default function AutoComplete({input,addTagCallback}) {
-    let { data: tags } = useQuery(
+    let { data: tags } = useSWR(
         `autocomplete-${input}`,
         async () => await Tags.autocomplete(input, 8),
-        { staleTime: 60 }
     )
 
     function clickCallback(tag: String) {

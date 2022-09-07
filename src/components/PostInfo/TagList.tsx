@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Tag from "components/Tag";
+import useSWR from "swr";
 import PropTypes from "prop-types";
 import Redirects from "js/redirects";
 import { Types, BSL, Tags } from "js/booru";
-import { useQuery } from "react-query";
 
 const NamespaceOrder = [
     "copyright",
@@ -22,7 +22,7 @@ type Tag = {
     type: string;
 }
 // function TagList({ tags = [] as Tag[] }) {
-//     let { data, status } = useQuery("taglist-" + tags.join(''), async () => {
+//     let { data, error } = useSWR("taglist-" + tags.join(''), async () => {
 //         let tagsData = []
 //         tags.forEach(async (tag) => {
 //             let tagData = await Tags.get(tag);
@@ -30,7 +30,6 @@ type Tag = {
 //         })
 //         return tagsData
 //     })
-//     console.log({data,status})
 
 //     if (status === "loading" || tags.length === 0) {
 //         return <FallbackTagList key="tags-loading" tags={tags} />
