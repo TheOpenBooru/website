@@ -2,8 +2,8 @@ import { Posts, Types } from "js/booru";
 
 //pages/sitemap.xml.js
 function generateSiteMap(postIds) {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    return `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <url>
        <loc>https://www.openbooru.org</loc>
        <changefreq>monthly</changefreq>
@@ -60,7 +60,7 @@ export async function getServerSideProps({ res }) {
     const sitemap = generateSiteMap(ids);
 
     res.setHeader('Content-Type', 'text/xml');
-    res.setHeader('Cache-Control', "max-age=360, public")
+    res.setHeader('Cache-Control', "max-age=3600, public")
     res.write(sitemap);
     res.end();
 
