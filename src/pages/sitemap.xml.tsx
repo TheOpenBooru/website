@@ -45,7 +45,6 @@ async function getAllIds() {
     let all_ids = [];
     while (true) {
         let posts = await Posts.search(query, all_ids.length);
-        console.log(all_ids.length)
         if (posts.length === 0) {
             break
         } else {
