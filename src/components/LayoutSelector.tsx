@@ -12,9 +12,7 @@ export default function LayoutSelector({ layout: CurrentLayout, setLayout }) {
                 // @ts-ignore, styled-components prop
                 active={CurrentLayout === layout}
             >
-                <LayoutIcon>
-                    <Image src={src} alt="" fill sizes="min-width: 2em"/>
-                </LayoutIcon>
+                <StyledImage src={src} alt="" fill sizes="min-width: 2rem"/>
             </LayoutButton>
         )
     }
@@ -49,10 +47,11 @@ const LayoutButton = styled.a`
     cursor: pointer;
     position: relative;
 
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1.2rem;
+    height: 1.2rem;
     margin-left: 0.1rem;
     margin-right: 0.1rem;
+    padding: .2rem;
     
     border: 0.15rem solid black;
     border-radius: 0.4rem;
@@ -73,10 +72,7 @@ const LayoutButton = styled.a`
     }
 `;
 
-const LayoutIcon = styled.div`
-    position: relative;
-    width: 95%;
-    height: 95%;
+const StyledImage = styled(Image)`
     filter: invert(0%);
 
     animation-fill-mode: forwards;
@@ -84,5 +80,4 @@ const LayoutIcon = styled.div`
     ${LayoutButton}:hover & {
         filter: invert(90%);
     }
-    
-`;
+`

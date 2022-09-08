@@ -6,9 +6,7 @@ import Image from "next/image";
 export default function Button({ src, alt, ...props}) {
     return (
         <ButtonContainer>
-            <ImageContainer>
-                <Image src={src} alt={alt} {...props}/>
-            </ImageContainer>
+            <StyledImage src={src} alt={alt} {...props}/>
         </ButtonContainer>
     )
 }
@@ -16,11 +14,12 @@ export default function Button({ src, alt, ...props}) {
 
 const ButtonContainer = styled.div`
     aspect-ratio: 1/1;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     
     margin-left: 0.1rem;
     margin-right: 0.1rem;
+    padding: 0.25rem;
 
     background-color: var(--BACKGROUND-3);
     border: 0.15rem solid var(--BORDER-1);
@@ -38,9 +37,7 @@ const ButtonContainer = styled.div`
 `;
 
 
-const ImageContainer = styled.div`
-    width: 80%;
-    height: 80%;
+const StyledImage = styled(Image)`
     filter: invert(0%);
 
     animation-fill-mode: forwards;
