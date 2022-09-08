@@ -25,10 +25,10 @@ export default function HeadInfo({
             <meta name="keywords" content={keywords.join(", ")}/>
             <meta name="author" content="Ben Brady"/>
 
-            <meta property="og:locale " content="en_US" />
-            <meta property="og:site_name " content={SiteName} />
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:site_name" content={SiteName} />
             <meta property="og:title" content={OutputTitle} />
-            <meta property="og:description" content={OutputDescription} />
+            {image === null ? <meta property="og:description" content={OutputDescription} /> : null}
             {path ? <meta property="og:url" content={path} /> : null}
             {image ? <meta property="og:image" content={image} /> : null}
             {image ? <meta property="og:image:secure_url" content={image} /> : null}
