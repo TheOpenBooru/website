@@ -30,13 +30,14 @@ export default function PostPage({ post }:PostPageProps) {
     let HeadMedia =
         post.media_type === "video"
         ? { video: post.full.url }
-        : { image: post.full.url }
+        : { image: post.full }
     
     return (
         <>
             <HeadInfo
                 title={`Post ${post.id} | ${post.tags.join(" ")}`}
                 description={`Post ${post.id}, ${post.tags.join(" ")}`}
+                path={`/post/${post.id}`}
                 keywords={post.tags}
                 {...HeadMedia}
             />

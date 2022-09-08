@@ -33,7 +33,7 @@ export default function Index({ posts, bsl }) {
 
     return (
         <>
-            <HeadInfo title={GetTitle(bsl)} />
+            <HeadInfo title={GetTitle(bsl)} path="/" />
             <PostsPage
                 LayoutElement={Layout}
                 currentLayout={layoutName}

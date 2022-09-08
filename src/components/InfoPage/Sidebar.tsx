@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function SideBar({ options, currentOption, callback }) {
     return (
         <Container>
-            {options.map((name:string) => <Option
+            {options.map(([name, _]) => <Option
                 text={name}
                 key={name}
                 active={currentOption === name}

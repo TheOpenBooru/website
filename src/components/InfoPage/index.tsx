@@ -12,25 +12,21 @@ type InfoProps = {
     mode?: string
 }
 
-export default function Info({mode = "About"}:InfoProps) {
-    let [currentMode, setMode] = useState(mode);
-
+export default function Info({mode: initialMode = "About"}:InfoProps) {
+    const [mode, setMode] = useState(initialMode);
     const options = {
         "About": About,
-        // "GDPR": GDPR,
         "Contact US": ContactUs,
     };
+    const CurrentPage = options[mode];
 
     return (
-        <>
-            <HeadInfo title="Info" />
-            <Container>
-                <Sidebar options={Object.entries(options)} currentOption={currentMode} callback={setMode} />
-                <PageContainer>
-                    <GDPR/>
-                </PageContainer>
-            </Container>
-        </>
+        <Container>
+            <Sidebar options={Object.entries(options)} currentOption={mode} callback={setMode} />
+            <PageContainer key={mode}>
+                <CurrentPage/>
+            </PageContainer>
+        </Container>
     );
 }
 

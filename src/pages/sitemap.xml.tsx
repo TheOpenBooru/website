@@ -1,26 +1,27 @@
 import { Posts, Types } from "js/booru";
 
+const SITE_URL = process.env.SITE_URL
 //pages/sitemap.xml.js
 function generateSiteMap(postIds) {
     return `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <url>
-       <loc>https://www.openbooru.org</loc>
+       <loc>${SITE_URL}</loc>
        <changefreq>monthly</changefreq>
        <priority>1.0</priority>
      </url>
      <url>
-       <loc>https://www.openbooru.org/info</loc>
+       <loc>${SITE_URL}/info</loc>
        <changefreq>monthly</changefreq>
        <priority>0.9</priority>
      </url>
      <url>
-       <loc>https://www.openbooru.org/auth/login</loc>
+       <loc>${SITE_URL}/auth/login</loc>
        <changefreq>monthly</changefreq>
        <priority>0.8</priority>
      </url>
      <url>
-       <loc>https://www.openbooru.org/auth/register</loc>
+       <loc>${SITE_URL}/auth/register</loc>
        <changefreq>monthly</changefreq>
        <priority>0.8</priority>
      </url>
@@ -28,7 +29,7 @@ function generateSiteMap(postIds) {
        .map((id: number) => {
          return `
        <url>
-            <loc>${`https://www.openbooru.org/post/${id.toFixed(0)}`}</loc>
+            <loc>${`${SITE_URL}/post/${id.toFixed(0)}`}</loc>
             <changefreq>daily</changefreq>
             <priority>0.6</priority>
        </url>
@@ -71,5 +72,5 @@ export async function getServerSideProps({ res }) {
 
 
 export default function SiteMap() {
-    // dad written by getServerSideProps
+    // data written by getServerSideProps
 };

@@ -24,6 +24,7 @@ const nextConfig = {
     env: {
         SITE_NAME: "Open Booru",
         SITE_DESCRIPTION: "The Open Booru, the free and open-source image board",
+        SITE_URL: "https://www.openbooru.org",
         API_URL: "https://api.openbooru.org",
         SERVER_API_KEY: null,
         READ_ONLY: false,
