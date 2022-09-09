@@ -15,8 +15,7 @@ const nextConfig = {
     },
     images: {
         domains: [
-            "safebooru.org",
-            "static1.e621.net",
+            "safebooru.org", "static1.e621.net",
             "slate", "localhost", "192.168.0.82", 
             "r34proxy.openbooru.workers.dev", "cdn.openbooru.org", "api.openbooru.org",
         ]
@@ -28,6 +27,7 @@ const nextConfig = {
         API_URL: "https://api.openbooru.org",
         SERVER_API_KEY: null,
         READ_ONLY: false,
+        PROMPT_AGE: false,
     },
     webpack(config, options) {
         return config
