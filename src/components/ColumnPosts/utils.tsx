@@ -1,18 +1,20 @@
 export function SplitPosts(posts: Array<object>, parts: number) {
     let buckets = Array.apply(null, Array(parts)).map(() => []);
-
-    posts.reduce((bucketIndex, post, i) => {
+    
+    function reduceInsertPost(bucketIndex, post) {
         let currentBucket = buckets[bucketIndex];
-        let nextBucket = buckets[(bucketIndex + 1) % parts]
+        let nextBucketIndex = (bucketIndex + 1) % parts
+        let nextBucket = buckets[nextBucketIndex]
+        
         if (getColumnHeight(currentBucket) > getColumnHeight(nextBucket)) {
-            nextBucket.push(post);
-            return (bucketIndex + 2) % parts
+            return reduceInsertPost(nextBucketIndex, post);
         } else {
             currentBucket.push(post);
-            return (bucketIndex + 1) % parts
+            return nextBucketIndex
         }
-    }, 0)
-
+    }
+    posts.reduce(reduceInsertPost, 0)
+    
     return buckets;
 }
 
@@ -24,9 +26,3 @@ function getColumnHeight(column: Array<object>) {
     },0)
 }
 
-function getShortestColumnIndex(columns) {
-    let heights = columns.map(getColumnHeight);
-    let MinHeight = Math.min(...heights);
-    let index = heights.indexOf(MinHeight);
-    return index;
-}
