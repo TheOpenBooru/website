@@ -29,6 +29,9 @@ export default function Item({ post, postCallback, parentRef, isTarget, priority
         }
     }
 
+    function roundHeight(height: number): number{
+        return Math.min(height, 900)
+    }
     return (
         <ImageContainer
             title={`Post: ${post.id}`}
@@ -43,8 +46,9 @@ export default function Item({ post, postCallback, parentRef, isTarget, priority
                     src={image.url}
                     alt=""
                     layout="responsive"
-                    height={image.height}
                     width={image.width}
+                    height={roundHeight(image.height)}
+                    objectFit="cover"
                     sizes="300px"
 
                     priority={priority}

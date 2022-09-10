@@ -5,7 +5,7 @@ export function SplitPosts(posts: Array<object>, parts: number) {
         let currentBucket = buckets[bucketIndex];
         let nextBucketIndex = (bucketIndex + 1) % parts
         let nextBucket = buckets[nextBucketIndex]
-        
+
         if (getColumnHeight(currentBucket) > getColumnHeight(nextBucket)) {
             return reduceInsertPost(nextBucketIndex, post);
         } else {
@@ -21,7 +21,7 @@ export function SplitPosts(posts: Array<object>, parts: number) {
 
 function getColumnHeight(column: Array<object>) {
     return column.reduce((total,post) => {
-        let height = (post.full.height / post.full.width)
+        let height = Math.min((post.full.height / post.full.width), 3)
         return total + height
     },0)
 }
