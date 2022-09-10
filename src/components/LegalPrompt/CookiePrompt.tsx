@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import MessageBox from "components/MessageBox";
 import useCookieConsent from "hooks/cookieHook";
+import Link from "next/link";
 
 export default function CookiePrompt() {
     let { accept, hasConsented } = useCookieConsent();
@@ -10,22 +11,38 @@ export default function CookiePrompt() {
         return null
     } else {
         return (
-            <MessageBox style={{backgroundColor: "rgba(0,0,0,0.995)"}}>
+            <OverlayConatiner>
                 <Container>
                     <AgeText>
-                        Do you wish to accept the use of cookies?
+                        Cookies are used for logins, settings and caching.
                         <br />
-                        These are required for the site to run.
+                        <br />
+                        Do you agree to the use of cookies? 
                     </AgeText>
                     <br/>
                     <ConfirmButton onClick={() => accept()}>
                         Accept Cookies
                     </ConfirmButton>
                 </Container>
-            </MessageBox>
+            </OverlayConatiner>
         )
     }
 }
+
+const OverlayConatiner = styled.div`
+    z-index: 5;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    left:0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .05s ease-out;
+
+    background-color: rgba(0,0,0,0.99);
+`
 
 const Container = styled.div`
     /* Position */

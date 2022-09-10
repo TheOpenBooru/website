@@ -49,7 +49,7 @@ const OptionSpan = styled.span`
 
     display: inline;
     position: relative;
-    margin-left: 1rem;
+    padding-left: .5rem;
     text-align: left;
     overflow: hidden;
     white-space: nowrap;
