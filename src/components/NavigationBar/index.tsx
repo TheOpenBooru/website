@@ -19,11 +19,9 @@ export default function NavigationBar() {
 function PostsSection({ text }) {
     return (
         <Link href="/">
-            <a>
-                <div className={styles.section}>
+            <a className={styles.section}>
                     <Icon src="/images/home.svg" alt="Home" />
                     {text ? <span className="navbar-button-text">Home</span> : null}
-                    </div>
             </a>
         </Link>
     )
@@ -33,11 +31,9 @@ function PostsSection({ text }) {
 function InfoSection({ text }) {
     return (
         <Link href={Redirects.info}>
-            <a>
-                <div className={styles.section}>
+            <a className={styles.section}>
                     <Icon src="/images/info.svg" alt="Info" />
                     {text ? <span className="navbar-button-text">Info</span> : null}
-                </div>
             </a>
         </Link>
     );

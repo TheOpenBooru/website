@@ -25,11 +25,9 @@ function AccountLoggedIn({ useText, username, logout }) {
 function AccountLogin({ useText }) {
     return (
         <Link href={Redirects.login}>
-            <a>
-                <div className={styles.section}>
-                    <Icon src="/images/profile.svg" alt="Login" />
-                    {useText ? <span className="navbar-button-text">Login</span> : null}
-                </div>
+            <a className={styles.section}>
+                <Icon src="/images/profile.svg" alt="Login" />
+                {useText ? <span className="navbar-button-text">Login</span> : null}
             </a>
         </Link>
     );
