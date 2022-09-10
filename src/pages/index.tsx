@@ -15,8 +15,12 @@ export const getServerSideProps: GetServerSideProps = async ({ query: params, re
 
     let query = BSL.decode(bsl)
     const PostQuery = Object.assign(new Types.PostQuery(), query)
-    let posts = await Posts.search(PostQuery, 0, 20);
-
+    let posts = await Promise.race([
+        Posts.search(PostQuery, 0, 20),
+        new Promise((resolve, reject) =>
+            setTimeout(() => resolve([]), 500)
+        )
+    ]);
     res.setHeader('Cache-Control', "max-age=60, public")
     return {
         props: { posts, bsl },
