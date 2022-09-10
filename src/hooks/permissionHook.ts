@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 import { Account } from "js/booru";
+import useSWR from "swr";
 
 export default function usePermission(permission: string): boolean {
-    let [allowed, setAllowed] = useState(false);
-    useEffect(() => {
-        (async () => {
-            let data = await Account.permissions();
-            if (!(permission in data)) {
-                throw new Error("Invalid Permission: " + permission)
-            }
-            
-            let hasPerm = data[permission]["has_permission"]
-            setAllowed(hasPerm);
-        })()
-    }, [permission])
-
-    return allowed
+    let { data, error } = useSWR("Permissions", Account.permissions)
+    
+    if (error || !data) {
+        return false 
+    } else {
+        if (!(permission in data)) {
+            throw new Error("Invalid Permission: " + permission)
+        }
+        
+        let allowed = data[permission]["has_permission"]
+        return allowed
+    }
 }
