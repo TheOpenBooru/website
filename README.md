@@ -1,7 +1,9 @@
 # ![](https://github.com/TheOpenBooru/website/blob/master/public/favicon.ico) Website
 
+The [OpenBooru](https://openbooru.org) frontend, written in Next.js.
 
-The OpenBooru website written in Next.js, located at [openbooru.org](https://openbooru.org).
+![image](https://user-images.githubusercontent.com/64110708/189491204-bd1dc6c3-4f88-4169-9e80-5a4ed809dcd9.png)
+
 
 ## Running
 
