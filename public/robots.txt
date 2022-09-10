@@ -1,6 +1,10 @@
 User-agent: *
-Allow: /posts
+Allow: /
 Allow: /post
+Allow: /posts
+Allow: /info
+Allow: /auth/login
+Allow: /auth/register
 Disallow: /error
 Disallow: /images
 Disallow: /js
