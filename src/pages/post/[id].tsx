@@ -29,7 +29,7 @@ type PostPageProps = {
 export default function PostPage({ post }:PostPageProps) {
     let HeadMedia =
         post.media_type === "video"
-        ? { video: post.full.url }
+        ? { video: post.full }
         : { image: post.full }
     
     return (
