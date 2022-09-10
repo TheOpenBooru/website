@@ -1,22 +1,31 @@
-export function SplitPosts(array, parts) {
+export function SplitPosts(posts: Array<object>, parts: number) {
     let buckets = Array.apply(null, Array(parts)).map(() => []);
-    array.forEach((v) => {
-        let smallestColumnIndex = getShortestColumnIndex(buckets);
-        buckets[smallestColumnIndex].push(v);
-    });
+
+    posts.reduce((bucketIndex, post, i) => {
+        let currentBucket = buckets[bucketIndex];
+        let nextBucket = buckets[(bucketIndex + 1) % parts]
+        if (getColumnHeight(currentBucket) > getColumnHeight(nextBucket)) {
+            nextBucket.push(post);
+            return (bucketIndex + 2) % parts
+        } else {
+            currentBucket.push(post);
+            return (bucketIndex + 1) % parts
+        }
+    }, 0)
+
     return buckets;
 }
 
 
-function getShortestColumnIndex(columns) {
-    let heights = new Array(columns.length).fill(0);
+function getColumnHeight(column: Array<object>) {
+    return column.reduce((total,post) => {
+        let height = (post.full.height / post.full.width)
+        return total + height
+    },0)
+}
 
-    columns.forEach((clmn, i) => {
-        let total = 0;
-        clmn.forEach((v) => (total += v.full.height / v.full.width));
-        heights[i] = total;
-    });
-    
+function getShortestColumnIndex(columns) {
+    let heights = columns.map(getColumnHeight);
     let MinHeight = Math.min(...heights);
     let index = heights.indexOf(MinHeight);
     return index;
