@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Allow: /post
+Allow: /post/
 Allow: /posts
 Allow: /info
 Allow: /auth/login
