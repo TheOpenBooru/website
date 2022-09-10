@@ -6,5 +6,7 @@ Allow: /info
 Allow: /auth/login
 Allow: /auth/register
 Disallow: /error
-Disallow: /images
-Disallow: /js
+Disallow: /500
+Disallow: /404
+Disallow: /images/
+Disallow: /js/
