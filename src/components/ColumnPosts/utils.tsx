@@ -1,4 +1,14 @@
-export function SplitPosts(posts: Array<object>, parts: number) {
+import { Types } from "js/booru";
+
+type Post = {
+    full: {
+        height: number,
+        width: number,
+    }
+}
+
+
+export function SplitPosts(posts: Array<Post>, parts: number) {
     let buckets = Array.apply(null, Array(parts)).map(() => []);
     
     function reduceInsertPost(bucketIndex, post) {
@@ -19,7 +29,7 @@ export function SplitPosts(posts: Array<object>, parts: number) {
 }
 
 
-function getColumnHeight(column: Array<object>) {
+function getColumnHeight(column: Array<Post>) {
     return column.reduce((total,post) => {
         let height = Math.min((post.full.height / post.full.width), 3)
         return total + height
