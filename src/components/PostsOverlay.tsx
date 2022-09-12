@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import styled from "styled-components";
 import MessageBox from "components/MessageBox";
-import SearchBox from "components/SearchBox";
-import CreatePost from "components/CreatePost";
-import ImportPost from "components/ImportPost";
 import Button from "components/Button";
 import usePermission from "hooks/permissionHook";
 import UploadImage from 'images/upload.svg'
 import CreateImage from 'images/plus.svg'
 import SearchImage from 'images/search.svg'
 
+const SearchBox = lazy(() => import("components/SearchBox"));
+const CreatePost = lazy(() => import("components/CreatePost"));
+const ImportPost = lazy(() => import("components/ImportPost"));
+
+
 export default function PostOverlay({ query, setQuery }) {
     let [mode, setMode] = useState(null);
-    let canCreatePost = usePermission("canCreatePosts")
+    let {has_permission: canCreatePost} = usePermission("canCreatePosts")
 
     const ModeCallback = (value) => () => {
         if (mode === value) {
@@ -39,23 +41,19 @@ export default function PostOverlay({ query, setQuery }) {
         }
     }
 
-    function MessageBoxOverlay() {
-        if (mode) {
-            return (
-                <MessageBox>
-                    <ModeContainer>
-                        <ModeSelector/>
-                    </ModeContainer>
-                </MessageBox>
-            )
-        } else {
-            return null
-        }
-    }
 
     return (
         <>
-            <MessageBoxOverlay />
+            <Suspense>
+                {mode
+                    ? <MessageBox>
+                        <ModeContainer>
+                            <ModeSelector/>
+                        </ModeContainer>
+                    </MessageBox>
+                    : null
+                }
+            </Suspense>
             <Container>
                 {canCreatePost
                     ? <Button src={UploadImage} alt="Import Post"  title="Import Post" onClick={ModeCallback("import")} />

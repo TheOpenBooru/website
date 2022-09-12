@@ -19,7 +19,7 @@ export default function HeadInfo({
         path = null as string,
 }): JSX.Element {
     let RenderedTitle = title ? `${SiteName} | ${title}` : SiteName
-    let RenderedDescription = description ? description + "\n" + SiteDescription : SiteDescription
+    let RenderedDescription = description ? SiteDescription + "\n" + description : SiteDescription
 
     // TODO: Add Article Tags https://ogp.me/#type_article
     return (
