@@ -15,8 +15,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query: params, re
 
     let query = BSL.decode(bsl)
     const PostQuery = Object.assign(new Types.PostQuery(), query)
+    
     let posts = await Promise.race([
-        Posts.search(PostQuery, 0, 20),
+        (async () => {
+            try {
+                return await Posts.search(PostQuery, 0, 20);
+            } catch {
+                return []
+            }
+        })(),
         new Promise((resolve, reject) =>
             setTimeout(() => resolve([]), 500)
         )
