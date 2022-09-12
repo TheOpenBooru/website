@@ -28,7 +28,7 @@ export default function FullscreenPosts({
     setIndex,
 }) {
     let router = useRouter();
-    let [initialUrl, setInitialUrl] = useState(router.asPath);
+    let [initialUrl, _] = useState(router.asPath);
 
     const post = posts[index];
     const prevPost = posts[index - 1];

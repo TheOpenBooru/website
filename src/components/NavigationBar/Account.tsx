@@ -3,7 +3,6 @@ import Link from "next/link"
 import Image from "next/image";
 import Redirects from "js/redirects";
 import useAccount from "hooks/accountHook";
-import NoSSR from "react-no-ssr"
 import styles from "./navbar.module.css";
 
 
