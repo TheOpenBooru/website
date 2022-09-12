@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useRouter } from "next/router";
 import Redirects from "js/redirects";
 import DesktopFullscreen from "./desktop";
-import useMobile from "hooks/mobileHook";
 
 FullscreenPosts.propTypes = {
     loading: PropTypes.bool,
@@ -27,8 +27,13 @@ export default function FullscreenPosts({
     index,
     setIndex,
 }) {
-    let isMobile = useMobile();
-    
+    let router = useRouter();
+    let [initialUrl, setInitialUrl] = useState(router.asPath);
+
+    const post = posts[index];
+    const prevPost = posts[index - 1];
+    const nextPost = posts[index + 1];
+
     useEffect(() => {
         const postsRemaining = posts.length - (index + 1);
         if (postsRemaining < 32) {
@@ -36,9 +41,15 @@ export default function FullscreenPosts({
         }
     }, [index, posts, morePostsCallback]);
     
-    const post = posts[index];
-    const prevPost = posts[index - 1];
-    const nextPost = posts[index + 1];
+    useEffect(() => {
+        let post = posts[index];
+        window.history.replaceState(null,null, Redirects.post(post.id))
+    }, [index, posts])
+    
+    function exit() {
+        window.history.replaceState(null, null, initialUrl);
+        exitCallback()
+    }
 
     function visitCallback() {
         let link = Redirects.post(post.id);
@@ -68,7 +79,7 @@ export default function FullscreenPosts({
         return (
             <DesktopFullscreen
                 {...{
-                    exitCallback,
+                    exitCallback: exit,
                     visitCallback,
                     nextPostCallback,
                     prevPostCallback,
