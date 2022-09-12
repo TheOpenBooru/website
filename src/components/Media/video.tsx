@@ -1,10 +1,13 @@
 import React from "react";
+import { Image } from "openbooru/lib/types";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-
-Video.propTypes = { video: PropTypes.object }
-export default function Video({ video }) {
+interface Props {
+    video: Image,
+    poster: Image,
+}
+export default function Video({ video, poster }:Props) {
     function updateVolume(e) {
         localStorage.setItem("volume", e.target.volume);
     }
@@ -20,6 +23,7 @@ export default function Video({ video }) {
             onVolumeChange={updateVolume}
             loop
             controls
+            poster={poster && poster.type === "image" ? poster?.url : null}
         >
             <source
                 src={video.url}

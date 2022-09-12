@@ -17,7 +17,7 @@ export default function Media({ type, full, preview, thumbnail = null, lazy = fa
         case "animation":
             return <Image full={full} preview={preview} thumbnail={thumbnail} lazy={lazy} />; // eslint-disable-line
         case "video":
-            return <Video video={full} />;
+            return <Video video={full} poster={thumbnail} />;
         default:
             return null;
     }
