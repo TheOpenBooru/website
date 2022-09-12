@@ -28,25 +28,28 @@ export default function FullscreenPosts({
     index,
     setIndex,
 }) {
+    let isMobile = useMobile();
+    
+    useEffect(() => {
+        const postsRemaining = posts.length - (index + 1);
+        if (postsRemaining < 32) {
+            morePostsCallback();
+        }
+    }, [index, posts, morePostsCallback]);
+    
     const post = posts[index];
-    if (post === undefined) return null;
     const prevPost = posts[index - 1];
     const nextPost = posts[index + 1];
-    
-    const postsRemaining = posts.length - (index + 1);
-    if (postsRemaining < 32) {
-        morePostsCallback();
-    }
 
     function visitCallback() {
         let link = Redirects.post(post.id);
         window.location.href = link;
     }
-
+    
     function updateIndex(index) {
         setIndex(index);
     }
-
+    
     function nextPostCallback() {
         if (index !== posts.length - 1) {
             updateIndex(index + 1)
@@ -58,20 +61,24 @@ export default function FullscreenPosts({
             updateIndex(index - 1)
         }
     }
-
-    return (
-        <DesktopFullscreen
-            {...{
-                exitCallback,
-                visitCallback,
-                nextPostCallback,
-                prevPostCallback,
-                prevPost,
-                post,
-                nextPost,
-                loading,
-                finished,
-            }}
-        />
-    );
+    
+    if (post === undefined) {
+        return null;
+    } else {
+        return (
+            <DesktopFullscreen
+                {...{
+                    exitCallback,
+                    visitCallback,
+                    nextPostCallback,
+                    prevPostCallback,
+                    prevPost,
+                    post,
+                    nextPost,
+                    loading,
+                    finished,
+                }}
+            />
+        );
+    }
 }
