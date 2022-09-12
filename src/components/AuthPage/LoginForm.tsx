@@ -12,11 +12,6 @@ LoginForm.propTypes = {
 }
 export default function LoginForm({errorHandler,showText}) {
     const permission = usePermission("canLogin");
-    useEffect(() => {
-        if (!permission.has_permission) {
-            Redirects.goto("/")
-        }
-    }, [permission])
 
     function handleInput(username, password) {
         if (username === "" || password === "") {
@@ -53,18 +48,31 @@ export default function LoginForm({errorHandler,showText}) {
         HandleLogin(username,password)
     }
 
-    return (
-        <form onSubmit={FormCallback}>
-            <InputsContainer>
-                <InputText type="username" placeholder="Username" />
-                <InputText type="password" placeholder="Password" />
-            </InputsContainer>
-            <LoginButton type="submit" value="Login"/>
-        </form>
-    )
+    if (!permission.has_permission) {
+        return <Container>Login Disabled</Container>
+    } else {
+        return (
+            <Container>
+                <form onSubmit={FormCallback}>
+                    <InputsContainer>
+                        <InputText type="username" placeholder="Username" />
+                        <InputText type="password" placeholder="Password" />
+                    </InputsContainer>
+                    <LoginButton type="submit" value="Login"/>
+                </form>
+            </Container>
+        )
+    }
 }
 
 
+const Container = styled.div`
+    display: flex;
+    flex-flow: nowrap column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+`;
 const InputsContainer = styled.div`
     display:flex;
     flex-flow: nowrap column;

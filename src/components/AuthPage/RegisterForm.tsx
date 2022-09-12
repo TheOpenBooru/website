@@ -14,12 +14,6 @@ RegisterForm.propTypes = {
 export default function RegisterForm({ errorHandler, showText }) {
     const permission = usePermission("canRegister");
 
-    useEffect(() => {
-        if (!permission.has_permission) {
-            Redirects.goto("/")
-        }
-    }, [permission])
-
     let usernameRef = useRef();
     let passwordRef = useRef();
     let confirmPasswordRef = useRef();
@@ -63,24 +57,33 @@ export default function RegisterForm({ errorHandler, showText }) {
         }
     }
 
-    return (
-        <Container>
-            <InputsContainer>
-                <InputText type="username" placeholder="Username" ref={usernameRef} />
-                <InputText type="password" placeholder="Password" ref={passwordRef} />
-                <InputText
-                    type="password"
-                    placeholder="Confirm Password"
-                    ref={confirmPasswordRef}
-                />
-            </InputsContainer>
-            {permission.captcha
-                ? <Captcha setCaptchaToken={setCaptchaToken} />
-                : null
-            }
-            <RegisterButton onClick={HandleRegister} type="submit" value="Register" />
-        </Container>
-    );
+    if (!permission.has_permission) {
+        return (
+            <Container>
+                Account Registration Disabled
+            </Container>
+        )
+    } else {
+        return (
+            <Container>
+                <InputsContainer>
+                    <InputText type="username" placeholder="Username" ref={usernameRef} />
+                    <InputText type="password" placeholder="Password" ref={passwordRef} />
+                    <InputText
+                        type="password"
+                        placeholder="Confirm Password"
+                        ref={confirmPasswordRef}
+                    />
+                </InputsContainer>
+                {permission.captcha
+                    ? <Captcha setCaptchaToken={setCaptchaToken} />
+                    : null
+                }
+                <RegisterButton onClick={HandleRegister} type="submit" value="Register" />
+            </Container>
+        );
+        
+    }
 }
 
 const Container = styled.div`

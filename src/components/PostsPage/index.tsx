@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import useSearch from "hooks/searchHook";
 import useMobile from "hooks/mobileHook";
-import Overlay from "components/PostsOverlay";
+import Overlay from "./Overlay";
 import FullscreenPosts from "components/FullscreenPosts";
-import LayoutSelector from "components/LayoutSelector";
+import LayoutSelector from "./LayoutSelector";
 import ColumnPosts from "components/ColumnPosts";
 import Redirects from "js/redirects";
 

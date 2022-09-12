@@ -13,7 +13,8 @@ export default function usePermission(permission: string): Permission {
     if (error || !data) {
         return { has_permission: false, captcha: false, ratelimt: null} 
     } else if (!(permission in data)) {
-        throw new Error("Invalid Permission: " + permission)
+        console.warn("Invalid Permission: " + permission)
+        return { has_permission: true, captcha: true, ratelimt: null} 
     } else {
         return data[permission];
     }
