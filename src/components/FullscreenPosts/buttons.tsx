@@ -1,38 +1,30 @@
 import React from "react";
 import styled from "styled-components";
-import FutureImage from "next/image";
 import LoadingIcon from "components/LoadingIcon";
 import Settings from "js/settings";
 
 
 export function LeftButton({ callback, post }) {
-    if (!post) {
-        <ButtonContainer />
-    } else {
-        let img = GenerateImageUrl(post, "/images/left-arrow.svg");
-        return (
-            <ButtonContainer onClick={callback}>
-                <Icon src={img} alt="" />
-            </ButtonContainer>
-        );
-    }
+    let img = GenerateImageUrl(post, "/images/left-arrow.svg");
+
+    return (
+        <ButtonContainer onClick={callback}>
+            <Icon src={img} alt="" />
+        </ButtonContainer>
+    );
 }
 
 export function RightButton({ callback, post, loading }) {
-    if (!post) {
-        <ButtonContainer/>
-    } else {
-        let img = GenerateImageUrl(post, "/images/right-arrow.svg");
-        return (
-            <ButtonContainer onClick={callback}>
-                {!post && loading
-                    ? <LoadingIcon/>
-                    : <Icon src={img} alt="" />
-                }
-            </ButtonContainer>
-        );
-    }
+    let img = GenerateImageUrl(post, "/images/right-arrow.svg");
 
+    return (
+        <ButtonContainer onClick={callback}>
+            {!post && loading
+                ? <LoadingIcon/>
+                : <Icon src={img} alt="" />
+            }
+        </ButtonContainer>
+    );
 }
 
 
