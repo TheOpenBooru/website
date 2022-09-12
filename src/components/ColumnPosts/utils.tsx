@@ -1,11 +1,4 @@
-import { Types } from "js/booru";
-
-type Post = {
-    full: {
-        height: number,
-        width: number,
-    }
-}
+import { Post } from "openbooru/lib/types";
 
 
 export function SplitPosts(posts: Array<Post>, parts: number) {
@@ -15,7 +8,7 @@ export function SplitPosts(posts: Array<Post>, parts: number) {
         let currentBucket = buckets[bucketIndex];
         let nextBucketIndex = (bucketIndex + 1) % parts
         let nextBucket = buckets[nextBucketIndex]
-
+        
         if (getColumnHeight(currentBucket) > getColumnHeight(nextBucket)) {
             return reduceInsertPost(nextBucketIndex, post);
         } else {
@@ -24,14 +17,14 @@ export function SplitPosts(posts: Array<Post>, parts: number) {
         }
     }
     posts.reduce(reduceInsertPost, 0)
-    
+
     return buckets;
 }
 
 
 function getColumnHeight(column: Array<Post>) {
     return column.reduce((total,post) => {
-        let height = Math.min((post.full.height / post.full.width), 3)
+        let height = Math.min((post.full.height / post.full.width), 2)
         return total + height
     },0)
 }
