@@ -56,7 +56,7 @@ export default React.memo(function Item({ index, post, postCallback, isTarget, p
                     width={image.width}
                     height={adjustedHeight}
                     objectFit="cover"
-                    sizes="30rem"
+                    sizes="300px"
                     
                     lazyRoot={parentRef}
                     priority={priority}

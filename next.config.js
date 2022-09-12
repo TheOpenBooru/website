@@ -24,6 +24,7 @@ const nextConfig = {
             "cdn.openbooru.org",
             "api.openbooru.org",
         ],
+        imageSizes: [192, 300],
     },
     env: {
         SITE_NAME: "Open Booru",
