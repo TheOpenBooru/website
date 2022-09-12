@@ -73,5 +73,5 @@ const ErrorText = styled.div`
     text-align: center;
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
-    /* font-weight: bolder; */
+    font-weight: bolder;
 `;
