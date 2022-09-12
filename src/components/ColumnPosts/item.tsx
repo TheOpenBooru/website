@@ -15,9 +15,6 @@ type ItemProps = {
 }
 export default React.memo(function Item({ index, post, postCallback, isTarget, parentRef, priority }: ItemProps) {
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
-    if (isTarget) {
-        console.log(post.id)
-    }
     let preview_type = post.preview?.type
     let image = preview_type !== "video"
         ? post.preview

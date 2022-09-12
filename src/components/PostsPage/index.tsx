@@ -60,7 +60,6 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
             </>
         )
     } else if (useFullscreen) {
-        console.log("Fullscreen")
         return (
             <FullscreenPosts
                 loading={search.loading}
