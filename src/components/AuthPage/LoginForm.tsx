@@ -53,13 +53,13 @@ export default function LoginForm({errorHandler,showText}) {
     } else {
         return (
             <Container>
-                <form onSubmit={FormCallback}>
+                <Form onSubmit={FormCallback}>
                     <InputsContainer>
                         <InputText type="username" placeholder="Username" />
                         <InputText type="password" placeholder="Password" />
                     </InputsContainer>
                     <LoginButton type="submit" value="Login"/>
-                </form>
+                </Form>
             </Container>
         )
     }
@@ -67,13 +67,22 @@ export default function LoginForm({errorHandler,showText}) {
 
 
 const Container = styled.div`
+    width:100%;
+    
     display: flex;
     flex-flow: nowrap column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
 `;
+
+const Form = styled.form`
+    width:100%;
+`
+
 const InputsContainer = styled.div`
+    width:100%;
+
     display:flex;
     flex-flow: nowrap column;
     justify-content: center;
