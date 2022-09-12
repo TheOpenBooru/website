@@ -43,32 +43,28 @@ export default function FullscreenPosts({
     
     useEffect(() => {
         let post = posts[index];
-        window.history.replaceState(null,null, Redirects.post(post.id))
+        window.history.replaceState(null, null, Redirects.post(post.id));
     }, [index, posts])
     
     function exit() {
         window.history.replaceState(null, null, initialUrl);
-        exitCallback()
+        exitCallback();
     }
-
-    function visitCallback() {
+    function visit() {
         let link = Redirects.post(post.id);
         window.location.href = link;
     }
-    
-    function updateIndex(index) {
-        setIndex(index);
-    }
+
     
     function nextPostCallback() {
         if (index !== posts.length - 1) {
-            updateIndex(index + 1)
+            setIndex(index + 1)
         }
     }
     
     function prevPostCallback() {
         if (index > 0) {
-            updateIndex(index - 1)
+            setIndex(index - 1)
         }
     }
     
@@ -79,8 +75,8 @@ export default function FullscreenPosts({
         return (
             <DesktopFullscreen
                 {...{
+                    visitCallback: visit,
                     exitCallback: exit,
-                    visitCallback,
                     nextPostCallback,
                     prevPostCallback,
                     prevPost,
