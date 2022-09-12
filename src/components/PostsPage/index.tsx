@@ -50,7 +50,7 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
     }, [search.query])
     
     const posts = search.posts.length == 0 ? initialPosts : search.posts
-    if (posts.length === 0) {
+    if (posts.length === 0 && search.finished) {
         return (
             <>
                 <Overlay query={search.query} setQuery={setQuery} />
