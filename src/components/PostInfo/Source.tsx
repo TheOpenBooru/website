@@ -5,13 +5,11 @@ export default function SourceEntry({ source }) {
     try {
         let url = new URL(source);
         return (
-            <Container>
-                <Span title={url.hostname}>
-                    {source}
-                    <StyledLink href={source}>
-                        <Icon src="/images/link.svg" height={10} width={10} />
-                    </StyledLink>
-                </Span>
+            <Container title={url.hostname}>
+                <Text>{source}</Text>
+                <StyledLink href={source}>
+                    <Icon src="/images/link.svg" height={10} width={10} />
+                </StyledLink>
             </Container>
         );
     } catch {
@@ -21,15 +19,18 @@ export default function SourceEntry({ source }) {
 
 const Container = styled.div`
     min-height: 1.2rem;
+    display: flex;
+    max-width:90vw;
 `
 
-const Span = styled.span`
+const Text = styled.span`
+    max-width: 80vw;
     color: #0c181d;
     display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-`;
+`
 
 const Icon = styled.img`
     margin-top: 0.2rem;

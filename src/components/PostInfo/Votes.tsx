@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Image from "next/image";
+import FutureImage from "next/future/image";
 import { Account, Posts } from "js/booru";
 
 Votes.propTypes = {
@@ -56,8 +57,8 @@ export default function Votes({ post }) {
                 <VoteIcon
                     src={upvoteUrl}
                     alt="Upvote"
-                    height="50"
-                    width="50"
+                    width={20}
+                    height={20}
                     priority={true}
                     onClick={upvoteCallback}
                     style={{ cursor: Account.Store.loggedIn ? "pointer" : null }}
@@ -68,8 +69,8 @@ export default function Votes({ post }) {
                 <VoteIcon
                     src={downvoteUrl}
                     alt="Downvote"
-                    height="50"
-                    width="50"
+                    width={20}
+                    height={20}
                     priority={true}
                     onClick={downvoteCallback}
                     style={{ cursor: Account.Store.loggedIn ? "pointer" : null }}
@@ -97,7 +98,7 @@ const VoteContainer = styled.div`
     align-items: center;
 `;
 
-const VoteIcon = styled(Image)`
-    height: 3rem;
-    width: 3rem;
+const VoteIcon = styled(FutureImage)`
+    height: 4rem;
+    width: 4rem;
 `;

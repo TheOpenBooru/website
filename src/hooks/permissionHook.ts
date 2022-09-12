@@ -2,17 +2,19 @@ import { useState, useEffect } from "react";
 import { Account } from "js/booru";
 import useSWR from "swr";
 
-export default function usePermission(permission: string): boolean {
+type Permission = {
+    has_permission: boolean,
+    captcha: boolean,
+    ratelimt: string|null
+}
+export default function usePermission(permission: string): Permission {
     let { data, error } = useSWR("Permissions", Account.permissions)
     
     if (error || !data) {
-        return false 
+        return { has_permission: false, captcha: false, ratelimt: null} 
+    } else if (!(permission in data)) {
+        throw new Error("Invalid Permission: " + permission)
     } else {
-        if (!(permission in data)) {
-            throw new Error("Invalid Permission: " + permission)
-        }
-        
-        let allowed = data[permission]["has_permission"]
-        return allowed
+        return data[permission];
     }
 }

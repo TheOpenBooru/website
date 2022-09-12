@@ -20,8 +20,13 @@ export default function Info({ post }) {
 }
 
 const Container = styled.div`
-    width: 100%;
-    height: 100%;
+    height: fit-content;
+    width: fit-content;
     padding: 0.5rem;
     white-space: nowrap;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;

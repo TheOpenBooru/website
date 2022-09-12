@@ -1,15 +1,23 @@
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Redirects from "js/redirects";
 import { Account } from "js/booru";
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import usePermission from "hooks/permissionHook";
 
 LoginForm.propTypes = {
     errorHandler:PropTypes.func,
     showText:PropTypes.func,
 }
 export default function LoginForm({errorHandler,showText}) {
+    const permission = usePermission("canLogin");
+    useEffect(() => {
+        if (!permission.has_permission) {
+            Redirects.goto("/")
+        }
+    }, [permission])
+
     function handleInput(username, password) {
         if (username === "" || password === "") {
             if (username === "" && password === "") {
