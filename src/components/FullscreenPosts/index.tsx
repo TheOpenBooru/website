@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Redirects from "js/redirects";
-import MobileFullscreen from "./mobile";
 import DesktopFullscreen from "./desktop";
 import useMobile from "hooks/mobileHook";
 
@@ -63,6 +62,7 @@ export default function FullscreenPosts({
     }
     
     if (post === undefined) {
+        debugger;
         return null;
     } else {
         return (

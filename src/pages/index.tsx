@@ -6,7 +6,6 @@ import GridPosts from "components/GridPosts";
 import ColumnPosts from "components/ColumnPosts";
 import PostsPage from "components/PostsPage";
 import HeadInfo from "components/HeadInfo";
-import LayoutSelector from "components/LayoutSelector";
 
 
 export const getServerSideProps: GetServerSideProps = async ({ query: params, res }) => {
