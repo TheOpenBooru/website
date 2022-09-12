@@ -1,4 +1,5 @@
 import Settings from "js/settings";
+import { Account } from "js/booru";
 import { Post, PostQuery } from "js/booru/types";
 
 export default async function search(search_query: PostQuery, index = 0, limit = 100): Promise<Array<Post>> {
@@ -25,8 +26,12 @@ export default async function search(search_query: PostQuery, index = 0, limit =
     params.set("index", index.toString());
     params.set("limit", limit.toString());
     
+    let headers = {}
+    if (Account.Store.token) {
+        headers["Authorization"] = "Bearer " + Account.Store.token
+    }
     let url = Settings.apiUrl + "/posts/search?" + params.toString();
-    let r = await fetch(url);
+    let r = await fetch(url, { headers });
     if (r.ok) {
         return await r.json();
     } else {
