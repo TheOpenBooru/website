@@ -43,7 +43,9 @@ export default function FullscreenPosts({
     
     useEffect(() => {
         let post = posts[index];
-        window.history.replaceState(null, null, Redirects.post(post.id));
+        if (post) {
+            window.history.replaceState(null, null, Redirects.post(post.id));
+        }
     }, [index, posts])
     
     function exit() {
