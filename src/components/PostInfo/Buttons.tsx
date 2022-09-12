@@ -1,22 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import Image from "next/image";
 import PropTypes from "prop-types";
-import useMobile from "hooks/mobileHook";
+import useWidth from "hooks/widthHook";
 import usePermission from "hooks/permissionHook";
 import { Account } from "js/booru";
-import Image from "next/image";
 
 Buttons.propTypes = {
     editCallback: PropTypes.func,
     deleteCallback: PropTypes.func,
 };
 export default function Buttons({ editCallback, deleteCallback }) {
-    let isMobile = useMobile();
-    let canEdit = usePermission("canEditPosts");
-    let canDelete = usePermission("canDeletePosts");
+    let width = useWidth();
+    let {has_permission: canEdit} = usePermission("canEditPosts");
+    let { has_permission: canDelete} = usePermission("canDeletePosts");
     return (
         <ButtonsContainer>
-            {canEdit && isMobile === false ? (
+            {canEdit && (width < 1100) ? (
                 <Button onClick={editCallback}>
                     <ImageContainer>
                         <Image src="/images/edit.svg" alt="" layout="fill"/>

@@ -4,8 +4,10 @@ import Account from "js/booru/account";
 
 export const PermissionError = new Error("You don't have the Permissions to do this")
 
-
-export default async function create(file, captcha_response = null) {
+type Post = {
+    id: number
+}
+export default async function create(file, captcha_response = null): Promise<Post> {
     let formData = new FormData();
     formData.append("image", file);
     return new Promise((resolve, reject) => {
@@ -23,7 +25,8 @@ export default async function create(file, captcha_response = null) {
                 if (xhr.status === 401) {
                     reject(this.PermissionError);
                 } else {
-                    reject(new Error("Generic Error"));
+                    let error = new Error(xhr.response)
+                    reject(error);
                 }
             }
         };

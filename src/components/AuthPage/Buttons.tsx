@@ -1,26 +1,28 @@
 import React from "react";
+import Link from "next/link";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
 Buttons.propTypes = {
-    mode: PropTypes.string,
-    setMode: PropTypes.func,
+    currentMode: PropTypes.string,
 };
-export default function Buttons({ mode, setMode }) {
+export default function Buttons({ currentMode }) {
     return (
         <Container>
-            <LeftButton
-                onClick={() => setMode("login")}
-                style={{ background: mode === "login" ? null : "var(--BACKGROUND-5)"}}
-                type="submit"
-                value="Login"
-            />
-            <RightButton
-                onClick={() => setMode("register")}
-                style={{background: mode === "register" ? null : "var(--BACKGROUND-5)"}}
-                type="submit"
-                value="Register"
-            />
+            <Link href="/auth/login" passHref>
+                <LeftButton
+                    style={{ background: currentMode === "login" ? null : "var(--BACKGROUND-5)"}}
+                >
+                        Login
+                </LeftButton>
+            </Link>
+            <Link href="/auth/register" passHref>
+                <RightButton
+                    style={{background: currentMode === "register" ? null : "var(--BACKGROUND-5)"}}
+                >
+                    Register
+                </RightButton>
+            </Link>
         </Container>
     );
 }
@@ -33,7 +35,7 @@ const Container = styled.div`
     margin-bottom: 1rem;
 `;
 
-const Button = styled.input`
+const Button = styled.a`
     cursor: pointer;
     user-select: none;
 
@@ -57,6 +59,9 @@ const Button = styled.input`
     &:hover {
         background: var(--BACKGROUND-4-HOVER) !important;
     }
+    
+    text-decoration: none !important;
+    color: black !important;
 `;
 
 const LeftButton = styled(Button)`

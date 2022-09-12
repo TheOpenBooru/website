@@ -6,7 +6,6 @@ import GridPosts from "components/GridPosts";
 import ColumnPosts from "components/ColumnPosts";
 import PostsPage from "components/PostsPage";
 import HeadInfo from "components/HeadInfo";
-import LayoutSelector from "components/LayoutSelector";
 
 
 export const getServerSideProps: GetServerSideProps = async ({ query: params, res }) => {
@@ -15,8 +14,19 @@ export const getServerSideProps: GetServerSideProps = async ({ query: params, re
 
     let query = BSL.decode(bsl)
     const PostQuery = Object.assign(new Types.PostQuery(), query)
-    let posts = await Posts.search(PostQuery, 0, 20);
-
+    
+    let posts = await Promise.race([
+        (async () => {
+            try {
+                return await Posts.search(PostQuery, 0, 20);
+            } catch {
+                return []
+            }
+        })(),
+        new Promise((resolve, reject) =>
+            setTimeout(() => resolve([]), 500)
+        )
+    ]);
     res.setHeader('Cache-Control', "max-age=60, public")
     return {
         props: { posts, bsl },

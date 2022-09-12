@@ -1,7 +1,11 @@
 import React from "react"
 import styled from "styled-components";
 
-export default function SortSelect({ sort, setSort }) {
+interface Props{
+    sort: string,
+    setSort: Function,
+}
+export default React.memo(function SortSelect({ sort, setSort }: Props) {
     function setSortCallback(e) {
         setSort(e.target.value);
     }
@@ -13,7 +17,7 @@ export default function SortSelect({ sort, setSort }) {
             <option value="downvotes">Downvotes</option>
         </Selector>
     )
-}
+});
 
 
 const Selector = styled.select`

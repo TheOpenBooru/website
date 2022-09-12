@@ -19,7 +19,8 @@ export default function useSearch() {
     let router = useRouter();
 
 
-    async function extend(count = 100) {
+    async function extend() {
+        const count = 100;
         if (lock || finished || query === null) return;
         setLock(true);
         

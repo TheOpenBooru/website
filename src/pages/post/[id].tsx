@@ -5,7 +5,7 @@ import HeadInfo from "components/HeadInfo";
 import PostMedia from "components/PostMedia";
 import PostInfo from "components/PostInfo";
 import { Posts } from "js/booru";
-import { Types } from "openbooru";
+import { Post } from "openbooru/lib/types";
 
 
 export const getServerSideProps: GetServerSideProps = async ({ query, res}) => {
@@ -24,19 +24,19 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res}) => {
 }
 
 type PostPageProps = {
-    post: Types.Post
+    post: Post
 }
 export default function PostPage({ post }:PostPageProps) {
     let HeadMedia =
         post.media_type === "video"
-        ? { video: post.full.url }
+        ? { video: post.full }
         : { image: post.full }
     
     return (
         <>
             <HeadInfo
-                title={`Post ${post.id} | ${post.tags.join(" ")}`}
-                description={`Post ${post.id}, ${post.tags.join(" ")}`}
+                title={`Post ${post.id}`}
+                description={`Post ${post.id}` + "\n" + post.tags.join(" ")}
                 path={`/post/${post.id}`}
                 keywords={post.tags}
                 {...HeadMedia}

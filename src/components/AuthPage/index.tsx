@@ -2,23 +2,16 @@ import React, { useState, useRef, useEffect } from "react";
 import { GetServerSideProps } from "next";
 import styled from "styled-components";
 import MessageBox from "components/MessageBox";
-import LoginForm from "components/LoginForm";
-import RegisterForm from "components/RegisterForm";
-import Buttons from "components/AuthButtons";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+import Buttons from "./Buttons";
 import { Account } from "js/booru";
 
 function compareError(err, other) {
     return err.message === other.message;
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
-    let { mode } = query
-    return { props: { initial_mode: mode } }
-}
-
-export default function Login({ initial_mode }) {
-    let [mode, setMode] = useState(initial_mode);
-
+export default function AuthPage({ mode }) {
     let errorRef = useRef(null);
     function showText(text) {
         errorRef.current.innerText = text;
@@ -47,7 +40,7 @@ export default function Login({ initial_mode }) {
     return (
         <MessageBox>
             <Container>
-                <Buttons mode={mode} setMode={setMode} />
+                <Buttons currentMode={mode} />
                 <ErrorText ref={errorRef} />
                 {mode === "login" ? (
                     <LoginForm errorHandler={handleError} showText={showText} />
@@ -73,5 +66,5 @@ const ErrorText = styled.div`
     text-align: center;
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
-    /* font-weight: bolder; */
+    font-weight: bolder;
 `;

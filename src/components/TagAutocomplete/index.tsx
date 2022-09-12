@@ -4,8 +4,11 @@ import Tag from "./Tag";
 import { Tags } from "js/booru";
 import useSWR from "swr";
 
-
-export default function AutoComplete({input,addTagCallback}) {
+interface Props{
+    input: string,
+    addTagCallback: Function,
+}
+export default React.memo(function AutoComplete({ input, addTagCallback }: Props) {
     let { data: tags } = useSWR(
         `autocomplete-${input}`,
         async () => await Tags.autocomplete(input, 8),
@@ -26,7 +29,7 @@ export default function AutoComplete({input,addTagCallback}) {
             </Container>
         );
     }
-}
+})
 
 
 const Container = styled.div`

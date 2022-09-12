@@ -56,7 +56,7 @@ export default function PostEdit({ post }:PostEditProps) {
 
 const Container = styled.div`
     height: 100%;
-    width: 80rem;
+    width: 50rem;
     padding: 1rem;
 
     display: flex;

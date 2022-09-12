@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import useSearch from "hooks/searchHook";
 import useMobile from "hooks/mobileHook";
-import Overlay from "components/PostsOverlay";
+import Overlay from "./Overlay";
 import FullscreenPosts from "components/FullscreenPosts";
-import LayoutSelector from "components/LayoutSelector";
+import LayoutSelector from "./LayoutSelector";
 import ColumnPosts from "components/ColumnPosts";
 import Redirects from "js/redirects";
 
@@ -17,33 +17,40 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
     let isMobile = useMobile();
     let [index, setIndex] = useState(0);
     let [useFullscreen, setUseFullscreen] = useState(false);
-    
 
 
-    function setQuery(query) {
+    const setQuery = React.useCallback((query) => {
         setIndex(0);
         setUseFullscreen(false)
         search.updateQuery(query)
-    }
+    },[search]);
     
-    const MorePostsCallback = async () => {
-        try {await search.extend()} catch (e) {}
-    }
-    const RedirectCallback = (id) => () => {
+    const MorePostsCallback = React.useCallback(async () => {
+        try {
+            await search.extend()
+        } catch (e) {
+            
+        }
+    }, [search]);
+    
+    const RedirectCallback = React.useCallback(({id}) => () => {
         router.push(Redirects.post(id))
-    }
-    const FullscreenCallback = (id) => () => {
-        let index = search.posts.findIndex((post) => post.id === id);
+    }, [router]);
+
+    const FullscreenCallback = React.useCallback(({index}) => () => {
         setIndex(index);
         setUseFullscreen(true);
-    }
+    }, [])
 
     useEffect(() => {
-        setUseFullscreen(false);
+        async () => {
+            await search.extend();
+            setUseFullscreen(false);
+        }
     }, [search.query])
     
     const posts = search.posts.length == 0 ? initialPosts : search.posts
-    if (posts.length === 0) {
+    if (posts.length === 0 && search.finished) {
         return (
             <>
                 <Overlay query={search.query} setQuery={setQuery} />
@@ -53,6 +60,7 @@ export default function Posts({ LayoutElement, currentLayout, setLayout, initial
             </>
         )
     } else if (useFullscreen) {
+        console.log("Fullscreen")
         return (
             <FullscreenPosts
                 loading={search.loading}

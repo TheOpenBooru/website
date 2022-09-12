@@ -1,15 +1,18 @@
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Redirects from "js/redirects";
 import { Account } from "js/booru";
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import usePermission from "hooks/permissionHook";
 
 LoginForm.propTypes = {
     errorHandler:PropTypes.func,
     showText:PropTypes.func,
 }
 export default function LoginForm({errorHandler,showText}) {
+    const permission = usePermission("canLogin");
+
     function handleInput(username, password) {
         if (username === "" || password === "") {
             if (username === "" && password === "") {
@@ -45,19 +48,41 @@ export default function LoginForm({errorHandler,showText}) {
         HandleLogin(username,password)
     }
 
-    return (
-        <form onSubmit={FormCallback}>
-            <InputsContainer>
-                <InputText type="username" placeholder="Username" />
-                <InputText type="password" placeholder="Password" />
-            </InputsContainer>
-            <LoginButton type="submit" value="Login"/>
-        </form>
-    )
+    if (!permission.has_permission) {
+        return <Container>Login Disabled</Container>
+    } else {
+        return (
+            <Container>
+                <Form onSubmit={FormCallback}>
+                    <InputsContainer>
+                        <InputText type="username" placeholder="Username" />
+                        <InputText type="password" placeholder="Password" />
+                    </InputsContainer>
+                    <LoginButton type="submit" value="Login"/>
+                </Form>
+            </Container>
+        )
+    }
 }
 
 
+const Container = styled.div`
+    width:100%;
+    
+    display: flex;
+    flex-flow: nowrap column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+`;
+
+const Form = styled.form`
+    width:100%;
+`
+
 const InputsContainer = styled.div`
+    width:100%;
+
     display:flex;
     flex-flow: nowrap column;
     justify-content: center;

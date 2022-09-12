@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Redirects from "js/redirects";
-import MobileFullscreen from "./mobile";
 import DesktopFullscreen from "./desktop";
 import useMobile from "hooks/mobileHook";
 
@@ -28,25 +27,28 @@ export default function FullscreenPosts({
     index,
     setIndex,
 }) {
+    let isMobile = useMobile();
+    
+    useEffect(() => {
+        const postsRemaining = posts.length - (index + 1);
+        if (postsRemaining < 32) {
+            morePostsCallback();
+        }
+    }, [index, posts, morePostsCallback]);
+    
     const post = posts[index];
-    if (post === undefined) return null;
     const prevPost = posts[index - 1];
     const nextPost = posts[index + 1];
-    
-    const postsRemaining = posts.length - (index + 1);
-    if (postsRemaining < 32) {
-        morePostsCallback();
-    }
 
     function visitCallback() {
         let link = Redirects.post(post.id);
         window.location.href = link;
     }
-
+    
     function updateIndex(index) {
         setIndex(index);
     }
-
+    
     function nextPostCallback() {
         if (index !== posts.length - 1) {
             updateIndex(index + 1)
@@ -58,20 +60,25 @@ export default function FullscreenPosts({
             updateIndex(index - 1)
         }
     }
-
-    return (
-        <DesktopFullscreen
-            {...{
-                exitCallback,
-                visitCallback,
-                nextPostCallback,
-                prevPostCallback,
-                prevPost,
-                post,
-                nextPost,
-                loading,
-                finished,
-            }}
-        />
-    );
+    
+    if (post === undefined) {
+        debugger;
+        return null;
+    } else {
+        return (
+            <DesktopFullscreen
+                {...{
+                    exitCallback,
+                    visitCallback,
+                    nextPostCallback,
+                    prevPostCallback,
+                    prevPost,
+                    post,
+                    nextPost,
+                    loading,
+                    finished,
+                }}
+            />
+        );
+    }
 }

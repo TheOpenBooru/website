@@ -55,7 +55,7 @@ export default function GridPosts({ posts, morePostsCallback, loading, postCallb
 }
 
 const Container = styled.div`
-    --IMAGE-SIZE: 12rem;
+    --IMAGE-SIZE: 192px;
 
     /* Position */
     max-width: 100vw;

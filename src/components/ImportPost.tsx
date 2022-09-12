@@ -1,12 +1,14 @@
 import React, { useRef, useState } from "react";
 import { Errors, Posts } from "js/booru";
 import styled from "styled-components";
+import usePermission from "hooks/permissionHook";
 import Captcha from "components/Captcha";
 import LoadingIcon from "components/LoadingIcon";
 import Redirects from "js/redirects";
 
 export default function ImportPost() {
     let [captchaResponse, setCaptchaResponse] = useState(null);
+    let {captcha: captchaRequired} = usePermission("canCreatePosts")
     let [loading, setLoading] = useState(false);
     let urlRef = useRef()
 
@@ -21,7 +23,7 @@ export default function ImportPost() {
 
         // @ts-ignore
         let url = urlRef.current.value
-        if (captchaResponse === null) {
+        if (captchaRequired && captchaResponse === null) {
             showText("Please Solve the Captcha")
         } else {
             try {
@@ -45,39 +47,81 @@ export default function ImportPost() {
 
     return (
         <Form onSubmit={FormHandler}>
-            <label htmlFor="url">URL:</label>
-            <URLInput type="url" name="url" ref={urlRef} required/>
+            <URL>
+                <label htmlFor="url">URL:</label>
+                <URLInput type="url" name="url" ref={urlRef} required/>
+            </URL>
             <br />
             <br />
-            <Captcha setCaptchaToken={setCaptchaResponse} />
+            { captchaRequired ? <Captcha setCaptchaToken={setCaptchaResponse} /> : null }
             <br />
             {loading
                 ? <LoadingContainer><LoadingIcon /></LoadingContainer>
-                : <input type="submit" value="Create" />
+                : <Button type="submit" value="Create" />
             }
         </Form>
     );
 }
 
+const Form = styled.form`
+    width: 30rem;
+    height: 10rem;
+    
+    background-color: var(--BACKGROUND-4);
+    border: 0.2em solid var(--BORDER-1);
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+
 const LoadingContainer = styled.div`
     width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem;
+
     display: flex;
     align-items: center;
     justify-content: center;
 `
 
+const URL = styled.div`
+    width: 95%;
+    margin: 0.5rem;
+    padding: 0.5rem;
+`
 
 const URLInput = styled.input`
-    width: calc(100% - 3rem);
+    width: calc(100% - 5rem);
 `
 
 
-const Form = styled.form`
-    padding: 0.5rem;
-    margin: 0.5rem;
+const Button = styled.input`
+    cursor: pointer;
+    user-select: none;
 
-    /* Look */
-    background-color: var(--BACKGROUND-4);
-    border: 0.2em solid var(--BORDER-1);
-    border-radius: 1rem;
-`;
+    width: 100%;
+
+    background: var(--BACKGROUND-3);
+
+    border: 0 solid var(--BORDER-1);
+    border-top-width: 0.2rem;
+    border-radius: 0 0 1rem 1rem;
+
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2rem;
+    font-size: larger;
+
+    & .active {
+        border-color: var(--BORDER-2);
+    }
+
+    transition: all ease-out 0.1s;
+    &:hover {
+        background: var(--BACKGROUND-3-HOVER) !important;
+    }
+`

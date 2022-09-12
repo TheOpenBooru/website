@@ -1,23 +1,31 @@
-export function SplitPosts(array, parts) {
+import { Post } from "openbooru/lib/types";
+
+
+export function SplitPosts(posts: Array<Post>, parts: number) {
     let buckets = Array.apply(null, Array(parts)).map(() => []);
-    array.forEach((v) => {
-        let smallestColumnIndex = getShortestColumnIndex(buckets);
-        buckets[smallestColumnIndex].push(v);
-    });
+    
+    function reduceInsertPost(bucketIndex, post) {
+        let currentBucket = buckets[bucketIndex];
+        let nextBucketIndex = (bucketIndex + 1) % parts
+        let nextBucket = buckets[nextBucketIndex]
+        
+        if (getColumnHeight(currentBucket) > getColumnHeight(nextBucket)) {
+            return reduceInsertPost(nextBucketIndex, post);
+        } else {
+            currentBucket.push(post);
+            return nextBucketIndex
+        }
+    }
+    posts.reduce(reduceInsertPost, 0)
+
     return buckets;
 }
 
 
-function getShortestColumnIndex(columns) {
-    let heights = new Array(columns.length).fill(0);
-
-    columns.forEach((clmn, i) => {
-        let total = 0;
-        clmn.forEach((v) => (total += v.full.height / v.full.width));
-        heights[i] = total;
-    });
-    
-    let MinHeight = Math.min(...heights);
-    let index = heights.indexOf(MinHeight);
-    return index;
+function getColumnHeight(column: Array<Post>) {
+    return column.reduce((total,post) => {
+        let height = Math.min((post.full.height / post.full.width), 2)
+        return total + height
+    },0)
 }
+

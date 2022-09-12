@@ -2,9 +2,16 @@ import React from "react";
 import FutureImage from "next/future/image";
 import styled, {css} from "styled-components";
 import Redirects from "js/redirects";
+import { Post } from "openbooru/lib/types";
 
 
-export default function GridItem({ post, callback, parentRef, isTarget }) {
+interface Props{
+    post: Post,
+    callback: React.MouseEventHandler<HTMLDivElement>,
+    parentRef: any,
+    isTarget: boolean,
+}
+export default React.memo(function GridItem({ post, callback, parentRef, isTarget }:Props) {
     let { thumbnail } = post;
     let className = `media-${post.media_type}`;
     
@@ -13,7 +20,7 @@ export default function GridItem({ post, callback, parentRef, isTarget }) {
         let scroller: Element = parentRef.current;
         let { top } = elem.getBoundingClientRect()
         top -= (window.innerHeight / 4)
-        scroller.scrollTo({top})
+        scroller.scrollTo({ top })
     }
     
     return (
@@ -21,7 +28,7 @@ export default function GridItem({ post, callback, parentRef, isTarget }) {
             <Container
                 key={post.id}
                 className={className}
-                onClick={callback}
+                onClick={(e) => callback(e)}
                 onLoad={isTarget ? scrollToCallback : null}
                 // @ts-ignore, styled component custom prop
                 type={post.media_type}
@@ -39,7 +46,7 @@ export default function GridItem({ post, callback, parentRef, isTarget }) {
             </Container>
         </a>
     );
-}
+});
 
 
 const BorderRadius = css`

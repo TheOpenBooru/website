@@ -1,7 +1,8 @@
 //@ts-nocheck
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import usePermission from "hooks/permissionHook";
 import Captcha from "components/Captcha";
 import Redirects from "js/redirects";
 import { Account } from "js/booru";
@@ -11,6 +12,8 @@ RegisterForm.propTypes = {
     showText: PropTypes.func,
 };
 export default function RegisterForm({ errorHandler, showText }) {
+    const permission = usePermission("canRegister");
+
     let usernameRef = useRef();
     let passwordRef = useRef();
     let confirmPasswordRef = useRef();
@@ -39,7 +42,7 @@ export default function RegisterForm({ errorHandler, showText }) {
             showText("Please enter a password");
         } else if (password !== confirmPassword) {
             showText("Your Passwords Do Not Match");
-        } else if (captchaToken === null) {
+        } else if (permission.captcha && captchaToken === null) {
             showText("Please solve the captcha");
         } else {
             ClearInput();
@@ -54,21 +57,33 @@ export default function RegisterForm({ errorHandler, showText }) {
         }
     }
 
-    return (
-        <Container>
-            <InputsContainer>
-                <InputText type="username" placeholder="Username" ref={usernameRef} />
-                <InputText type="password" placeholder="Password" ref={passwordRef} />
-                <InputText
-                    type="password"
-                    placeholder="Confirm Password"
-                    ref={confirmPasswordRef}
-                />
-            </InputsContainer>
-            <Captcha setCaptchaToken={setCaptchaToken} />
-            <RegisterButton onClick={HandleRegister} type="submit" value="Register" />
-        </Container>
-    );
+    if (!permission.has_permission) {
+        return (
+            <Container>
+                Account Registration Disabled
+            </Container>
+        )
+    } else {
+        return (
+            <Container>
+                <InputsContainer>
+                    <InputText type="username" placeholder="Username" ref={usernameRef} />
+                    <InputText type="password" placeholder="Password" ref={passwordRef} />
+                    <InputText
+                        type="password"
+                        placeholder="Confirm Password"
+                        ref={confirmPasswordRef}
+                    />
+                </InputsContainer>
+                {permission.captcha
+                    ? <Captcha setCaptchaToken={setCaptchaToken} />
+                    : null
+                }
+                <RegisterButton onClick={HandleRegister} type="submit" value="Register" />
+            </Container>
+        );
+        
+    }
 }
 
 const Container = styled.div`

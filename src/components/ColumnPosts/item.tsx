@@ -1,4 +1,4 @@
-import React, { Ref, useState } from "react";
+import React, { Ref, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { Types } from "openbooru";
 import Image from "next/image";
@@ -6,19 +6,25 @@ import Redirects from "js/redirects";
 
 
 type ItemProps = {
+    index: number,
     post: Types.Post,
     postCallback: any,
     isTarget: boolean,
-    parentRef,
-    priority: boolean
+    priority: boolean,
+    parentRef: any,
 }
-export default function Item({ post, postCallback, parentRef, isTarget, priority }: ItemProps) {
+export default React.memo(function Item({ index, post, postCallback, isTarget, parentRef, priority }: ItemProps) {
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
+    if (isTarget) {
+        console.log(post.id)
+    }
     let preview_type = post.preview?.type
     let image = preview_type !== "video"
         ? post.preview
         : post.thumbnail;
     image ??= post.thumbnail
-
+    
+    
     function scrollTo(e) {
         let elem: Element = e.target;
         let scroller = parentRef?.current;
@@ -29,12 +35,16 @@ export default function Item({ post, postCallback, parentRef, isTarget, priority
         }
     }
 
+    let aspectRatio = (image.height / image.width)
+    let targetAspectRatio = clamp(aspectRatio, 0.5, 2)
+    let adjustedHeight = (image.height / aspectRatio) * targetAspectRatio
+    
+    
     return (
         <ImageContainer
             title={`Post: ${post.id}`}
-            onClick={postCallback(post.id)}
-            // @ts-ignore, element has scrollIntoView function, Typescript doesn't see it?
-            onLoad={(e) => isTarget ? scrollTo(e) : null}
+            onClick={postCallback({id:post.id, index})}
+            onLoad={isTarget ? scrollTo: null}
             // @ts-ignore, styled component custom prop
             type={post.media_type}
         >
@@ -43,18 +53,21 @@ export default function Item({ post, postCallback, parentRef, isTarget, priority
                     src={image.url}
                     alt=""
                     layout="responsive"
-                    height={image.height}
                     width={image.width}
+                    height={adjustedHeight}
+                    objectFit="cover"
                     sizes="300px"
-
+                    
+                    lazyRoot={parentRef}
                     priority={priority}
+                    
                     placeholder="blur"
                     blurDataURL={post.thumbnail.url}
                 />
             </a>
         </ImageContainer>
     );
-}
+});
 
 
 const BorderRadius = css`
@@ -69,11 +82,12 @@ const BorderRadius = css`
 
 const ImageContainer = styled.div`
     display: block;
-    width: 100%;
     height: auto;
+    width: 100%;
     cursor: pointer;
 
     margin: .2rem;
+    margin-bottom: 1rem;
     outline: 0.3rem solid;
     background: var(--BACKGROUND-3);
     
