@@ -3,7 +3,14 @@ import styled from "styled-components";
 import Image from "next/image";
 import Tag from "components/Tag";
 
-export default function TagList({ includeTags, setIncludeTags, excludeTags, setExcludeTags }) {
+
+interface Props{
+    includeTags: Array<string>,
+    excludeTags: Array<string>,
+    setIncludeTags: Function,
+    setExcludeTags: Function,
+}
+export default React.memo(function TagList({ includeTags, setIncludeTags, excludeTags, setExcludeTags }: Props) {
     const removeTagCallback = (tag) => () => {
         if (includeTags.includes(tag)) {
             includeTags = includeTags.filter((t) => t !== tag);
@@ -44,7 +51,7 @@ export default function TagList({ includeTags, setIncludeTags, excludeTags, setE
             })}
         </Container>
     );
-}
+})
 
 const Container = styled.div`
     height: 100%;

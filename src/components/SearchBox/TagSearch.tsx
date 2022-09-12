@@ -3,10 +3,12 @@ import styled from "styled-components";
 import Tag from "components/Tag";
 import TagAutocomplete from "components/TagAutocomplete";
 
-export default function TagSearch({
-        includeTags = [] as string[],
-        setIncludeTags,
-    }) {
+interface Props{
+    includeTags: Array<string>,
+    setIncludeTags: Function,
+}
+
+export default React.memo(function TagSearch({includeTags, setIncludeTags}: Props) {
     let [ text, setText ] = useState("");
     
     function addTagCallback(tag) {
@@ -52,7 +54,7 @@ export default function TagSearch({
             </AutoCompleteContainer>
         </>
     );
-}
+})
 
 
 const SearchInput = styled.input`

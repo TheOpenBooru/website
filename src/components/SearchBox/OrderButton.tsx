@@ -2,7 +2,11 @@ import React from "react"
 import Image from "next/image";
 import styled from "styled-components";
 
-export default function OrderButton({ decending, setDecending }) {
+interface Props{
+    decending: boolean,
+    setDecending: Function,
+}
+export default React.memo(function OrderButton({ decending, setDecending }: Props) {
     let callback = () => setDecending(!decending)
     let alt = decending ? "Sort Descending" : "Sort Ascending";
     return (
@@ -14,7 +18,7 @@ export default function OrderButton({ decending, setDecending }) {
             />
         </Order>
     )
-}
+});
 
 const Order = styled.div`
     background-color: var(--BACKGROUND-4);
