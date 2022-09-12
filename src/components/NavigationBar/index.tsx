@@ -18,12 +18,10 @@ export default function NavigationBar() {
 
 function PostsSection({ text }) {
     return (
-        <Link href="/">
-            <a className={styles.section}>
-                    <Icon src="/images/home.svg" alt="Home" />
-                    {text ? <span className="navbar-button-text">Home</span> : null}
-            </a>
-        </Link>
+        <a href="/" className={styles.section}>
+            <Icon src="/images/home.svg" alt="Home" />
+            {text ? <span className="navbar-button-text">Home</span> : null}
+        </a>
     )
 }
 
