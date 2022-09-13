@@ -43,7 +43,7 @@ const Contianer = styled.div`
     background: var(--BACKGROUND-2);
 `;
 
-const LayoutButton = styled.a`
+const LayoutButton = styled.div`
     cursor: pointer;
     position: relative;
 
