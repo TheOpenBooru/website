@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query: params, re
             }
         })(),
         new Promise((resolve, reject) =>
-            setTimeout(() => resolve([]), 500)
+            setTimeout(() => resolve([]), 100)
         )
     ]);
     res.setHeader('Cache-Control', "max-age=60, public")
