@@ -39,13 +39,16 @@ export default React.memo(function Item({ index, post, postCallback, isTarget, p
     
     return (
         <ImageContainer
-            title={`Post: ${post.id}`}
             onClick={postCallback({id:post.id, index})}
             onLoad={isTarget ? scrollTo: null}
             // @ts-ignore, styled component custom prop
             type={post.media_type}
         >
-            <a href={Redirects.post(post.id)} onClick={(e) => { e.preventDefault(); }}>
+            <a
+                title={`Post: ${post.id}`}
+                href={Redirects.post(post.id)}
+                onClick={(e) => { e.preventDefault(); }}
+            >
                 <StyledImage
                     src={image.url}
                     alt=""
