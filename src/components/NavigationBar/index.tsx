@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/future/image";
 import Link from "next/link";
 import Redirects from "js/redirects";
 import AccountSection from "./Account"
@@ -43,7 +43,7 @@ function InfoSection({ text }) {
 function Icon({ src, alt = "" }) {
     return (
         <div className={styles.icon}>
-            <Image src={src} alt={alt} height="128" width="128" />
+            <Image src={src} alt={alt} height="24" width="24"  />
         </div>
     );
 }

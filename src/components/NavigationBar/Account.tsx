@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
-import Image from "next/image";
+import Image from "next/future/image";
 import Redirects from "js/redirects";
 import useAccount from "hooks/accountHook";
 import styles from "./navbar.module.css";
@@ -53,7 +53,7 @@ export default function AccountSection({ text: useText }) {
 function Icon({ src, alt = "" }) {
     return (
         <div className={styles.icon}>
-            <Image src={src} alt={alt} height="128" width="128" />
+            <Image src={src} alt={alt}  height="24" width="24"  />
         </div>
     );
 }

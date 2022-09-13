@@ -56,14 +56,14 @@ export default function PostOverlay({ query, setQuery }) {
             </Suspense>
             <Container>
                 {canCreatePost
-                    ? <Button src={UploadImage} alt="Import Post"  title="Import Post" onClick={ModeCallback("import")} />
+                    ? <Button src={UploadImage} alt="Import Post"  title="Import Post" onClick={ModeCallback("import")} height="32" width="32" />
                     : null
                 }
                 {canCreatePost
-                    ? <Button src={CreateImage} title="Create Post" alt="Create Post" onClick={ModeCallback("create")} />
+                    ? <Button src={CreateImage} title="Create Post" alt="Create Post" onClick={ModeCallback("create")} height="32" width="32" />
                     : null
                 }
-                <Button src={SearchImage} alt="Search" onClick={ModeCallback("search")} />
+                <Button src={SearchImage} alt="Search" onClick={ModeCallback("search")}  height="32" width="32" />
             </Container>
         </>
     );

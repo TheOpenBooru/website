@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "next/image";
+import FutureImage from "next/future/image";
 
 
 export default function Button({ src, alt, ...props}) {
@@ -37,7 +37,7 @@ const ButtonContainer = styled.div`
 `;
 
 
-const StyledImage = styled(Image)`
+const StyledImage = styled(FutureImage)`
     filter: invert(0%);
 
     animation-fill-mode: forwards;
