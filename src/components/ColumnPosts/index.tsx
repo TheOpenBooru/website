@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import NoSSR from "react-no-ssr";
 import styled from "styled-components";
 import LoadingIcon from "components/LoadingIcon";
 import useWidth from "hooks/widthHook";
@@ -109,7 +108,7 @@ const Columns = styled.div`
 
 const ColumnContainer = styled.div`
     --IMAGE-WIDTH: 300px;
-    --IMAGE-MARGIN: .5rem;
+    --IMAGE-MARGIN: 8px;
 
     width: var(--IMAGE-WIDTH);
     margin: var(--IMAGE-MARGIN);
