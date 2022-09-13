@@ -1,11 +1,16 @@
 import React from "react"
 import AgePrompt from "./AgePrompt"
 import CookiePrompt from "./CookiePrompt"
+import NoSSR from "react-no-ssr";
 
 export default function LegalPrompt() {
-    if (process.env.PROMPT_AGE) {
-        return <AgePrompt/>
-    } else {
-        return <CookiePrompt/>
-    }
+    return (
+        <NoSSR>
+            {
+                process.env.PROMPT_AGE
+                    ? <AgePrompt />
+                    : <CookiePrompt/>
+            }
+        </NoSSR>
+    )
 }
