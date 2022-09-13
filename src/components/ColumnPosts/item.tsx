@@ -21,7 +21,7 @@ export default React.memo(function Item({ index, post, postCallback, isTarget, p
         : post.thumbnail;
     image ??= post.thumbnail
     
-    
+
     function scrollTo(e) {
         let elem: Element = e.target;
         let scroller = parentRef?.current;
@@ -47,7 +47,7 @@ export default React.memo(function Item({ index, post, postCallback, isTarget, p
             <a
                 title={`Post: ${post.id}`}
                 href={Redirects.post(post.id)}
-                onClick={(e) => { e.preventDefault(); }}
+                onClick={(e) => e.preventDefault()}
             >
                 <StyledImage
                     src={image.url}
