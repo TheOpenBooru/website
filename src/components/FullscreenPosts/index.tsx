@@ -28,6 +28,7 @@ export default React.memo(function FullscreenPosts({
         setIndex,
         }:Props) {
     let router = useRouter();
+    let [initialUrl, _] = useState(router.asPath);
 
     const post = posts[index];
     const prevPost = posts[index - 1];
@@ -40,7 +41,15 @@ export default React.memo(function FullscreenPosts({
         }
     }, [index, posts, morePostsCallback]);
     
+    useEffect(() => {
+        let post = posts[index];
+        if (post) {
+            window.history.replaceState(null, null, Redirects.post(post.id));
+        }
+    }, [index, posts])
+    
     function exit() {
+        window.history.replaceState(null, null, initialUrl);
         exitCallback();
     }
 
@@ -63,7 +72,7 @@ export default React.memo(function FullscreenPosts({
     }
     
     if (post === undefined) {
-        debugger;
+        exit();
         return null;
     } else {
         return (
