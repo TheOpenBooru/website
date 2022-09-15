@@ -1,21 +1,20 @@
 import React, { useRef, useEffect } from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import LoadingIcon from "components/LoadingIcon";
 import Item from "./item";
-import Settings from "js/settings";
+import { Post, PostQuery } from "openbooru/lib/types";
 
-GridPosts.propTypes = {
-    loading: PropTypes.bool,
-    finished: PropTypes.bool,
-    posts: PropTypes.arrayOf(PropTypes.object),
-    index: PropTypes.number,
-    query: PropTypes.object,
-    setQuery: PropTypes.func,
-    postCallback: PropTypes.func,
-    morePostsCallback: PropTypes.func,
+interface Props {
+    loading: boolean,
+    finished: boolean,
+    posts: Post[],
+    index: number,
+    query: PostQuery,
+    setQuery: Function,
+    postCallback: Function,
+    morePostsCallback: Function,
 };
-export default function GridPosts({ posts, morePostsCallback, loading, postCallback, index }) {
+export default React.memo(function GridPosts({ posts, morePostsCallback, loading, postCallback, index }: Props) {
     const scrollRef = useRef();
     useEffect(() => {
         const interval = setInterval(() => {
@@ -39,7 +38,7 @@ export default function GridPosts({ posts, morePostsCallback, loading, postCallb
                     <Item
                         key={post.id}
                         post={post}
-                        callback={postCallback(post.id)}
+                        callback={postCallback({id: post.id, index:i})}
                         isTarget={i === index}
                         parentRef={scrollRef}
                     />
@@ -52,7 +51,7 @@ export default function GridPosts({ posts, morePostsCallback, loading, postCallb
             ) : null}
         </Container>
     );
-}
+})
 
 const Container = styled.div`
     --IMAGE-SIZE: 192px;
