@@ -15,14 +15,12 @@ function CallbackContainer({ namespace, callback, children }) {
 
 function HrefContainer({ namespace, href, children }) {
     return (
-        <Link href={href} prefetch={false} passHref>
-            <a>
-                {/* @ts-ignore, styled-components prop */}
-                <HoverableContainer namespace={namespace}>
-                    {children}
-                </HoverableContainer>
-            </a>
-        </Link>
+        <a href={href}>
+            {/* @ts-ignore, styled-components prop */}
+            <HoverableContainer namespace={namespace}>
+                {children}
+            </HoverableContainer>
+        </a>
     )
 }
 
