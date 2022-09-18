@@ -11,6 +11,7 @@ const nextConfig = {
     experimental: {
         images: {
             allowFutureImage: true,
+            unoptimized: true
         },
     },
     images: {
@@ -24,19 +25,16 @@ const nextConfig = {
             "cdn.openbooru.org",
             "api.openbooru.org",
         ],
-        imageSizes: [192, 300],
+        imageSizes: [64, 192, 300]
     },
     env: {
-        SITE_NAME: "Open Booru",
-        SITE_DESCRIPTION: "Openbooru, the free and open-source image board based on Gelbooru and Danbooru.",
+        SITE_NAME: "Openbooru",
+        SITE_DESCRIPTION: "Openbooru, the free and open-source imageboard. Hosting cute and funny, content from quality creators.",
         SITE_URL: "https://openbooru.org",
         API_URL: "https://api.openbooru.org",
         SERVER_API_KEY: null,
         READ_ONLY: false,
         PROMPT_AGE: false,
-    },
-    webpack(config, options) {
-        return config;
     },
     async headers() {
         return [
