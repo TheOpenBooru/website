@@ -1,27 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Media from "components/Media";
+import type { Post } from "openbooru/dist/types";
 
 
-PostMedia.propTypes = {
-    post: PropTypes.object,
+interface Props {
+    post: Post,
+    callback?: Function,
 }
-export default function PostMedia({ post, ...props }) {
-    return (
-        <Container key={post.id} {...props}>
-            <Media type={post.media_type} full={post.full} preview={post.preview} thumbnail={post.thumbnail} />
-        </Container>
-    )
-}
+export default React.memo(function PostMedia({ post, callback }: Props) {
+    let [useZoom, setUseZoom] = useState(false);
+    if (useZoom) {
+        return (
+            <Container key={post.id} onClick={callback ? () => callback() : null}>
+                <ZoomContainer>
+                    <Media type={post.media_type} full={post.full} preview={post.preview} thumbnail={post.thumbnail} />
+                </ZoomContainer>
+            </Container>
+        )
+    } else {
+        return (
+            <Container key={post.id} onClick={callback && post.media_type !== "video" ? () => callback() : null}>
+                <Media type={post.media_type} full={post.full} preview={post.preview} thumbnail={post.thumbnail} />
+            </Container>
+        )
+    }
+})
+
+
+const ZoomContainer = styled.div`
+    width:100%;
+    padding:0 20% 0 20%;
+    max-height:100%;
+    overflow-y: auto;
+    display: block;
+`
 
 
 const Container = styled.div`
     position: relative;
-    height: 100%;
     width: 100%;
+    height: 100%;
 
-    display: block;
-    align-items: center;
-    justify-content: center;
+    display: flex;
+    place-items: center;
 `
