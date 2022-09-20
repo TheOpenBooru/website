@@ -28,9 +28,9 @@ const nextConfig = {
         imageSizes: [64, 192, 300]
     },
     env: {
-        SITE_NAME: "Openbooru",
-        SITE_DESCRIPTION: "Openbooru, the free and open-source imageboard. Hosting cute and funny, content from quality creators.",
-        SITE_URL: "https://openbooru.org",
+        SITE_NAME: "Open Booru",
+        SITE_DESCRIPTION: "Open Booru, the free and open-source imageboard. Hosting cute and funny, content from quality creators.",
+        SITE_URL: "https://www.openbooru.org",
         API_URL: "https://api.openbooru.org",
         SERVER_API_KEY: null,
         READ_ONLY: false,
