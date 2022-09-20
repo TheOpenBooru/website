@@ -14,11 +14,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query: params, re
 
     let query = BSL.decode(bsl)
     const PostQuery = Object.assign(new Types.PostQuery(), query)
-    
     let posts = await Promise.race([
         (async () => {
             try {
-                return await Posts.search(PostQuery, 0, 20);
+                return await Posts.search(PostQuery, 0, 25);
             } catch {
                 return []
             }
@@ -59,9 +58,7 @@ function GetTitle(bsl: string) {
         return ""
     } else {
         bsl = bsl
-            .replace(':',": ")
             .replace('_'," ")
-        bsl = titleCase(bsl)
         return "Search | " + bsl
     }
 }
