@@ -8,7 +8,12 @@ type Permission = {
     ratelimt: string|null
 }
 export default function usePermission(permission: string): Permission {
-    let { data, error } = useSWR("Permissions", Account.permissions)
+    let { data, error } = useSWR( `Permissions-${Account.Store.level}`, Account.permissions, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        }
+    )
     
     if (error || !data) {
         return { has_permission: false, captcha: false, ratelimt: null} 
