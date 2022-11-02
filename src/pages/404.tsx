@@ -1,25 +1,26 @@
 import React from "react";
 import HeadInfo from "components/HeadInfo";
-import css from "styled-jsx/css";
+import styled from "styled-components";
 
 export default function MissingPage() {
     return (
         <>
             <HeadInfo title="Page Not Found"/>
-            <style jsx>{`
-                h1 {
-                    font-size: 5rem;
-                    text-align: center;
-                }
-                h2 {
-                    font-size: 2rem;
-                    text-align: center;
-                }
-            `}</style>
             <div>
-                <h1>404 - Page Not Found</h1>
-                <h2>Oopsie Woopsie, We Could Not Find The Pagey Wagey</h2>
+                <Header>404 - Page Not Found</Header>
+                <Message>Oopsie Woopsie, We Could Not Find The Page</Message>
             </div>
         </>
     );
 }
+
+
+const Header = styled.h1`
+    font-size: 5rem;
+    text-align: center;
+`
+
+const Message = styled.h2`
+    font-size: 2rem;
+    text-align: center;
+`
