@@ -9,7 +9,6 @@ export default async function get(id): Promise<Post> {
         headers["Authorization"] = "Bearer " + Account.Store.token
     }
     let r = await fetch(url, { headers });
-    console.log(await r.text())
     if (r.status === 404) {
         throw new Error("Post Not Found");
     } else {
