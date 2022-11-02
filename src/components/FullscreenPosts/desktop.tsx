@@ -49,7 +49,7 @@ export default function DesktopFullscreen({
         <Container>
             <PostContainer>
                 <LeftButton post={prevPost} callback={prevPostCallback} />
-                <PostMedia post={post} onClick={exitCallback} />
+                <PostMedia post={post} callback={exitCallback} />
                 <RightButton post={nextPost} callback={nextPostCallback} loading={loading}/>
             </PostContainer>
             <PostInfo post={post} />
