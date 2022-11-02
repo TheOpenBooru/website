@@ -16,7 +16,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res}) => {
         return {
             props: { post },
         }
-    } catch {
+    } catch (e) {
+        console.error(e);
         return {
             notFound: true
         }
