@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Media from "components/Media";
-import type { Post } from "openbooru/dist/types";
+import type { Types } from "openbooru";
 
 
 interface Props {
-    post: Post,
+    post: Types.Post,
     callback?: Function,
 }
 export default React.memo(function PostMedia({ post, callback }: Props) {
